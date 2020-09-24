@@ -256,6 +256,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
 | `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
+| `* *`    | Forgetful/Disorganised student | search what tasks/meetings are due soon or by a specific date/time (filter) | I can remember to finish before the deadline|
 | `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
 
 *{More to be added}*
@@ -287,6 +288,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Filter items due on a specific date/time**
+
+**MSS**
+
+1.  User requests to filter items due by/before a specified date/time
+2.  Lifebook shows a list of items that fulfil the requirement.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid.
+
+    * 1a1. AddressBook shows an error message.
+
+      Use case restarts at step 1.
+
+* 2a. The list is empty.
+
+  Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -294,6 +316,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Commands should be intuitive so that users can quickly remember the commands.
 
 *{More to be added}*
 
