@@ -83,16 +83,26 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Adding a zoom meeting
+### Adding a zoom meeting: `link meeting`
 
-Adds a person to the app.
+Adds a zoom link for a task.
 
 Format: `link meeting [desc/DESCRIPTION] [url/MEETING LINK] [i/index of todo] [date/DD/MM/YYYY] [time/HHMM]`
 Examples:
 * `link meeting desc/Annual meeting url/https://nus-sg.zoom.us/j/98401234359?pwd=eG9HU1FJRDdsVHRaYkFUTC95L0abcedf i/2 date/20/1/2020 time/2359`
 * `link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf i/2 date/22/9/2020 time/2359`
 
-### Filter deadlines : `items due ...`
+### Adding a collaborative folder link: `link doc`
+
+Adds a collaborative link (Google Drive, GitHub, Trello, and others)
+
+Format: 
+`link doc [desc/DESCRIPTION] [url/LINK] todo [i/index of todo]` or
+`link doc [desc/DESCRIPTION] [url/LINK] event [i/index of event]`
+Examples:
+* `link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoUz1JpAgynIkfacr0asqV9A4kh todo i/2`
+
+### Filter deadlines : `items due`
 
 User can search todos/meetings due by/before a certain date/time.
 
@@ -157,6 +167,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
+
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
@@ -209,9 +220,10 @@ Action | Format, Examples
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
 **Filter by** | `items due by/<DD/MM/YYYY> <HHmm>`
 **Filter before** |  `items due before/<DD/MM/YYYY> <HHmm>`
+**Link** | `link doc [desc/DESCRIPTION] [url/link] [todo / event] [i/index of task]` <br> e.g.,`link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoIkfacr0asqV9A4kh todo i/2`
