@@ -156,6 +156,60 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 _{explain the feature here}_
 
+### Adding To Do's : `todo`
+Adds a To Do to the TodoList of LifeBook.
+
+Format: `todo desc/DESCRIPTION date/DATE time/TIME`
+
+* `DATE` must be specified in the format of DD/MM/YYYY
+* `TIME` must be speficied in the format of HHmm using 24 hour time
+
+Examples:
+
+* `todo finish desc/cs2101 Oral Presentation reflection date/08/08/2020 time/2359`
+* `todo finish user guide draft date/09/08/2020 time/2300`
+
+### View all To Do's : `list todo`
+Shows a list of all To Do's in the TodoList.
+
+Format: `list todo`
+
+### Removing To Do's : `remove todo`
+Removes a To Do from the TodoList of LifeBook.
+
+Format: `remove todo i/INDEX`
+
+* Removes the To Do at the specified `INDEX`.
+* The index refers to the index number shown in the displayed TodoList.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Example:
+* `list todo` followed by `remove todo i/3`  removes the 3rd To Do from the To Do list.
+
+### View details of a specific To Do: `show todo`
+Shows all details of a specific To Do on the TodoList.
+
+Format: `show todo i/INDEX`
+
+* Shows all details of the To Do at the specified `INDEX`.
+* The index refers to the index number shown in the displayed TodoList.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Example:
+* `list todo` followed by `show todo i/3`  shows all details of the 3rd To Do on the To Do list.
+
+### Mark To Do as complete: `done`
+Marks a To Do on the TodoList as complete.
+
+Format: `done i/INDEX`
+
+* Marks the To Do at the specified `INDEX` as done.
+* The index refers to the index number shown in the displayed TodoList.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Example:
+* `list todo` followed by `done todo i/3`  marks the 3rd To Do on the To Do list as complete.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -176,3 +230,8 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Add To Do** | `todo desc/DESCRIPTION date/DATE time/TIME` <br> e.g., `todo finish user guide draft date/09/08/2020 time/2300`
+**List To Do** | `list todo`
+**Remove To Do** | `remove todo i/INDEX` <br> e.g., `remove todo i/3`
+**Show To Do** | `show todo i/INDEX`
+**Mark To Do as Complete** | `done i/INDEX`
