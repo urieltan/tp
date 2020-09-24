@@ -88,13 +88,21 @@ User can search todos/meetings due by/before a certain date/time.
 Outputs a list of results.
 
 * Due by
-    `items due by/<DD/MM/YYYY> <HHmm>`
+    `items due by/DD/MM/YYYY [HHmm]`
+    
+    `DD/MM/YYYY`: States the Day, Month, Year.
+    
+    `HHmm`: States the time in 24 hours.
     
     Example: `items due by/25/9/2020 2359`
     It will output a list of todos/meetings that are due specifically **on** 25th September 2020, 2359.
 
 * Due before
-    `items due before/<DD/MM/YYYY> <HHmm>`
+    `items due before/DD/MM/YYYY [HHmm]`
+    
+    `DD/MM/YYYY`: States the Day, Month, Year.
+    
+    `HHmm`: States the time in 24 hours.
     
     Example: `items due before/25/9/2020 2359`
     It will output a list of todos/meetings that are due specifically **before** 25th September 2020, 2359.
