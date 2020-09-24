@@ -29,7 +29,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
    * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
    * **`link meeting`**`desc/Annual meeting url/https://nus-sg.zoom.us/j/98401234359?pwd=eG9HU1FJRDdsVHRaYkFUTC95L0abcedf todo i/2 date/20/1/2020 time/2359` : Add a zoom meeting titled 'annual meeting' at 2359, 20 Jan 2020 to the app.
-   
+
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
    * **`clear`** : Deletes all contacts.
@@ -110,24 +110,24 @@ Outputs a list of results.
 
 * Due by
     `items due by/DD/MM/YYYY [HHmm]`
-    
+
     `DD/MM/YYYY`: States the Day, Month, Year.
-    
+
     `HHmm`: States the time in 24 hours.
-    
+
     Example: `items due by/25/9/2020 2359`
     It will output a list of todos/meetings that are due specifically **on** 25th September 2020, 2359.
 
 * Due before
     `items due before/DD/MM/YYYY [HHmm]`
-    
+
     `DD/MM/YYYY`: States the Day, Month, Year.
-    
+
     `HHmm`: States the time in 24 hours.
-    
+
     Example: `items due before/25/9/2020 2359`
     It will output a list of todos/meetings that are due specifically **before** 25th September 2020, 2359.
-    
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
