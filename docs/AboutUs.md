@@ -11,7 +11,7 @@ You can reach us at the email `urieltan[at]comp.nus.edu.sg`
 
 ### Tan Hong Jie Uriel
 
-<img src="images/uriel.jpeg" width="200px">
+<img src="images/urieltan.png" width="200px">
 
 [[github](https://github.com/urieltan)]
 
@@ -19,7 +19,7 @@ You can reach us at the email `urieltan[at]comp.nus.edu.sg`
 
 ### Chua Chen Ler
 
-<img src="images/chenler.jpeg" width="200px">
+<img src="images/lerxcl.png" width="200px">
 
 [[github](http://github.com/lerxcl)]
 
@@ -28,7 +28,7 @@ You can reach us at the email `urieltan[at]comp.nus.edu.sg`
 
 ### Lin Yuan Xun, Caleb
 
-<img src="images/caleb.jpeg" width="200px">
+<img src="images/Caleblyx.png" width="200px">
 
 [[github](http://github.com/caleblyx)] 
 
@@ -37,7 +37,7 @@ You can reach us at the email `urieltan[at]comp.nus.edu.sg`
 
 ### Lucia Tirtia Gunawan
 
-<img src="images/lucia.jpeg" width="200px">
+<img src="images/luciatirta.png" width="200px">
 
 [[github](http://github.com/luciatirta)]
 
@@ -45,7 +45,7 @@ You can reach us at the email `urieltan[at]comp.nus.edu.sg`
 
 ### Kevin William
 
-<img src="images/kevin.png" width="200px">
+<img src="images/kevnw.png" width="200px">
 
 [[github](http://github.com/kevnw)]
 
