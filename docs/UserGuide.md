@@ -151,6 +151,19 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+### Showing persons with a specific tag: `show`
+Shows persons whose tags match the tag being searched.
+
+Format: `show tag [t/TAG]`
+* The search is case-insensitive. e.g `friends` will match `Friends`
+* Only full words will be matched. e.g. `friend` will not match `friends`
+* Persons whose one of the tag(s) matches the tag searched will be returned.
+e.g. Hans with tag `friends` and `colleagues` will be returned when tag `friends` is searched.
+
+Examples:
+* `show tag t/colleagues` 
+* `show tag t/friends`
+
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
@@ -282,6 +295,7 @@ Action | Format, Examples
 **List To Do** | `list todo`
 **Remove To Do** | `remove todo i/INDEX` <br> e.g., `remove todo i/3`
 **Show To Do** | `show todo i/INDEX`
+**Show Tag** | `show tag t/TAG`
 **Mark To Do as Complete** | `done i/INDEX`
 **Filter by** | `items due by/<DD/MM/YYYY> <HHmm>`
 **Filter before** |  `items due before/<DD/MM/YYYY> <HHmm>`
