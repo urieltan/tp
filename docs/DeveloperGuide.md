@@ -258,6 +258,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
 | `* *`    | forgetful/disorganised student | search what tasks/meetings are due soon or by a specific date/time (filter) | I can remember to finish before the deadline|
 | `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `*`      | As a disorganised student |  add, remove, and view zoom links for meetings          | remember my Zoom Links                                          |
 
 *{More to be added}*
 
