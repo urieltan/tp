@@ -327,7 +327,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Lifebook shows an error message.
 
       Use case resumes at step 2.
+      
+* 3b. The given action does not exist.
 
+    * 3b1. Lifebook shows an error message.
+    
+     Use case resumes at step 2.
 
 **Use case: Filter items due on a specific date/time**
 
