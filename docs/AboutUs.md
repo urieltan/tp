@@ -5,55 +5,48 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `urieltan[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Tan Hong Jie Uriel
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/urieltan.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/urieltan)]
 
-* Role: Project Advisor
+* Role: About Us expert, Developer Guide
 
-### Jane Doe
+### Chua Chen Ler
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lerxcl.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/lerxcl)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Team Lead, Deliverables and deadlines, Scheduling and tracking
 
-### Johnny Doe
 
-<img src="images/johndoe.png" width="200px">
+### Lin Yuan Xun, Caleb
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+<img src="images/Caleblyx.png" width="200px">
 
-* Role: Developer
+[[github](http://github.com/caleblyx)] 
+
+* Role: User guide, Intellij expert, Merge conflict solver
 * Responsibilities: Data
 
-### Jean Doe
+### Lucia Tirtia Gunawan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/luciatirta.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/luciatirta)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Testing, Ui Expert
 
-### James Doe
+### Kevin William
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kevnw.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/kevnw)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Integration, Code quality, Github Expert
