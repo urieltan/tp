@@ -3,7 +3,8 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Lifebook is a **desktop application intended for University students to  manage contact details, assignments, projects, 
+and module details.** Lifebook supports Command Line Interface (CLI) for efficient contacts and tasks management while still having the benefits of a Graphical User Interface (GUI).
 
 * Table of Contents
 {:toc}
@@ -14,9 +15,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `lifebook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your Lifebook.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -26,7 +27,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the contact list.
 
    * **`link meeting`**`desc/Annual meeting url/https://nus-sg.zoom.us/j/98401234359?pwd=eG9HU1FJRDdsVHRaYkFUTC95L0abcedf todo i/2 date/20/1/2020 time/2359` : Add a zoom meeting titled 'annual meeting' at 2359, 20 Jan 2020 to the app.
 
@@ -71,7 +72,7 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to the contact list.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -87,18 +88,21 @@ Examples:
 
 Adds a zoom link for a task.
 
-Format: `link meeting [desc/DESCRIPTION] [url/MEETING LINK] [i/index of todo] [date/DD/MM/YYYY] [time/HHMM]`
+Format: 
+* `link meeting desc/DESCRIPTION url/MEETING LINK todo i/INDEX_OF_TODO date/DD/MM/YYYY time/HHmm` or
+* `link meeting desc/DESCRIPTION url/MEETING LINK event i/INDEX_OF_EVENT date/DD/MM/YYYY time/HHmm`
+
 Examples:
-* `link meeting desc/Annual meeting url/https://nus-sg.zoom.us/j/98401234359?pwd=eG9HU1FJRDdsVHRaYkFUTC95L0abcedf i/2 date/20/1/2020 time/2359`
-* `link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf i/2 date/22/9/2020 time/2359`
+* `link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf event i/2 date/22/9/2020 time/1400`
 
 ### Adding a collaborative folder link: `link doc`
 
 Adds a collaborative link (Google Drive, GitHub, Trello, and others)
 
 Format: 
-`link doc [desc/DESCRIPTION] [url/LINK] todo [i/index of todo]` or
-`link doc [desc/DESCRIPTION] [url/LINK] event [i/index of event]`
+* `link doc desc/DESCRIPTION url/LINK todo i/INDEX_OF_TODO` or
+* `link doc desc/DESCRIPTION url/LINK event i/INDEX_OF_EVENT`
+
 Examples:
 * `link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoUz1JpAgynIkfacr0asqV9A4kh todo i/2`
 
@@ -130,13 +134,13 @@ Outputs a list of results.
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in the contact list.
 
 Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in the contact list.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -185,7 +189,7 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from the contact list.
 
 Format: `delete INDEX`
 
@@ -194,12 +198,12 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `list` followed by `delete 2` deletes the 2nd person in the contact list.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the contact list.
 
 Format: `clear`
 
@@ -211,11 +215,11 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Lifebook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Archiving data files `[coming in v2.0]`
+### Archiving data files 
 
-_{explain the feature here}_
+This feature will be implemented in the next iteration (v1.2).
 
 ### Adding To Do's : `todo`
 Adds a To Do to the TodoList of LifeBook.
@@ -276,7 +280,7 @@ Example:
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Lifebook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -294,9 +298,10 @@ Action | Format, Examples
 **Add To Do** | `todo desc/DESCRIPTION date/DATE time/TIME` <br> e.g., `todo finish user guide draft date/09/08/2020 time/2300`
 **List To Do** | `list todo`
 **Remove To Do** | `remove todo i/INDEX` <br> e.g., `remove todo i/3`
-**Show To Do** | `show todo i/INDEX`
-**Show Tag** | `show tag t/TAG`
-**Mark To Do as Complete** | `done i/INDEX`
-**Filter by** | `items due by/<DD/MM/YYYY> <HHmm>`
-**Filter before** |  `items due before/<DD/MM/YYYY> <HHmm>`
-**Link** | `link doc [desc/DESCRIPTION] [url/link] [todo / event] [i/index of task]` <br> e.g.,`link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoIkfacr0asqV9A4kh todo i/2`
+**Show To Do** | `show todo i/INDEX` <br> e.g., `show todo 3`
+**Show Tag** | `show tag t/TAG` <br> e.g., `show tag t/friends`
+**Mark To Do as Complete** | `done i/INDEX` <br> e.g., `done 5`
+**Filter by** | `items due by/DD/MM/YYYY [HHmm]` <br> e.g. `items due by/21/10/2020`
+**Filter before** |  `items due before/DD/MM/YYYY [HHmm]` <br> e.g. `items due before/21/10/2020 2359`
+**Link meeting** | `link meeting desc/DESCRIPTION url/LINK todo/event i/INDEX_OF_TASK` <br> e.g.,`link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf event i/2 date/22/9/2020 time/1400`
+**Link doc** | `link doc desc/DESCRIPTION url/LINK todo/event i/INDEX_OF_TASK` <br> e.g.,`link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoIkfacr0asqV9A4kh todo i/2`
