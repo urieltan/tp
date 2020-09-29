@@ -28,7 +28,7 @@ You can reach us at the email `urieltan[at]comp.nus.edu.sg`
 
 ### Lin Yuan Xun, Caleb
 
-<img src="images/Caleblyx.png" width="200px">
+<img src="images/caleblyx.png" width="200px">
 
 [[github](http://github.com/caleblyx)] 
 
