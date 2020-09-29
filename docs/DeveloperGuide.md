@@ -255,6 +255,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | add a new person               |                                                                        |
 | `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
+| `* * *`  | forgetful student                          | add and remove to do's         | I can remember to complete important tasks for projects or assignments |
+| `* * *`  | student                                    | mark to do's as done           | I can remember the tasks or assignments that I have completed          |
+| `* * *`  | forgetful student                           | view details of a to do        | I can recall the details of an assignment or task.                     |
 | `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
 | `* *`    | forgetful/disorganised student | search what tasks/meetings are due soon or by a specific date/time (filter) | I can remember to finish before the deadline|
 | `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
@@ -287,6 +290,49 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Lifebook shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: Add a To Do to the To Do List**
+
+**MSS**
+1. User requests to add a To Do and its details (i.e. description, date, and time) to the To Do list.
+2. Lifebook acknowledges the request by adding the To Do to the To Do list.
+
+    Use case ends.
+    
+**Extensions**
+
+* 1a. User inputs the date or time of the To Do in the incorrect format.
+    * 1a1. Lifebook shows an error message
+    
+    Use case restarts at step 1.
+    
+**Use case: Perform an action (remove, show, mark as done) on a To Do from the To Do list**
+
+**MSS**
+1.  User requests to list all To Do's
+2.  Lifebook shows a list of To Do's
+3.  User requests to perform an action on a specific To Do from the list
+4.  Lifebook performs action on To Do.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. Lifebook shows an error message.
+
+      Use case resumes at step 2.
+      
+* 3b. The given action does not exist.
+
+    * 3b1. Lifebook shows an error message.
+    
+     Use case resumes at step 2.
 
 **Use case: Filter items due on a specific date/time**
 
