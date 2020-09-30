@@ -258,6 +258,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | forgetful student                          | add and remove to do's         | I can remember to complete important tasks for projects or assignments |
 | `* * *`  | student                                    | mark to do's as done           | I can remember the tasks or assignments that I have completed          |
 | `* * *`  | forgetful student                           | view details of a to do        | I can recall the details of an assignment or task.                     |
+| ` * * ` | forgetful student                           |  search for contacts under a particular tag  | I can find people I'm working with easily
 | `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
 | `* *`    | forgetful/disorganised student | search what tasks/meetings are due soon or by a specific date/time (filter) | I can remember to finish before the deadline|
 | `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
@@ -286,6 +287,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 * 3a. The given index is invalid.
+
+    * 3a1. Lifebook shows an error message.
+
+      Use case resumes at step 2.
+      
+**Use case: Show contacts with a specific tag**
+
+**MSS**
+
+1.  User requests to list persons
+2.  Lifebook shows a list of persons
+3.  User requests to show all persons with a specific tag in the list
+4.  Lifebook shows all the persons whose tag matching the tag searched
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given tag is empty or invalid.
 
     * 3a1. Lifebook shows an error message.
 
