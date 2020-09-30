@@ -104,6 +104,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | disorganised student                                       | add and remove collaborative links (Google Drive, and many more)   | find the collaborative link for the project easily                |
 | `* *`    | forgetful/disorganised student | search what tasks/meetings are due soon or by a specific date/time (filter) | remember to finish before the deadline|
 | `*`      | user with many contacts in the Lifebook | sort persons by name           | locate a person easily                                                 |
+| `*`      | disorganised student |  add, remove, and view zoom links for meetings          | remember my Zoom Links                                          |
 
 *{More to be added}*
 
@@ -230,6 +231,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. Lifebook acknowledges the request by showing the requested task.
 3. User requests to bind the link with the task.
 4. Lifebook performs action on the task.
+
+      Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid.
+
+    * 1a1. Lifebook shows an error message.
+
+      Use case restarts at step 1.
+
+* 2a. The list is empty.
+
+* 3a. The task already has a link.
+
+    * 3a1. Lifebook requests permission to override the existing link.
+    
+      Use case ends.
+**Use case: Store and retrieve a meeting link**
+
+**MSS**
+
+1. User requests a task to be given a meeting link (Teams, Zoom, etc).
+2. Lifebook acknowledges the request by attaching a link to the task.
+3. User later requests to view meeting links associated with the task.
+4. Lifebook shows the links associated with the task.
 
       Use case ends.
 
