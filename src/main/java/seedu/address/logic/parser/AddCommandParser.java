@@ -38,11 +38,13 @@ public class AddCommandParser implements Parser<AddCommand> {
         String[] splitArgs = args.trim().split(" ", 2);
         if (splitArgs[0].trim().equals("contact")) {
             ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                    ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                            PREFIX_ADDRESS, PREFIX_TAG);
 
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                     || !argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddContactCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddContactCommand.MESSAGE_USAGE));
             }
 
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());

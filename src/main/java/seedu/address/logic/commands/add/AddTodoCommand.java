@@ -48,13 +48,7 @@ public class AddTodoCommand extends AddCommand {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-//        requireNonNull(model);
-//
-//        if (model.hasPerson(toAdd)) {
-//            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-//        }
-//
-//        model.addPerson(toAdd);
+        requireNonNull(model);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
