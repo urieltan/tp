@@ -19,10 +19,17 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * and returns a DeleteCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public DeleteContactCommand parse(String args) throws ParseException {
+    public DeleteCommand parse(String args) throws ParseException {
+        String[] splitArgs = args.trim().split(" ", 2);
         try {
-            Index index = ParserUtil.parseIndex(args);
-            return new DeleteContactCommand(index);
+            Index index = ParserUtil.parseIndex(splitArgs[1]);
+            if (splitArgs[0].trim().equals("contact")) {
+                return new DeleteContactCommand(index);
+            } else if (splitArgs[0].trim().equals("todo")) {
+                return new DeleteTodoCommand(index);
+            } else {
+                return new DeleteEventCommand(index);
+            }
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteContactCommand.MESSAGE_USAGE), pe);
