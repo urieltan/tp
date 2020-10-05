@@ -36,18 +36,23 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        System.out.println(args);
         String[] splitArgs = args.trim().split(" ", 2);
         if (splitArgs[0].equals("contact")) {
+            if (splitArgs.length < 2) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        EditContactCommand.MESSAGE_USAGE));
+            }
             ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                    ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_NAME,
+                            PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
             Index index;
 
             try {
                 index = ParserUtil.parseIndex(argMultimap.getPreamble());
             } catch (ParseException pe) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditContactCommand.MESSAGE_USAGE), pe);
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        EditContactCommand.MESSAGE_USAGE), pe);
             }
 
             EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
@@ -72,14 +77,16 @@ public class EditCommandParser implements Parser<EditCommand> {
             return new EditContactCommand(index, editPersonDescriptor);
         } else if (splitArgs[0].equals("todo")) {
             ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                    ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_NAME,
+                            PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
             Index index;
 
             try {
                 index = ParserUtil.parseIndex(argMultimap.getPreamble());
             } catch (ParseException pe) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditContactCommand.MESSAGE_USAGE), pe);
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        EditContactCommand.MESSAGE_USAGE), pe);
             }
 
             EditTodoDescriptor editTodoDescriptor = new EditTodoDescriptor();
@@ -104,14 +111,16 @@ public class EditCommandParser implements Parser<EditCommand> {
             return new EditTodoCommand(index, editTodoDescriptor);
         } else {
             ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                    ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_NAME,
+                            PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
             Index index;
 
             try {
                 index = ParserUtil.parseIndex(argMultimap.getPreamble());
             } catch (ParseException pe) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditContactCommand.MESSAGE_USAGE), pe);
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        EditContactCommand.MESSAGE_USAGE), pe);
             }
 
             EditEventDescriptor editEventDescriptor = new EditEventDescriptor();
