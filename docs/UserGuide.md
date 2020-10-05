@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-Lifebook is a **desktop application intended for University students to  manage contact details, assignments, projects, 
+Lifebook is a **desktop application intended for University students to  manage contact details, assignments, projects,
 and module details.** Lifebook supports Command Line Interface (CLI) for efficient contacts and tasks management while still having the benefits of a Graphical User Interface (GUI).
 
 * Table of Contents
@@ -88,7 +88,7 @@ Examples:
 
 Adds a zoom link for a task.
 
-Format: 
+Format:
 * `link meeting desc/DESCRIPTION url/MEETING LINK todo i/INDEX_OF_TODO date/DD/MM/YYYY time/HHmm` or
 * `link meeting desc/DESCRIPTION url/MEETING LINK event i/INDEX_OF_EVENT date/DD/MM/YYYY time/HHmm`
 
@@ -99,7 +99,7 @@ Examples:
 
 Adds a collaborative link (Google Drive, GitHub, Trello, and others)
 
-Format: 
+Format:
 * `link doc desc/DESCRIPTION url/LINK todo i/INDEX_OF_TODO` or
 * `link doc desc/DESCRIPTION url/LINK event i/INDEX_OF_EVENT`
 
@@ -165,7 +165,7 @@ Format: `show tag [t/TAG]`
 e.g. Hans with tag `friends` and `colleagues` will be returned when tag `friends` is searched.
 
 Examples:
-* `show tag t/colleagues` 
+* `show tag t/colleagues`
 * `show tag t/friends`
 
 ### Locating persons by name: `find contact`
@@ -217,7 +217,7 @@ Format: `exit`
 
 Lifebook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Archiving data files 
+### Archiving data files
 
 This feature will be implemented in the next iteration (v1.2).
 

@@ -30,7 +30,7 @@ You can reach us at the email `urieltan[at]comp.nus.edu.sg`
 
 <img src="images/caleblyx.png" width="200px">
 
-[[github](http://github.com/caleblyx)] 
+[[github](http://github.com/caleblyx)]
 
 * Role: User guide, Intellij expert, Merge conflict solver
 * Responsibilities: Data

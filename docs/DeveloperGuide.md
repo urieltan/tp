@@ -79,7 +79,7 @@ This section describes some noteworthy details on how certain features are imple
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: 
+**Value proposition**:
 * Students can keep track of tasks from all modules they take efficiently.
 * Manage contacts faster than a typical mouse/GUI driven app.
 * Increase school productivity.
@@ -134,7 +134,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Lifebook shows an error message.
 
       Use case resumes at step 2.
-      
+
 **Use case: Show contacts with a specific tag**
 
 **MSS**
@@ -165,15 +165,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. Lifebook acknowledges the request by adding the To Do to the To Do list.
 
     Use case ends.
-    
+
 **Extensions**
 
 * 1a. User inputs the date or time of the To Do in the incorrect format.
 
     * 1a1. Lifebook shows an error message
-    
+
     Use case restarts at step 1.
-    
+
 **Use case: Perform an action (remove, show, mark as done) on a To Do from the To Do list**
 
 **MSS**
@@ -195,11 +195,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Lifebook shows an error message.
 
       Use case resumes at step 2.
-      
+
 * 3b. The given action does not exist.
 
     * 3b1. Lifebook shows an error message.
-    
+
      Use case resumes at step 2.
 
 **Use case: Filter items due on a specific date/time**
@@ -247,7 +247,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. The task already has a link.
 
     * 3a1. Lifebook requests permission to override the existing link.
-    
+
       Use case ends.
 **Use case: Store and retrieve a meeting link**
 
@@ -273,7 +273,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. The task already has a link.
 
     * 3a1. Lifebook requests permission to override the existing link.
-    
+
       Use case ends.
 
 *{More to be added}*

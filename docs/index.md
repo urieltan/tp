@@ -16,7 +16,7 @@
 
 * For the detailed user documentation of this project, see [here](https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/docs/UserGuide.md).
 
-* For contributing to the ongoing development of the Lifebook, do check out the [Developer Guide](https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/docs/DeveloperGuide.md). 
+* For contributing to the ongoing development of the Lifebook, do check out the [Developer Guide](https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/docs/DeveloperGuide.md).
 
 This project is developed from an se-education.org initiative. If you would like to contribute code to the initiative, see [se-education.org](https://se-education.org#https://se-education.org/#contributing) for more info.
 
