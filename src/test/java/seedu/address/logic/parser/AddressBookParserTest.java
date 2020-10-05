@@ -19,6 +19,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.add.AddContactCommand;
 import seedu.address.logic.commands.delete.DeleteContactCommand;
 import seedu.address.logic.commands.list.ListContactCommand;
@@ -49,7 +50,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteContactCommand command = (DeleteContactCommand) parser.parseCommand(
-                DeleteContactCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+                DeleteContactCommand.COMMAND_WORD + " contact " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteContactCommand(INDEX_FIRST_PERSON), command);
     }
 
@@ -84,8 +85,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListContactCommand.COMMAND_WORD) instanceof ListContactCommand);
-        assertTrue(parser.parseCommand(ListContactCommand.COMMAND_WORD + " 3") instanceof ListContactCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " contact ") instanceof ListContactCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
 
     @Test

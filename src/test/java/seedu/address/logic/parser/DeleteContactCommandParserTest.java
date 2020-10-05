@@ -22,12 +22,12 @@ public class DeleteContactCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteContactCommand(INDEX_FIRST_PERSON));
+        assertParseSuccess(parser, "contact 1", new DeleteContactCommand(INDEX_FIRST_PERSON));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a",
+        assertParseFailure(parser, "contact a",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteContactCommand.MESSAGE_USAGE));
     }
 }
