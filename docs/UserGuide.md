@@ -3,7 +3,8 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Lifebook is a **desktop application intended for University students to  manage contact details, assignments, projects,
+and module details.** Lifebook supports Command Line Interface (CLI) for efficient contacts and tasks management while still having the benefits of a Graphical User Interface (GUI).
 
 * Table of Contents
 {:toc}
@@ -14,9 +15,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `lifebook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your Lifebook.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -24,15 +25,15 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`list contact`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`add contact`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the contact list.
 
    * **`link meeting`**`desc/Annual meeting url/https://nus-sg.zoom.us/j/98401234359?pwd=eG9HU1FJRDdsVHRaYkFUTC95L0abcedf todo i/2 date/20/1/2020 time/2359` : Add a zoom meeting titled 'annual meeting' at 2359, 20 Jan 2020 to the app.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`delete contact`**`3` : Deletes the 3rd contact shown in the current list.
 
-   * **`clear`** : Deletes all contacts.
+   * **`clear contact`** : Deletes all contacts.
 
    * **`exit`** : Exits the app.
 
@@ -69,36 +70,39 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a person: `add contact`
 
-Adds a person to the address book.
+Adds a person to the contact list.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add  contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add contact n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `add contact n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
 ### Adding a zoom meeting: `link meeting`
 
 Adds a zoom link for a task.
 
-Format: `link meeting [desc/DESCRIPTION] [url/MEETING LINK] [i/index of todo] [date/DD/MM/YYYY] [time/HHMM]`
+Format:
+* `link meeting desc/DESCRIPTION url/MEETING LINK todo i/INDEX_OF_TODO date/DD/MM/YYYY time/HHmm` or
+* `link meeting desc/DESCRIPTION url/MEETING LINK event i/INDEX_OF_EVENT date/DD/MM/YYYY time/HHmm`
+
 Examples:
-* `link meeting desc/Annual meeting url/https://nus-sg.zoom.us/j/98401234359?pwd=eG9HU1FJRDdsVHRaYkFUTC95L0abcedf i/2 date/20/1/2020 time/2359`
-* `link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf i/2 date/22/9/2020 time/2359`
+* `link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf event i/2 date/22/9/2020 time/1400`
 
 ### Adding a collaborative folder link: `link doc`
 
 Adds a collaborative link (Google Drive, GitHub, Trello, and others)
 
-Format: 
-`link doc [desc/DESCRIPTION] [url/LINK] todo [i/index of todo]` or
-`link doc [desc/DESCRIPTION] [url/LINK] event [i/index of event]`
+Format:
+* `link doc desc/DESCRIPTION url/LINK todo i/INDEX_OF_TODO` or
+* `link doc desc/DESCRIPTION url/LINK event i/INDEX_OF_EVENT`
+
 Examples:
 * `link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoUz1JpAgynIkfacr0asqV9A4kh todo i/2`
 
@@ -128,17 +132,17 @@ Outputs a list of results.
     Example: `items due before/25/9/2020 2359`
     It will output a list of todos/meetings that are due specifically **before** 25th September 2020, 2359.
 
-### Listing all persons : `list`
+### Listing all persons : `list contact`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in the contact list.
 
-Format: `list`
+Format: `list contact`
 
-### Editing a person : `edit`
+### Editing a person : `edit contact`
 
-Edits an existing person in the address book.
+Edits an existing person in the contact list.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit contact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -148,14 +152,27 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit contact 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit contact 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Showing persons with a specific tag: `show`
+Shows persons whose tags match the tag being searched.
+
+Format: `show tag [t/TAG]`
+* The search is case-insensitive. e.g `friends` will match `Friends`
+* Only full words will be matched. e.g. `friend` will not match `friends`
+* Persons whose one of the tag(s) matches the tag searched will be returned.
+e.g. Hans with tag `friends` and `colleagues` will be returned when tag `friends` is searched.
+
+Examples:
+* `show tag t/colleagues`
+* `show tag t/friends`
+
+### Locating persons by name: `find contact`
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find contact KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -165,30 +182,30 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find contact John` returns `john` and `John Doe`
+* `find contact alex david` returns `Alex Yeoh`, `David Li`<br>
 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a person : `delete contact`
 
-Deletes the specified person from the address book.
+Deletes the specified person from the contact list.
 
-Format: `delete INDEX`
+Format: `delete contact INDEX`
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list contact` followed by `delete contact 2` deletes the 2nd person in the contact list.
+* `find contact Betsy` followed by `delete contact 1` deletes the 1st person in the results of the `find` command.
 
-### Clearing all entries : `clear`
+### Clearing all entries : `clear contact`
 
-Clears all entries from the address book.
+Clears all entries from the contact list.
 
-Format: `clear`
+Format: `clear contact`
 
 ### Exiting the program : `exit`
 
@@ -198,11 +215,11 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Lifebook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Archiving data files `[coming in v2.0]`
+### Archiving data files
 
-_{explain the feature here}_
+This feature will be implemented in the next iteration (v1.2).
 
 ### Adding To Do's : `todo`
 Adds a To Do to the TodoList of LifeBook.
@@ -263,7 +280,7 @@ Example:
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Lifebook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -281,8 +298,10 @@ Action | Format, Examples
 **Add To Do** | `todo desc/DESCRIPTION date/DATE time/TIME` <br> e.g., `todo finish user guide draft date/09/08/2020 time/2300`
 **List To Do** | `list todo`
 **Remove To Do** | `remove todo i/INDEX` <br> e.g., `remove todo i/3`
-**Show To Do** | `show todo i/INDEX`
-**Mark To Do as Complete** | `done i/INDEX`
-**Filter by** | `items due by/<DD/MM/YYYY> <HHmm>`
-**Filter before** |  `items due before/<DD/MM/YYYY> <HHmm>`
-**Link** | `link doc [desc/DESCRIPTION] [url/link] [todo / event] [i/index of task]` <br> e.g.,`link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoIkfacr0asqV9A4kh todo i/2`
+**Show To Do** | `show todo i/INDEX` <br> e.g., `show todo 3`
+**Show Tag** | `show tag t/TAG` <br> e.g., `show tag t/friends`
+**Mark To Do as Complete** | `done i/INDEX` <br> e.g., `done 5`
+**Filter by** | `items due by/DD/MM/YYYY [HHmm]` <br> e.g. `items due by/21/10/2020`
+**Filter before** |  `items due before/DD/MM/YYYY [HHmm]` <br> e.g. `items due before/21/10/2020 2359`
+**Link meeting** | `link meeting desc/DESCRIPTION url/LINK todo/event i/INDEX_OF_TASK` <br> e.g.,`link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf event i/2 date/22/9/2020 time/1400`
+**Link doc** | `link doc desc/DESCRIPTION url/LINK todo/event i/INDEX_OF_TASK` <br> e.g.,`link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoIkfacr0asqV9A4kh todo i/2`

@@ -5,6 +5,9 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import java.util.Arrays;
 
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.find.FindContactCommand;
+import seedu.address.logic.commands.find.FindEventCommand;
+import seedu.address.logic.commands.find.FindTodoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
@@ -19,15 +22,44 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        String[] splitArgs = args.trim().split(" ", 2);
+        if (splitArgs[0].equals("contact")) {
+            if (splitArgs.length < 2) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindContactCommand.MESSAGE_USAGE));
+            }
+            String trimmedArgs = splitArgs[1].trim();
+            if (trimmedArgs.isEmpty()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindContactCommand.MESSAGE_USAGE));
+            }
+
+            String[] nameKeywords = trimmedArgs.split("\\s+");
+
+            return new FindContactCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        } else if (splitArgs[0].equals("todo")) {
+            System.out.println("masuk todo");
+            String trimmedArgs = splitArgs[1].trim();
+            if (trimmedArgs.isEmpty()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindContactCommand.MESSAGE_USAGE));
+            }
+
+            String[] nameKeywords = trimmedArgs.split("\\s+");
+
+            return new FindTodoCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        } else {
+            System.out.println("masuk event");
+            String trimmedArgs = splitArgs[1].trim();
+            if (trimmedArgs.isEmpty()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindContactCommand.MESSAGE_USAGE));
+            }
+
+            String[] nameKeywords = trimmedArgs.split("\\s+");
+
+            return new FindEventCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
         }
-
-        String[] nameKeywords = trimmedArgs.split("\\s+");
-
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
 
 }
