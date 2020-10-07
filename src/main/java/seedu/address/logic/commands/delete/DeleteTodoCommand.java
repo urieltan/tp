@@ -11,11 +11,13 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.Todo;
 
 public class DeleteTodoCommand extends DeleteCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + ": Deletes the todo identified by the index number used in the displayed  TodoList.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
@@ -30,15 +32,16 @@ public class DeleteTodoCommand extends DeleteCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        /*List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());*/
+        Task todoToDelete = model.getTodo(targetIndex.getOneBased());
+        model.deleteTodo(targetIndex.getOneBased());
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, todoToDelete));
     }
 
     @Override

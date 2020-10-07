@@ -12,6 +12,9 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Event;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.Todo;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,11 +25,15 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private FilteredList<Task> filteredTasks;
+    private final TaskList todoList;
+    private final TaskList eventList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, TaskList todoList,
+                        TaskList eventList) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
@@ -34,11 +41,15 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.todoList = todoList;
+        this.eventList = eventList;
+
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredTasks = new FilteredList<Task>(this.todoList.getObservableTaskList(), PREDICATE_SHOW_ALL_TODOS);
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new TaskList(), new TaskList());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -147,5 +158,55 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
     }
+    //=========== TaskList ================================================================================
+    @Override
+    public void addTodo(Todo todo) {
+        this.todoList.add(todo);
+        filteredTasks = new FilteredList<>(this.todoList.getObservableTaskList());
+    }
+    @Override
+    public void addEvent(Event event) {
+        this.eventList.add(event);
+        filteredTasks = new FilteredList<>(this.eventList.getObservableTaskList());
+    }
+    @Override
+    public void deleteTodo(int index) {
+        this.todoList.delete(index);
+    }
+    @Override
+    public void deleteEvent(int index) {
+        this.eventList.delete(index);
+    }
 
+    @Override
+    public Task getTodo(int index) {
+        return this.todoList.get(index);
+    }
+
+    @Override
+    public Task getEvent(int index) {
+        return this.eventList.get(index);
+    }
+
+    //=========== Filtered Task List Accessors =============================================================
+    @Override
+    public ObservableList<Task> getFilteredTaskList() {
+        return filteredTasks;
+    }
+
+    @Override
+    public void updateFilteredTaskList(Predicate<? super Task> predicate) {
+        requireNonNull(predicate);
+        filteredTasks.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredTaskListTodo() {
+        filteredTasks = new FilteredList<Task>(this.todoList.getObservableTaskList());
+    }
+
+    @Override
+    public void updateFilteredTaskListEvent() {
+        filteredTasks = new FilteredList<Task>(this.eventList.getObservableTaskList());
+    }
 }

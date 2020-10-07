@@ -2,26 +2,26 @@ package seedu.address.model;
 
 import java.util.ArrayList;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.task.Task;
 
 /** Encapsulates a list of tasks */
-public class TaskList<T extends Task> {
+public class TaskList {
 
     /** An array list consisting of tasks. */
-    private ArrayList<T> list;
+    private ArrayList<Task> list;
 
     /**
      * Constructs a TaskList by assigning the list parameter to a newly constructed
      * empty Task ArrayList.
      */
     public TaskList() {
-        list = new ArrayList<T>();
+        list = new ArrayList<Task>();
     }
-
     /**
      * Deletes a task from list with at index minus one.
      * @param index the index (plus one) of the task to be removed from the list.
-     * @throws
      */
     public void delete(int index) {
         list.remove(index - 1);
@@ -32,7 +32,7 @@ public class TaskList<T extends Task> {
      *
      * @param task the task to be added to the list.
      */
-    public void add(T task) {
+    public void add(Task task) {
         list.add(task);
     }
 
@@ -94,6 +94,16 @@ public class TaskList<T extends Task> {
         for (Task task: list) {
             task.markAsDone();
         }
+    }
+
+    public ObservableList<Task> getObservableTaskList() {
+        javafx.collections.ObservableList<Task> ObservableList = FXCollections.observableList(list);
+        return ObservableList;
+    }
+
+    @Override
+    public String toString() {
+        return list.toString();
     }
 }
 

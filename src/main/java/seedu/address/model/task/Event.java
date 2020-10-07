@@ -1,7 +1,6 @@
 package seedu.address.model.task;
 
 
-import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -35,13 +34,13 @@ public class Event extends Task {
      * description and period of time.
      *
      * @param description a brief description of the event.
-     * @param period two dates and times with the format of inputFormatter in the form of
-     *               -start- to -end-.
+     * @param start the starting date and time of event.
+     * @param end the ending date and time of event.
      */
-    public Event (String description, String period) {
+    public Event (String description, String start, String end) {
         super(description);
-        this.start = LocalDateTime.parse(period.substring(0, END_OF_FIRST_DATE_TIME_INDEX), INPUT_DATE_TIME_FORMAT);
-        this.end = LocalDateTime.parse(period.substring(START_OF_SECOND_DATE_TIME_INDEX), INPUT_DATE_TIME_FORMAT);
+        this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
+        this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
     }
 
     /**
@@ -50,13 +49,13 @@ public class Event extends Task {
      *
      * @param isDone indicates if the event has been completed.
      * @param description a brief description of the event.
-     * @param period two dates with the format of inputFormatter in the form of
-     *               start date- to -end date-.
+     * @param start the starting date and time of event.
+     * @param end the ending date and time of event.
      */
-    public Event(boolean isDone, String description, String period) {
+    public Event(boolean isDone, String description, String start, String end) {
         super(isDone, description);
-        this.start = LocalDateTime.parse(period.substring(0, END_OF_FIRST_DATE_TIME_INDEX), INPUT_DATE_TIME_FORMAT);
-        this.end = LocalDateTime.parse(period.substring(START_OF_SECOND_DATE_TIME_INDEX), INPUT_DATE_TIME_FORMAT);
+        this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
+        this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
     }
 
     /**
@@ -67,14 +66,14 @@ public class Event extends Task {
      * @return the String representation of the period of which the event occurred over.
      */
     public String getPeriod() {
-        return this.start.format(OUTPUT_DATE_TIME_FORMAT).toString() + " to " + this.end.format(OUTPUT_DATE_TIME_FORMAT).toString();
+        return this.start.format(OUTPUT_DATE_TIME_FORMAT).toString() + " to "
+               + this.end.format(OUTPUT_DATE_TIME_FORMAT).toString();
     }
 
     /**
      * Reschedules the period of an event to be of a provided period.
      *
      * @param newPeriod the period that the event should be rescheduled to.
-     * @throws
      */
     public void reschedule(String newPeriod) {
         this.start = LocalDateTime.parse(newPeriod.substring(0, END_OF_FIRST_DATE_TIME_INDEX), INPUT_DATE_TIME_FORMAT);
@@ -88,7 +87,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + getDescription() + " (at: " + getPeriod() +")";
+        return "[" + getStatusIcon() + "] " + getDescription() + " (at: " + getPeriod() + ")";
     }
 
     /**
@@ -126,6 +125,11 @@ public class Event extends Task {
             return "E | 0 | " + this.getDescription() + " | " + this.start.format(INPUT_DATE_TIME_FORMAT)
                     + " to " + this.end.format(INPUT_DATE_TIME_FORMAT);
         }
+    }
+
+    @Override
+    public String getDateTime() {
+        return this.getPeriod();
     }
 }
 

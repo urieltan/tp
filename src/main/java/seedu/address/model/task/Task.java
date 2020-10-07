@@ -1,6 +1,6 @@
 package seedu.address.model.task;
 
-public class Task {
+public abstract class Task {
     /** A brief description of the task. */
     protected String description;
 
@@ -100,5 +100,6 @@ public class Task {
             return "T | 0 | " + this.getDescription();
         }
     }
-}
 
+    public abstract String getDateTime();
+}
