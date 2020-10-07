@@ -12,6 +12,9 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Event;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.Todo;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,11 +25,13 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private FilteredList<Task> filteredTasks;
+    private final TaskList taskList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, TaskList taskList) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
@@ -34,11 +39,14 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.taskList = taskList;
+
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredTasks = new FilteredList<>(this.taskList.getTaskList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new TaskList());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -147,5 +155,35 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
     }
+    //=========== TaskList ================================================================================
+    @Override
+    public void addTodo(Todo todo) {
+        taskList.addTask(todo);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+    }
+    @Override
+    public void addEvent(Event event) {
+        this.taskList.addTask(event);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+    }
+    @Override
+    public void deleteTodo(Task task) {
+        this.taskList.removeTask(task);
+    }
+    @Override
+    public void deleteEvent(Task task) {
+        this.taskList.removeTask(task);
+    }
 
+    //=========== Filtered Task List Accessors =============================================================
+    @Override
+    public ObservableList<Task> getFilteredTaskList() {
+        return filteredTasks;
+    }
+
+    @Override
+    public void updateFilteredTaskList(Predicate<? super Task> predicate) {
+        requireNonNull(predicate);
+        filteredTasks.setPredicate(predicate);
+    }
 }

@@ -10,7 +10,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 public class DeleteEventCommand extends DeleteCommand {
 
@@ -30,17 +30,16 @@ public class DeleteEventCommand extends DeleteCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Task> lastShownList = model.getFilteredTaskList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+        Task eventToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deleteTodo(eventToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, eventToDelete));
     }
-
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
