@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.list.ListContactCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.TaskList;
 import seedu.address.model.UserPrefs;
 
 /**
@@ -23,8 +24,8 @@ public class ListContactCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new TaskList());
+        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new TaskList());
     }
 
     @Test
