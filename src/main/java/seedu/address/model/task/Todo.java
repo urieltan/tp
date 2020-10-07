@@ -109,7 +109,16 @@ public class Todo extends Task {
     }
 
     @Override
+    public String getDescription() {
+        return "Todo: " + this.description;
+    }
+
+    @Override
     public String getDateTime() {
         return getDeadline();
+    }
+
+    public String getDescriptionDateTime() {
+        return this.description + getDateTime() + " (by: " + getDateTime() + ")";
     }
 }

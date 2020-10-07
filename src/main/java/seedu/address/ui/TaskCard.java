@@ -31,6 +31,8 @@ public class TaskCard extends UiPart<Region> {
     private Label id;
     @FXML
     private Label dateTime;
+    @FXML
+    private Label statusIcon;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -41,6 +43,7 @@ public class TaskCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         description.setText(task.getDescription());
         dateTime.setText(task.getDateTime());
+        statusIcon.setText("Status: " + task.getStatusIcon());
     }
 
     @Override

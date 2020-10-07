@@ -17,7 +17,7 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
-    Predicate<Task> PREDICATE_SHOW_ALL_TODOS = unused -> true;
+    Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -92,21 +92,13 @@ public interface Model {
 
     void updateFilteredTaskList(Predicate<? super Task> predicate);
 
-    void updateFilteredTaskListTodo();
-
-    void updateFilteredTaskListEvent();
-
     void addTodo(Todo todo);
 
     void addEvent(Event event);
 
-    void deleteTodo(int index);
+    void deleteTodo(Task task);
 
-    void deleteEvent(int index);
-
-    Task getTodo(int index);
-
-    Task getEvent(int index);
+    void deleteEvent(Task task);
 
 
     ObservableList<Task> getFilteredTaskList();

@@ -10,9 +10,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.Todo;
 
 public class DeleteTodoCommand extends DeleteCommand {
 
@@ -32,16 +30,15 @@ public class DeleteTodoCommand extends DeleteCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        /*List<Person> lastShownList = model.getFilteredPersonList();
+        List<Task> lastShownList = model.getFilteredTaskList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());*/
-        Task todoToDelete = model.getTodo(targetIndex.getOneBased());
-        model.deleteTodo(targetIndex.getOneBased());
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, todoToDelete));
+        Task taskToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deleteTodo(taskToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, taskToDelete));
     }
 
     @Override

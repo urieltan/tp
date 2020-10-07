@@ -26,14 +26,12 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private FilteredList<Task> filteredTasks;
-    private final TaskList todoList;
-    private final TaskList eventList;
+    private final TaskList taskList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, TaskList todoList,
-                        TaskList eventList) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, TaskList taskList) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
@@ -41,15 +39,14 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        this.todoList = todoList;
-        this.eventList = eventList;
+        this.taskList = taskList;
 
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredTasks = new FilteredList<Task>(this.todoList.getObservableTaskList(), PREDICATE_SHOW_ALL_TODOS);
+        filteredTasks = new FilteredList<>(this.taskList.getTaskList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs(), new TaskList(), new TaskList());
+        this(new AddressBook(), new UserPrefs(), new TaskList());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -161,31 +158,21 @@ public class ModelManager implements Model {
     //=========== TaskList ================================================================================
     @Override
     public void addTodo(Todo todo) {
-        this.todoList.add(todo);
-        filteredTasks = new FilteredList<>(this.todoList.getObservableTaskList());
+        taskList.addTask(todo);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
     @Override
     public void addEvent(Event event) {
-        this.eventList.add(event);
-        filteredTasks = new FilteredList<>(this.eventList.getObservableTaskList());
+        this.taskList.addTask(event);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
     @Override
-    public void deleteTodo(int index) {
-        this.todoList.delete(index);
+    public void deleteTodo(Task task) {
+        this.taskList.removeTask(task);
     }
     @Override
-    public void deleteEvent(int index) {
-        this.eventList.delete(index);
-    }
-
-    @Override
-    public Task getTodo(int index) {
-        return this.todoList.get(index);
-    }
-
-    @Override
-    public Task getEvent(int index) {
-        return this.eventList.get(index);
+    public void deleteEvent(Task task) {
+        this.taskList.removeTask(task);
     }
 
     //=========== Filtered Task List Accessors =============================================================
@@ -198,15 +185,5 @@ public class ModelManager implements Model {
     public void updateFilteredTaskList(Predicate<? super Task> predicate) {
         requireNonNull(predicate);
         filteredTasks.setPredicate(predicate);
-    }
-
-    @Override
-    public void updateFilteredTaskListTodo() {
-        filteredTasks = new FilteredList<Task>(this.todoList.getObservableTaskList());
-    }
-
-    @Override
-    public void updateFilteredTaskListEvent() {
-        filteredTasks = new FilteredList<Task>(this.eventList.getObservableTaskList());
     }
 }

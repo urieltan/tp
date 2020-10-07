@@ -91,7 +91,7 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs, new TaskList(), new TaskList());
+        return new ModelManager(initialData, userPrefs, new TaskList());
     }
 
     private void initLogging(Config config) {

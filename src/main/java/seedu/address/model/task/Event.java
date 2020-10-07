@@ -89,6 +89,9 @@ public class Event extends Task {
     public String toString() {
         return "[" + getStatusIcon() + "] " + getDescription() + " (at: " + getPeriod() + ")";
     }
+    public String getDescriptionDateTime() {
+        return this.description + getDateTime() + " (at: " + getPeriod() + ")";
+    }
 
     /**
      * Returns a boolean value indicating if the event is equal to another object by
@@ -127,6 +130,10 @@ public class Event extends Task {
         }
     }
 
+    @Override
+    public String getDescription() {
+        return "Event: " + this.description;
+    }
     @Override
     public String getDateTime() {
         return this.getPeriod();

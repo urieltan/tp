@@ -28,6 +28,7 @@
         <Label fx:id="description" styleClass="cell_big_label" text="\$first" />
       </HBox>
       <Label fx:id="dateTime" styleClass="cell_small_label" text="\$dateTime" />
+         <Label fx:id="statusIcon" layoutX="25.0" layoutY="63.0" styleClass="cell_small_label" text="\\$statusIcon" />
     </VBox>
       <rowConstraints>
          <RowConstraints />

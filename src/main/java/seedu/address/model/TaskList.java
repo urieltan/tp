@@ -1,109 +1,120 @@
 package seedu.address.model;
 
-import java.util.ArrayList;
+import static java.util.Objects.requireNonNull;
 
-import javafx.collections.FXCollections;
+import java.util.List;
+
 import javafx.collections.ObservableList;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList;
 
-/** Encapsulates a list of tasks */
-public class TaskList {
+/**
+ * Wraps all data at the address-book level
+ * Duplicates are not allowed (by .isSamePerson comparison)
+ */
+public class TaskList implements ReadOnlyTaskList {
 
-    /** An array list consisting of tasks. */
-    private ArrayList<Task> list;
+    private final UniqueTaskList tasks;
 
-    /**
-     * Constructs a TaskList by assigning the list parameter to a newly constructed
-     * empty Task ArrayList.
-     */
-    public TaskList() {
-        list = new ArrayList<Task>();
-    }
-    /**
-     * Deletes a task from list with at index minus one.
-     * @param index the index (plus one) of the task to be removed from the list.
-     */
-    public void delete(int index) {
-        list.remove(index - 1);
-    }
-
-    /**
-     * Adds a task to list.
+    /*
+     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
+     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
      *
-     * @param task the task to be added to the list.
+     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
+     *   among constructors.
      */
-    public void add(Task task) {
-        list.add(task);
+    {
+        tasks = new UniqueTaskList();
+    }
+
+    public TaskList() {}
+
+    /**
+     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     */
+    public TaskList(ReadOnlyTaskList toBeCopied) {
+        this();
+        resetData(toBeCopied);
+    }
+
+    //// list overwrite operations
+
+    /**
+     * Replaces the contents of the person list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void setTasks(List<Task> tasks) {
+        this.tasks.setTasks(tasks);
     }
 
     /**
-     * Retrieves the task at a provided index minus one from list.
-     *
-     * @param index the index (plus one) of the task to be retrieved from list.
-     * @return
+     * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
-    public Task get(int index) {
-        return list.get(index - 1);
+    public void resetData(ReadOnlyTaskList newData) {
+        requireNonNull(newData);
+
+        setTasks(newData.getTaskList());
+    }
+
+    //// person-level operations
+
+    /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     */
+    public boolean hasTask(Task task) {
+        requireNonNull(task);
+        return tasks.contains(task);
     }
 
     /**
-     * Returns the size of TaskList.
-     *
-     * @return the size of list.
+     * Adds a person to the address book.
+     * The person must not already exist in the address book.
      */
-    public int size() {
-        return list.size();
+    public void addTask(Task t) {
+        tasks.add(t);
     }
 
     /**
-     * Returns a boolean value indicating if the TaskList is empty.
-     *
-     * @return true or false if the list is empty or not empty respectively.
+     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * {@code target} must exist in the address book.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    public boolean isEmpty() {
-        return list.isEmpty();
+    public void setTask(Task target, Task editedTask) {
+        requireNonNull(editedTask);
+
+        tasks.setPerson(target, editedTask);
     }
 
     /**
-     * Returns a TaskList of tasks containing the provided key words or phrases.
-     *
-     * @param keyWord the key words or phrases that are being searched for in the TaskList.
-     * @return a TaskList of tasks containing the provided key words or phrases.
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
      */
-    public TaskList contains(String keyWord) {
-        TaskList keyWordTasks = new TaskList();
-        for (int i = 1; i < this.size(); i++) {
-            if (this.get(i).toString().contains(keyWord)) {
-                keyWordTasks.add(this.get(i));
-            }
-        }
-        return keyWordTasks;
+    public void removeTask(Task key) {
+        tasks.remove(key);
     }
 
-    /**
-     * Deletes all tasks in the TaskList.
-     */
-    public void deleteAll() {
-        list.clear();
-    }
-
-    /**
-     * Marks all tasks in the TaskList as done.
-     */
-    public void markAllDone() {
-        for (Task task: list) {
-            task.markAsDone();
-        }
-    }
-
-    public ObservableList<Task> getObservableTaskList() {
-        javafx.collections.ObservableList<Task> ObservableList = FXCollections.observableList(list);
-        return ObservableList;
-    }
+    //// util methods
 
     @Override
     public String toString() {
-        return list.toString();
+        return tasks.asUnmodifiableObservableList().size() + " tasks";
+        // TODO: refine later
+    }
+
+    @Override
+    public ObservableList<Task> getTaskList() {
+        return tasks.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TaskList // instanceof handles nulls
+                && tasks.equals(((TaskList) other).tasks));
+    }
+
+    @Override
+    public int hashCode() {
+        return tasks.hashCode();
     }
 }
-

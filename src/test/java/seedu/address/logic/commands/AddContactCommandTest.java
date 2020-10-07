@@ -159,16 +159,6 @@ public class AddContactCommandTest {
         }
 
         @Override
-        public void updateFilteredTaskListTodo() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredTaskListEvent() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void addTodo(Todo todo) {
             throw new AssertionError("This method should not be called.");
         }
@@ -179,12 +169,12 @@ public class AddContactCommandTest {
         }
 
         @Override
-        public void deleteTodo(int index) {
+        public void deleteTodo(Task task) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deleteEvent(int index) {
+        public void deleteEvent(Task task) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -42,7 +42,6 @@ public class TaskListPanel extends UiPart<Region> {
                 setText(null);
             } else {
                 setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
-                System.out.println(task);
             }
         }
     }

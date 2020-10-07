@@ -77,6 +77,10 @@ public abstract class Task {
         }
     }
 
+    public boolean isSameTask(Task task) {
+        return this.equals(task);
+    }
+
     /**
      * Returns the string representation of task, which includes the status icon
      * and description.
