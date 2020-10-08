@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.find.FindContactCommand;
 import seedu.address.logic.commands.list.ListAllCommand;
 import seedu.address.logic.commands.list.ListContactCommand;
 import seedu.address.logic.commands.list.ListEventCommand;
@@ -27,9 +26,9 @@ public class ListCommandParser implements Parser<ListCommand> {
             return new ListContactCommand();
         } else if (args.trim().equals("todo")) {
             return new ListTodoCommand();
-        } else if (args.trim().equals("event")){
+        } else if (args.trim().equals("event")) {
             return new ListEventCommand();
-        } else if (args.trim().equals("all")){
+        } else if (args.trim().equals("all")) {
             return new ListAllCommand();
         }
         else{
