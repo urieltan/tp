@@ -16,7 +16,19 @@ public class DueBeforeCommandParser implements Parser<DueBeforeCommand> {
         try {
             String[] splitArgs = args.trim().split(" ", 2);
             String date = splitArgs[0].split("/")[1];
+
+            // if date not in DD-MM-YYYY format
+            if (date.length() < 10) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DueBeforeCommand.MESSAGE_USAGE));
+            }
             String time = splitArgs[1].split("/")[1];
+            // if time not in HHmm format
+            if (time.length() < 4) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DueBeforeCommand.MESSAGE_USAGE));
+            }
+
             String deadline = date + " " + time;
             return new DueBeforeCommand(new DueBeforePredicate(deadline));
         } catch (ArrayIndexOutOfBoundsException e) {

@@ -106,31 +106,31 @@ Format:
 Examples:
 * `link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoUz1JpAgynIkfacr0asqV9A4kh todo i/2`
 
-### Filter deadlines : `items due`
+### Filter deadlines : `itemsDue`
 
 User can search todos/meetings due by/before a certain date/time.
 
 Outputs a list of results.
 
 * Due by
-    `items due by/DD/MM/YYYY [HHmm]`
+    `itemsDueBy date/DD-MM-YYYY time/HHmm`
 
-    `DD/MM/YYYY`: States the Day, Month, Year.
+    `DD-MM-YYYY`: States the Day, Month, Year.
 
     `HHmm`: States the time in 24 hours.
 
-    Example: `items due by/25/9/2020 2359`
-    It will output a list of todos/meetings that are due specifically **on** 25th September 2020, 2359.
+    Example: `itemsDueBy date/12-12-2020 time/2359`
+    It will output a list of todos/meetings that are due specifically **on** 12th December 2020, 2359.
 
 * Due before
-    `items due before/DD/MM/YYYY [HHmm]`
+    `itemsDueBefore date/DD-MM-YYYY time/HHmm`
 
-    `DD/MM/YYYY`: States the Day, Month, Year.
+    `DD-MM-YYYY`: States the Day, Month, Year.
 
     `HHmm`: States the time in 24 hours.
 
-    Example: `items due before/25/9/2020 2359`
-    It will output a list of todos/meetings that are due specifically **before** 25th September 2020, 2359.
+    Example: `itemsDueBefore date/12-12-2020 time/2359`
+    It will output a list of todos/meetings that are due specifically **before** 12th December 2020, 2359.
 
 ### Listing all persons : `list contact`
 
@@ -301,7 +301,7 @@ Action | Format, Examples
 **Show To Do** | `show todo i/INDEX` <br> e.g., `show todo 3`
 **Show Tag** | `show tag t/TAG` <br> e.g., `show tag t/friends`
 **Mark To Do as Complete** | `done i/INDEX` <br> e.g., `done 5`
-**Filter by** | `items due by/DD/MM/YYYY [HHmm]` <br> e.g. `items due by/21/10/2020`
-**Filter before** |  `items due before/DD/MM/YYYY [HHmm]` <br> e.g. `items due before/21/10/2020 2359`
+**Filter by** | `itemsDueBy date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueBy date/12-12-2020 time/2359`
+**Filter before** |  `itemsDueBefore date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueBefore date/12-12-2020 time/2359`
 **Link meeting** | `link meeting desc/DESCRIPTION url/LINK todo/event i/INDEX_OF_TASK` <br> e.g.,`link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf event i/2 date/22/9/2020 time/1400`
 **Link doc** | `link doc desc/DESCRIPTION url/LINK todo/event i/INDEX_OF_TASK` <br> e.g.,`link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoIkfacr0asqV9A4kh todo i/2`
