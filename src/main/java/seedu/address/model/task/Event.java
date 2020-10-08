@@ -138,5 +138,10 @@ public class Event extends Task {
     public String getDateTime() {
         return this.getPeriod();
     }
+
+    @Override
+    public LocalDateTime getLocalDateTime() {
+        return this.end;
+    }
 }
 
