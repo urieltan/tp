@@ -158,15 +158,15 @@ Examples:
 ### Showing persons with a specific tag: `show`
 Shows persons whose tags match the tag being searched.
 
-Format: `show tag [t/TAG]`
+Format: `show t/TAG`
 * The search is case-insensitive. e.g `friends` will match `Friends`
 * Only full words will be matched. e.g. `friend` will not match `friends`
 * Persons whose one of the tag(s) matches the tag searched will be returned.
 e.g. Hans with tag `friends` and `colleagues` will be returned when tag `friends` is searched.
 
 Examples:
-* `show tag t/colleagues`
-* `show tag t/friends`
+* `show t/colleagues`
+* `show t/friends`
 
 ### Locating persons by name: `find contact`
 
@@ -299,7 +299,7 @@ Action | Format, Examples
 **List To Do** | `list todo`
 **Remove To Do** | `remove todo i/INDEX` <br> e.g., `remove todo i/3`
 **Show To Do** | `show todo i/INDEX` <br> e.g., `show todo 3`
-**Show Tag** | `show tag t/TAG` <br> e.g., `show tag t/friends`
+**Show** | `show t/TAG` <br> e.g., `show t/friends`
 **Mark To Do as Complete** | `done i/INDEX` <br> e.g., `done 5`
 **Filter by** | `itemsDueBy date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueBy date/12-12-2020 time/2359`
 **Filter before** |  `itemsDueBefore date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueBefore date/12-12-2020 time/2359`
