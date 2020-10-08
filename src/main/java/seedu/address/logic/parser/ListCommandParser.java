@@ -30,8 +30,7 @@ public class ListCommandParser implements Parser<ListCommand> {
             return new ListEventCommand();
         } else if (args.trim().equals("all")) {
             return new ListAllCommand();
-        }
-        else {
+        } else {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
