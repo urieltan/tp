@@ -8,6 +8,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.task.DueBeforePredicate;
 
+/**
+ * Finds all tasks (Todos and Events) that are due before a given date and time.
+ */
 public class DueBeforeCommand extends Command {
     public static final String COMMAND_WORD = "itemsDueBefore";
 
