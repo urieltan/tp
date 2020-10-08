@@ -1,5 +1,7 @@
 package seedu.address.model.task;
 
+import java.time.LocalDateTime;
+
 public abstract class Task {
     /** A brief description of the task. */
     protected String description;
@@ -106,4 +108,6 @@ public abstract class Task {
     }
 
     public abstract String getDateTime();
+
+    public abstract LocalDateTime getLocalDateTime();
 }

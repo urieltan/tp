@@ -100,6 +100,5 @@ public interface Model {
 
     void deleteEvent(Task task);
 
-
     ObservableList<Task> getFilteredTaskList();
 }

@@ -118,6 +118,11 @@ public class Todo extends Task {
         return getDeadline();
     }
 
+    @Override
+    public LocalDateTime getLocalDateTime() {
+        return this.deadline;
+    }
+
     public String getDescriptionDateTime() {
         return this.description + getDateTime() + " (by: " + getDateTime() + ")";
     }
