@@ -92,7 +92,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list_throwsParseException() throws Exception {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE), ()
             -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3"));
     }
 
