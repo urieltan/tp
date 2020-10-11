@@ -1,9 +1,11 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.due;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.task.DueBeforePredicate;
@@ -23,7 +25,7 @@ public class DueBeforeCommand extends Command {
             + PREFIX_DATE + "12-12-2020 "
             + PREFIX_TIME + "2359";
 
-    public static final String MESSAGE_SUCCESS = "Here are the list of Todos/Events due before: ";
+    public static final String MESSAGE_SUCCESS = "Here are the list of Todos/Events due before: %1$s";
 
     private DueBeforePredicate predicate;
 
@@ -35,7 +37,7 @@ public class DueBeforeCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredTaskList(predicate);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, predicate.getDateTime()));
     }
 
 }
