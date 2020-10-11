@@ -69,7 +69,7 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-
+<h2> Contact</h2>
 ### Adding a person: `add contact`
 
 Adds a person to the contact list.
@@ -83,54 +83,6 @@ A person can have any number of tags (including 0)
 Examples:
 * `add contact n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add contact n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
-### Adding a zoom meeting: `link meeting`
-
-Adds a zoom link for a task.
-
-Format:
-* `link meeting desc/DESCRIPTION url/MEETING LINK todo i/INDEX_OF_TODO date/DD/MM/YYYY time/HHmm` or
-* `link meeting desc/DESCRIPTION url/MEETING LINK event i/INDEX_OF_EVENT date/DD/MM/YYYY time/HHmm`
-
-Examples:
-* `link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf event i/2 date/22/9/2020 time/1400`
-
-### Adding a collaborative folder link: `link doc`
-
-Adds a collaborative link (Google Drive, GitHub, Trello, and others)
-
-Format:
-* `link doc desc/DESCRIPTION url/LINK todo i/INDEX_OF_TODO` or
-* `link doc desc/DESCRIPTION url/LINK event i/INDEX_OF_EVENT`
-
-Examples:
-* `link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoUz1JpAgynIkfacr0asqV9A4kh todo i/2`
-
-### Filter deadlines : `itemsDue`
-
-User can search todos/meetings due by/before a certain date/time.
-
-Outputs a list of results.
-
-* Due by
-    `itemsDueBy date/DD-MM-YYYY time/HHmm`
-
-    `DD-MM-YYYY`: States the Day, Month, Year.
-
-    `HHmm`: States the time in 24 hours.
-
-    Example: `itemsDueBy date/12-12-2020 time/2359`
-    It will output a list of todos/meetings that are due specifically **on** 12th December 2020, 2359.
-
-* Due before
-    `itemsDueBefore date/DD-MM-YYYY time/HHmm`
-
-    `DD-MM-YYYY`: States the Day, Month, Year.
-
-    `HHmm`: States the time in 24 hours.
-
-    Example: `itemsDueBefore date/12-12-2020 time/2359`
-    It will output a list of todos/meetings that are due specifically **before** 12th December 2020, 2359.
 
 ### Listing all persons : `list contact`
 
@@ -207,39 +159,27 @@ Clears all entries from the contact list.
 
 Format: `clear contact`
 
-### Exiting the program : `exit`
+<h2> Todo </h2>
 
-Exits the program.
-
-Format: `exit`
-
-### Saving the data
-
-Lifebook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Archiving data files
-
-This feature will be implemented in the next iteration (v1.2).
-
-### Adding To Do's : `todo`
+### Adding To Dos : `add todo`
 Adds a To Do to the TodoList of LifeBook.
 
-Format: `todo desc/DESCRIPTION date/DATE time/TIME`
+Format: `add todo desc/DESCRIPTION date/DATE time/TIME`
 
-* `DATE` must be specified in the format of DD/MM/YYYY
+* `DATE` must be specified in the format of DD-MM-YYYY
 * `TIME` must be speficied in the format of HHmm using 24 hour time
 
 Examples:
 
-* `todo finish desc/cs2101 Oral Presentation reflection date/08/08/2020 time/2359`
-* `todo finish user guide draft date/09/08/2020 time/2300`
+* `add todo desc/cs2101 Oral Presentation reflection date/08-08-2020 time/2359`
+* `add todo desc/user guide draft date/09-08-2020 time/2300`
 
-### View all To Do's : `list todo`
+### View all To Dos : `list todo`
 Shows a list of all To Do's in the TodoList.
 
 Format: `list todo`
 
-### Removing To Do's : `remove todo`
+### Removing To Dos : `remove todo`
 Removes a To Do from the TodoList of LifeBook.
 
 Format: `remove todo i/INDEX`
@@ -274,6 +214,126 @@ Format: `done i/INDEX`
 
 Example:
 * `list todo` followed by `done todo i/3`  marks the 3rd To Do on the To Do list as complete.
+
+<h2> Event </h2>
+
+### Adding Events : `add event`
+Adds an Event o to the EventList of LifeBook.
+
+Format: `add event desc/DESCRIPTION startdate/DATE starttime/TIME enddate/DATE endtime/TIME`
+
+* `DATE` must be specified in the format of DD-MM-YYYY
+* `TIME` must be speficied in the format of HHmm using 24 hour time
+
+Examples:
+
+* `add event desc/Party with friends startdate/08-08-2020 starttime/2359 enddate/10-08-2020 endtime/2359`
+* `add event desc/Singapore Fintech Festival startdate/09-08-2020 starttime/1000 enddate/12-08-2020 endtime/2359`
+
+### View all Events : `list event`
+Shows a list of all Events in the EventList.
+
+Format: `list event`
+
+### Removing Events : `remove event`
+Removes an Event from the EventList of LifeBook.
+
+Format: `remove event i/INDEX`
+
+* Removes the Event at the specified `INDEX`.
+* The index refers to the index number shown in the displayed EventList.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Example:
+* `list event` followed by `remove event i/3`  removes the 3rd Event from the Event list.
+
+### View details of a specific Event: `show event`
+Shows all details of a specific Event on the EventList.
+
+Format: `show event i/INDEX`
+
+* Shows all details of the Event at the specified `INDEX`.
+* The index refers to the index number shown in the displayed EventList.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Example:
+* `list event` followed by `show event i/3`  shows all details of the 3rd Event on the Event list.
+
+### Mark To Do as complete: `done`
+Marks an Event on the EventList as complete.
+
+Format: `done i/INDEX`
+
+* Marks the Event at the specified `INDEX` as done.
+* The index refers to the index number shown in the displayed EventList.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Example:
+* `list event` followed by `done event i/3`  marks the 3rd Event on the Event list as complete.
+
+<h2> Others </h2>
+
+### Adding a zoom meeting: `link meeting`
+
+Adds a zoom link for a task.
+
+Format:
+* `link meeting desc/DESCRIPTION url/MEETING LINK todo i/INDEX_OF_TODO date/DD/MM/YYYY time/HHmm` or
+* `link meeting desc/DESCRIPTION url/MEETING LINK event i/INDEX_OF_EVENT date/DD/MM/YYYY time/HHmm`
+
+Examples:
+* `link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf event i/2 date/22/9/2020 time/1400`
+
+### Adding a collaborative folder link: `link doc`
+
+Adds a collaborative link (Google Drive, GitHub, Trello, and others)
+
+Format:
+* `link doc desc/DESCRIPTION url/LINK todo i/INDEX_OF_TODO` or
+* `link doc desc/DESCRIPTION url/LINK event i/INDEX_OF_EVENT`
+
+Examples:
+* `link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoUz1JpAgynIkfacr0asqV9A4kh todo i/2`
+
+### Filter deadlines : `itemsDue`
+
+User can search todos/meetings due by/before a certain date/time.
+
+Outputs a list of results.
+
+* Due by
+    `itemsDueBy date/DD-MM-YYYY time/HHmm`
+
+    `DD-MM-YYYY`: States the Day, Month, Year.
+
+    `HHmm`: States the time in 24 hours.
+
+    Example: `itemsDueBy date/12-12-2020 time/2359`
+    It will output a list of todos/meetings that are due specifically **on** 12th December 2020, 2359.
+
+* Due before
+    `itemsDueBefore date/DD-MM-YYYY time/HHmm`
+
+    `DD-MM-YYYY`: States the Day, Month, Year.
+
+    `HHmm`: States the time in 24 hours.
+
+    Example: `itemsDueBefore date/12-12-2020 time/2359`
+    It will output a list of todos/meetings that are due specifically **before** 12th December 2020, 2359.
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+### Saving the data
+
+Lifebook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+### Archiving data files
+
+This feature will be implemented in the next iteration (v1.2).
 
 --------------------------------------------------------------------------------------------------------------------
 
