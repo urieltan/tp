@@ -273,6 +273,12 @@ Example:
 
 <h2> Others </h2>
 
+### Listing all contacts and tasks : `list all`
+
+Shows a list of all contacts, events, and to-dos in the Lifebook.
+
+Format: `list all`
+
 ### Adding a zoom meeting: `link meeting`
 
 Adds a zoom link for a task.
