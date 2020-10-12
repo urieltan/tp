@@ -77,7 +77,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             String deadline = date + " " + time;
             Todo todo = new Todo(description, deadline);
             return new AddTodoCommand(todo);
-        } else {
+        } else if (splitArgs[0].trim().equals("event")) {
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_DESCRIPTION, PREFIX_STARTDATE,
                             PREFIX_STARTTIME, PREFIX_ENDDATE, PREFIX_ENDTIME);
@@ -98,6 +98,12 @@ public class AddCommandParser implements Parser<AddCommand> {
             Event event = new Event(description, stDateTime, endDateTime);
 
             return new AddEventCommand(event);
+        } else if (splitArgs[0].trim().equals("meeting")) {
+            //TODO TODO TODO
+            
+        }
+        else {
+            throw new ParseException(AddCommand.MESSAGE_USAGE);
         }
 
     }
