@@ -176,7 +176,7 @@ public class ModelManager implements Model {
     }
     @Override
     public boolean hasTask(Task task) {
-        return task != null;
+        return this.taskList.hasTask(task);
     }
 
     //=========== Filtered Task List Accessors =============================================================
