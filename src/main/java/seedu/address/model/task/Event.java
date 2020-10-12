@@ -90,7 +90,8 @@ public class Event extends Task {
         return "[" + getStatusIcon() + "] " + getDescription() + " (at: " + getPeriod() + ")";
     }
     public String getDescriptionDateTime() {
-        return this.description + getDateTime() + " (at: " + getPeriod() + ")";
+        // hardcoded [✘] as done feature is not done as of now.
+        return "[✘] Event: " + this.description + " (at: " + getPeriod() + ")";
     }
 
     /**
@@ -134,6 +135,7 @@ public class Event extends Task {
     public String getDescription() {
         return "Event: " + this.description;
     }
+
     @Override
     public String getDateTime() {
         return this.getPeriod();
@@ -142,6 +144,14 @@ public class Event extends Task {
     @Override
     public LocalDateTime getLocalDateTime() {
         return this.end;
+    }
+
+    public String getStartDateTime() {
+        return start.format(INPUT_DATE_TIME_FORMAT);
+    }
+
+    public String getEndDateTime() {
+        return end.format(INPUT_DATE_TIME_FORMAT);
     }
 }
 

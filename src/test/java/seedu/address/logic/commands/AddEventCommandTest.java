@@ -9,7 +9,7 @@ import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.commands.add.AddTodoCommand;
+import seedu.address.logic.commands.add.AddEventCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -19,7 +19,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.task.Event;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Todo;
-import seedu.address.testutil.TodoBuilder;
+import seedu.address.testutil.EventBuilder;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -27,55 +27,55 @@ import java.util.Arrays;
 import java.util.function.Predicate;
 
 
-public class AddTodoCommandTest {
+public class AddEventCommandTest {
     @Test
-    public void constructor_nullTodo_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddTodoCommand(null));
+    public void constructor_nullEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddEventCommand(null));
     }
 
     @Test
-    public void execute_todoAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingTodoAdded modelStub = new ModelStubAcceptingTodoAdded();
-        Todo validTodo = new TodoBuilder().build();
+    public void execute_EventAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingEventAdded modelStub = new ModelStubAcceptingEventAdded();
+        Event validEvent = new EventBuilder().build();
 
-        CommandResult commandResult = new AddTodoCommand(validTodo).execute(modelStub);
+        CommandResult commandResult = new AddEventCommand(validEvent).execute(modelStub);
 
-        assertEquals(String.format(AddTodoCommand.MESSAGE_SUCCESS, validTodo), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validTodo), modelStub.todosAdded);
+        assertEquals(String.format(AddEventCommand.MESSAGE_SUCCESS, validEvent), commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validEvent), modelStub.eventsAdded);
     }
 
     @Test
-    public void execute_duplicateTodo_throwsCommandException() {
-        Todo validTodo = new TodoBuilder().build();
-        AddTodoCommand addTodoCommand = new AddTodoCommand(validTodo);
-        ModelStub modelStub = new ModelStubWithTodo(validTodo);
+    public void execute_duplicateEvent_throwsCommandException() {
+        Event validEvent = new EventBuilder().build();
+        AddEventCommand addEventCommand = new AddEventCommand(validEvent);
+        ModelStub modelStub = new ModelStubWithEvent(validEvent);
 
         assertThrows(CommandException.class,
-                AddTodoCommand.MESSAGE_DUPLICATE_PERSON, () -> addTodoCommand.execute(modelStub));
+                AddEventCommand.MESSAGE_DUPLICATE_PERSON, () -> addEventCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Todo homework = new TodoBuilder().withDescription("homework").build();
-        Todo assignment = new TodoBuilder().withDescription("assignment").build();
-        AddTodoCommand addHomeworkCommand = new AddTodoCommand(homework);
-        AddTodoCommand addAssignmentCommand = new AddTodoCommand(assignment);
+        Event meeting = new EventBuilder().withDescription("meeting").build();
+        Event party = new EventBuilder().withDescription("party").build();
+        AddEventCommand addMeetingCommand = new AddEventCommand(meeting);
+        AddEventCommand addPartyCommand = new AddEventCommand(party);
 
         // same object -> returns true
-        assertTrue(addHomeworkCommand.equals(addHomeworkCommand));
+        assertTrue(addMeetingCommand.equals(addMeetingCommand));
 
         // same values -> returns true
-        AddTodoCommand addHomeworkCommandCopy = new AddTodoCommand(homework);
-        assertTrue(addHomeworkCommand.equals(addHomeworkCommandCopy));
+        AddEventCommand addMeetingCommandCopy = new AddEventCommand(meeting);
+        assertTrue(addMeetingCommand.equals(addMeetingCommandCopy));
 
         // different types -> returns false
-        assertFalse(addHomeworkCommand.equals(1));
+        assertFalse(addMeetingCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addHomeworkCommand.equals(null));
+        assertFalse(addMeetingCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(addHomeworkCommand.equals(addAssignmentCommand));
+        assertFalse(addMeetingCommand.equals(addPartyCommand));
     }
 
     /**
@@ -191,37 +191,37 @@ public class AddTodoCommandTest {
     /**
      * A Model stub that contains a single to-do.
      */
-    private class ModelStubWithTodo extends ModelStub {
-        private final Todo todo;
+    private class ModelStubWithEvent extends ModelStub {
+        private final Event event;
 
-        ModelStubWithTodo(Todo todo) {
-            requireNonNull(todo);
-            this.todo = todo;
+        ModelStubWithEvent(Event event) {
+            requireNonNull(event);
+            this.event = event;
         }
 
         @Override
-        public boolean hasTask(Task todo) {
-            requireNonNull(todo);
-            return this.todo.isSameTask(todo);
+        public boolean hasTask(Task event) {
+            requireNonNull(event);
+            return this.event.isSameTask(event);
         }
     }
 
     /**
      * A Model stub that always accept the to-do being added.
      */
-    private class ModelStubAcceptingTodoAdded extends ModelStub {
-        final ArrayList<Todo> todosAdded = new ArrayList<>();
+    private class ModelStubAcceptingEventAdded extends ModelStub {
+        final ArrayList<Event> eventsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasTask(Task todo) {
-            requireNonNull(todo);
-            return todosAdded.stream().anyMatch(todo::isSameTask);
+        public boolean hasTask(Task event) {
+            requireNonNull(event);
+            return eventsAdded.stream().anyMatch(event::isSameTask);
         }
 
         @Override
-        public void addTodo(Todo todo) {
-            requireNonNull(todo);
-            todosAdded.add(todo);
+        public void addEvent(Event event) {
+            requireNonNull(event);
+            eventsAdded.add(event);
         }
 
         @Override
@@ -232,3 +232,4 @@ public class AddTodoCommandTest {
     }
 
 }
+
