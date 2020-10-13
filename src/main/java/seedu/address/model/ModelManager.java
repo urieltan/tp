@@ -174,6 +174,10 @@ public class ModelManager implements Model {
     public void deleteEvent(Task task) {
         this.taskList.removeTask(task);
     }
+    @Override
+    public boolean hasTask(Task task) {
+        return this.taskList.hasTask(task);
+    }
 
     //=========== Filtered Task List Accessors =============================================================
     @Override

@@ -124,6 +124,7 @@ public class Todo extends Task {
     }
 
     public String getDescriptionDateTime() {
-        return this.description + getDateTime() + " (by: " + getDateTime() + ")";
+        // hardcoded [✘] as done feature is not done as of now.
+        return "[✘] Todo: " + this.description + " (by: " + getDateTime() + ")";
     }
 }

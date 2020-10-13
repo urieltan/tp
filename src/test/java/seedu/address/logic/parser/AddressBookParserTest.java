@@ -18,6 +18,8 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.add.AddContactCommand;
+import seedu.address.logic.commands.add.AddEventCommand;
+import seedu.address.logic.commands.add.AddTodoCommand;
 import seedu.address.logic.commands.delete.DeleteContactCommand;
 import seedu.address.logic.commands.edit.EditContactCommand;
 import seedu.address.logic.commands.edit.EditContactCommand.EditPersonDescriptor;
@@ -26,19 +28,39 @@ import seedu.address.logic.commands.list.ListContactCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Event;
+import seedu.address.model.task.Todo;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.TodoBuilder;
 
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
 
     @Test
-    public void parseCommand_add() throws Exception {
+    public void parseCommand_addContact() throws Exception {
         Person person = new PersonBuilder().build();
         AddContactCommand command = (AddContactCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new AddContactCommand(person), command);
+    }
+
+    @Test
+    public void parseCommand_addTodo() throws Exception {
+        Todo todo = new TodoBuilder().build();
+        AddTodoCommand command = (AddTodoCommand) parser.parseCommand(AddTodoCommand.COMMAND_WORD
+                + " todo desc/homework date/12-12-2020 time/2359");
+        assertEquals(new AddTodoCommand(todo), command);
+    }
+
+    @Test
+    public void parseCommand_addEvent() throws Exception {
+        Event event = new EventBuilder().build();
+        AddEventCommand command = (AddEventCommand) parser.parseCommand(AddEventCommand.COMMAND_WORD
+                + " event desc/meeting startdate/12-12-2020 starttime/1000 enddate/12-12-2020 endtime/1130");
+        assertEquals(new AddEventCommand(event), command);
     }
 
     @Test
