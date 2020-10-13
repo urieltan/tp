@@ -105,4 +105,7 @@ public interface Model {
     ObservableList<Task> getFilteredTaskList();
 
     ReadOnlyTaskList getTaskList();
+
+    void setTask(Task target, Task editedTask);
+    void markAsDone(Task target);
 }

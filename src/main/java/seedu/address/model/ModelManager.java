@@ -182,7 +182,16 @@ public class ModelManager implements Model {
     public boolean hasTask(Task task) {
         return this.taskList.hasTask(task);
     }
-
+    @Override
+    public void setTask(Task target, Task editedTask) {
+        requireAllNonNull(target, editedTask);
+        taskList.setTask(target, editedTask);
+    }
+    @Override
+    public void markAsDone(Task target) {
+        requireAllNonNull(target);
+        taskList.markAsDone(target);
+    }
     //=========== Filtered Task List Accessors =============================================================
     @Override
     public ObservableList<Task> getFilteredTaskList() {

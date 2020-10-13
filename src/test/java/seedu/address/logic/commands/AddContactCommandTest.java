@@ -190,7 +190,16 @@ public class AddContactCommandTest {
         }
 
         @Override
+        public void setTask(Task target, Task editedTask) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void markAsDone(Task target) {
             throw new AssertionError("This method should not be called.");
         }
     }
