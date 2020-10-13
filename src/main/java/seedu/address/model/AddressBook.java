@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.task.Event;
 import seedu.address.model.task.Todo;
 import seedu.address.model.task.UniqueTaskList;
 
@@ -97,9 +98,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
-    /// To-do methods
+    //// Task methods
+
     public void addTodo(Todo todo) {
         tasks.add(todo);
+    }
+
+    public void addEvent(Event event) {
+        tasks.add(event);
     }
 
     //// util methods

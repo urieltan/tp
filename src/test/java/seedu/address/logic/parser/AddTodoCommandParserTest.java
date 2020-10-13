@@ -22,7 +22,7 @@ public class AddTodoCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         Todo expectedTodo = new TodoBuilder(HOMEWORK).build();
-        System.out.println("todo " + HOMEWORK_DESC + HOMEWORK_DATE + HOMEWORK_TIME);
+
         assertParseSuccess(parser, "todo " + HOMEWORK_DESC + HOMEWORK_DATE + HOMEWORK_TIME,
                 new AddTodoCommand(expectedTodo));
     }
