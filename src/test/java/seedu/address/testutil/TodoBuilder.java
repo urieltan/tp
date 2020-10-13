@@ -2,10 +2,21 @@ package seedu.address.testutil;
 
 import seedu.address.model.task.Todo;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * A utility class to help with building To-do objects.
  */
 public class TodoBuilder {
+     /**
+      * The format of inputted dates that the class can accept.
+      */
+    private static final DateTimeFormatter INPUT_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+    /**
+     * The format of outputted dates by the class.
+     */
+    private static final DateTimeFormatter OUTPUT_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
 
     public static final String DEFAULT_DESC = "homework";
     public static final String DEFAULT_DATETIME = "12-12-2020 2359";
@@ -26,7 +37,12 @@ public class TodoBuilder {
      */
     public TodoBuilder(Todo todoToCopy) {
         description = todoToCopy.getDescription();
-        dateTime = todoToCopy.getDateTime();
+        // remove "To do: "
+        description = description.substring(6);
+
+        String dateTimeOutput = todoToCopy.getDateTime();
+        // flip the output and input of LocalDateTime
+        dateTime = LocalDateTime.parse(dateTimeOutput, OUTPUT_DATE_TIME_FORMAT).format(INPUT_DATE_TIME_FORMAT);
     }
 
     /**
