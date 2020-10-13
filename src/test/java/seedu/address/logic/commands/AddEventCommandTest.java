@@ -1,13 +1,19 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import javafx.collections.ObservableList;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Predicate;
+
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.add.AddEventCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -21,12 +27,6 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.Todo;
 import seedu.address.testutil.EventBuilder;
 
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.function.Predicate;
-
-
 public class AddEventCommandTest {
     @Test
     public void constructor_nullEvent_throwsNullPointerException() {
@@ -34,7 +34,7 @@ public class AddEventCommandTest {
     }
 
     @Test
-    public void execute_EventAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_eventAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingEventAdded modelStub = new ModelStubAcceptingEventAdded();
         Event validEvent = new EventBuilder().build();
 

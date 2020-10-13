@@ -30,7 +30,11 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Event;
 import seedu.address.model.task.Todo;
-import seedu.address.testutil.*;
+import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.TodoBuilder;
 
 public class AddressBookParserTest {
 

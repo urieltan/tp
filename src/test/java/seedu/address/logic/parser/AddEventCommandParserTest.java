@@ -12,7 +12,6 @@ import seedu.address.model.task.Event;
 import seedu.address.testutil.EventBuilder;
 
 public class AddEventCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
     private static final String MEETING_DESC = "desc/meeting ";
     private static final String MEETING_START_DATE = "startdate/12-12-2020 ";
     private static final String MEETING_START_TIME = "starttime/1000 ";
@@ -21,6 +20,8 @@ public class AddEventCommandParserTest {
 
     private static final String INVALID_DATE = "date/1-1-2020 ";
     private static final String INVALID_TIME = "time/12000 ";
+
+    private AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {

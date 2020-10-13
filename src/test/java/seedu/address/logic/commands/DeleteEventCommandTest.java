@@ -6,8 +6,10 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.delete.DeleteEventCommand;
@@ -18,19 +20,17 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.task.Event;
 import seedu.address.testutil.EventBuilder;
 
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-
 public class DeleteEventCommandTest {
-    private Event Event = new EventBuilder().build();
+    private Event event = new EventBuilder().build();
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new TaskList());
 
     @Test
     public void execute_validIndexTaskList_success() {
-        model.addEvent(Event);
-        Event EventToDelete = (Event) model.getFilteredTaskList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.addEvent(event);
+        Event eventToDelete = (Event) model.getFilteredTaskList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteEventCommand deleteEventCommand = new DeleteEventCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(DeleteEventCommand.MESSAGE_DELETE_PERSON_SUCCESS, EventToDelete);
+        String expectedMessage = String.format(DeleteEventCommand.MESSAGE_DELETE_PERSON_SUCCESS, eventToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new TaskList());
 

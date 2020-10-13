@@ -1,12 +1,15 @@
 package seedu.address.testutil;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.task.Event;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.model.AddressBook;
+import seedu.address.model.task.Event;
+
+/**
+ * A utility class containing a list of {@code Events} objects to be used in tests.
+ */
 public class TypicalEvents {
     public static final Event MEETING = new EventBuilder().withDescription("meeting")
             .withStartDateTime("12-12-2020 1000").withEndDateTime("12-12-2020 1130").build();
@@ -20,8 +23,8 @@ public class TypicalEvents {
      */
     public static AddressBook getTypicalEventsAddressBook() {
         AddressBook ab = new AddressBook();
-        for (Event Event: getTypicalEvents()) {
-            ab.addEvent(Event);
+        for (Event event: getTypicalEvents()) {
+            ab.addEvent(event);
         }
         return ab;
     }

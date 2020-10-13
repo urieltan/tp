@@ -12,12 +12,14 @@ import seedu.address.model.task.Todo;
 import seedu.address.testutil.TodoBuilder;
 
 public class AddTodoCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
     private static final String HOMEWORK_DESC = "desc/homework ";
     private static final String HOMEWORK_DATE = "date/12-12-2020 ";
     private static final String HOMEWORK_TIME = "time/2359";
+
     private static final String INVALID_DATE = "date/1-1-2020";
     private static final String INVALID_TIME = "time/12000";
+
+    private AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
