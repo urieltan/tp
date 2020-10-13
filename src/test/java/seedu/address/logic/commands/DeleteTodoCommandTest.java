@@ -30,7 +30,7 @@ public class DeleteTodoCommandTest {
         Todo todoToDelete = (Todo) model.getFilteredTaskList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteTodoCommand deleteTodoCommand = new DeleteTodoCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(DeleteTodoCommand.MESSAGE_DELETE_PERSON_SUCCESS, todoToDelete);
+        String expectedMessage = String.format(DeleteTodoCommand.MESSAGE_DELETE_TODO_SUCCESS, todoToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new TaskList());
 
