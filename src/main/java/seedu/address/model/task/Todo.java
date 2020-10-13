@@ -42,7 +42,18 @@ public class Todo extends Task {
         this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
     }
 
-
+    /**
+     * Constructs a task, which may or may not have been completed,
+     * with a brief description and deadline for the task to be completed by.
+     *
+     * @param isDone      indicates if the deadline has been completed.
+     * @param description a brief description of the deadline.
+     * @param deadline    a date and time specifies a deadline.
+     */
+    public Todo(boolean isDone, String description, LocalDateTime deadline) {
+        super(isDone, description);
+        this.deadline = deadline;
+    }
     /**
      * Changes the deadline of the task to a provided new deadline.
      *
@@ -57,7 +68,7 @@ public class Todo extends Task {
      *
      * @return a String representation of the deadline with the format of outputFormatter.
      */
-    public String getDeadline() {
+    public String deadlineToString() {
         return this.deadline.format(OUTPUT_DATE_TIME_FORMAT).toString();
     }
 
@@ -69,7 +80,7 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + getDescription() + " (by: " + getDeadline() + ")";
+        return "[" + getStatusIcon() + "] " + getDescription() + " (by: " + deadlineToString() + ")";
     }
 
     /**
@@ -115,7 +126,7 @@ public class Todo extends Task {
 
     @Override
     public String getDateTime() {
-        return getDeadline();
+        return deadlineToString();
     }
 
     @Override
@@ -123,7 +134,32 @@ public class Todo extends Task {
         return this.deadline;
     }
 
+    @Override
+    public boolean isTodo() {
+        return true;
+    }
+
+    @Override
+    public boolean isEvent() {
+        return false;
+    }
+
     public String getDescriptionDateTime() {
         return this.description + getDateTime() + " (by: " + getDateTime() + ")";
+    }
+
+    @Override
+    public LocalDateTime getDeadline() {
+        return this.deadline;
+    }
+
+    @Override
+    public LocalDateTime getStart() {
+        return null;
+    }
+
+    @Override
+    public LocalDateTime getEnd() {
+        return null;
     }
 }
