@@ -100,6 +100,8 @@ public interface Model {
 
     void deleteEvent(Task task);
 
+    boolean hasTask(Task task);
+
     ObservableList<Task> getFilteredTaskList();
 
     ReadOnlyTaskList getTaskList();

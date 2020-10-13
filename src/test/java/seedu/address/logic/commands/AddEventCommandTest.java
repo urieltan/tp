@@ -15,69 +15,67 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.commands.add.AddContactCommand;
+import seedu.address.logic.commands.add.AddEventCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyTaskList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Event;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Todo;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.EventBuilder;
 
-public class AddContactCommandTest {
-
+public class AddEventCommandTest {
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddContactCommand(null));
+    public void constructor_nullEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddEventCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_eventAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingEventAdded modelStub = new ModelStubAcceptingEventAdded();
+        Event validEvent = new EventBuilder().build();
 
-        CommandResult commandResult = new AddContactCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = new AddEventCommand(validEvent).execute(modelStub);
 
-        assertEquals(String.format(AddContactCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(String.format(AddEventCommand.MESSAGE_SUCCESS, validEvent), commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validEvent), modelStub.eventsAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddContactCommand addContactCommand = new AddContactCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_duplicateEvent_throwsCommandException() {
+        Event validEvent = new EventBuilder().build();
+        AddEventCommand addEventCommand = new AddEventCommand(validEvent);
+        ModelStub modelStub = new ModelStubWithEvent(validEvent);
 
         assertThrows(CommandException.class,
-                AddContactCommand.MESSAGE_DUPLICATE_PERSON, () -> addContactCommand.execute(modelStub));
+                AddEventCommand.MESSAGE_DUPLICATE_PERSON, () -> addEventCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddContactCommand addAliceCommand = new AddContactCommand(alice);
-        AddContactCommand addBobCommand = new AddContactCommand(bob);
+        Event meeting = new EventBuilder().withDescription("meeting").build();
+        Event party = new EventBuilder().withDescription("party").build();
+        AddEventCommand addMeetingCommand = new AddEventCommand(meeting);
+        AddEventCommand addPartyCommand = new AddEventCommand(party);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addMeetingCommand.equals(addMeetingCommand));
 
         // same values -> returns true
-        AddContactCommand addAliceCommandCopy = new AddContactCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddEventCommand addMeetingCommandCopy = new AddEventCommand(meeting);
+        assertTrue(addMeetingCommand.equals(addMeetingCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addMeetingCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addMeetingCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertFalse(addMeetingCommand.equals(addPartyCommand));
     }
 
     /**
@@ -185,56 +183,53 @@ public class AddContactCommandTest {
         }
 
         @Override
-        public ReadOnlyTaskList getTaskList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public boolean hasTask(Task task) {
             throw new AssertionError("This method should not be called.");
         }
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single to-do.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
+    private class ModelStubWithEvent extends ModelStub {
+        private final Event event;
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubWithEvent(Event event) {
+            requireNonNull(event);
+            this.event = event;
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+        public boolean hasTask(Task event) {
+            requireNonNull(event);
+            return this.event.isSameTask(event);
         }
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the to-do being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingEventAdded extends ModelStub {
+        final ArrayList<Event> eventsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+        public boolean hasTask(Task event) {
+            requireNonNull(event);
+            return eventsAdded.stream().anyMatch(event::isSameTask);
         }
 
         @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public void addEvent(Event event) {
+            requireNonNull(event);
+            eventsAdded.add(event);
         }
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
+
     }
 
 }
+

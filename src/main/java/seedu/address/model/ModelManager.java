@@ -178,6 +178,11 @@ public class ModelManager implements Model {
     public ReadOnlyTaskList getTaskList() {
         return taskList;
     }
+
+    public boolean hasTask(Task task) {
+        return this.taskList.hasTask(task);
+    }
+
     //=========== Filtered Task List Accessors =============================================================
     @Override
     public ObservableList<Task> getFilteredTaskList() {

@@ -15,69 +15,67 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.commands.add.AddContactCommand;
+import seedu.address.logic.commands.add.AddTodoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyTaskList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Event;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Todo;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TodoBuilder;
 
-public class AddContactCommandTest {
-
+public class AddTodoCommandTest {
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddContactCommand(null));
+    public void constructor_nullTodo_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddTodoCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_todoAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingTodoAdded modelStub = new ModelStubAcceptingTodoAdded();
+        Todo validTodo = new TodoBuilder().build();
 
-        CommandResult commandResult = new AddContactCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = new AddTodoCommand(validTodo).execute(modelStub);
 
-        assertEquals(String.format(AddContactCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(String.format(AddTodoCommand.MESSAGE_SUCCESS, validTodo), commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validTodo), modelStub.todosAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddContactCommand addContactCommand = new AddContactCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_duplicateTodo_throwsCommandException() {
+        Todo validTodo = new TodoBuilder().build();
+        AddTodoCommand addTodoCommand = new AddTodoCommand(validTodo);
+        ModelStub modelStub = new ModelStubWithTodo(validTodo);
 
         assertThrows(CommandException.class,
-                AddContactCommand.MESSAGE_DUPLICATE_PERSON, () -> addContactCommand.execute(modelStub));
+                AddTodoCommand.MESSAGE_DUPLICATE_PERSON, () -> addTodoCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddContactCommand addAliceCommand = new AddContactCommand(alice);
-        AddContactCommand addBobCommand = new AddContactCommand(bob);
+        Todo homework = new TodoBuilder().withDescription("homework").build();
+        Todo assignment = new TodoBuilder().withDescription("assignment").build();
+        AddTodoCommand addHomeworkCommand = new AddTodoCommand(homework);
+        AddTodoCommand addAssignmentCommand = new AddTodoCommand(assignment);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addHomeworkCommand.equals(addHomeworkCommand));
 
         // same values -> returns true
-        AddContactCommand addAliceCommandCopy = new AddContactCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddTodoCommand addHomeworkCommandCopy = new AddTodoCommand(homework);
+        assertTrue(addHomeworkCommand.equals(addHomeworkCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addHomeworkCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addHomeworkCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertFalse(addHomeworkCommand.equals(addAssignmentCommand));
     }
 
     /**
@@ -185,56 +183,52 @@ public class AddContactCommandTest {
         }
 
         @Override
-        public ReadOnlyTaskList getTaskList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public boolean hasTask(Task task) {
             throw new AssertionError("This method should not be called.");
         }
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single to-do.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
+    private class ModelStubWithTodo extends ModelStub {
+        private final Todo todo;
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubWithTodo(Todo todo) {
+            requireNonNull(todo);
+            this.todo = todo;
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+        public boolean hasTask(Task todo) {
+            requireNonNull(todo);
+            return this.todo.isSameTask(todo);
         }
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the to-do being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingTodoAdded extends ModelStub {
+        final ArrayList<Todo> todosAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+        public boolean hasTask(Task todo) {
+            requireNonNull(todo);
+            return todosAdded.stream().anyMatch(todo::isSameTask);
         }
 
         @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public void addTodo(Todo todo) {
+            requireNonNull(todo);
+            todosAdded.add(todo);
         }
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
+
     }
 
 }
