@@ -19,7 +19,7 @@ public class DeleteEventCommand extends DeleteCommand {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Event: %1$s";
+    public static final String MESSAGE_DELETE_EVENT_SUCCESS = "Deleted Event: %1$s";
 
     private final Index targetIndex;
 
@@ -33,12 +33,12 @@ public class DeleteEventCommand extends DeleteCommand {
         List<Task> lastShownList = model.getFilteredTaskList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
         Task eventToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteTodo(eventToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, eventToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, eventToDelete));
     }
     @Override
     public boolean equals(Object other) {
