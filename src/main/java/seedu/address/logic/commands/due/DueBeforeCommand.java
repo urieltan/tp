@@ -40,4 +40,11 @@ public class DueBeforeCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, predicate.getDateTime()));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DueBeforeCommand // instanceof handles nulls
+                && predicate.equals(((DueBeforeCommand) other).predicate));
+    }
+
 }
