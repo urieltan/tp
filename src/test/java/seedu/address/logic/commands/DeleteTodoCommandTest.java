@@ -42,7 +42,7 @@ public class DeleteTodoCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTaskList().size() + 1);
         DeleteTodoCommand deleteTodoCommand = new DeleteTodoCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteTodoCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteTodoCommand, model, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     @Test
