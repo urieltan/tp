@@ -183,5 +183,9 @@ public class Event extends Task {
     public LocalDateTime getLocalDateTime() {
         return this.end;
     }
+
+    public String getMeetingLink() {
+        return this.meetingLink.toString();
+    }
 }
 

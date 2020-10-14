@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.task.Event;
 import seedu.address.model.task.Task;
 
 /**
@@ -33,6 +34,8 @@ public class TaskCard extends UiPart<Region> {
     private Label dateTime;
     @FXML
     private Label statusIcon;
+    @FXML
+    private Label meetingLink;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -44,6 +47,11 @@ public class TaskCard extends UiPart<Region> {
         description.setText(task.getDescription());
         dateTime.setText(task.getDateTime());
         statusIcon.setText("Status: " + task.getStatusIcon());
+        if(task.getClass() == Event.class) {
+            meetingLink.setText(((Event) task).getMeetingLink());
+        } else{
+            meetingLink.setText("");
+        }
     }
 
     @Override

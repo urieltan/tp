@@ -71,7 +71,7 @@ public class MeetingLink {
      */
     @Override
     public String toString() {
-        return getDescription() + getMeetingTime() + "\n" + getUrl();
+        return getDescription() + " " + getMeetingTime() + "\n" + getUrl();
     }
 
     /**
@@ -106,7 +106,7 @@ public class MeetingLink {
     }
 
     public String getDescription() {
-        return "Todo: " + this.description;
+        return this.description;
     }
 
     public LocalDateTime getLocalDateTime() {
@@ -114,6 +114,6 @@ public class MeetingLink {
     }
 
     public String getDescriptionDateTime() {
-        return this.description + " (by: " + getMeetingTime() + ")\n" + url;
+        return this.description + " (by: " + getMeetingTime() + ") (" + url + ")";
     }
 }
