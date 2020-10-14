@@ -19,7 +19,7 @@ public class DeleteTodoCommand extends DeleteCommand {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Todo: %1$s";
+    public static final String MESSAGE_DELETE_TODO_SUCCESS = "Deleted Todo: %1$s";
 
     private final Index targetIndex;
 
@@ -33,12 +33,12 @@ public class DeleteTodoCommand extends DeleteCommand {
         List<Task> lastShownList = model.getFilteredTaskList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
         Task taskToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteTodo(taskToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, taskToDelete), "TASK");
+        return new CommandResult(String.format(MESSAGE_DELETE_TODO_SUCCESS, taskToDelete), "TASK");
     }
 
     @Override

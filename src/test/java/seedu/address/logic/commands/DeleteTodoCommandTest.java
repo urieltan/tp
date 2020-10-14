@@ -30,7 +30,7 @@ public class DeleteTodoCommandTest {
         Todo todoToDelete = (Todo) model.getFilteredTaskList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteTodoCommand deleteTodoCommand = new DeleteTodoCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(DeleteTodoCommand.MESSAGE_DELETE_PERSON_SUCCESS, todoToDelete);
+        String expectedMessage = String.format(DeleteTodoCommand.MESSAGE_DELETE_TODO_SUCCESS, todoToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new TaskList());
 
@@ -42,7 +42,7 @@ public class DeleteTodoCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTaskList().size() + 1);
         DeleteTodoCommand deleteTodoCommand = new DeleteTodoCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteTodoCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteTodoCommand, model, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     @Test

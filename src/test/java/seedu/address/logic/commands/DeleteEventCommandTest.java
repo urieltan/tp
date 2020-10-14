@@ -30,7 +30,7 @@ public class DeleteEventCommandTest {
         Event eventToDelete = (Event) model.getFilteredTaskList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteEventCommand deleteEventCommand = new DeleteEventCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(DeleteEventCommand.MESSAGE_DELETE_PERSON_SUCCESS, eventToDelete);
+        String expectedMessage = String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS, eventToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new TaskList());
 
@@ -42,7 +42,7 @@ public class DeleteEventCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTaskList().size() + 1);
         DeleteEventCommand deleteEventCommand = new DeleteEventCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteEventCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteEventCommand, model, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     @Test
