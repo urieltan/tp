@@ -29,6 +29,8 @@ and module details.** Lifebook supports Command Line Interface (CLI) for efficie
 
    * **`add contact`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the contact list.
 
+   * **`add todo`**`desc/homework date/12-12-2020 time/2359`: Adds a todo with a description `homework` that is due by `12 December 2020, 2359`.
+
    * **`link meeting`**`desc/Annual meeting url/https://nus-sg.zoom.us/j/98401234359?pwd=eG9HU1FJRDdsVHRaYkFUTC95L0abcedf todo i/2 date/20/1/2020 time/2359` : Add a zoom meeting titled 'annual meeting' at 2359, 20 Jan 2020 to the app.
 
    * **`delete contact`**`3` : Deletes the 3rd contact shown in the current list.
@@ -56,20 +58,21 @@ and module details.** Lifebook supports Command Line Interface (CLI) for efficie
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order.<br>
+* Parameters for contacts can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 </div>
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
 <h2> Contact</h2>
+
 ### Adding a person: `add contact`
 
 Adds a person to the contact list.
@@ -354,20 +357,25 @@ This feature will be implemented in the next iteration (v1.2).
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
+**Add Contact** | `add contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add contact n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Clear Contacts** | `clear contact`
+**Delete Contact** | `delete contact INDEX`<br> e.g., `delete contact 3`
+**Edit Contact** | `edit contact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]`<br> e.g.,`edit contact 2 n/James Lee e/jameslee@example.com`
+**Find Contact** | `find contact KEYWORD [MORE_KEYWORDS]`<br> e.g., `find contact James Jake`
+**List (Contacts and Tasks)** | `list all`
+**List Contacts** | `list contact`
 **Help** | `help`
-**Add To Do** | `todo desc/DESCRIPTION date/DATE time/TIME` <br> e.g., `todo finish user guide draft date/09/08/2020 time/2300`
-**List To Do** | `list todo`
+**Add To Do** | `add todo desc/DESCRIPTION date/DATE time/TIME` <br> e.g., `add todo desc/finish user guide draft date/09/08/2020 time/2300`
+**List To Dos** | `list todo`
 **Remove To Do** | `remove todo i/INDEX` <br> e.g., `remove todo i/3`
 **Show To Do** | `show todo i/INDEX` <br> e.g., `show todo 3`
+**Add Event** | `add event desc/DESCRIPTION startdate/DATE starttime/TIME enddate/DATE endtime/TIME` <br> e.g., `add event desc/meeting startdate/12-12-2020 starttime/1000 enddate/12-12-2020 endtime/1130`
+**List Events** | `list event`
+**Remove Event** | `remove event i/INDEX` <br> e.g., `remove event i/3`
+**Show Event** | `show event i/INDEX` <br> e.g., `show event i/3`
 **Show** | `show t/TAG` <br> e.g., `show t/friends`
-**Mark To Do as Complete** | `done i/INDEX` <br> e.g., `done 5`
-**Filter by** | `itemsDueBy date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueBy date/12-12-2020 time/2359`
-**Filter before** |  `itemsDueBefore date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueBefore date/12-12-2020 time/2359`
+**Mark To Do/Event as Complete** | `done i/INDEX` <br> e.g., `done 5`
+**Find tasks due by** | `itemsDueBy date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueBy date/12-12-2020 time/2359`
+**Find tasks due before** |  `itemsDueBefore date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueBefore date/12-12-2020 time/2359`
 **Link meeting** | `link meeting desc/DESCRIPTION url/LINK todo/event i/INDEX_OF_TASK` <br> e.g.,`link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf event i/2 date/22/9/2020 time/1400`
 **Link doc** | `link doc desc/DESCRIPTION url/LINK todo/event i/INDEX_OF_TASK` <br> e.g.,`link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoIkfacr0asqV9A4kh todo i/2`
