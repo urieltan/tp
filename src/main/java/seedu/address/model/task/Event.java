@@ -77,7 +77,22 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the String representation of the period of time which the event occurred over. In the
+     * Constructs an event which may or may not be completed
+     * with a brief description and period of time.
+     *
+     * @param isDone indicates if the event has been completed.
+     * @param description a brief description of the event.
+     * @param start the starting date and time of event.
+     * @param end the ending date and time of event.
+     */
+    public Event(boolean isDone, String description, LocalDateTime start, LocalDateTime end) {
+        super(isDone, description);
+        this.start = start;
+        this.end = end;
+    }
+
+    /**
+     * Returns the String representation of the period of time which the event occurred over. in the
      * form of -start- to -end-.
      * Dates and times are in the format of outputFormatter.
      *
@@ -130,7 +145,7 @@ public class Event extends Task {
         return "[" + getStatusIcon() + "] " + getDescription() + " (at: " + getPeriod() + ")";
     }
     public String getDescriptionDateTime() {
-        return this.description + getDateTime() + " (at: " + getPeriod() + ")";
+        return this.description + " (at: " + getPeriod() + ")";
     }
 
     /**
@@ -171,9 +186,15 @@ public class Event extends Task {
     }
 
     @Override
-    public String getDescription() {
-        return "Event: " + this.description;
+    public LocalDateTime getDeadline() {
+        return null;
     }
+
+    @Override
+    public String getDescription() {
+        return this.description;
+    }
+
     @Override
     public String getDateTime() {
         return this.getPeriod();
@@ -186,6 +207,34 @@ public class Event extends Task {
 
     public String getMeetingLink() {
         return this.meetingLink.toString();
+    @Override
+    public boolean isTodo() {
+        return false;
+    }
+
+    @Override
+    public boolean isEvent() {
+        return true;
+    }
+    @Override
+    public LocalDateTime getStart() {
+        return this.start;
+    }
+    @Override
+    public LocalDateTime getEnd() {
+        return this.end;
+    }
+    public String getStartDateTime() {
+        return start.format(INPUT_DATE_TIME_FORMAT);
+    }
+
+    public String getEndDateTime() {
+        return end.format(INPUT_DATE_TIME_FORMAT);
+    }
+    @Override
+    public String getType() {
+        return "Event";
     }
 }
+
 

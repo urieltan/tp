@@ -27,6 +27,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private Label type;
+    @FXML
     private Label description;
     @FXML
     private Label id;
@@ -43,6 +45,7 @@ public class TaskCard extends UiPart<Region> {
     public TaskCard(Task task, int displayedIndex) {
         super(FXML);
         this.task = task;
+        type.setText(task.getType());
         id.setText(displayedIndex + ". ");
         description.setText(task.getDescription());
         dateTime.setText(task.getDateTime());

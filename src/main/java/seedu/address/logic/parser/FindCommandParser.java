@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.UNKNOWN_FIND_COMMAND;
 
 import java.util.Arrays;
 
@@ -38,7 +39,6 @@ public class FindCommandParser implements Parser<FindCommand> {
 
             return new FindContactCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
         } else if (splitArgs[0].equals("todo")) {
-            System.out.println("masuk todo");
             String trimmedArgs = splitArgs[1].trim();
             if (trimmedArgs.isEmpty()) {
                 throw new ParseException(
@@ -48,8 +48,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             String[] nameKeywords = trimmedArgs.split("\\s+");
 
             return new FindTodoCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-        } else {
-            System.out.println("masuk event");
+        } else if (splitArgs[0].equals("event")) {
             String trimmedArgs = splitArgs[1].trim();
             if (trimmedArgs.isEmpty()) {
                 throw new ParseException(
@@ -59,6 +58,8 @@ public class FindCommandParser implements Parser<FindCommand> {
             String[] nameKeywords = trimmedArgs.split("\\s+");
 
             return new FindEventCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        } else {
+            throw new ParseException(UNKNOWN_FIND_COMMAND);
         }
     }
 

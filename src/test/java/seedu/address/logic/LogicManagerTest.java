@@ -29,6 +29,7 @@ import seedu.address.model.TaskList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonTaskListStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.PersonBuilder;
@@ -47,7 +48,8 @@ public class LogicManagerTest {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonTaskListStorage taskListStorage = new JsonTaskListStorage(temporaryFolder.resolve("taskList.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, taskListStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -76,7 +78,9 @@ public class LogicManagerTest {
                 new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonTaskListStorage taskListStorage =
+                new JsonTaskListStorage(temporaryFolder.resolve("ioExceptiontaskList" + ".json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, taskListStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command

@@ -71,6 +71,20 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
+     * Replaces the person {@code target} in the list with an identical task marked as done.
+     * {@code target} must exist in the list.
+     */
+    public void markAsDone(Task target) {
+        requireAllNonNull(target);
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new PersonNotFoundException();
+        }
+        target.markAsDone();
+        internalList.set(index, target);
+    }
+
+    /**
      * Removes the equivalent person from the list.
      * The person must exist in the list.
      */

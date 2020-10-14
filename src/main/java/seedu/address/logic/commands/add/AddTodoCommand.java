@@ -38,8 +38,11 @@ public class AddTodoCommand extends AddCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        if (model.hasTask(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
         model.addTodo(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getDescriptionDateTime()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getDescriptionDateTime()), "TASK");
     }
 
     @Override

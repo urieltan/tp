@@ -18,7 +18,7 @@ import seedu.address.model.task.Event;
 public class AddEventCommand extends AddCommand {
 
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a todo to the TodoList. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a event to the TaskList. "
             + "Parameters: "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_STARTDATE + "START DATE "
@@ -42,8 +42,11 @@ public class AddEventCommand extends AddCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        if (model.hasTask(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
         model.addEvent(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getDescriptionDateTime()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getDescriptionDateTime()), "TASK");
     }
 
     @Override
