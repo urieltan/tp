@@ -153,10 +153,6 @@
     -fx-background-radius: 5;
 }
 
-.list-view .scroll-bar:horizontal {
-    -fx-scale-x: 0;
-}
-
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
@@ -246,7 +242,7 @@
 }
 
 .context-menu {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: #343f4b;
 }
 
 .context-menu .label {
@@ -255,6 +251,7 @@
 
 .menu-bar {
     -fx-background-color: #343f4b;
+    -fx-selection-bar: #485563;
 }
 
 .menu-bar .label {
@@ -264,8 +261,16 @@
     -fx-opacity: 0.9;
 }
 
+.menu:focused {
+    -fx-background-color: #485563;
+}
+
 .menu .left-container {
     -fx-background-color: black;
+}
+
+.menu-item:focused {
+    -fx-background-color: #485563;
 }
 
 /*
@@ -343,12 +348,13 @@
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #485563;
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#1d1d1d, 50%);
-    -fx-background-insets: 3;
+    -fx-background-color:#6a8098;
+    -fx-background-insets: 2.5;
+    -fx-background-radius: 5;
 }
 
 .scroll-bar .increment-button, .scroll-bar .decrement-button {
@@ -400,12 +406,19 @@
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
+#placeHolder {
+    -fx-background-color: #485563;
+    -fx-background-radius: 15 15 15 15;
+    -fx-padding: 10;
+    -fx-border-width: 0;
+}
+
 #resultDisplayPlaceholder {
     -fx-background-color: #29323C;
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #485563, transparent, #485563;
+    -fx-background-color: transparent;
     -fx-background-radius: 15;
 }
 
@@ -416,6 +429,9 @@
     -fx-background-color: transparent;
 }
 .text-area .scroll-pane .content{
+    -fx-background-color: transparent;
+}
+.corner {
     -fx-background-color: transparent;
 }
 
