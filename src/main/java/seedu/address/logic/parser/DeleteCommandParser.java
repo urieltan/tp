@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.UNKNOWN_DELETE_COMMAND;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
@@ -27,8 +28,10 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 return new DeleteContactCommand(index);
             } else if (splitArgs[0].trim().equals("todo")) {
                 return new DeleteTodoCommand(index);
-            } else {
+            } else if (splitArgs[0].trim().equals("event")){
                 return new DeleteEventCommand(index);
+            } else {
+                throw new ParseException(UNKNOWN_DELETE_COMMAND);
             }
         } catch (ParseException pe) {
             throw new ParseException(
