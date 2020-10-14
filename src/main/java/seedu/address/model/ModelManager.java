@@ -31,7 +31,7 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, TaskList taskList) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, ReadOnlyTaskList taskList) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
@@ -39,7 +39,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        this.taskList = taskList;
+        this.taskList = new TaskList(taskList);
 
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredTasks = new FilteredList<>(this.taskList.getTaskList());
@@ -175,15 +175,29 @@ public class ModelManager implements Model {
         this.taskList.removeTask(task);
     }
     @Override
+    public ReadOnlyTaskList getTaskList() {
+        return taskList;
+    }
+
     public boolean hasTask(Task task) {
         return this.taskList.hasTask(task);
     }
-
+    @Override
+    public void setTask(Task target, Task editedTask) {
+        requireAllNonNull(target, editedTask);
+        taskList.setTask(target, editedTask);
+    }
+    @Override
+    public void markAsDone(Task target) {
+        requireAllNonNull(target);
+        taskList.markAsDone(target);
+    }
     //=========== Filtered Task List Accessors =============================================================
     @Override
     public ObservableList<Task> getFilteredTaskList() {
         return filteredTasks;
     }
+
 
     @Override
     public void updateFilteredTaskList(Predicate<? super Task> predicate) {

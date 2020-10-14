@@ -57,6 +57,9 @@ public abstract class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+    public boolean getStatus() {
+        return isDone;
+    }
 
     /**
      * Returns a boolean value indicating if the task is equal to
@@ -107,7 +110,11 @@ public abstract class Task {
         }
     }
 
+    public abstract LocalDateTime getDeadline();
+    public abstract LocalDateTime getStart();
+    public abstract LocalDateTime getEnd();
     public abstract String getDateTime();
-
     public abstract LocalDateTime getLocalDateTime();
+    public abstract boolean isTodo();
+    public abstract boolean isEvent();
 }
