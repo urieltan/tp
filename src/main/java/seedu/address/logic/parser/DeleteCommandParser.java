@@ -28,7 +28,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 return new DeleteContactCommand(index);
             } else if (splitArgs[0].trim().equals("todo")) {
                 return new DeleteTodoCommand(index);
-            } else if (splitArgs[0].trim().equals("event")){
+            } else if (splitArgs[0].trim().equals("event")) {
                 return new DeleteEventCommand(index);
             } else {
                 throw new ParseException(UNKNOWN_DELETE_COMMAND);

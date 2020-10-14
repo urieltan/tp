@@ -110,7 +110,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
 
             return new EditTodoCommand(index, editTodoDescriptor);
-        } else if (splitArgs[0].equals("event")){
+        } else if (splitArgs[0].equals("event")) {
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_NAME,
                             PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);

@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.Messages.*;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.UNKNOWN_ADD_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
@@ -77,7 +78,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             String deadline = date + " " + time;
             Todo todo = new Todo(description, deadline);
             return new AddTodoCommand(todo);
-        } else if (splitArgs[0].trim().equals("event")){
+        } else if (splitArgs[0].trim().equals("event")) {
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_DESCRIPTION, PREFIX_STARTDATE,
                             PREFIX_STARTTIME, PREFIX_ENDDATE, PREFIX_ENDTIME);

@@ -48,7 +48,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             String[] nameKeywords = trimmedArgs.split("\\s+");
 
             return new FindTodoCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-        } else if (splitArgs[0].equals("event")){
+        } else if (splitArgs[0].equals("event")) {
             String trimmedArgs = splitArgs[1].trim();
             if (trimmedArgs.isEmpty()) {
                 throw new ParseException(
