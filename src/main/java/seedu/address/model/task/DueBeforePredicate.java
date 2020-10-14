@@ -12,4 +12,11 @@ public class DueBeforePredicate extends DuePredicate {
     public boolean test(Task task) {
         return task.getLocalDateTime().isAfter(deadline);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DueBeforePredicate // instanceof handles nulls
+                && deadline.equals(((DueBeforePredicate) other).deadline)); // state check
+    }
 }

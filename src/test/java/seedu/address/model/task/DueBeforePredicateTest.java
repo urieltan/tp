@@ -30,4 +30,29 @@ public class DueBeforePredicateTest {
         //Event
         assertFalse(predicate.test(new EventBuilder().build()));
     }
+
+    @Test
+    public void equals() {
+        String firstDateTime = "10-10-2010 1010";
+        String secondDateTime = "20-12-2020 2359";
+
+        DueBeforePredicate firstPredicate = new DueBeforePredicate(firstDateTime);
+        DueBeforePredicate secondPredicate = new DueBeforePredicate(secondDateTime);
+
+        // same object -> returns true
+        assertTrue(firstPredicate.equals(firstPredicate));
+
+        // same values -> returns true
+        DueBeforePredicate firstPredicateCopy = new DueBeforePredicate(firstDateTime);
+        assertTrue(firstPredicate.equals(firstPredicateCopy));
+
+        // different types -> returns false
+        assertFalse(firstPredicate.equals(1));
+
+        // null -> returns false
+        assertFalse(firstPredicate.equals(null));
+
+        // different person -> returns false
+        assertFalse(firstPredicate.equals(secondPredicate));
+    }
 }
