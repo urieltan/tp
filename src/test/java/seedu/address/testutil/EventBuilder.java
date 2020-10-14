@@ -39,9 +39,6 @@ public class EventBuilder {
      */
     public EventBuilder(Event eventToCopy) {
         description = eventToCopy.getDescription();
-        // remove "Event: "
-        description = description.substring(7);
-
         startDateTime = eventToCopy.getStartDateTime();
         endDateTime = eventToCopy.getEndDateTime();
     }

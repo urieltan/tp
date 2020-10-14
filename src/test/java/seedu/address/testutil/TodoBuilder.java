@@ -37,9 +37,6 @@ public class TodoBuilder {
      */
     public TodoBuilder(Todo todoToCopy) {
         description = todoToCopy.getDescription();
-        // remove "To do: "
-        description = description.substring(6);
-
         String dateTimeOutput = todoToCopy.getDateTime();
         // flip the output and input of LocalDateTime
         dateTime = LocalDateTime.parse(dateTimeOutput, OUTPUT_DATE_TIME_FORMAT).format(INPUT_DATE_TIME_FORMAT);

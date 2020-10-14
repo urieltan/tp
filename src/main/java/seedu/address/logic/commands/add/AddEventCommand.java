@@ -18,7 +18,7 @@ import seedu.address.model.task.Event;
 public class AddEventCommand extends AddCommand {
 
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a todo to the TodoList. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a event to the TaskList. "
             + "Parameters: "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_STARTDATE + "START DATE "

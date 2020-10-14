@@ -18,6 +18,7 @@
       <padding>
         <Insets bottom="5" left="15" right="5" top="5" />
       </padding>
+         <Label fx:id="type" layoutX="25.0" layoutY="72.0" styleClass="cell_small_label" text="\$type" />
       <HBox alignment="CENTER_LEFT" spacing="5">
         <Label fx:id="id" styleClass="cell_big_label">
           <minWidth>
@@ -28,7 +29,7 @@
         <Label fx:id="description" styleClass="cell_big_label" text="\$first" />
       </HBox>
       <Label fx:id="dateTime" styleClass="cell_small_label" text="\$dateTime" />
-         <Label fx:id="statusIcon" layoutX="25.0" layoutY="63.0" styleClass="cell_small_label" text="\\$statusIcon" />
+         <Label fx:id="statusIcon" layoutX="25.0" layoutY="63.0" styleClass="cell_small_label" text="\$statusIcon" />
     </VBox>
       <rowConstraints>
          <RowConstraints />

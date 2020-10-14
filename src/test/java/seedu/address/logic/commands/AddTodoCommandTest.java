@@ -41,7 +41,8 @@ public class AddTodoCommandTest {
 
         CommandResult commandResult = new AddTodoCommand(validTodo).execute(modelStub);
 
-        assertEquals(String.format(AddTodoCommand.MESSAGE_SUCCESS, validTodo), commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddTodoCommand.MESSAGE_SUCCESS, validTodo.getDescriptionDateTime()),
+                commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validTodo), modelStub.todosAdded);
     }
 
