@@ -121,7 +121,7 @@ public class Todo extends Task {
 
     @Override
     public String getDescription() {
-        return "Todo: " + this.description;
+        return this.description;
     }
 
     @Override
@@ -145,8 +145,7 @@ public class Todo extends Task {
     }
 
     public String getDescriptionDateTime() {
-        // hardcoded [✘] as done feature is not done as of now.
-        return "[✘] Todo: " + this.description + " (by: " + getDateTime() + ")";
+        return this.description + " (by: " + getDateTime() + ")";
     }
 
     @Override
@@ -162,5 +161,9 @@ public class Todo extends Task {
     @Override
     public LocalDateTime getEnd() {
         return null;
+    }
+    @Override
+    public String getType() {
+        return "Todo";
     }
 }

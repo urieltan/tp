@@ -117,4 +117,5 @@ public abstract class Task {
     public abstract LocalDateTime getLocalDateTime();
     public abstract boolean isTodo();
     public abstract boolean isEvent();
+    public abstract String getType();
 }
