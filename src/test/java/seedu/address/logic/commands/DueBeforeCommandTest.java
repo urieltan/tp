@@ -31,7 +31,7 @@ public class DueBeforeCommandTest {
 
         ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new TaskList());
 
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedMessage, "TASK", expectedModel);
     }
 
     @Test
