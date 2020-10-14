@@ -10,7 +10,7 @@ public class DueBeforePredicate extends DuePredicate {
 
     @Override
     public boolean test(Task task) {
-        return task.getLocalDateTime().isAfter(deadline);
+        return task.getLocalDateTime().isBefore(deadline);
     }
 
     @Override

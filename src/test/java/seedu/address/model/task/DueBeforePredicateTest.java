@@ -11,7 +11,7 @@ import seedu.address.testutil.TodoBuilder;
 public class DueBeforePredicateTest {
     @Test
     public void test_tasksDueBefore_returnsTrue() {
-        DueBeforePredicate predicate = new DueBeforePredicate("10-12-2020 2359");
+        DueBeforePredicate predicate = new DueBeforePredicate("20-12-2020 2359");
 
         //To-do (homework)
         assertTrue(predicate.test(new TodoBuilder().build()));
@@ -22,7 +22,7 @@ public class DueBeforePredicateTest {
 
     @Test
     public void test_noTasksDueBefore_returnsFalse() {
-        DueBeforePredicate predicate = new DueBeforePredicate("15-12-2020 2359");
+        DueBeforePredicate predicate = new DueBeforePredicate("01-01-2020 2359");
 
         //To-do
         assertFalse(predicate.test(new TodoBuilder().build()));
