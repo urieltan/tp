@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.TodoBuilder;
 import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.TodoBuilder;
 
 public class DueBeforePredicateTest {
     @Test
