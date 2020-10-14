@@ -38,7 +38,7 @@ public class DeleteEventCommand extends DeleteCommand {
 
         Task eventToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteTodo(eventToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, eventToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, eventToDelete), "TASK");
     }
     @Override
     public boolean equals(Object other) {

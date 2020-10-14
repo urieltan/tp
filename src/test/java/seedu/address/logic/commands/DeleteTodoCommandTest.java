@@ -34,7 +34,7 @@ public class DeleteTodoCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new TaskList());
 
-        assertCommandSuccess(deleteTodoCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteTodoCommand, model, expectedMessage, "TASK", expectedModel);
     }
 
     @Test

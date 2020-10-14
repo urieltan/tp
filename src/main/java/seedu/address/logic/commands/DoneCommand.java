@@ -37,6 +37,6 @@ public class DoneCommand extends Command {
         Task taskToMark = lastShownList.get(targetIndex.getZeroBased());
         model.markAsDone(taskToMark);
 
-        return new CommandResult(String.format(MESSAGE_MARK_TASK_AS_DONE_SUCCESS, taskToMark));
+        return new CommandResult(String.format(MESSAGE_MARK_TASK_AS_DONE_SUCCESS, taskToMark), "TASK");
     }
 }
