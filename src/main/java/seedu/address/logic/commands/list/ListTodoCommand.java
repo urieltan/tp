@@ -24,6 +24,6 @@ public class ListTodoCommand extends ListCommand {
         List<String> keyword = new ArrayList<>();
         keyword.add(TODO_KEYWORD);
         model.updateFilteredTaskList(new DescriptionContainsKeywordsPredicate(keyword));
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, "TASK");
     }
 }

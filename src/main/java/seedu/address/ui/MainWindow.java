@@ -173,6 +173,19 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Navigate features tab to show the correct tab
+     * @param category the category the command belongs to
+     */
+    @FXML
+    private void handleTabNavigation(String category) {
+        if (category.equals("CONTACT")) {
+            featuresPanelPlaceholder.getSelectionModel().select(0);
+        } else if (category.equals("TASK")) {
+            featuresPanelPlaceholder.getSelectionModel().select(1);
+        }
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -187,6 +200,8 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            handleTabNavigation(commandResult.getCategory());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
