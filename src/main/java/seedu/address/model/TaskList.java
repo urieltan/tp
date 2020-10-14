@@ -117,4 +117,8 @@ public class TaskList implements ReadOnlyTaskList {
     public int hashCode() {
         return tasks.hashCode();
     }
+
+    public void markAsDone(Task target) {
+        this.tasks.markAsDone(target);
+    }
 }
