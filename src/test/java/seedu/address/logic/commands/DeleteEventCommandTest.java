@@ -34,7 +34,7 @@ public class DeleteEventCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new TaskList());
 
-        assertCommandSuccess(deleteEventCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteEventCommand, model, expectedMessage, "TASK", expectedModel);
     }
 
     @Test

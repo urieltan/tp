@@ -90,9 +90,9 @@ public class CommandTestUtil {
      * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
      * that takes a string {@code expectedMessage}.
      */
-    public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
+    public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage, String category,
             Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, category);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 
