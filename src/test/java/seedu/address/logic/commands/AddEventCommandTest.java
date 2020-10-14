@@ -40,8 +40,11 @@ public class AddEventCommandTest {
         Event validEvent = new EventBuilder().build();
 
         CommandResult commandResult = new AddEventCommand(validEvent).execute(modelStub);
+        System.out.println(String.format(AddEventCommand.MESSAGE_SUCCESS, validEvent));
+        System.out.println(commandResult.getFeedbackToUser());
 
-        assertEquals(String.format(AddEventCommand.MESSAGE_SUCCESS, validEvent), commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddEventCommand.MESSAGE_SUCCESS, validEvent.getDescriptionDateTime()),
+                commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validEvent), modelStub.eventsAdded);
     }
 
