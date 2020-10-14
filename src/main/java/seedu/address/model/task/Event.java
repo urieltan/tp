@@ -29,6 +29,9 @@ public class Event extends Task {
     /**The date and time at which the event ends. */
     private LocalDateTime end;
 
+    /**The meeting link url. */
+    private MeetingLink meetingLink;
+
     /**
      * Constructs an event that has not been completed with a brief
      * description and period of time.
@@ -41,6 +44,21 @@ public class Event extends Task {
         super(description);
         this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
         this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
+    }
+
+    /**
+     * Constructs an event that has not been completed with a brief
+     * description and period of time.
+     *
+     * @param description a brief description of the event.
+     * @param start the starting date and time of event.
+     * @param end the ending date and time of event.
+     */
+    public Event (String description, String start, String end, MeetingLink meetingLink){
+        super(description);
+        this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
+        this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
+        this.meetingLink = meetingLink;
     }
 
     /**
@@ -59,7 +77,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the String representation of the period of time which the event occurred over. in the
+     * Returns the String representation of the period of time which the event occurred over. In the
      * form of -start- to -end-.
      * Dates and times are in the format of outputFormatter.
      *
@@ -67,7 +85,29 @@ public class Event extends Task {
      */
     public String getPeriod() {
         return this.start.format(OUTPUT_DATE_TIME_FORMAT).toString() + " to "
-               + this.end.format(OUTPUT_DATE_TIME_FORMAT).toString();
+                + this.end.format(OUTPUT_DATE_TIME_FORMAT).toString();
+    }
+
+    /**
+     * Returns the String representation of the start time which the event occurred over. In the
+     * form of -start-.
+     * Dates and times are in the format of inputFormatter.
+     *
+     * @return the String representation of the period of which the event starts.
+     */
+    public String getStartTime() {
+        return this.start.format(INPUT_DATE_TIME_FORMAT).toString();
+    }
+
+    /**
+     * Returns the String representation of the start time which the event occurred over. In the
+     * form of -end-.
+     * Dates and times are in the format of inputFormatter.
+     *
+     * @return the String representation of the period of which the event ends.
+     */
+    public String getEndTime() {
+        return this.end.format(INPUT_DATE_TIME_FORMAT).toString();
     }
 
     /**

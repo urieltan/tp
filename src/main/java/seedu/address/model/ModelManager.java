@@ -13,6 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Event;
+import seedu.address.model.task.MeetingLink;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Todo;
 
@@ -165,6 +166,12 @@ public class ModelManager implements Model {
     public void addEvent(Event event) {
         this.taskList.addTask(event);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+    }
+    @Override
+    public void setTask(Task target, Task editedTask) {
+        requireAllNonNull(target, editedTask);
+
+        taskList.setTask(target, editedTask);
     }
     @Override
     public void deleteTodo(Task task) {

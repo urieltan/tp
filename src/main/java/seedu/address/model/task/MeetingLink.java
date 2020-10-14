@@ -30,10 +30,10 @@ public class MeetingLink {
      * @param description a brief description of the deadline.
      * @param deadline    a String in a specific format (inputFormatter) which specifies a date.
      */
-    public MeetingLink(String description, String url, String deadline) {
+    public MeetingLink(String description, String url, String meetingTime) {
         this.description = description;
         this.url = url;
-        this.meetingTime = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
+        this.meetingTime = LocalDateTime.parse(meetingTime, INPUT_DATE_TIME_FORMAT);
     }
 
     /**
@@ -52,6 +52,15 @@ public class MeetingLink {
      */
     public String getMeetingTime() {
         return this.meetingTime.format(OUTPUT_DATE_TIME_FORMAT).toString();
+    }
+
+    /**
+     * Returns a String representation of the url.
+     *
+     * @return a String representation of the url.
+     */
+    public String getUrl() {
+        return this.url;
     }
 
     /**
@@ -92,13 +101,8 @@ public class MeetingLink {
      *
      * @return the string representation of the task to be saved in a text file.
      */
-    @Override
     public String saveFormat() {
-        if (isDone) {
-            return "D | 1 | " + this.getDescription() + " | " + this.deadline.format(INPUT_DATE_TIME_FORMAT).toString();
-        } else {
-            return "D | 0 | " + this.getDescription() + " | " + this.deadline.format(INPUT_DATE_TIME_FORMAT).toString();
-        }
+        return this.description + this.meetingTime.format(INPUT_DATE_TIME_FORMAT).toString();
     }
 
     public String getDescription() {
@@ -110,6 +114,6 @@ public class MeetingLink {
     }
 
     public String getDescriptionDateTime() {
-        return this.description + getDateTime() + " (by: " + getDateTime() + ")";
+        return this.description + " (by: " + getMeetingTime() + ")\n" + url;
     }
 }

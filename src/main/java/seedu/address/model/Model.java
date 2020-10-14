@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Event;
+import seedu.address.model.task.MeetingLink;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Todo;
 
@@ -95,6 +96,13 @@ public interface Model {
     void addTodo(Todo todo);
 
     void addEvent(Event event);
+
+    /**
+     * Replaces the given Task {@code target} with {@code editedTask}.
+     * {@code target} must exist in the address book.
+     * The task identity of {@code editedTask} must not be the same as another existing Task in the life book.
+     */
+    void setTask(Task target, Task editedTask);
 
     void deleteTodo(Task task);
 
