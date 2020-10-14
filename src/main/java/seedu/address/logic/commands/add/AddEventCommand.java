@@ -46,7 +46,7 @@ public class AddEventCommand extends AddCommand {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
         model.addEvent(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getDescriptionDateTime()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getDescriptionDateTime()), "TASK");
     }
 
     @Override

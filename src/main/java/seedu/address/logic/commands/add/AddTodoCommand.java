@@ -42,7 +42,7 @@ public class AddTodoCommand extends AddCommand {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
         model.addTodo(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getDescriptionDateTime()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getDescriptionDateTime()), "TASK");
     }
 
     @Override

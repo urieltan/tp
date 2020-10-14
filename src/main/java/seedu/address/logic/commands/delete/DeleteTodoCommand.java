@@ -38,7 +38,7 @@ public class DeleteTodoCommand extends DeleteCommand {
 
         Task taskToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteTodo(taskToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_TODO_SUCCESS, taskToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_TODO_SUCCESS, taskToDelete), "TASK");
     }
 
     @Override

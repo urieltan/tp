@@ -48,7 +48,7 @@ public class EditContactCommandTest {
                 new UserPrefs(), new TaskList());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
-        assertCommandSuccess(editContactCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editContactCommand, model, expectedMessage, "CONTACT", expectedModel);
     }
 
     @Test
@@ -70,7 +70,7 @@ public class EditContactCommandTest {
                 new UserPrefs(), new TaskList());
         expectedModel.setPerson(lastPerson, editedPerson);
 
-        assertCommandSuccess(editContactCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editContactCommand, model, expectedMessage, "CONTACT", expectedModel);
     }
 
     @Test
@@ -83,7 +83,7 @@ public class EditContactCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new UserPrefs(), new TaskList());
 
-        assertCommandSuccess(editContactCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editContactCommand, model, expectedMessage, "CONTACT", expectedModel);
     }
 
     @Test
@@ -101,7 +101,7 @@ public class EditContactCommandTest {
                 new UserPrefs(), new TaskList());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
-        assertCommandSuccess(editContactCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editContactCommand, model, expectedMessage, "CONTACT", expectedModel);
     }
 
     @Test
