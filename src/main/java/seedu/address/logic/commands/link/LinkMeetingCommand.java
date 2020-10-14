@@ -54,14 +54,14 @@ public class LinkMeetingCommand extends LinkCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         try {
-            Event eventToEdit = (Event) lastShownList.get(index.getOneBased());
+            Event eventToEdit = (Event) lastShownList.get(index.getZeroBased());
             Event editedEvent = new Event(eventToEdit.getDescription(), eventToEdit.getStartTime(),
                     eventToEdit.getEndTime(), meetingLink);
             model.setTask(eventToEdit, editedEvent);
             model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
         }
         catch (ClassCastException e){
-            throw new CommandException(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
+            throw new CommandException(Messages.MESSAGE_TASK_IS_NOT_EVENT);
         }
 
 
