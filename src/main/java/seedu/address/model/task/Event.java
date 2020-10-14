@@ -44,6 +44,7 @@ public class Event extends Task {
         super(description);
         this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
         this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
+        this.meetingLink = new MeetingLink();
     }
 
     /**
@@ -74,6 +75,7 @@ public class Event extends Task {
         super(isDone, description);
         this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
         this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
+        this.meetingLink = new MeetingLink();
     }
 
     /**
@@ -89,6 +91,7 @@ public class Event extends Task {
         super(isDone, description);
         this.start = start;
         this.end = end;
+        this.meetingLink = new MeetingLink();
     }
 
     /**

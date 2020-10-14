@@ -23,6 +23,11 @@ public class MeetingLink {
     /** A brief description of the task. */
     private String url;
 
+
+    public MeetingLink() {
+        this("No meeting link", "-", "10-10-2020 2000");
+    }
+
     /**
      * Constructs a task that has not been completed
      * with a brief description and deadline for the task to be completed by.

@@ -96,7 +96,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             String endTime = argMultimap.getValue(PREFIX_ENDTIME).get().trim();
             String stDateTime = stDate + " " + stTime;
             String endDateTime = endDate + " " + endTime;
-            MeetingLink meetingLink = new MeetingLink("Meeting not set", "", "10-10-2020 0000");
+            MeetingLink meetingLink = new MeetingLink();
 
             Event event = new Event(description, stDateTime, endDateTime, meetingLink);
 
