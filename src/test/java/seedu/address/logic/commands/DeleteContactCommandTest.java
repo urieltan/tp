@@ -38,7 +38,7 @@ public class DeleteContactCommandTest {
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new TaskList());
         expectedModel.deletePerson(personToDelete);
 
-        assertCommandSuccess(deleteContactCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteContactCommand, model, expectedMessage, "CONTACT", expectedModel);
     }
 
     @Test
@@ -62,7 +62,7 @@ public class DeleteContactCommandTest {
         expectedModel.deletePerson(personToDelete);
         showNoPerson(expectedModel);
 
-        assertCommandSuccess(deleteContactCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteContactCommand, model, expectedMessage, "CONTACT", expectedModel);
     }
 
     @Test
