@@ -168,12 +168,6 @@ public class ModelManager implements Model {
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
     @Override
-    public void setTask(Task target, Task editedTask) {
-        requireAllNonNull(target, editedTask);
-
-        taskList.setTask(target, editedTask);
-    }
-    @Override
     public void deleteTodo(Task task) {
         this.taskList.removeTask(task);
     }

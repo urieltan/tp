@@ -207,6 +207,7 @@ public class Event extends Task {
 
     public String getMeetingLink() {
         return this.meetingLink.toString();
+    }
     @Override
     public boolean isTodo() {
         return false;

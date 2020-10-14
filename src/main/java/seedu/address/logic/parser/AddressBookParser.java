@@ -13,7 +13,8 @@ import seedu.address.logic.commands.DoneCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.ShowTagCommand;[[
+import seedu.address.logic.commands.LinkCommand;
+import seedu.address.logic.commands.ShowTagCommand;
 import seedu.address.logic.commands.delete.DeleteContactCommand;
 import seedu.address.logic.commands.due.DueBeforeCommand;
 import seedu.address.logic.commands.due.DueByCommand;

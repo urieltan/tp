@@ -65,7 +65,7 @@ public class LinkMeetingCommand extends LinkCommand {
         }
 
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, meetingLink.getDescriptionDateTime()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, meetingLink.getDescriptionDateTime()),"TASK");
     }
 
     @Override
