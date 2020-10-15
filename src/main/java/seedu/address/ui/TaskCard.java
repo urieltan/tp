@@ -1,10 +1,15 @@
 package seedu.address.ui;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import javafx.fxml.FXML;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.task.Event;
 import seedu.address.model.task.Task;
 
 /**
@@ -37,7 +42,9 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label statusIcon;
     @FXML
-    private Label meetingLink;
+    private Hyperlink meetingLink;
+    @FXML
+    private Label linkDescription;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -50,10 +57,20 @@ public class TaskCard extends UiPart<Region> {
         description.setText(task.getDescription());
         dateTime.setText(task.getDateTime());
         statusIcon.setText("Status: " + task.getStatusIcon());
-        if (task.getClass() == Event.class) {
-            meetingLink.setText(((Event) task).getMeetingLink());
-        } else {
-            meetingLink.setText("");
+        if (task.getLink() != null) {
+            meetingLink.setText(task.getLink().getUrl());
+            meetingLink.setOnAction(e -> {
+                if (Desktop.isDesktopSupported()) {
+                    try {
+                        Desktop.getDesktop().browse(new URI(meetingLink.getText()));
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    } catch (URISyntaxException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            });
+            linkDescription.setText(task.getLink().getDescription());
         }
     }
 

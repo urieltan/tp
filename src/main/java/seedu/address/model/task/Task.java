@@ -9,6 +9,8 @@ public abstract class Task {
     /** Tracks the completion of the task */
     protected boolean isDone;
 
+    protected Link link;
+
     /**
      * Constructs a task that has not been completed with a description.
      *
@@ -114,6 +116,7 @@ public abstract class Task {
     public abstract LocalDateTime getStart();
     public abstract LocalDateTime getEnd();
     public abstract String getDateTime();
+    public abstract Link getLink();
     public abstract LocalDateTime getLocalDateTime();
     public abstract boolean isTodo();
     public abstract boolean isEvent();

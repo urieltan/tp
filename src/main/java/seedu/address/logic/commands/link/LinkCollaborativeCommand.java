@@ -1,10 +1,8 @@
 package seedu.address.logic.commands.link;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_URL;
 
 import java.util.List;
@@ -15,35 +13,33 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.LinkCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.task.Event;
-import seedu.address.model.task.MeetingLink;
+import seedu.address.model.task.CollaborativeLink;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.Todo;
 
 /**
- * Add a meeting link to an event.
+ * Add a Collaborative link to a todo.
  */
-public class LinkMeetingCommand extends LinkCommand {
+public class LinkCollaborativeCommand extends LinkCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add meeting link to event. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add collaborative link to todo. "
             + "Parameters: "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_URL + "URL "
-            + PREFIX_INDEX + "INDEX "
-            + PREFIX_DATE + "DATE "
-            + PREFIX_TIME + "TIME";
+            + PREFIX_INDEX + "INDEX ";
 
-    public static final String MESSAGE_SUCCESS = "New meeting added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New collaborative folder link added: %1$s";
 
-    private final MeetingLink meetingLink;
+    private final CollaborativeLink collaborativeLink;
 
     private final Index index;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public LinkMeetingCommand(Index index, MeetingLink meetingLink) {
-        requireNonNull(meetingLink);
-        this.meetingLink = meetingLink;
+    public LinkCollaborativeCommand(Index index, CollaborativeLink collaborativeLink) {
+        requireNonNull(collaborativeLink);
+        this.collaborativeLink = collaborativeLink;
         this.index = index;
     }
 
@@ -55,22 +51,21 @@ public class LinkMeetingCommand extends LinkCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         try {
-            Event eventToEdit = (Event) lastShownList.get(index.getZeroBased());
-            Event editedEvent = new Event(eventToEdit.getDescription(), eventToEdit.getStartTime(),
-                    eventToEdit.getEndTime(), meetingLink);
-            model.setTask(eventToEdit, editedEvent);
+            Todo todoToEdit = (Todo) lastShownList.get(index.getZeroBased());
+            Todo editedTodo = new Todo(todoToEdit.getDescription(), todoToEdit.getDeadline(), collaborativeLink);
+            model.setTask(todoToEdit, editedTodo);
             model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
         } catch (ClassCastException e) {
             throw new CommandException(Messages.MESSAGE_TASK_IS_NOT_EVENT);
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, meetingLink.getDescriptionDateTime()), "TASK");
+        return new CommandResult(String.format(MESSAGE_SUCCESS, collaborativeLink.getDescription()), "TASK");
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof LinkMeetingCommand // instanceof handles nulls
-                && meetingLink.equals(((LinkMeetingCommand) other).meetingLink));
+                || (other instanceof LinkCollaborativeCommand // instanceof handles nulls
+                && collaborativeLink.equals(((LinkCollaborativeCommand) other).collaborativeLink));
     }
 }

@@ -8,14 +8,19 @@ public class Todo extends Task {
      * The format of inputted dates that the class can accept.
      */
     private static final DateTimeFormatter INPUT_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+
     /**
      * The format of outputted dates by the class.
      */
     private static final DateTimeFormatter OUTPUT_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
+
     /**
      * The deadline of the task to be completed by.
      */
     private LocalDateTime deadline;
+
+    /**The collaborative link url. */
+    private CollaborativeLink collaborativeLink;
 
     /**
      * Constructs a task that has not been completed
@@ -27,6 +32,35 @@ public class Todo extends Task {
     public Todo(String description, String deadline) {
         super(description);
         this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
+        this.collaborativeLink = new CollaborativeLink();
+    }
+
+    /**
+     * Constructs a task that has not been completed
+     * with a brief description and deadline for the task to be completed by.
+     *
+     * @param description a brief description of the deadline.
+     * @param deadline    a String in a specific format (inputFormatter) which specifies a date.
+     * @param collaborativeLink the collaborative link of todo.
+     */
+    public Todo(String description, String deadline, CollaborativeLink collaborativeLink) {
+        super(description);
+        this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
+        this.collaborativeLink = collaborativeLink;
+    }
+
+    /**
+     * Constructs a task that has not been completed
+     * with a brief description and deadline for the task to be completed by.
+     *
+     * @param description a brief description of the deadline.
+     * @param deadline    a String in a specific format (inputFormatter) which specifies a date.
+     * @param collaborativeLink the collaborative link of todo.
+     */
+    public Todo(String description, LocalDateTime deadline, CollaborativeLink collaborativeLink) {
+        super(description);
+        this.deadline = deadline;
+        this.collaborativeLink = collaborativeLink;
     }
 
     /**
@@ -40,6 +74,7 @@ public class Todo extends Task {
     public Todo(boolean isDone, String description, String deadline) {
         super(isDone, description);
         this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
+        this.collaborativeLink = new CollaborativeLink();
     }
 
     /**
@@ -53,7 +88,9 @@ public class Todo extends Task {
     public Todo(boolean isDone, String description, LocalDateTime deadline) {
         super(isDone, description);
         this.deadline = deadline;
+        this.collaborativeLink = new CollaborativeLink();
     }
+
     /**
      * Changes the deadline of the task to a provided new deadline.
      *
@@ -165,5 +202,10 @@ public class Todo extends Task {
     @Override
     public String getType() {
         return "Todo";
+    }
+
+    @Override
+    public Link getLink() {
+        return this.collaborativeLink;
     }
 }
