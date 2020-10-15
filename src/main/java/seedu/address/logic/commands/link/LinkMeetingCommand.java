@@ -3,6 +3,7 @@ package seedu.address.logic.commands.link;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_URL;
 
@@ -19,7 +20,7 @@ import seedu.address.model.task.MeetingLink;
 import seedu.address.model.task.Task;
 
 /**
- * Add a meeting link to a event.
+ * Add a meeting link to an event.
  */
 public class LinkMeetingCommand extends LinkCommand {
 
@@ -27,7 +28,7 @@ public class LinkMeetingCommand extends LinkCommand {
             + "Parameters: "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_URL + "URL "
-            + PREFIX_URL + "URL "
+            + PREFIX_INDEX + "INDEX "
             + PREFIX_DATE + "DATE "
             + PREFIX_TIME + "TIME";
 

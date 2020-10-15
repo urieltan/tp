@@ -287,22 +287,20 @@ Format: `list all`
 Adds a zoom link for a task.
 
 Format:
-* `link meeting desc/DESCRIPTION url/MEETING LINK todo i/INDEX_OF_TODO date/DD/MM/YYYY time/HHmm` or
-* `link meeting desc/DESCRIPTION url/MEETING LINK event i/INDEX_OF_EVENT date/DD/MM/YYYY time/HHmm`
+* `link meeting desc/DESCRIPTION url/MEETING LINK i/INDEX_OF_TODO date/DD-MM-YYYY time/HHmm`
 
 Examples:
-* `link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf event i/2 date/22/9/2020 time/1400`
+* `link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf i/2 date/22-9-2020 time/1400`
 
 ### Adding a collaborative folder link: `link doc`
 
 Adds a collaborative link (Google Drive, GitHub, Trello, and others)
 
 Format:
-* `link doc desc/DESCRIPTION url/LINK todo i/INDEX_OF_TODO` or
-* `link doc desc/DESCRIPTION url/LINK event i/INDEX_OF_EVENT`
+* `link doc desc/DESCRIPTION url/LINK i/INDEX_OF_TODO` 
 
 Examples:
-* `link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoUz1JpAgynIkfacr0asqV9A4kh todo i/2`
+* `link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoUz1JpAgynIkfacr0asqV9A4kh i/2`
 
 ### Filter deadlines : `itemsDue`
 

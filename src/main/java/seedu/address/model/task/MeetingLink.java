@@ -3,41 +3,36 @@ package seedu.address.model.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class MeetingLink {
+public class MeetingLink extends Link {
     /**
      * The format of inputted dates that the class can accept.
      */
     private static final DateTimeFormatter INPUT_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+
     /**
      * The format of outputted dates by the class.
      */
     private static final DateTimeFormatter OUTPUT_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
+
     /**
      * The deadline of the task to be completed by.
      */
     private LocalDateTime meetingTime;
-
-    /** A brief description of the task. */
-    private String description;
-
-    /** A brief description of the task. */
-    private String url;
-
 
     public MeetingLink() {
         this("No meeting link", "-", "10-10-2020 2000");
     }
 
     /**
-     * Constructs a task that has not been completed
-     * with a brief description and deadline for the task to be completed by.
+     * Constructs a Meeting Link
+     * with a brief description, url, and meeting time.
      *
      * @param description a brief description of the deadline.
-     * @param deadline    a String in a specific format (inputFormatter) which specifies a date.
+     * @param url    a String in a URL format which specifies the link.
+     * @param meetingTime a String which describes the meeting time.
      */
     public MeetingLink(String description, String url, String meetingTime) {
-        this.description = description;
-        this.url = url;
+        super(description, url);
         this.meetingTime = LocalDateTime.parse(meetingTime, INPUT_DATE_TIME_FORMAT);
     }
 
@@ -60,19 +55,10 @@ public class MeetingLink {
     }
 
     /**
-     * Returns a String representation of the url.
+     * Returns a String representation of the Meeting link.
+     * This representation includes the description, meeting time, and url in the format of outputFormatter.
      *
-     * @return a String representation of the url.
-     */
-    public String getUrl() {
-        return this.url;
-    }
-
-    /**
-     * Returns a String representation of the task.
-     * This representation includes the status icon, description, and deadline in the format of outputFormatter.
-     *
-     * @return a String representation of the task.
+     * @return a String representation of the Meeting Link.
      */
     @Override
     public String toString() {
@@ -93,8 +79,8 @@ public class MeetingLink {
             return true;
         } else if (o instanceof MeetingLink) {
             MeetingLink link = (MeetingLink) o;
-            boolean isEqual = this.description.equals(link.description)
-                    && this.meetingTime.equals(link.meetingTime) && this.url.equals(link.url);
+            boolean isEqual = this.getDescription().equals(link.getDescription())
+                    && this.meetingTime.equals(link.meetingTime) && this.getUrl().equals(link.getUrl());
             return isEqual;
         } else {
             return false;
@@ -107,18 +93,23 @@ public class MeetingLink {
      * @return the string representation of the task to be saved in a text file.
      */
     public String saveFormat() {
-        return this.description + this.meetingTime.format(INPUT_DATE_TIME_FORMAT).toString();
-    }
-
-    public String getDescription() {
-        return this.description;
+        return this.getDescription() + this.meetingTime.format(INPUT_DATE_TIME_FORMAT).toString();
     }
 
     public LocalDateTime getLocalDateTime() {
         return this.meetingTime;
     }
 
+    @Override
+    public String getDescription() {
+        if (super.getDescription().equals("No meeting link")) {
+            return super.getDescription();
+        } else {
+            return this.getDescriptionDateTime();
+        }
+    }
+
     public String getDescriptionDateTime() {
-        return this.description + " (by: " + getMeetingTime() + ") (" + url + ")";
+        return super.getDescription() + " (on: " + getMeetingTime() + ")";
     }
 }

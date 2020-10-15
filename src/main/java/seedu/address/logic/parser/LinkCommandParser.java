@@ -11,8 +11,10 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.LinkCommand;
+import seedu.address.logic.commands.link.LinkCollaborativeCommand;
 import seedu.address.logic.commands.link.LinkMeetingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.task.CollaborativeLink;
 import seedu.address.model.task.MeetingLink;
 
 /**
@@ -27,7 +29,7 @@ public class LinkCommandParser implements Parser<LinkCommand> {
      */
     public LinkCommand parse(String args) throws ParseException {
         String[] splitArgs = args.trim().split(" ", 2);
-        if (splitArgs[0].trim().split(" ")[0].trim().equals("meet")) {
+        if (splitArgs[0].trim().split(" ")[0].trim().equals("meeting")) {
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_DESCRIPTION, PREFIX_URL, PREFIX_INDEX,
                             PREFIX_DATE, PREFIX_TIME);
@@ -48,6 +50,22 @@ public class LinkCommandParser implements Parser<LinkCommand> {
             MeetingLink meetingLink = new MeetingLink(description, url, meetingTime);
 
             return new LinkMeetingCommand(index, meetingLink);
+        } else if (splitArgs[0].trim().split(" ")[0].trim().equals("doc")) {
+            ArgumentMultimap argMultimap =
+                    ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_DESCRIPTION, PREFIX_URL, PREFIX_INDEX);
+
+            if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION, PREFIX_URL, PREFIX_INDEX)
+                    || !argMultimap.getPreamble().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        LinkCommand.MESSAGE_USAGE));
+            }
+            String description = argMultimap.getValue(PREFIX_DESCRIPTION).get().trim();
+            String url = argMultimap.getValue(PREFIX_URL).get().trim();
+            Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get().trim());
+
+            CollaborativeLink collaborativeLink = new CollaborativeLink(description, url);
+
+            return new LinkCollaborativeCommand(index, collaborativeLink);
         } else {
             throw new ParseException(LinkCommand.MESSAGE_USAGE);
         }

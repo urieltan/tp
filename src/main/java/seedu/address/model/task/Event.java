@@ -54,6 +54,7 @@ public class Event extends Task {
      * @param description a brief description of the event.
      * @param start the starting date and time of event.
      * @param end the ending date and time of event.
+     * @param meetingLink the meeting link of event.
      */
     public Event (String description, String start, String end, MeetingLink meetingLink) {
         super(description);
@@ -228,6 +229,12 @@ public class Event extends Task {
     public LocalDateTime getEnd() {
         return this.end;
     }
+
+    @Override
+    public Link getLink() {
+        return this.meetingLink;
+    }
+
     public String getStartDateTime() {
         return start.format(INPUT_DATE_TIME_FORMAT);
     }
