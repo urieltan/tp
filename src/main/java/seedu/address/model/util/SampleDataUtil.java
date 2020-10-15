@@ -15,6 +15,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Event;
+import seedu.address.model.task.MeetingLink;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Todo;
 
@@ -47,7 +48,7 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         return new Task[] {
             new Todo("Finish assignment", "19-05-2020 2359"),
-            new Event("Attend group meeting", "20-05-2020 1000", "20-05-2020 1200")
+            new Event("Attend group meeting", "20-05-2020 1000", "20-05-2020 1200", new MeetingLink())
         };
     }
 

@@ -96,6 +96,13 @@ public interface Model {
 
     void addEvent(Event event);
 
+    /**
+     * Replaces the given Task {@code target} with {@code editedTask}.
+     * {@code target} must exist in the address book.
+     * The task identity of {@code editedTask} must not be the same as another existing Task in the life book.
+     */
+    void setTask(Task target, Task editedTask);
+
     void deleteTodo(Task task);
 
     void deleteEvent(Task task);
@@ -106,6 +113,5 @@ public interface Model {
 
     ReadOnlyTaskList getTaskList();
 
-    void setTask(Task target, Task editedTask);
     void markAsDone(Task target);
 }
