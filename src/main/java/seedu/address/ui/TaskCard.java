@@ -50,9 +50,9 @@ public class TaskCard extends UiPart<Region> {
         description.setText(task.getDescription());
         dateTime.setText(task.getDateTime());
         statusIcon.setText("Status: " + task.getStatusIcon());
-        if(task.getClass() == Event.class) {
+        if (task.getClass() == Event.class) {
             meetingLink.setText(((Event) task).getMeetingLink());
-        } else{
+        } else {
             meetingLink.setText("");
         }
     }

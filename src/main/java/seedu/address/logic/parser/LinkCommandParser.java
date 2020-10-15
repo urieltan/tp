@@ -1,9 +1,12 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_URL;
 
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
@@ -11,9 +14,6 @@ import seedu.address.logic.commands.LinkCommand;
 import seedu.address.logic.commands.link.LinkMeetingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.task.MeetingLink;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.Event;
-import seedu.address.model.task.Todo;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -48,8 +48,7 @@ public class LinkCommandParser implements Parser<LinkCommand> {
             MeetingLink meetingLink = new MeetingLink(description, url, meetingTime);
 
             return new LinkMeetingCommand(index, meetingLink);
-        }
-        else {
+        } else {
             throw new ParseException(LinkCommand.MESSAGE_USAGE);
         }
 

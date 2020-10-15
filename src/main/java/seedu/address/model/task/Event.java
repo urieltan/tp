@@ -55,7 +55,7 @@ public class Event extends Task {
      * @param start the starting date and time of event.
      * @param end the ending date and time of event.
      */
-    public Event (String description, String start, String end, MeetingLink meetingLink){
+    public Event (String description, String start, String end, MeetingLink meetingLink) {
         super(description);
         this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
         this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
