@@ -13,7 +13,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Event;
-import seedu.address.model.task.MeetingLink;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Todo;
 

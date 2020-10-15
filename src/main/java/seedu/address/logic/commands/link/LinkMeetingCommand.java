@@ -3,8 +3,8 @@ package seedu.address.logic.commands.link;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_URL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_URL;
 
 import java.util.List;
 
@@ -59,7 +59,7 @@ public class LinkMeetingCommand extends LinkCommand {
                     eventToEdit.getEndTime(), meetingLink);
             model.setTask(eventToEdit, editedEvent);
             model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
-        } catch (ClassCastException e){
+        } catch (ClassCastException e) {
             throw new CommandException(Messages.MESSAGE_TASK_IS_NOT_EVENT);
         }
 
