@@ -1,5 +1,7 @@
 package seedu.address.model.task;
 
+import seedu.address.logic.commands.AddCommand;
+
 import java.time.LocalDateTime;
 
 public abstract class Task {
@@ -55,9 +57,12 @@ public abstract class Task {
 
     /**
      * Indicates that the task has been completed.
+     *
+     * @return AddCommand if the task is recurring.
      */
-    public void markAsDone() {
+    public AddCommand markAsDone() {
         this.isDone = true;
+        return null;
     }
     public boolean getStatus() {
         return isDone;

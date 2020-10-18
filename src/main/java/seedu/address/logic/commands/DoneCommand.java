@@ -6,6 +6,7 @@ import java.util.List;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.add.AddTodoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.task.Task;
@@ -35,7 +36,11 @@ public class DoneCommand extends Command {
         }
 
         Task taskToMark = lastShownList.get(targetIndex.getZeroBased());
-        model.markAsDone(taskToMark);
+        AddCommand recurrenceAddCommand = model.markAsDone(taskToMark);
+        //if (recurrenceAddCommand != null) {
+        System.out.println("adding again");
+        recurrenceAddCommand.execute(model);
+        //}
 
         return new CommandResult(String.format(MESSAGE_MARK_TASK_AS_DONE_SUCCESS, taskToMark), "TASK");
     }

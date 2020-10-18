@@ -1,5 +1,8 @@
 package seedu.address.model.task;
 
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.add.AddTodoCommand;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -21,6 +24,11 @@ public class Todo extends Task {
 
     /**The collaborative link url. */
     private CollaborativeLink collaborativeLink;
+
+    /**
+     * The recurrence (if any).
+     */
+    private Recurrence recurrence;
 
     /**
      * Constructs a task that has not been completed
@@ -61,6 +69,34 @@ public class Todo extends Task {
         super(description);
         this.deadline = deadline;
         this.collaborativeLink = collaborativeLink;
+    }
+
+    /**
+     * Constructs a task that has not been completed
+     * with a brief description and deadline for the task to be completed by.
+     *
+     * @param description a brief description of the deadline.
+     * @param deadline    a String in a specific format (inputFormatter) which specifies a date.
+     * @param recurrence the recurrence of todo.
+     */
+    public Todo(String description, String deadline, Recurrence recurrence) {
+        super(description);
+        this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
+        this.recurrence = recurrence;
+    }
+
+    /**
+     * Constructs a task that has not been completed
+     * with a brief description and deadline for the task to be completed by.
+     *
+     * @param description a brief description of the deadline.
+     * @param deadline    a LocalDateTime in a specific format (inputFormatter) which specifies a date.
+     * @param recurrence the recurrence of todo.
+     */
+    public Todo(String description, LocalDateTime deadline, Recurrence recurrence) {
+        super(description);
+        this.deadline = deadline;
+        this.recurrence = recurrence;
     }
 
     /**
@@ -107,6 +143,19 @@ public class Todo extends Task {
      */
     public String deadlineToString() {
         return this.deadline.format(OUTPUT_DATE_TIME_FORMAT).toString();
+    }
+
+    @Override
+    public AddCommand markAsDone() {
+        this.isDone = true;
+        if (this.recurrence != null) {
+            LocalDateTime newDateTime = this.getLocalDateTime()
+                    .plus(this.recurrence.getValue(), this.recurrence.getChronoUnit());
+            AddTodoCommand command = new AddTodoCommand(new Todo(description, newDateTime, recurrence));
+            return command;
+        } else {
+            return null;
+        }
     }
 
     /**

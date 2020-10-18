@@ -14,6 +14,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTTIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
+import static seedu.address.model.task.Recurrence.DAY;
+import static seedu.address.model.task.Recurrence.WEEK;
+import static seedu.address.model.task.Recurrence.MONTH;
+import static seedu.address.model.task.Recurrence.YEAR;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -31,6 +36,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Event;
 import seedu.address.model.task.MeetingLink;
+import seedu.address.model.task.Recurrence;
 import seedu.address.model.task.Todo;
 
 /**
@@ -67,7 +73,8 @@ public class AddCommandParser implements Parser<AddCommand> {
             return new AddContactCommand(person);
         } else if (splitArgs[0].trim().equals("todo")) {
             ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_TIME);
+                    ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_DESCRIPTION,
+                            PREFIX_DATE, PREFIX_TIME, PREFIX_RECURRING);
             if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_TIME)
                     || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -77,7 +84,29 @@ public class AddCommandParser implements Parser<AddCommand> {
             String date = argMultimap.getValue(PREFIX_DATE).get().trim();
             String time = argMultimap.getValue(PREFIX_TIME).get().trim();
             String deadline = date + " " + time;
-            Todo todo = new Todo(description, deadline);
+
+            Todo todo;
+            if (arePrefixesPresent(argMultimap, PREFIX_RECURRING)) {
+                String recurrenceInput = argMultimap.getValue(PREFIX_RECURRING).get();
+                try {
+                    String[] recurrenceSplit = recurrenceInput.split(" ");
+                    Integer recurrenceValue = Integer.parseInt(recurrenceSplit[0]);
+                    String recurrenceTimePeriod = recurrenceSplit[1];
+                    if (recurrenceTimePeriod.equals(DAY) || recurrenceTimePeriod.equals(WEEK)
+                        || recurrenceTimePeriod.equals(MONTH) || recurrenceTimePeriod.equals(YEAR)) {
+                        Recurrence recurrence = new Recurrence(recurrenceValue, recurrenceTimePeriod);
+                        todo = new Todo(description, deadline, recurrence);
+                    } else {
+                        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                AddTodoCommand.MESSAGE_USAGE));
+                    }
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            AddTodoCommand.MESSAGE_USAGE));
+                }
+            } else {
+                todo = new Todo(description, deadline);
+            }
             return new AddTodoCommand(todo);
         } else if (splitArgs[0].trim().equals("event")) {
             ArgumentMultimap argMultimap =
