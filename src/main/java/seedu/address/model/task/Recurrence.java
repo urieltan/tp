@@ -9,12 +9,10 @@ public class Recurrence {
     public static final String YEAR = "year";
 
     private final Integer value;
-    private final String timePeriod;
     private final ChronoUnit chronoUnit;
 
     public Recurrence(Integer value, String timePeriod) {
         this.value = value;
-        this.timePeriod = timePeriod;
 
         if (timePeriod.equals(DAY)) {
             this.chronoUnit = ChronoUnit.DAYS;
@@ -35,9 +33,5 @@ public class Recurrence {
 
     public ChronoUnit getChronoUnit() {
         return this.chronoUnit;
-    }
-
-    public String getTimePeriod() {
-        return this.timePeriod;
     }
 }

@@ -1,9 +1,7 @@
 package seedu.address.logic.commands.add;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
@@ -20,7 +18,8 @@ public class AddTodoCommand extends AddCommand {
             + "Parameters: "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_DATE + "DATE "
-            + PREFIX_TIME + "TIME";
+            + PREFIX_TIME + "TIME"
+            + " [" + PREFIX_RECURRING + "RECURRING]";
 
     public static final String MESSAGE_SUCCESS = "New todo added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This todo already exists in the TodoList";

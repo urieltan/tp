@@ -100,7 +100,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                                 AddTodoCommand.MESSAGE_USAGE));
                     }
-                } catch (ArrayIndexOutOfBoundsException e) {
+                } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
                     throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                             AddTodoCommand.MESSAGE_USAGE));
                 }
@@ -111,7 +111,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         } else if (splitArgs[0].trim().equals("event")) {
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_DESCRIPTION, PREFIX_STARTDATE,
-                            PREFIX_STARTTIME, PREFIX_ENDDATE, PREFIX_ENDTIME);
+                            PREFIX_STARTTIME, PREFIX_ENDDATE, PREFIX_ENDTIME, PREFIX_RECURRING);
             if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION, PREFIX_STARTDATE,
                     PREFIX_STARTTIME, PREFIX_ENDDATE, PREFIX_ENDTIME)
                     || !argMultimap.getPreamble().isEmpty()) {
