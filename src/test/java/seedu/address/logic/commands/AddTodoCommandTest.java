@@ -195,7 +195,7 @@ public class AddTodoCommandTest {
         }
 
         @Override
-        public void markAsDone(Task target) {
+        public AddCommand markAsDone(Task target) {
             throw new AssertionError("This method should not be called.");
         }
 
