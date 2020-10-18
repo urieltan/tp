@@ -127,8 +127,28 @@ public class AddCommandParser implements Parser<AddCommand> {
             String endDateTime = endDate + " " + endTime;
             MeetingLink meetingLink = new MeetingLink();
 
-            Event event = new Event(description, stDateTime, endDateTime, meetingLink);
-
+            Event event;
+            if (arePrefixesPresent(argMultimap, PREFIX_RECURRING)) {
+                String recurrenceInput = argMultimap.getValue(PREFIX_RECURRING).get();
+                try {
+                    String[] recurrenceSplit = recurrenceInput.split(" ");
+                    Integer recurrenceValue = Integer.parseInt(recurrenceSplit[0]);
+                    String recurrenceTimePeriod = recurrenceSplit[1];
+                    if (recurrenceTimePeriod.equals(DAY) || recurrenceTimePeriod.equals(WEEK)
+                            || recurrenceTimePeriod.equals(MONTH) || recurrenceTimePeriod.equals(YEAR)) {
+                        Recurrence recurrence = new Recurrence(recurrenceValue, recurrenceTimePeriod);
+                        event = new Event(description, stDateTime, endDateTime, recurrence);
+                    } else {
+                        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                AddTodoCommand.MESSAGE_USAGE));
+                    }
+                } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            AddTodoCommand.MESSAGE_USAGE));
+                }
+            } else {
+                event = new Event(description, stDateTime, endDateTime, meetingLink);
+            }
             return new AddEventCommand(event);
         } else {
             throw new ParseException(UNKNOWN_ADD_COMMAND);
