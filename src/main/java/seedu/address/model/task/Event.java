@@ -308,6 +308,11 @@ public class Event extends Task {
     public String getType() {
         return "Event";
     }
+
+    @Override
+    public Recurrence getRecurrence() {
+        return this.recurrence;
+    }
 }
 
 

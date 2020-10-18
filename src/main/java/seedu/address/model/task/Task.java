@@ -13,6 +13,8 @@ public abstract class Task {
 
     protected Link link;
 
+    protected Recurrence recurrence;
+
     /**
      * Constructs a task that has not been completed with a description.
      *
@@ -126,4 +128,5 @@ public abstract class Task {
     public abstract boolean isTodo();
     public abstract boolean isEvent();
     public abstract String getType();
+    public abstract Recurrence getRecurrence();
 }

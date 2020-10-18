@@ -257,4 +257,9 @@ public class Todo extends Task {
     public Link getLink() {
         return this.collaborativeLink;
     }
+
+    @Override
+    public Recurrence getRecurrence() {
+        return this.recurrence;
+    }
 }
