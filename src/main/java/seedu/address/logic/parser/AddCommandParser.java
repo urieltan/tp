@@ -10,14 +10,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDTIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTTIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.model.task.Recurrence.DAY;
-import static seedu.address.model.task.Recurrence.WEEK;
 import static seedu.address.model.task.Recurrence.MONTH;
+import static seedu.address.model.task.Recurrence.WEEK;
 import static seedu.address.model.task.Recurrence.YEAR;
 
 import java.util.Set;

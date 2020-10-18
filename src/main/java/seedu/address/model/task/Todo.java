@@ -1,10 +1,10 @@
 package seedu.address.model.task;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.add.AddTodoCommand;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.add.AddTodoCommand;
 
 public class Todo extends Task {
     /**

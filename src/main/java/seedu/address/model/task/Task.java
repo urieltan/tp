@@ -1,8 +1,8 @@
 package seedu.address.model.task;
 
-import seedu.address.logic.commands.AddCommand;
-
 import java.time.LocalDateTime;
+
+import seedu.address.logic.commands.AddCommand;
 
 public abstract class Task {
     /** A brief description of the task. */

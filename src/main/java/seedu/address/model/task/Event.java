@@ -1,12 +1,10 @@
 package seedu.address.model.task;
 
-
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.add.AddEventCommand;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.add.AddEventCommand;
 
 /**
  * Encapsulates a task to be completed over a span of time (i.e period).
