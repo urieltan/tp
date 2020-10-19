@@ -177,6 +177,15 @@ public class Todo extends Task {
         this.collaborativeLink = link;
     }
 
+    /**
+     * Constructs a task, which may or may not have been completed,
+     * with a brief description and deadline for the task to be completed by.
+     *
+     * @param description a brief description of the deadline.
+     * @param deadline    a date and time specifies a deadline.
+     * @param recurrence the recurrence of todo.
+     * @param link        a Collaborative Link for the todo.
+     */
     public Todo(String description, LocalDateTime deadline, Recurrence recurrence, CollaborativeLink link) {
         super(description);
         this.deadline = deadline;
