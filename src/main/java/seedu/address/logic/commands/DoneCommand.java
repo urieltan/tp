@@ -18,7 +18,6 @@ public class DoneCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-
     private final Index targetIndex;
 
     public DoneCommand(Index targetIndex) {
@@ -31,12 +30,22 @@ public class DoneCommand extends Command {
         List<Task> lastShownList = model.getFilteredTaskList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
         Task taskToMark = lastShownList.get(targetIndex.getZeroBased());
-        model.markAsDone(taskToMark);
+        AddCommand recurrenceAddCommand = model.markAsDone(taskToMark);
+        if (recurrenceAddCommand != null) {
+            recurrenceAddCommand.execute(model);
+        }
 
         return new CommandResult(String.format(MESSAGE_MARK_TASK_AS_DONE_SUCCESS, taskToMark), "TASK");
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DoneCommand // instanceof handles nulls
+                && targetIndex.equals(((DoneCommand) other).targetIndex));
     }
 }

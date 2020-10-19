@@ -45,6 +45,8 @@ public class TaskCard extends UiPart<Region> {
     private Hyperlink meetingLink;
     @FXML
     private Label linkDescription;
+    @FXML
+    private Label recurring;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -71,6 +73,9 @@ public class TaskCard extends UiPart<Region> {
                 }
             });
             linkDescription.setText(task.getLink().getDescription());
+        }
+        if (task.getRecurrence() != null) {
+            recurring.setText("Recurring task");
         }
     }
 

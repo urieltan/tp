@@ -31,6 +31,7 @@
       </HBox>
       <Label fx:id="dateTime" styleClass="cell_small_label" text="\$dateTime" />
       <Label fx:id="statusIcon" layoutX="25.0" layoutY="63.0" styleClass="cell_small_label" text="\\$statusIcon" />
+      <Label fx:id="recurring" styleClass="cell_small_label"/>
       <Hyperlink fx:id="meetingLink" styleClass="cell_small_label"/>
       <Label fx:id="linkDescription" styleClass="cell_small_label" text="No description" />
     </VBox>

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDTIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
 
 import seedu.address.logic.commands.AddCommand;
@@ -24,7 +25,8 @@ public class AddEventCommand extends AddCommand {
             + PREFIX_STARTDATE + "START DATE "
             + PREFIX_STARTDATE + "START TIME "
             + PREFIX_ENDDATE + "END DATE "
-            + PREFIX_ENDTIME + "END TIME";
+            + PREFIX_ENDTIME + "END TIME"
+            + " [" + PREFIX_RECURRING + "RECURRING]";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";

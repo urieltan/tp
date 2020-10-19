@@ -167,15 +167,18 @@ Format: `clear contact`
 ### Adding To Dos : `add todo`
 Adds a To Do to the TodoList of LifeBook.
 
-Format: `add todo desc/DESCRIPTION date/DATE time/TIME`
+Format: `add todo desc/DESCRIPTION date/DATE time/TIME [recurring/VALUE UNIT]`
 
 * `DATE` must be specified in the format of DD-MM-YYYY
-* `TIME` must be speficied in the format of HHmm using 24 hour time
+* `TIME` must be specified in the format of HHmm using 24 hour time
+* `VALUE` must be > 0
+* `UNIT` must be "day", "week", "month" or "year"
 
 Examples:
 
 * `add todo desc/cs2101 Oral Presentation reflection date/08-08-2020 time/2359`
 * `add todo desc/user guide draft date/09-08-2020 time/2300`
+* `add todo desc/tutorial date/10-10-2020 time/1130 recurring/1 week`
 
 ### View all To Dos : `list todo`
 Shows a list of all To Do's in the TodoList.
@@ -214,6 +217,7 @@ Format: `done INDEX`
 * Marks the To Do at the specified `INDEX` as done.
 * The index refers to the index number shown in the displayed TodoList.
 * The index **must be a positive integer** 1, 2, 3, …​
+* If it is a recurring todo, it will proceed to add a new Todo based on the new deadline given by the recurrence.
 
 Example:
 * `list todo` followed by `done todo 3`  marks the 3rd To Do on the To Do list as complete.
@@ -223,14 +227,16 @@ Example:
 ### Adding Events : `add event`
 Adds an Event o to the EventList of LifeBook.
 
-Format: `add event desc/DESCRIPTION startdate/DATE starttime/TIME enddate/DATE endtime/TIME`
+Format: `add event desc/DESCRIPTION startdate/DATE starttime/TIME enddate/DATE endtime/TIME [recurring/VALUE UNIT]`
 
 * `DATE` must be specified in the format of DD-MM-YYYY
-* `TIME` must be speficied in the format of HHmm using 24 hour time
+* `TIME` must be specified in the format of HHmm using 24 hour time
+* `VALUE` must be > 0
+* `UNIT` must be "day", "week", "month" or "year"
 
 Examples:
 
-* `add event desc/Party with friends startdate/08-08-2020 starttime/2359 enddate/10-08-2020 endtime/2359`
+* `add event desc/Party with friends startdate/08-08-2020 starttime/2359 enddate/10-08-2020 endtime/2359 recurring/1 year`
 * `add event desc/Singapore Fintech Festival startdate/09-08-2020 starttime/1000 enddate/12-08-2020 endtime/2359`
 
 ### View all Events : `list event`
@@ -270,6 +276,7 @@ Format: `done INDEX`
 * Marks the Event at the specified `INDEX` as done.
 * The index refers to the index number shown in the displayed EventList.
 * The index **must be a positive integer** 1, 2, 3, …​
+* If it is a recurring event, it will proceed to add a new Event based on the new deadline given by the recurrence.
 
 Example:
 * `list event` followed by `done event 3`  marks the 3rd Event on the Event list as complete.
@@ -363,11 +370,11 @@ Action | Format, Examples
 **List (Contacts and Tasks)** | `list all`
 **List Contacts** | `list contact`
 **Help** | `help`
-**Add To Do** | `add todo desc/DESCRIPTION date/DATE time/TIME` <br> e.g., `add todo desc/finish user guide draft date/09/08/2020 time/2300`
+**Add To Do** | `add todo desc/DESCRIPTION date/DATE time/TIME [recurring/VALUE UNIT]` <br> e.g., `add todo desc/update user guide date/09/08/2020 time/2300 recurring/1 week`
 **List To Dos** | `list todo`
 **Remove To Do** | `delete todo INDEX` <br> e.g., `delete todo 3`
 **Show To Do** | `show todo INDEX` <br> e.g., `show todo 3`
-**Add Event** | `add event desc/DESCRIPTION startdate/DATE starttime/TIME enddate/DATE endtime/TIME` <br> e.g., `add event desc/meeting startdate/12-12-2020 starttime/1000 enddate/12-12-2020 endtime/1130`
+**Add Event** | `add event desc/DESCRIPTION startdate/DATE starttime/TIME enddate/DATE endtime/TIME [recurring/VALUE UNIT]` <br> e.g., `add event desc/meeting startdate/12-12-2020 starttime/1000 enddate/12-12-2020 endtime/1130 recurring/1 week`
 **List Events** | `list event`
 **Remove Event** | `delete event INDEX` <br> e.g., `delete event 3`
 **Show Event** | `show event INDEX` <br> e.g., `show event 3`

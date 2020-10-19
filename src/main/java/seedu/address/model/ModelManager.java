@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Event;
 import seedu.address.model.task.Task;
@@ -188,9 +189,9 @@ public class ModelManager implements Model {
         taskList.setTask(target, editedTask);
     }
     @Override
-    public void markAsDone(Task target) {
+    public AddCommand markAsDone(Task target) {
         requireAllNonNull(target);
-        taskList.markAsDone(target);
+        return taskList.markAsDone(target);
     }
     //=========== Filtered Task List Accessors =============================================================
     @Override
