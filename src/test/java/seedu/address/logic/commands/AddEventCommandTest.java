@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalEvents.PARTY;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -56,6 +57,18 @@ public class AddEventCommandTest {
 
         assertThrows(CommandException.class,
                 AddEventCommand.MESSAGE_DUPLICATE_PERSON, () -> addEventCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_EventWithRecurrenceAcceptedByModel_addSuccessful() throws Exception {
+        AddEventCommandTest.ModelStubAcceptingEventAdded modelStub = new AddEventCommandTest.ModelStubAcceptingEventAdded();
+        Event validEvent = new EventBuilder(PARTY).build();
+
+        CommandResult commandResult = new AddEventCommand(validEvent).execute(modelStub);
+
+        assertEquals(String.format(AddEventCommand.MESSAGE_SUCCESS, validEvent.getDescriptionDateTime()),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validEvent), modelStub.eventsAdded);
     }
 
     @Test
