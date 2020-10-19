@@ -14,7 +14,7 @@ public class TypicalTodos {
     public static final Todo HOMEWORK = new TodoBuilder().withDescription("homework")
             .withDateTime("12-12-2020 2359").build();
     public static final Todo CHORES = new TodoBuilder().withDescription("do chores")
-            .withDateTime("01-01-2020 1800").build();
+            .withDateTime("01-01-2020 1800").withRecurrence("1 week").build();
 
     private TypicalTodos() {} // prevents instantiation
 
