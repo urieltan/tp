@@ -103,19 +103,40 @@ public class Event extends Task {
 
     /**
      * Constructs an event which may or may not be completed
-     * with a brief description and period of time.
+     * with a brief description, period of time, and a meeting link
      *
      * @param isDone indicates if the event has been completed.
      * @param description a brief description of the event.
      * @param start the starting date and time of event.
-     * @param end the ending date and time of event.
      * @param recurrence the recurrence of event.
+     * @param end the ending date and time of event.
      */
-    public Event(boolean isDone, String description, LocalDateTime start, LocalDateTime end, Recurrence recurrence) {
+    public Event(boolean isDone, String description, LocalDateTime start,
+                 LocalDateTime end, Recurrence recurrence, MeetingLink link) {
         super(isDone, description);
         this.start = start;
         this.end = end;
         this.recurrence = recurrence;
+        this.meetingLink = link;
+    }
+
+    /**
+     * Constructs an event which may or may not be completed
+     * with a brief description, period of time, and a meeting link
+     *
+     * @param isDone indicates if the event has been completed.
+     * @param description a brief description of the event.
+     * @param start the starting date and time of event.
+     * @param recurrence the recurrence of event.
+     * @param end the ending date and time of event.
+     */
+    public Event(boolean isDone, String description, LocalDateTime start,
+                 LocalDateTime end, Recurrence recurrence) {
+        super(isDone, description);
+        this.start = start;
+        this.end = end;
+        this.recurrence = recurrence;
+        this.meetingLink = new MeetingLink();
     }
 
     /**
@@ -132,6 +153,7 @@ public class Event extends Task {
         this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
         this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
         this.recurrence = recurrence;
+        this.meetingLink = new MeetingLink();
     }
 
     /**
@@ -148,6 +170,7 @@ public class Event extends Task {
         this.start = start;
         this.end = end;
         this.recurrence = recurrence;
+        this.meetingLink = new MeetingLink();
     }
 
     /**
@@ -282,8 +305,8 @@ public class Event extends Task {
         return this.end;
     }
 
-    public String getMeetingLink() {
-        return this.meetingLink.toString();
+    public MeetingLink getMeetingLink() {
+        return this.meetingLink;
     }
 
     @Override

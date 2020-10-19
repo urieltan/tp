@@ -108,11 +108,14 @@ public class Todo extends Task {
      * @param description a brief description of the deadline.
      * @param deadline    a LocalDateTime in a specific format (inputFormatter) which specifies a date.
      * @param recurrence the recurrence of todo.
+     * @param link        the Collaborative Link of todo.
      */
-    public Todo(boolean isDone, String description, LocalDateTime deadline, Recurrence recurrence) {
+    public Todo(boolean isDone, String description, LocalDateTime deadline,
+                Recurrence recurrence, CollaborativeLink link) {
         super(isDone, description);
         this.deadline = deadline;
         this.recurrence = recurrence;
+        this.collaborativeLink = link;
     }
 
     /**
@@ -135,12 +138,43 @@ public class Todo extends Task {
      *
      * @param isDone      indicates if the deadline has been completed.
      * @param description a brief description of the deadline.
+     * @param deadline    a String in a specific format (inputFormatter) which specifies a date.
+     * @param recurrence the recurrence of todo.
+     */
+    public Todo(boolean isDone, String description, LocalDateTime deadline, Recurrence recurrence) {
+        super(isDone, description);
+        this.deadline = deadline;
+        this.collaborativeLink = new CollaborativeLink();
+        this.recurrence = recurrence;
+    }
+
+    /**
+     * Constructs a task, which may or may not have been completed,
+     * with a brief description and deadline for the task to be completed by.
+     *
+     * @param isDone      indicates if the deadline has been completed.
+     * @param description a brief description of the deadline.
      * @param deadline    a date and time specifies a deadline.
      */
     public Todo(boolean isDone, String description, LocalDateTime deadline) {
         super(isDone, description);
         this.deadline = deadline;
         this.collaborativeLink = new CollaborativeLink();
+    }
+
+    /**
+     * Constructs a task, which may or may not have been completed,
+     * with a brief description and deadline for the task to be completed by.
+     *
+     * @param isDone      indicates if the deadline has been completed.
+     * @param description a brief description of the deadline.
+     * @param deadline    a date and time specifies a deadline.
+     * @param link        a Collaborative Link for the todo.
+     */
+    public Todo(boolean isDone, String description, LocalDateTime deadline, CollaborativeLink link) {
+        super(isDone, description);
+        this.deadline = deadline;
+        this.collaborativeLink = link;
     }
 
     /**

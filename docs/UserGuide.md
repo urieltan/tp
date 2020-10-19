@@ -304,7 +304,7 @@ Examples:
 Adds a collaborative link (Google Drive, GitHub, Trello, and others)
 
 Format:
-* `link doc desc/DESCRIPTION url/LINK i/INDEX_OF_TODO` 
+* `link doc desc/DESCRIPTION url/LINK i/INDEX_OF_TODO`
 
 Examples:
 * `link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoUz1JpAgynIkfacr0asqV9A4kh i/2`
