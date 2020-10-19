@@ -1,9 +1,10 @@
 package seedu.address.model.task;
 
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.add.AddEventCommand;
 
 /**
  * Encapsulates a task to be completed over a span of time (i.e period).
@@ -31,6 +32,11 @@ public class Event extends Task {
 
     /**The meeting link url. */
     private MeetingLink meetingLink;
+
+    /**
+     * The recurrence (if any).
+     */
+    private Recurrence recurrence;
 
     /**
      * Constructs an event that has not been completed with a brief
@@ -102,13 +108,46 @@ public class Event extends Task {
      * @param isDone indicates if the event has been completed.
      * @param description a brief description of the event.
      * @param start the starting date and time of event.
+     * @param recurrence the recurrence of event.
      * @param end the ending date and time of event.
      */
-    public Event(boolean isDone, String description, LocalDateTime start, LocalDateTime end, MeetingLink link) {
+    public Event(boolean isDone, String description, LocalDateTime start, LocalDateTime end, Recurrence recurrence, MeetingLink link) {
         super(isDone, description);
         this.start = start;
         this.end = end;
+        this.recurrence = recurrence;
         this.meetingLink = link;
+
+    /**
+     * Constructs an event which may or may not be completed
+     * with a brief description and period of time.
+     *
+     * @param description a brief description of the event.
+     * @param start the starting date and time of event (String).
+     * @param end the ending date and time of event (String).
+     * @param recurrence the recurrence of event.
+     */
+    public Event(String description, String start, String end, Recurrence recurrence) {
+        super(description);
+        this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
+        this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
+        this.recurrence = recurrence;
+    }
+
+    /**
+     * Constructs an event which may or may not be completed
+     * with a brief description and period of time.
+     *
+     * @param description a brief description of the event.
+     * @param start the starting date and time of event (LocalDateTime).
+     * @param end the ending date and time of event (LocalDateTime).
+     * @param recurrence the recurrence of event.
+     */
+    public Event(String description, LocalDateTime start, LocalDateTime end, Recurrence recurrence) {
+        super(description);
+        this.start = start;
+        this.end = end;
+        this.recurrence = recurrence;
     }
 
     /**
@@ -155,6 +194,23 @@ public class Event extends Task {
         this.end = LocalDateTime.parse(newPeriod.substring(START_OF_SECOND_DATE_TIME_INDEX), INPUT_DATE_TIME_FORMAT);
     }
 
+    @Override
+    public AddCommand markAsDone() {
+        this.isDone = true;
+        if (this.recurrence != null) {
+            LocalDateTime newStartDateTime = this.getStart()
+                    .plus(this.recurrence.getValue(), this.recurrence.getChronoUnit());
+            LocalDateTime newEndDateTime = this.getEnd()
+                    .plus(this.recurrence.getValue(), this.recurrence.getChronoUnit());
+
+            AddEventCommand command = new AddEventCommand(
+                    new Event(description, newStartDateTime, newEndDateTime, recurrence));
+            return command;
+        } else {
+            return null;
+        }
+    }
+
     /**
      * Returns the string representation of the event, which includes the status icon, description, and period.
      *
@@ -164,6 +220,7 @@ public class Event extends Task {
     public String toString() {
         return "[" + getStatusIcon() + "] " + getDescription() + " (at: " + getPeriod() + ")";
     }
+
     public String getDescriptionDateTime() {
         return this.description + " (at: " + getPeriod() + ")";
     }
@@ -228,6 +285,7 @@ public class Event extends Task {
     public MeetingLink getMeetingLink() {
         return this.meetingLink;
     }
+
     @Override
     public boolean isTodo() {
         return false;
@@ -237,10 +295,12 @@ public class Event extends Task {
     public boolean isEvent() {
         return true;
     }
+
     @Override
     public LocalDateTime getStart() {
         return this.start;
     }
+
     @Override
     public LocalDateTime getEnd() {
         return this.end;
@@ -258,9 +318,15 @@ public class Event extends Task {
     public String getEndDateTime() {
         return end.format(INPUT_DATE_TIME_FORMAT);
     }
+
     @Override
     public String getType() {
         return "Event";
+    }
+
+    @Override
+    public Recurrence getRecurrence() {
+        return this.recurrence;
     }
 }
 

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalTodos.CHORES;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -54,6 +55,18 @@ public class AddTodoCommandTest {
 
         assertThrows(CommandException.class,
                 AddTodoCommand.MESSAGE_DUPLICATE_PERSON, () -> addTodoCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_todoWithRecurrenceAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingTodoAdded modelStub = new ModelStubAcceptingTodoAdded();
+        Todo validTodo = new TodoBuilder(CHORES).build();
+
+        CommandResult commandResult = new AddTodoCommand(validTodo).execute(modelStub);
+
+        assertEquals(String.format(AddTodoCommand.MESSAGE_SUCCESS, validTodo.getDescriptionDateTime()),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validTodo), modelStub.todosAdded);
     }
 
     @Test
@@ -195,7 +208,7 @@ public class AddTodoCommandTest {
         }
 
         @Override
-        public void markAsDone(Task target) {
+        public AddCommand markAsDone(Task target) {
             throw new AssertionError("This method should not be called.");
         }
 

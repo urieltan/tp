@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import seedu.address.model.task.Recurrence;
 import seedu.address.model.task.Todo;
 
 /**
@@ -23,6 +24,7 @@ public class TodoBuilder {
 
     private String description;
     private String dateTime;
+    private Recurrence recurrence;
 
     /**
      * Creates a {@code TodoBuilder} with the default details.
@@ -40,6 +42,7 @@ public class TodoBuilder {
         String dateTimeOutput = todoToCopy.getDateTime();
         // flip the output and input of LocalDateTime
         dateTime = LocalDateTime.parse(dateTimeOutput, OUTPUT_DATE_TIME_FORMAT).format(INPUT_DATE_TIME_FORMAT);
+        recurrence = todoToCopy.getRecurrence();
     }
 
     /**
@@ -58,8 +61,19 @@ public class TodoBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Recurrence} of the {@code To-do} that we are building.
+     */
+    public TodoBuilder withRecurrence(String recurrenceInput) {
+        String[] recurrenceSplit = recurrenceInput.split(" ");
+        Integer recurrenceValue = Integer.parseInt(recurrenceSplit[0]);
+        String recurrenceTimePeriod = recurrenceSplit[1];
+        this.recurrence = new Recurrence(recurrenceValue, recurrenceTimePeriod);
+        return this;
+    }
+
     public Todo build() {
-        return new Todo(description, dateTime);
+        return new Todo(description, dateTime, recurrence);
     }
 
 }

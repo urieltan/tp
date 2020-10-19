@@ -2,6 +2,8 @@ package seedu.address.model.task;
 
 import java.time.LocalDateTime;
 
+import seedu.address.logic.commands.AddCommand;
+
 public abstract class Task {
     /** A brief description of the task. */
     protected String description;
@@ -10,6 +12,8 @@ public abstract class Task {
     protected boolean isDone;
 
     protected Link link;
+
+    protected Recurrence recurrence;
 
     /**
      * Constructs a task that has not been completed with a description.
@@ -55,9 +59,12 @@ public abstract class Task {
 
     /**
      * Indicates that the task has been completed.
+     *
+     * @return AddCommand if the task is recurring.
      */
-    public void markAsDone() {
+    public AddCommand markAsDone() {
         this.isDone = true;
+        return null;
     }
     public boolean getStatus() {
         return isDone;
@@ -121,4 +128,5 @@ public abstract class Task {
     public abstract boolean isTodo();
     public abstract boolean isEvent();
     public abstract String getType();
+    public abstract Recurrence getRecurrence();
 }

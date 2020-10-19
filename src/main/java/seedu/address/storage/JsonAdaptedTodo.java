@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.task.CollaborativeLink;
+import seedu.address.model.task.Recurrence;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Todo;
 
@@ -18,6 +19,7 @@ public class JsonAdaptedTodo extends JsonAdaptedTask {
     private final LocalDateTime deadline;
     private final String linkDesc;
     private final String linkUrl;
+    private final Recurrence recurrence;
 
     /**
      * Constructs a {@code JsonAdaptedTodo} with the given Todo details.
@@ -25,11 +27,16 @@ public class JsonAdaptedTodo extends JsonAdaptedTask {
     @JsonCreator
     public JsonAdaptedTodo(@JsonProperty("description") String description, @JsonProperty("isDone") Boolean isDone,
                            @JsonProperty("deadline") LocalDateTime deadline, @JsonProperty("linkDesc") String linkDesc,
-                           @JsonProperty("linkUrl") String url) {
+                           @JsonProperty("linkUrl") String url, @JsonProperty("recurrence") JsonAdaptedRecurrence recurrence) {
         super(description, isDone);
         this.deadline = deadline;
         this.linkDesc = linkDesc;
         this.linkUrl = url;
+        if (recurrence != null) {
+            this.recurrence = recurrence.toModelType();
+        } else {
+            this.recurrence = null;
+        }
     }
 
     /**
@@ -40,6 +47,7 @@ public class JsonAdaptedTodo extends JsonAdaptedTask {
         deadline = source.getDeadline();
         linkDesc = source.getLink().getDescription();
         linkUrl = source.getLink().getUrl();
+        recurrence = source.getRecurrence();
     }
 
     @Override
@@ -58,11 +66,16 @@ public class JsonAdaptedTodo extends JsonAdaptedTask {
         }
 
         final LocalDateTime modelDeadline = deadline;
+        final Recurrence modelRecurrence = recurrence;
 
-        if (linkUrl.equals("-") || linkDesc.equals("No collaborative link")) {
+        if (linkUrl == null || linkDesc == null) {
             return new Todo(modelIsDone, modelDescription, modelDeadline);
         } else {
-            return new Todo(modelIsDone, modelDescription, modelDeadline, new CollaborativeLink(linkDesc, linkUrl));
-        }
+          if (modelRecurrence == null) {
+            return new Todo(modelIsDone, modelDescription, modelDeadline);
+          } else {
+            return new Todo(modelIsDone, modelDescription, modelDeadline, modelRecurrence, new CollaborativeLink(linkDesc, linkUrl));
+          }
+       }
     }
 }
