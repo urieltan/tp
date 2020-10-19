@@ -99,7 +99,7 @@ public abstract class Task {
     }
 
     /** Tracks if there is a link present in this task */
-    public boolean hasLink(){
+    public boolean hasLink() {
         if (this.link != null) {
             return true;
         } else {

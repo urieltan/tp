@@ -47,7 +47,7 @@ public class JsonAdaptedEvent extends JsonAdaptedTask {
         super(source);
         start = source.getStart();
         end = source.getEnd();
-        if(source.getLink().isPresent()) {
+        if (source.getLink().isPresent()) {
             linkDesc = source.getLink().get().getDescription().split(" ", 2)[0];
             linkUrl = source.getLink().get().getUrl();
         } else {

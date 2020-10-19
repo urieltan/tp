@@ -46,7 +46,7 @@ public class JsonAdaptedTodo extends JsonAdaptedTask {
     public JsonAdaptedTodo(Task source) {
         super(source);
         deadline = source.getDeadline();
-        if(source.getLink().isPresent()) {
+        if (source.getLink().isPresent()) {
             linkDesc = source.getLink().get().getDescription();
             linkUrl = source.getLink().get().getUrl();
         } else {
