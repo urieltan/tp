@@ -105,6 +105,23 @@ public class Event extends Task {
      * Constructs an event which may or may not be completed
      * with a brief description and period of time.
      *
+     * @param isDone indicates if the event has been completed.
+     * @param description a brief description of the event.
+     * @param start the starting date and time of event.
+     * @param end the ending date and time of event.
+     * @param recurrence the recurrence of event.
+     */
+    public Event(boolean isDone, String description, LocalDateTime start, LocalDateTime end, Recurrence recurrence) {
+        super(isDone, description);
+        this.start = start;
+        this.end = end;
+        this.recurrence = recurrence;
+    }
+
+    /**
+     * Constructs an event which may or may not be completed
+     * with a brief description and period of time.
+     *
      * @param description a brief description of the event.
      * @param start the starting date and time of event (String).
      * @param end the ending date and time of event (String).

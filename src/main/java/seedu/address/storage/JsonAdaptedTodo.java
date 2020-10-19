@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.task.Recurrence;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Todo;
 
@@ -15,15 +16,22 @@ import seedu.address.model.task.Todo;
 public class JsonAdaptedTodo extends JsonAdaptedTask {
 
     private final LocalDateTime deadline;
+    private final Recurrence recurrence;
 
     /**
      * Constructs a {@code JsonAdaptedTodo} with the given Todo details.
      */
     @JsonCreator
     public JsonAdaptedTodo(@JsonProperty("description") String description, @JsonProperty("isDone") Boolean isDone,
-                           @JsonProperty("deadline") LocalDateTime deadline) {
+                           @JsonProperty("deadline") LocalDateTime deadline,
+                           @JsonProperty("recurrence") JsonAdaptedRecurrence recurrence) {
         super(description, isDone);
         this.deadline = deadline;
+        if (recurrence != null) {
+            this.recurrence = recurrence.toModelType();
+        } else {
+            this.recurrence = null;
+        }
     }
 
     /**
@@ -32,6 +40,7 @@ public class JsonAdaptedTodo extends JsonAdaptedTask {
     public JsonAdaptedTodo(Task source) {
         super(source);
         deadline = source.getDeadline();
+        recurrence = source.getRecurrence();
     }
 
     @Override
@@ -50,8 +59,13 @@ public class JsonAdaptedTodo extends JsonAdaptedTask {
         }
 
         final LocalDateTime modelDeadline = deadline;
+        final Recurrence modelRecurrence = recurrence;
 
-        return new Todo(modelIsDone, modelDescription, modelDeadline);
+        if (modelRecurrence == null) {
+            return new Todo(modelIsDone, modelDescription, modelDeadline);
+        } else {
+            return new Todo(modelIsDone, modelDescription, modelDeadline, modelRecurrence);
+        }
     }
 }
 

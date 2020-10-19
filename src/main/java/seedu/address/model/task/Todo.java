@@ -99,6 +99,22 @@ public class Todo extends Task {
         this.recurrence = recurrence;
     }
 
+
+    /**
+     * Constructs a task that has not been completed
+     * with a brief description and deadline for the task to be completed by.
+     *
+     * @param isDone      indicates if the deadline has been completed.
+     * @param description a brief description of the deadline.
+     * @param deadline    a LocalDateTime in a specific format (inputFormatter) which specifies a date.
+     * @param recurrence the recurrence of todo.
+     */
+    public Todo(boolean isDone, String description, LocalDateTime deadline, Recurrence recurrence) {
+        super(isDone, description);
+        this.deadline = deadline;
+        this.recurrence = recurrence;
+    }
+
     /**
      * Constructs a task, which may or may not have been completed,
      * with a brief description and deadline for the task to be completed by.
