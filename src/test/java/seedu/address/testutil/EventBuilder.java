@@ -83,7 +83,7 @@ public class EventBuilder {
 
 
     public Event build() {
-        return new Event(description, startDateTime, endDateTime);
+        return new Event(description, startDateTime, endDateTime, recurrence);
     }
 
 }

@@ -73,7 +73,7 @@ public class TodoBuilder {
     }
 
     public Todo build() {
-        return new Todo(description, dateTime);
+        return new Todo(description, dateTime, recurrence);
     }
 
 }

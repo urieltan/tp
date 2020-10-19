@@ -53,5 +53,4 @@ public class AddTodoCommand extends AddCommand {
                 || (other instanceof AddTodoCommand // instanceof handles nulls
                 && toAdd.equals(((AddTodoCommand) other).toAdd));
     }
-
 }
