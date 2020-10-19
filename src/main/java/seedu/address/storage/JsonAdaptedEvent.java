@@ -18,7 +18,6 @@ public class JsonAdaptedEvent extends JsonAdaptedTask {
     private final String linkUrl;
     private final String linkTime;
     private final Recurrence recurrence;
-  
     /**
      * Constructs a {@code JsonAdaptedEvent} with the given Event details.
      */
@@ -26,7 +25,8 @@ public class JsonAdaptedEvent extends JsonAdaptedTask {
     public JsonAdaptedEvent(@JsonProperty("description") String description, @JsonProperty("isDone") Boolean isDone,
                            @JsonProperty("start") LocalDateTime start, @JsonProperty("end") LocalDateTime end,
                             @JsonProperty("linkDesc") String linkDesc, @JsonProperty("linkUrl") String url,
-                            @JsonProperty("linkTime") String linkTime, @JsonProperty("recurrence") JsonAdaptedRecurrence recurrence) {
+                            @JsonProperty("linkTime") String linkTime,
+                            @JsonProperty("recurrence") JsonAdaptedRecurrence recurrence) {
         super(description, isDone);
         this.start = start;
         this.end = end;
@@ -75,18 +75,21 @@ public class JsonAdaptedEvent extends JsonAdaptedTask {
         }
 
         final LocalDateTime modelEnd = end;
-      
         final Recurrence modelRecurrence = recurrence;
 
         if (linkUrl == null || linkDesc == null || linkTime == null) {
-            return new Event(modelIsDone, modelDescription, modelStart, modelEnd);
+            if (modelRecurrence == null) {
+                return new Event(modelIsDone, modelDescription, modelStart, modelEnd);
+            } else {
+                return new Event(modelIsDone, modelDescription, modelStart, modelEnd, modelRecurrence);
+            }
         } else {
-          if (modelRecurrence == null) {
-            return new Event(modelIsDone, modelDescription, modelStart, modelEnd);
-          } else {
-            return new Event(modelIsDone, modelDescription,
-                    modelStart, modelEnd, modelRecurrence, new MeetingLink(linkDesc, linkUrl, linkTime));
-          }
+            if (modelRecurrence == null) {
+                return new Event(modelIsDone, modelDescription, modelStart, modelEnd);
+            } else {
+                return new Event(modelIsDone, modelDescription,
+                        modelStart, modelEnd, modelRecurrence, new MeetingLink(linkDesc, linkUrl, linkTime));
+            }
         }
     }
 }

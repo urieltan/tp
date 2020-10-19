@@ -27,7 +27,8 @@ public class JsonAdaptedTodo extends JsonAdaptedTask {
     @JsonCreator
     public JsonAdaptedTodo(@JsonProperty("description") String description, @JsonProperty("isDone") Boolean isDone,
                            @JsonProperty("deadline") LocalDateTime deadline, @JsonProperty("linkDesc") String linkDesc,
-                           @JsonProperty("linkUrl") String url, @JsonProperty("recurrence") JsonAdaptedRecurrence recurrence) {
+                           @JsonProperty("linkUrl") String url,
+                           @JsonProperty("recurrence") JsonAdaptedRecurrence recurrence) {
         super(description, isDone);
         this.deadline = deadline;
         this.linkDesc = linkDesc;
@@ -69,13 +70,18 @@ public class JsonAdaptedTodo extends JsonAdaptedTask {
         final Recurrence modelRecurrence = recurrence;
 
         if (linkUrl == null || linkDesc == null) {
-            return new Todo(modelIsDone, modelDescription, modelDeadline);
+            if (modelRecurrence == null) {
+                return new Todo(modelIsDone, modelDescription, modelDeadline);
+            } else {
+                return new Todo(modelIsDone, modelDescription, modelDeadline, modelRecurrence);
+            }
         } else {
-          if (modelRecurrence == null) {
-            return new Todo(modelIsDone, modelDescription, modelDeadline);
-          } else {
-            return new Todo(modelIsDone, modelDescription, modelDeadline, modelRecurrence, new CollaborativeLink(linkDesc, linkUrl));
-          }
-       }
+            if (modelRecurrence == null) {
+                return new Todo(modelIsDone, modelDescription, modelDeadline);
+            } else {
+                return new Todo(modelIsDone, modelDescription, modelDeadline,
+                        modelRecurrence, new CollaborativeLink(linkDesc, linkUrl));
+            }
+        }
     }
 }
