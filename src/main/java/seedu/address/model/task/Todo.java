@@ -2,6 +2,7 @@ package seedu.address.model.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.add.AddTodoCommand;
@@ -304,8 +305,8 @@ public class Todo extends Task {
     }
 
     @Override
-    public Link getLink() {
-        return this.collaborativeLink;
+    public Optional<Link> getLink() {
+        return Optional.ofNullable(this.collaborativeLink);
     }
 
     @Override

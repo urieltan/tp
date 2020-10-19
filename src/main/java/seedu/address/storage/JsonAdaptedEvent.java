@@ -47,8 +47,13 @@ public class JsonAdaptedEvent extends JsonAdaptedTask {
         super(source);
         start = source.getStart();
         end = source.getEnd();
-        linkDesc = source.getLink().getDescription().split(" ", 2)[0];
-        linkUrl = source.getLink().getUrl();
+        if(source.getLink().isPresent()) {
+            linkDesc = source.getLink().get().getDescription().split(" ", 2)[0];
+            linkUrl = source.getLink().get().getUrl();
+        } else {
+            linkDesc = "";
+            linkUrl = "";
+        }
         linkTime = ((Event) source).getMeetingLink().saveTimeFormat();
         recurrence = source.getRecurrence();
     }

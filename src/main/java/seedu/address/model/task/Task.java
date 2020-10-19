@@ -1,6 +1,7 @@
 package seedu.address.model.task;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import seedu.address.logic.commands.AddCommand;
 
@@ -11,7 +12,9 @@ public abstract class Task {
     /** Tracks the completion of the task */
     protected boolean isDone;
 
+    /** Optional link for documents and online meetings */
     protected Link link;
+
 
     protected Recurrence recurrence;
 
@@ -95,6 +98,15 @@ public abstract class Task {
         return this.equals(task);
     }
 
+    /** Tracks if there is a link present in this task */
+    public boolean hasLink(){
+        if (this.link != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * Returns the string representation of task, which includes the status icon
      * and description.
@@ -123,7 +135,7 @@ public abstract class Task {
     public abstract LocalDateTime getStart();
     public abstract LocalDateTime getEnd();
     public abstract String getDateTime();
-    public abstract Link getLink();
+    public abstract Optional<Link> getLink();
     public abstract LocalDateTime getLocalDateTime();
     public abstract boolean isTodo();
     public abstract boolean isEvent();

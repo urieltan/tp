@@ -3,10 +3,10 @@ package seedu.address.model.task;
 public abstract class Link {
 
     /** A brief description of the link. */
-    private String description;
+    private final String description;
 
     /** The url for the link */
-    private String url;
+    private final String url;
 
     /**
      * Constructs a link with description and url.

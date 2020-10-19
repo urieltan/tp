@@ -59,8 +59,8 @@ public class TaskCard extends UiPart<Region> {
         description.setText(task.getDescription());
         dateTime.setText(task.getDateTime());
         statusIcon.setText("Status: " + task.getStatusIcon());
-        if (task.getLink() != null) {
-            meetingLink.setText(task.getLink().getUrl());
+        if (task.getLink().isPresent()) {
+            meetingLink.setText(task.getLink().get().getUrl());
             meetingLink.setOnAction(e -> {
                 if (Desktop.isDesktopSupported()) {
                     try {
@@ -72,7 +72,7 @@ public class TaskCard extends UiPart<Region> {
                     }
                 }
             });
-            linkDescription.setText(task.getLink().getDescription());
+            linkDescription.setText(task.getLink().get().getDescription());
         }
         if (task.getRecurrence() != null) {
             recurring.setText("Recurring task");
