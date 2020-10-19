@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.time.format.DateTimeFormatter;
 
 import seedu.address.model.task.Event;
+import seedu.address.model.task.Recurrence;
 
 /**
  * A utility class to help with building To-do objects.
@@ -24,6 +25,7 @@ public class EventBuilder {
     private String description;
     private String startDateTime;
     private String endDateTime;
+    private Recurrence recurrence;
 
     /**
      * Creates a {@code EventBuilder} with the default details.
@@ -41,6 +43,7 @@ public class EventBuilder {
         description = eventToCopy.getDescription();
         startDateTime = eventToCopy.getStartDateTime();
         endDateTime = eventToCopy.getEndDateTime();
+        recurrence = eventToCopy.getRecurrence();
     }
 
     /**
@@ -64,6 +67,17 @@ public class EventBuilder {
      */
     public EventBuilder withEndDateTime(String endDateTime) {
         this.endDateTime = endDateTime;
+        return this;
+    }
+
+    /**
+     * Sets the {@code Recurrence} of the {@code Event} that we are building.
+     */
+    public EventBuilder withRecurrence(String recurrenceInput) {
+        String[] recurrenceSplit = recurrenceInput.split(" ");
+        Integer recurrenceValue = Integer.parseInt(recurrenceSplit[0]);
+        String recurrenceTimePeriod = recurrenceSplit[1];
+        this.recurrence = new Recurrence(recurrenceValue, recurrenceTimePeriod);
         return this;
     }
 

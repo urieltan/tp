@@ -14,7 +14,8 @@ public class TypicalEvents {
     public static final Event MEETING = new EventBuilder().withDescription("meeting")
             .withStartDateTime("12-12-2020 1000").withEndDateTime("12-12-2020 1130").build();
     public static final Event PARTY = new EventBuilder().withDescription("party")
-            .withStartDateTime("01-01-2020 1800").withEndDateTime("02-01-2020 0600").build();
+            .withStartDateTime("01-01-2020 1800").withEndDateTime("02-01-2020 0600")
+            .withRecurrence("1 year").build();
 
     private TypicalEvents() {} // prevents instantiation
 

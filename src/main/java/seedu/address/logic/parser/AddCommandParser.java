@@ -140,11 +140,11 @@ public class AddCommandParser implements Parser<AddCommand> {
                         event = new Event(description, stDateTime, endDateTime, recurrence);
                     } else {
                         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                                AddTodoCommand.MESSAGE_USAGE));
+                                AddEventCommand.MESSAGE_USAGE));
                     }
                 } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
                     throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                            AddTodoCommand.MESSAGE_USAGE));
+                            AddEventCommand.MESSAGE_USAGE));
                 }
             } else {
                 event = new Event(description, stDateTime, endDateTime, meetingLink);
