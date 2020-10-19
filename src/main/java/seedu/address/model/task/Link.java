@@ -1,6 +1,13 @@
 package seedu.address.model.task;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 public abstract class Link {
+
+    public static final String MESSAGE_CONSTRAINTS = "Link must be in URL Format.";
+
+    public static final String VALIDATION_REGEX =
+            "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
 
     /** A brief description of the link. */
     private String description;
@@ -16,7 +23,15 @@ public abstract class Link {
      */
     public Link(String description, String url) {
         this.description = description;
+        checkArgument(isValidURL(url), MESSAGE_CONSTRAINTS);
         this.url = url;
+    }
+
+    /**
+     * Returns if a given string is a valid email.
+     */
+    public static boolean isValidURL(String url) {
+        return url.matches(VALIDATION_REGEX) || url.equals("-");
     }
 
     /**

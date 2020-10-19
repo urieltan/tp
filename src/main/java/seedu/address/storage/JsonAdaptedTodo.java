@@ -46,13 +46,8 @@ public class JsonAdaptedTodo extends JsonAdaptedTask {
     public JsonAdaptedTodo(Task source) {
         super(source);
         deadline = source.getDeadline();
-        if (source.getLink() != null) {
-            linkDesc = source.getLink().getDescription();
-            linkUrl = source.getLink().getUrl();
-        } else {
-            linkDesc = "No";
-            linkUrl = "-";
-        }
+        linkDesc = source.getLink().getDescription();
+        linkUrl = source.getLink().getUrl();
         recurrence = source.getRecurrence();
     }
 
@@ -82,7 +77,7 @@ public class JsonAdaptedTodo extends JsonAdaptedTask {
             }
         } else {
             if (modelRecurrence == null) {
-                return new Todo(modelIsDone, modelDescription, modelDeadline);
+                return new Todo(modelIsDone, modelDescription, modelDeadline, new CollaborativeLink(linkDesc, linkUrl));
             } else {
                 return new Todo(modelIsDone, modelDescription, modelDeadline,
                         modelRecurrence, new CollaborativeLink(linkDesc, linkUrl));

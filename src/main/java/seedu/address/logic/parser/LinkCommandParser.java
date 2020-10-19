@@ -37,7 +37,7 @@ public class LinkCommandParser implements Parser<LinkCommand> {
             if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION, PREFIX_URL, PREFIX_INDEX, PREFIX_DATE, PREFIX_TIME)
                     || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        LinkCommand.MESSAGE_USAGE));
+                        LinkMeetingCommand.MESSAGE_USAGE));
             }
             String description = argMultimap.getValue(PREFIX_DESCRIPTION).get().trim();
             String date = argMultimap.getValue(PREFIX_DATE).get().trim();
@@ -45,9 +45,10 @@ public class LinkCommandParser implements Parser<LinkCommand> {
             String url = argMultimap.getValue(PREFIX_URL).get().trim();
             String meetingTime = date + " " + time;
             Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get().trim());
+            ParserUtil.parseLink(url);
 
 
-            MeetingLink meetingLink = new MeetingLink(description, url, meetingTime);
+            MeetingLink meetingLink = ParserUtil.parseMeetingLink(description, url, meetingTime);
 
             return new LinkMeetingCommand(index, meetingLink);
         } else if (splitArgs[0].trim().split(" ")[0].trim().equals("doc")) {
@@ -57,13 +58,14 @@ public class LinkCommandParser implements Parser<LinkCommand> {
             if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION, PREFIX_URL, PREFIX_INDEX)
                     || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        LinkCommand.MESSAGE_USAGE));
+                        LinkCollaborativeCommand.MESSAGE_USAGE));
             }
             String description = argMultimap.getValue(PREFIX_DESCRIPTION).get().trim();
             String url = argMultimap.getValue(PREFIX_URL).get().trim();
             Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get().trim());
+            ParserUtil.parseLink(url);
 
-            CollaborativeLink collaborativeLink = new CollaborativeLink(description, url);
+            CollaborativeLink collaborativeLink = ParserUtil.parseCollaborativeLink(description, url);
 
             return new LinkCollaborativeCommand(index, collaborativeLink);
         } else {
