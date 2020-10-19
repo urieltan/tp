@@ -24,6 +24,8 @@ public class Recurrence {
     public Recurrence(Integer value, String timePeriod) {
         this.value = value;
 
+        assert this.value > 0 : "recurrence should not be 0";
+
         if (timePeriod.equals(DAY)) {
             this.chronoUnit = ChronoUnit.DAYS;
         } else if (timePeriod.equals(WEEK)) {
