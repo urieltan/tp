@@ -60,8 +60,9 @@ public class AddEventCommandTest {
     }
 
     @Test
-    public void execute_EventWithRecurrenceAcceptedByModel_addSuccessful() throws Exception {
-        AddEventCommandTest.ModelStubAcceptingEventAdded modelStub = new AddEventCommandTest.ModelStubAcceptingEventAdded();
+    public void execute_eventWithRecurrenceAcceptedByModel_addSuccessful() throws Exception {
+        AddEventCommandTest.ModelStubAcceptingEventAdded modelStub = new AddEventCommandTest
+                .ModelStubAcceptingEventAdded();
         Event validEvent = new EventBuilder(PARTY).build();
 
         CommandResult commandResult = new AddEventCommand(validEvent).execute(modelStub);

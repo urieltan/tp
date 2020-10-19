@@ -3,8 +3,8 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalTodos.HOMEWORK;
 import static seedu.address.testutil.TypicalTodos.CHORES;
+import static seedu.address.testutil.TypicalTodos.HOMEWORK;
 
 import org.junit.jupiter.api.Test;
 
@@ -68,8 +68,7 @@ public class AddTodoCommandParserTest {
     @Test
     public void parse_allFieldsPresentWithRecurrence() {
         Todo expectedTodo = new TodoBuilder(CHORES).build();
-
-        assertParseSuccess(parser, "todo " + CHORES_DESC  + CHORES_DATE  + CHORES_TIME + CHORES_RECURRENCE,
+        assertParseSuccess(parser, "todo " + CHORES_DESC + CHORES_DATE + CHORES_TIME + CHORES_RECURRENCE,
                 new AddTodoCommand(expectedTodo));
     }
 
@@ -78,11 +77,11 @@ public class AddTodoCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTodoCommand.MESSAGE_USAGE);
 
         // invalid recurrence value
-        assertParseFailure(parser, "todo " + CHORES_DESC  + CHORES_DATE  + CHORES_TIME
+        assertParseFailure(parser, "todo " + CHORES_DESC + CHORES_DATE + CHORES_TIME
                 + INVALID_RECURRENCE_VALUE, expectedMessage);
 
         // invalid recurrence unit
-        assertParseFailure(parser, "todo " + CHORES_DESC  + CHORES_DATE  + CHORES_TIME
+        assertParseFailure(parser, "todo " + CHORES_DESC + CHORES_DATE + CHORES_TIME
                 + INVALID_RECURRENCE_UNIT, expectedMessage);
     }
 

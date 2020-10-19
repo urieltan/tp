@@ -58,7 +58,7 @@ public class AddTodoCommandTest {
     }
 
     @Test
-    public void execute_TodoWithRecurrenceAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_todoWithRecurrenceAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingTodoAdded modelStub = new ModelStubAcceptingTodoAdded();
         Todo validTodo = new TodoBuilder(CHORES).build();
 
