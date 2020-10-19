@@ -92,6 +92,21 @@ public class Todo extends Task {
     }
 
     /**
+     * Constructs a task, which may or may not have been completed,
+     * with a brief description and deadline for the task to be completed by.
+     *
+     * @param isDone      indicates if the deadline has been completed.
+     * @param description a brief description of the deadline.
+     * @param deadline    a date and time specifies a deadline.
+     * @param link        a Collaborative Link for the todo.
+     */
+    public Todo(boolean isDone, String description, LocalDateTime deadline, CollaborativeLink link) {
+        super(isDone, description);
+        this.deadline = deadline;
+        this.collaborativeLink = link;
+    }
+
+    /**
      * Changes the deadline of the task to a provided new deadline.
      *
      * @param newDeadline the deadline of the task to be changed to

@@ -96,6 +96,22 @@ public class Event extends Task {
     }
 
     /**
+     * Constructs an event which may or may not be completed
+     * with a brief description, period of time, and a meeting link
+     *
+     * @param isDone indicates if the event has been completed.
+     * @param description a brief description of the event.
+     * @param start the starting date and time of event.
+     * @param end the ending date and time of event.
+     */
+    public Event(boolean isDone, String description, LocalDateTime start, LocalDateTime end, MeetingLink link) {
+        super(isDone, description);
+        this.start = start;
+        this.end = end;
+        this.meetingLink = link;
+    }
+
+    /**
      * Returns the String representation of the period of time which the event occurred over. in the
      * form of -start- to -end-.
      * Dates and times are in the format of outputFormatter.
@@ -209,8 +225,8 @@ public class Event extends Task {
         return this.end;
     }
 
-    public String getMeetingLink() {
-        return this.meetingLink.toString();
+    public MeetingLink getMeetingLink() {
+        return this.meetingLink;
     }
     @Override
     public boolean isTodo() {

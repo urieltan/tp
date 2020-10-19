@@ -92,8 +92,8 @@ public class MeetingLink extends Link {
      *
      * @return the string representation of the task to be saved in a text file.
      */
-    public String saveFormat() {
-        return this.getDescription() + this.meetingTime.format(INPUT_DATE_TIME_FORMAT).toString();
+    public String saveTimeFormat() {
+        return this.meetingTime.format(INPUT_DATE_TIME_FORMAT).toString();
     }
 
     public LocalDateTime getLocalDateTime() {

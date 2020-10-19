@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.task.CollaborativeLink;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Todo;
 
@@ -15,15 +16,20 @@ import seedu.address.model.task.Todo;
 public class JsonAdaptedTodo extends JsonAdaptedTask {
 
     private final LocalDateTime deadline;
+    private final String linkDesc;
+    private final String linkUrl;
 
     /**
      * Constructs a {@code JsonAdaptedTodo} with the given Todo details.
      */
     @JsonCreator
     public JsonAdaptedTodo(@JsonProperty("description") String description, @JsonProperty("isDone") Boolean isDone,
-                           @JsonProperty("deadline") LocalDateTime deadline) {
+                           @JsonProperty("deadline") LocalDateTime deadline, @JsonProperty("linkDesc") String linkDesc,
+                           @JsonProperty("linkUrl") String url) {
         super(description, isDone);
         this.deadline = deadline;
+        this.linkDesc = linkDesc;
+        this.linkUrl = url;
     }
 
     /**
@@ -32,6 +38,8 @@ public class JsonAdaptedTodo extends JsonAdaptedTask {
     public JsonAdaptedTodo(Task source) {
         super(source);
         deadline = source.getDeadline();
+        linkDesc = source.getLink().getDescription();
+        linkUrl = source.getLink().getUrl();
     }
 
     @Override
@@ -51,7 +59,10 @@ public class JsonAdaptedTodo extends JsonAdaptedTask {
 
         final LocalDateTime modelDeadline = deadline;
 
-        return new Todo(modelIsDone, modelDescription, modelDeadline);
+        if (linkUrl.equals("-") || linkDesc.equals("No collaborative link")) {
+            return new Todo(modelIsDone, modelDescription, modelDeadline);
+        } else {
+            return new Todo(modelIsDone, modelDescription, modelDeadline, new CollaborativeLink(linkDesc, linkUrl));
+        }
     }
 }
-
