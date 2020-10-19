@@ -92,8 +92,8 @@ public class AddCommandParser implements Parser<AddCommand> {
                     String[] recurrenceSplit = recurrenceInput.split(" ");
                     Integer recurrenceValue = Integer.parseInt(recurrenceSplit[0]);
                     String recurrenceTimePeriod = recurrenceSplit[1];
-                    if (recurrenceTimePeriod.equals(DAY) || recurrenceTimePeriod.equals(WEEK)
-                        || recurrenceTimePeriod.equals(MONTH) || recurrenceTimePeriod.equals(YEAR)) {
+                    if (checkChronoUnitValidity(recurrenceTimePeriod)
+                            && checkRecurrenceValueValidity(recurrenceValue)) {
                         Recurrence recurrence = new Recurrence(recurrenceValue, recurrenceTimePeriod);
                         todo = new Todo(description, deadline, recurrence);
                     } else {
@@ -134,8 +134,8 @@ public class AddCommandParser implements Parser<AddCommand> {
                     String[] recurrenceSplit = recurrenceInput.split(" ");
                     Integer recurrenceValue = Integer.parseInt(recurrenceSplit[0]);
                     String recurrenceTimePeriod = recurrenceSplit[1];
-                    if (recurrenceTimePeriod.equals(DAY) || recurrenceTimePeriod.equals(WEEK)
-                            || recurrenceTimePeriod.equals(MONTH) || recurrenceTimePeriod.equals(YEAR)) {
+                    if (checkChronoUnitValidity(recurrenceTimePeriod)
+                            && checkRecurrenceValueValidity(recurrenceValue)) {
                         Recurrence recurrence = new Recurrence(recurrenceValue, recurrenceTimePeriod);
                         event = new Event(description, stDateTime, endDateTime, recurrence);
                     } else {
@@ -161,6 +161,25 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Returns true if the recurrence unit is day/week/month/year.
+     * @param recurrenceTimePeriod input by user
+     * @return boolean
+     */
+    private static boolean checkChronoUnitValidity(String recurrenceTimePeriod) {
+        return recurrenceTimePeriod.equals(DAY) || recurrenceTimePeriod.equals(WEEK)
+                || recurrenceTimePeriod.equals(MONTH) || recurrenceTimePeriod.equals(YEAR);
+    }
+
+    /**
+     * Returns true if the recurrence value is > 0.
+     * @param value input by user
+     * @return boolean
+     */
+    private static boolean checkRecurrenceValueValidity(Integer value) {
+        return value > 0;
     }
 
 }
