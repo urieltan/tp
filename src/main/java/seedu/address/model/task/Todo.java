@@ -177,6 +177,13 @@ public class Todo extends Task {
         this.collaborativeLink = link;
     }
 
+    public Todo(String description, LocalDateTime deadline, Recurrence recurrence, CollaborativeLink link) {
+        super(description);
+        this.deadline = deadline;
+        this.recurrence = recurrence;
+        this.link = link;
+    }
+
     /**
      * Changes the deadline of the task to a provided new deadline.
      *
