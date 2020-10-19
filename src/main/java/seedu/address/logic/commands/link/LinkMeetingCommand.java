@@ -56,8 +56,14 @@ public class LinkMeetingCommand extends LinkCommand {
         }
         try {
             Event eventToEdit = (Event) lastShownList.get(index.getZeroBased());
-            Event editedEvent = new Event(eventToEdit.getDescription(), eventToEdit.getStartTime(),
-                    eventToEdit.getEndTime(), meetingLink);
+            Event editedEvent;
+            if (eventToEdit.getRecurrence() != null) {
+                editedEvent = new Event(eventToEdit.getDescription(), eventToEdit.getStartTime(),
+                        eventToEdit.getEndTime(), eventToEdit.getRecurrence(), meetingLink);
+            } else {
+                editedEvent = new Event(eventToEdit.getDescription(), eventToEdit.getStartTime(),
+                        eventToEdit.getEndTime(), meetingLink);
+            }
             model.setTask(eventToEdit, editedEvent);
             model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
         } catch (ClassCastException e) {

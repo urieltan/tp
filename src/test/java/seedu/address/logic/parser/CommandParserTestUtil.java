@@ -29,12 +29,9 @@ public class CommandParserTestUtil {
      */
     public static void assertParseFailure(Parser parser, String userInput, String expectedMessage) {
         try {
-            System.out.println(userInput);
             parser.parse(userInput);
             throw new AssertionError("The expected ParseException was not thrown.");
         } catch (ParseException pe) {
-            System.out.println(expectedMessage + "EAMK ");
-            System.out.println(pe.getMessage());
             assertEquals(expectedMessage, pe.getMessage());
         }
     }

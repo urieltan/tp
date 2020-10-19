@@ -70,6 +70,24 @@ public class Event extends Task {
     }
 
     /**
+     * Constructs an event that has not been completed with a brief
+     * description and period of time.
+     *
+     * @param description a brief description of the event.
+     * @param start the starting date and time of event.
+     * @param end the ending date and time of event.
+     * @param recurrence the recurrence of event.
+     * @param meetingLink the meeting link of event.
+     */
+    public Event (String description, String start, String end, Recurrence recurrence, MeetingLink meetingLink) {
+        super(description);
+        this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
+        this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
+        this.recurrence = recurrence;
+        this.meetingLink = meetingLink;
+    }
+
+    /**
      * Constructs an event which may or may not be completed
      * with a brief description and period of time.
      *
@@ -117,6 +135,24 @@ public class Event extends Task {
         this.start = start;
         this.end = end;
         this.recurrence = recurrence;
+        this.meetingLink = link;
+    }
+
+    /**
+     * Constructs an event which may or may not be completed
+     * with a brief description, period of time, and a meeting link
+     *
+     * @param isDone indicates if the event has been completed.
+     * @param description a brief description of the event.
+     * @param start the starting date and time of event.
+     * @param link the Meeting Link of event.
+     * @param end the ending date and time of event.
+     */
+    public Event(boolean isDone, String description, LocalDateTime start,
+                 LocalDateTime end, MeetingLink link) {
+        super(isDone, description);
+        this.start = start;
+        this.end = end;
         this.meetingLink = link;
     }
 

@@ -14,6 +14,9 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.CollaborativeLink;
+import seedu.address.model.task.Link;
+import seedu.address.model.task.MeetingLink;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -93,6 +96,49 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Validates a {@code String url} an returns a {@Code Boolean}
+     *
+     * @throws ParseException if the given {@code String url} is invalid.
+     */
+    public static boolean validateLink(String url) throws ParseException {
+        requireNonNull(url);
+        String trimmedUrl = url.trim();
+        boolean isValid = Link.isValidUrl(trimmedUrl);
+        if (!isValid) {
+            throw new ParseException((Link.MESSAGE_CONSTRAINTS));
+        }
+        return true;
+    }
+
+
+    /**
+     * Returns a Collaborative Link that is guaranteed to have a valid URL.
+     *
+     * @param description The description of the Collaborative Link
+     * @param url The url to the Collaborative Folder
+     * @return A Collaborative Link object with description and url
+     */
+    public static CollaborativeLink parseCollaborativeLink(String description, String url) {
+        requireNonNull(description);
+        String trimmedUrl = url.trim();
+        return new CollaborativeLink(description, trimmedUrl);
+    }
+
+    /**
+     * Returns a Meeting Link that is guaranteed to have a valid URL.
+     *
+     * @param description The description of the Meeting Link
+     * @param url The url to the Meeting
+     * @param meetingTime The meeting time
+     * @return A Meeting Link object with description, url, and meeting time
+     */
+    public static MeetingLink parseMeetingLink(String description, String url, String meetingTime) {
+        requireNonNull(description, meetingTime);
+        String trimmedUrl = url.trim();
+        return new MeetingLink(description, trimmedUrl, meetingTime);
     }
 
     /**
