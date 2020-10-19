@@ -149,7 +149,7 @@ public class Event extends Task {
      * @param end the ending date and time of event.
      */
     public Event(boolean isDone, String description, LocalDateTime start,
-                 LocalDateTime end, MeetingLink link ) {
+                 LocalDateTime end, MeetingLink link) {
         super(isDone, description);
         this.start = start;
         this.end = end;

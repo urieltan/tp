@@ -45,7 +45,7 @@ public class LinkCommandParser implements Parser<LinkCommand> {
             String url = argMultimap.getValue(PREFIX_URL).get().trim();
             String meetingTime = date + " " + time;
             Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get().trim());
-            ParserUtil.parseLink(url);
+            ParserUtil.validateLink(url);
 
 
             MeetingLink meetingLink = ParserUtil.parseMeetingLink(description, url, meetingTime);
@@ -63,7 +63,7 @@ public class LinkCommandParser implements Parser<LinkCommand> {
             String description = argMultimap.getValue(PREFIX_DESCRIPTION).get().trim();
             String url = argMultimap.getValue(PREFIX_URL).get().trim();
             Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get().trim());
-            ParserUtil.parseLink(url);
+            ParserUtil.validateLink(url);
 
             CollaborativeLink collaborativeLink = ParserUtil.parseCollaborativeLink(description, url);
 

@@ -23,14 +23,14 @@ public abstract class Link {
      */
     public Link(String description, String url) {
         this.description = description;
-        checkArgument(isValidURL(url), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidUrl(url), MESSAGE_CONSTRAINTS);
         this.url = url;
     }
 
     /**
      * Returns if a given string is a valid email.
      */
-    public static boolean isValidURL(String url) {
+    public static boolean isValidUrl(String url) {
         return url.matches(VALIDATION_REGEX) || url.equals("-");
     }
 
