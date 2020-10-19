@@ -36,7 +36,6 @@ public class DoneCommand extends Command {
         Task taskToMark = lastShownList.get(targetIndex.getZeroBased());
         AddCommand recurrenceAddCommand = model.markAsDone(taskToMark);
         if (recurrenceAddCommand != null) {
-            System.out.println("adding again");
             recurrenceAddCommand.execute(model);
         }
 

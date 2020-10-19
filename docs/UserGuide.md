@@ -370,11 +370,11 @@ Action | Format, Examples
 **List (Contacts and Tasks)** | `list all`
 **List Contacts** | `list contact`
 **Help** | `help`
-**Add To Do** | `add todo desc/DESCRIPTION date/DATE time/TIME [recurring/VALUE UNIT]` <br> e.g., `add todo desc/finish user guide draft date/09/08/2020 time/2300`
+**Add To Do** | `add todo desc/DESCRIPTION date/DATE time/TIME [recurring/VALUE UNIT]` <br> e.g., `add todo desc/update user guide date/09/08/2020 time/2300 recurring/1 week`
 **List To Dos** | `list todo`
 **Remove To Do** | `delete todo INDEX` <br> e.g., `delete todo 3`
 **Show To Do** | `show todo INDEX` <br> e.g., `show todo 3`
-**Add Event** | `add event desc/DESCRIPTION startdate/DATE starttime/TIME enddate/DATE endtime/TIME [recurring/VALUE UNIT]` <br> e.g., `add event desc/meeting startdate/12-12-2020 starttime/1000 enddate/12-12-2020 endtime/1130`
+**Add Event** | `add event desc/DESCRIPTION startdate/DATE starttime/TIME enddate/DATE endtime/TIME [recurring/VALUE UNIT]` <br> e.g., `add event desc/meeting startdate/12-12-2020 starttime/1000 enddate/12-12-2020 endtime/1130 recurring/1 week`
 **List Events** | `list event`
 **Remove Event** | `delete event INDEX` <br> e.g., `delete event 3`
 **Show Event** | `show event INDEX` <br> e.g., `show event 3`
