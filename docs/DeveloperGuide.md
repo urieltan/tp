@@ -45,15 +45,59 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Filter tasks (dueBy and dueBefore) feature
 
-#### Proposed Implementation
+#### Implementation
+
+#####Parser: 
+
+<INSERT UML DIAG HERE FOR PARSER>
+
+* `DueBeforeCommandParser` implements `Parser<DueBeforeCommand>`
+ 
+    * It checks for the phrase `itemsDueBefore` and parses the input after the prefixes: date `date/` and time `time/`. 
+    * If the input are in the correct date and time format, a new DueBeforePredicate object is created and passed to a new DueBeforeCommand constructor.
+    
+    
+* `DueByCommandParser` implements `Parser<DueByCommand>`
+
+    * It checks for the phrase `itemsDueBy` and parses the content after the prefixes: date `date/` and time `time/`.
+    * If the input are in the correct date and time format, a new DueByPredicate object is created and passed to a new DueByCommand constructor.
+
+#####Predicate:
+
+The way dueBy and dueBefore works is very similar, the difference only being the dueBefore and dueBy predicate.
+
+`DueBeforePredicate` and `DueByPredicate` extends `DuePredicate`.
+
+<INSERT UML DIAG HERE FOR PREDICATE>
+
+* `DueBeforePredicate` compares the LocalDateTime input and every task's LocalDateTime, and returns true if the task's LocalDateTime *is before* the input's LocalDateTime.
+* `DueByPredicate` compares the LocalDateTime input and every task's LocalDateTime, and returns true if the task's LocalDateTime *equals* the input's LocalDateTime.
+
+#####Command: 
+
+<INSERT UML DIAG HERE FOR COMMAND>
+
+* `DueBeforeCommand` and `DueByCommand` extends `Command`.
+* The command will be executed with the `Model`, which will update the `FilteredTaskList` based on the `DueByPredicate`/`DueBeforePredicate`
+* If it is successful, it will return a `CommandResult` with a successful message to the UI.
+
+The following sequence diagram shows how the dueBy filtering works:
+
+<INSERT SEQ DIAG>
 
 #### Design consideration:
 
-##### Aspect: How undo & redo executes
+##### Aspect: How dueBy and dueBefore executes
 
-### \[Proposed\] Data archiving
+After implementing the task operations, there is `FilteredTaskList` which we can utilise to filter tasks.
+
+By using the same function, we can prevent duplication of code.
+
+Furthermore, we have adhered a similar design to the task's operations (Using of Command, Parser classes) to maintain code consistency.
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
