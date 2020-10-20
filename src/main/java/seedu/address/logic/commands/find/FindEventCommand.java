@@ -6,31 +6,31 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.task.DescriptionContainsKeywordsPredicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
+ * Finds and lists all events in lifebook whose description contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindEventCommand extends FindCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all event whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " event" + ": Finds all event whose descriptions contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Example: " + COMMAND_WORD + " event meeting";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final DescriptionContainsKeywordsPredicate predicate;
 
-    public FindEventCommand(NameContainsKeywordsPredicate predicate) {
+    public FindEventCommand(DescriptionContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredTaskList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()), "TASK");
+                String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW, model.getFilteredTaskList().size()), "TASK");
     }
 
     @Override
