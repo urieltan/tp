@@ -2,9 +2,13 @@ package seedu.address.testutil;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
+import java.util.Set;
 
+import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Recurrence;
 import seedu.address.model.task.Todo;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building To-do objects.
@@ -25,6 +29,7 @@ public class TodoBuilder {
     private String description;
     private String dateTime;
     private Recurrence recurrence;
+    private Set<Tag> tags;
 
     /**
      * Creates a {@code TodoBuilder} with the default details.
@@ -32,6 +37,7 @@ public class TodoBuilder {
     public TodoBuilder() {
         description = DEFAULT_DESC;
         dateTime = DEFAULT_DATETIME;
+        tags = new HashSet<>();
     }
 
     /**
@@ -43,6 +49,7 @@ public class TodoBuilder {
         // flip the output and input of LocalDateTime
         dateTime = LocalDateTime.parse(dateTimeOutput, OUTPUT_DATE_TIME_FORMAT).format(INPUT_DATE_TIME_FORMAT);
         recurrence = todoToCopy.getRecurrence();
+        tags = new HashSet<>(todoToCopy.getTags());
     }
 
     /**
@@ -72,8 +79,16 @@ public class TodoBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Todo} that we are building.
+     */
+    public TodoBuilder withTags(String ... tags) {
+        this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
     public Todo build() {
-        return new Todo(description, dateTime, recurrence);
+        return new Todo(description, dateTime, recurrence, tags);
     }
 
 }

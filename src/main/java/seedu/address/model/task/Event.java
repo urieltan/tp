@@ -346,7 +346,7 @@ public class Event extends Task {
                     + " to " + this.end.format(INPUT_DATE_TIME_FORMAT) + " | " + this.getTagsToString();
         } else {
             return "E | 0 | " + this.getDescription() + " | " + this.start.format(INPUT_DATE_TIME_FORMAT)
-                    + " to " + this.end.format(INPUT_DATE_TIME_FORMAT) +  " | " + this.getTagsToString();
+                    + " to " + this.end.format(INPUT_DATE_TIME_FORMAT) + " | " + this.getTagsToString();
         }
     }
 
