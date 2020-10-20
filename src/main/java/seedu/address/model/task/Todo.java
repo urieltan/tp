@@ -41,7 +41,6 @@ public class Todo extends Task {
     public Todo(String description, String deadline) {
         super(description);
         this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
-        this.collaborativeLink = new CollaborativeLink();
     }
 
     /**
@@ -130,7 +129,6 @@ public class Todo extends Task {
     public Todo(boolean isDone, String description, String deadline) {
         super(isDone, description);
         this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
-        this.collaborativeLink = new CollaborativeLink();
     }
 
     /**
@@ -145,7 +143,6 @@ public class Todo extends Task {
     public Todo(boolean isDone, String description, LocalDateTime deadline, Recurrence recurrence) {
         super(isDone, description);
         this.deadline = deadline;
-        this.collaborativeLink = new CollaborativeLink();
         this.recurrence = recurrence;
     }
 
@@ -160,7 +157,6 @@ public class Todo extends Task {
     public Todo(boolean isDone, String description, LocalDateTime deadline) {
         super(isDone, description);
         this.deadline = deadline;
-        this.collaborativeLink = new CollaborativeLink();
     }
 
     /**

@@ -51,8 +51,8 @@ public class JsonAdaptedEvent extends JsonAdaptedTask {
             linkDesc = source.getLink().get().getDescription().split(" ", 2)[0];
             linkUrl = source.getLink().get().getUrl();
         } else {
-            linkDesc = "";
-            linkUrl = "";
+            linkDesc = null;
+            linkUrl = null;
         }
         linkTime = ((Event) source).getMeetingLink().saveTimeFormat();
         recurrence = source.getRecurrence();
@@ -90,7 +90,7 @@ public class JsonAdaptedEvent extends JsonAdaptedTask {
             }
         } else {
             if (modelRecurrence == null) {
-                return new Event(modelIsDone, modelDescription, modelStart, modelEnd);
+                return new Event(modelIsDone, modelDescription, modelStart, modelEnd, new MeetingLink(linkDesc, linkUrl, linkTime));
             } else {
                 return new Event(modelIsDone, modelDescription,
                         modelStart, modelEnd, modelRecurrence, new MeetingLink(linkDesc, linkUrl, linkTime));
