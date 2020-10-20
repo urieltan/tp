@@ -4,10 +4,12 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.task.Task;
@@ -47,6 +49,8 @@ public class TaskCard extends UiPart<Region> {
     private Label linkDescription;
     @FXML
     private Label recurring;
+    @FXML
+    private FlowPane tags;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -77,6 +81,9 @@ public class TaskCard extends UiPart<Region> {
         if (task.getRecurrence() != null) {
             recurring.setText("Recurring task");
         }
+        task.getTags().stream()
+            .sorted(Comparator.comparing(tag -> tag.tagName))
+            .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override
