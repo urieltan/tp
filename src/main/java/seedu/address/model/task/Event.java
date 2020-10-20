@@ -2,6 +2,7 @@ package seedu.address.model.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.add.AddEventCommand;
@@ -50,7 +51,6 @@ public class Event extends Task {
         super(description);
         this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
         this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
-        this.meetingLink = new MeetingLink();
     }
 
     /**
@@ -70,20 +70,17 @@ public class Event extends Task {
     }
 
     /**
-     * Constructs an event that has not been completed with a brief
-     * description and period of time.
-     *
+     * Constructs an event that may or may not be completed with a brief
+     * description and period of time and a meeting link.
      * @param description a brief description of the event.
      * @param start the starting date and time of event.
      * @param end the ending date and time of event.
-     * @param recurrence the recurrence of event.
      * @param meetingLink the meeting link of event.
      */
-    public Event (String description, String start, String end, Recurrence recurrence, MeetingLink meetingLink) {
-        super(description);
-        this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
-        this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
-        this.recurrence = recurrence;
+    public Event (boolean isDone, String description, LocalDateTime start, LocalDateTime end, MeetingLink meetingLink) {
+        super(isDone, description);
+        this.start = start;
+        this.end = end;
         this.meetingLink = meetingLink;
     }
 
@@ -100,7 +97,6 @@ public class Event extends Task {
         super(isDone, description);
         this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
         this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
-        this.meetingLink = new MeetingLink();
     }
 
     /**
@@ -116,7 +112,6 @@ public class Event extends Task {
         super(isDone, description);
         this.start = start;
         this.end = end;
-        this.meetingLink = new MeetingLink();
     }
 
     /**
@@ -148,11 +143,11 @@ public class Event extends Task {
      * @param link the Meeting Link of event.
      * @param end the ending date and time of event.
      */
-    public Event(boolean isDone, String description, LocalDateTime start,
-                 LocalDateTime end, MeetingLink link) {
-        super(isDone, description);
-        this.start = start;
-        this.end = end;
+    public Event(String description, String start, String end, Recurrence recurrence, MeetingLink link) {
+        super(description);
+        this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
+        this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
+        this.recurrence = recurrence;
         this.meetingLink = link;
     }
 
@@ -172,7 +167,6 @@ public class Event extends Task {
         this.start = start;
         this.end = end;
         this.recurrence = recurrence;
-        this.meetingLink = new MeetingLink();
     }
 
     /**
@@ -189,7 +183,6 @@ public class Event extends Task {
         this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
         this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
         this.recurrence = recurrence;
-        this.meetingLink = new MeetingLink();
     }
 
     /**
@@ -206,7 +199,6 @@ public class Event extends Task {
         this.start = start;
         this.end = end;
         this.recurrence = recurrence;
-        this.meetingLink = new MeetingLink();
     }
 
     /**
@@ -366,8 +358,8 @@ public class Event extends Task {
     }
 
     @Override
-    public Link getLink() {
-        return this.meetingLink;
+    public Optional<Link> getLink() {
+        return Optional.ofNullable(this.meetingLink);
     }
 
     public String getStartDateTime() {

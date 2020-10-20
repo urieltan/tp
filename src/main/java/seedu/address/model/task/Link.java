@@ -10,10 +10,10 @@ public abstract class Link {
             "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
 
     /** A brief description of the link. */
-    private String description;
+    private final String description;
 
     /** The url for the link */
-    private String url;
+    private final String url;
 
     /**
      * Constructs a link with description and url.
