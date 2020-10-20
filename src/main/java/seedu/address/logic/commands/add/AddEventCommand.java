@@ -6,6 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDTIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTTIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
@@ -23,18 +25,26 @@ public class AddEventCommand extends AddCommand {
             + "Parameters: "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_STARTDATE + "START DATE "
-            + PREFIX_STARTDATE + "START TIME "
+            + PREFIX_STARTTIME + "START TIME "
             + PREFIX_ENDDATE + "END DATE "
             + PREFIX_ENDTIME + "END TIME"
-            + " [" + PREFIX_RECURRING + "RECURRING]";
+            + " [" + PREFIX_RECURRING + "RECURRING]"
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_DESCRIPTION + "Attend meeting "
+            + PREFIX_STARTDATE + "10-11-2020 "
+            + PREFIX_STARTTIME + "1200 "
+            + PREFIX_ENDDATE + "10-11-2020 "
+            + PREFIX_ENDTIME + "1400 "
+            + PREFIX_TAG + "CS2103T";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book";
 
     private final Event toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Event}
      */
     public AddEventCommand(Event event) {
         requireNonNull(event);
@@ -45,10 +55,10 @@ public class AddEventCommand extends AddCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (model.hasTask(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
         model.addEvent(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getDescriptionDateTime()), "TASK");
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getDescriptionDateTime()), "EVENT");
     }
 
     @Override

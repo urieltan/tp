@@ -1,11 +1,17 @@
 package seedu.address.storage;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.task.CollaborativeLink;
 import seedu.address.model.task.Recurrence;
 import seedu.address.model.task.Task;
@@ -20,6 +26,7 @@ public class JsonAdaptedTodo extends JsonAdaptedTask {
     private final String linkDesc;
     private final String linkUrl;
     private final Recurrence recurrence;
+    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedTodo} with the given Todo details.
@@ -28,7 +35,8 @@ public class JsonAdaptedTodo extends JsonAdaptedTask {
     public JsonAdaptedTodo(@JsonProperty("description") String description, @JsonProperty("isDone") Boolean isDone,
                            @JsonProperty("deadline") LocalDateTime deadline, @JsonProperty("linkDesc") String linkDesc,
                            @JsonProperty("linkUrl") String url,
-                           @JsonProperty("recurrence") JsonAdaptedRecurrence recurrence) {
+                           @JsonProperty("recurrence") JsonAdaptedRecurrence recurrence,
+                           @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         super(description, isDone);
         this.deadline = deadline;
         this.linkDesc = linkDesc;
@@ -37,6 +45,9 @@ public class JsonAdaptedTodo extends JsonAdaptedTask {
             this.recurrence = recurrence.toModelType();
         } else {
             this.recurrence = null;
+        }
+        if (tagged != null) {
+            this.tagged.addAll(tagged);
         }
     }
 
@@ -54,10 +65,17 @@ public class JsonAdaptedTodo extends JsonAdaptedTask {
             linkUrl = "";
         }
         recurrence = source.getRecurrence();
+        tagged.addAll(source.getTags().stream()
+            .map(JsonAdaptedTag::new)
+            .collect(Collectors.toList()));
     }
 
     @Override
     public Task toModelType() throws IllegalValueException {
+        final List<Tag> personTags = new ArrayList<>();
+        for (JsonAdaptedTag tag : tagged) {
+            personTags.add(tag.toModelType());
+        }
         if (description == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "description"));
         }
@@ -73,19 +91,21 @@ public class JsonAdaptedTodo extends JsonAdaptedTask {
 
         final LocalDateTime modelDeadline = deadline;
         final Recurrence modelRecurrence = recurrence;
+        final Set<Tag> modelTags = new HashSet<>(personTags);
 
         if (linkUrl == null || linkDesc == null) {
             if (modelRecurrence == null) {
-                return new Todo(modelIsDone, modelDescription, modelDeadline);
+                return new Todo(modelIsDone, modelDescription, modelDeadline, modelTags);
             } else {
-                return new Todo(modelIsDone, modelDescription, modelDeadline, modelRecurrence);
+                return new Todo(modelIsDone, modelDescription, modelDeadline, modelRecurrence, modelTags);
             }
         } else {
             if (modelRecurrence == null) {
-                return new Todo(modelIsDone, modelDescription, modelDeadline, new CollaborativeLink(linkDesc, linkUrl));
+                return new Todo(modelIsDone, modelDescription, modelDeadline,
+                    new CollaborativeLink(linkDesc, linkUrl), modelTags);
             } else {
                 return new Todo(modelIsDone, modelDescription, modelDeadline,
-                        modelRecurrence, new CollaborativeLink(linkDesc, linkUrl));
+                        modelRecurrence, new CollaborativeLink(linkDesc, linkUrl), modelTags);
             }
         }
     }
