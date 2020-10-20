@@ -74,7 +74,7 @@ public class JsonAdaptedTodo extends JsonAdaptedTask {
         final LocalDateTime modelDeadline = deadline;
         final Recurrence modelRecurrence = recurrence;
 
-        if (linkUrl == null || linkDesc == null) {
+        if (linkUrl == "" || linkDesc == "") {
             if (modelRecurrence == null) {
                 return new Todo(modelIsDone, modelDescription, modelDeadline);
             } else {
