@@ -54,7 +54,7 @@ public class AddEventCommandTest {
         ModelStub modelStub = new ModelStubWithEvent(validEvent);
 
         assertThrows(CommandException.class,
-                AddEventCommand.MESSAGE_DUPLICATE_PERSON, () -> addEventCommand.execute(modelStub));
+                AddEventCommand.MESSAGE_DUPLICATE_EVENT, () -> addEventCommand.execute(modelStub));
     }
 
     @Test

@@ -47,8 +47,9 @@ public class SampleDataUtil {
     }
     public static Task[] getSampleTasks() {
         return new Task[] {
-            new Todo("Finish assignment", "19-05-2020 2359"),
-            new Event("Attend group meeting", "20-05-2020 1000", "20-05-2020 1200", new MeetingLink())
+            new Todo("Finish assignment", "19-05-2020 2359", getTagSet("CS2100")),
+            new Event("Attend group meeting", "20-05-2020 1000", "20-05-2020 1200",
+                new MeetingLink(), getTagSet("CS2103T"))
         };
     }
 

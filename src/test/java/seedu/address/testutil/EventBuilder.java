@@ -1,9 +1,13 @@
 package seedu.address.testutil;
 
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
+import java.util.Set;
 
+import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Event;
 import seedu.address.model.task.Recurrence;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building To-do objects.
@@ -26,6 +30,7 @@ public class EventBuilder {
     private String startDateTime;
     private String endDateTime;
     private Recurrence recurrence;
+    private Set<Tag> tags;
 
     /**
      * Creates a {@code EventBuilder} with the default details.
@@ -34,6 +39,7 @@ public class EventBuilder {
         description = DEFAULT_DESC;
         startDateTime = DEFAULT_STARTDATETIME;
         endDateTime = DEFAULT_ENDDATETIME;
+        tags = new HashSet<>();
     }
 
     /**
@@ -44,6 +50,7 @@ public class EventBuilder {
         startDateTime = eventToCopy.getStartDateTime();
         endDateTime = eventToCopy.getEndDateTime();
         recurrence = eventToCopy.getRecurrence();
+        tags = new HashSet<>(eventToCopy.getTags());
     }
 
     /**
@@ -81,9 +88,17 @@ public class EventBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Event} that we are building.
+     */
+    public EventBuilder withTags(String ... tags) {
+        this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
 
     public Event build() {
-        return new Event(description, startDateTime, endDateTime, recurrence);
+        return new Event(description, startDateTime, endDateTime, recurrence, tags);
     }
 
 }
