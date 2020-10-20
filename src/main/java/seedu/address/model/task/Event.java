@@ -137,7 +137,24 @@ public class Event extends Task {
      * Constructs an event which may or may not be completed
      * with a brief description, period of time, and a meeting link
      *
-     * @param isDone indicates if the event has been completed.
+     * @param description a brief description of the event.
+     * @param start the starting date and time of event.
+     * @param recurrence the recurrence of event.
+     * @param end the ending date and time of event.
+     */
+    public Event(String description, LocalDateTime start,
+                 LocalDateTime end, Recurrence recurrence, MeetingLink link) {
+        super(description);
+        this.start = start;
+        this.end = end;
+        this.recurrence = recurrence;
+        this.meetingLink = link;
+    }
+
+    /**
+     * Constructs an event which may or may not be completed
+     * with a brief description, period of time, and a meeting link
+     *
      * @param description a brief description of the event.
      * @param start the starting date and time of event.
      * @param link the Meeting Link of event.
@@ -254,8 +271,14 @@ public class Event extends Task {
             LocalDateTime newEndDateTime = this.getEnd()
                     .plus(this.recurrence.getValue(), this.recurrence.getChronoUnit());
 
-            AddEventCommand command = new AddEventCommand(
-                    new Event(description, newStartDateTime, newEndDateTime, recurrence));
+            AddCommand command;
+            if (this.meetingLink == null) {
+                command = new AddEventCommand(
+                        new Event(description, newStartDateTime, newEndDateTime, recurrence));
+            } else {
+                command = new AddEventCommand(
+                        new Event(description, newStartDateTime, newEndDateTime, recurrence, this.getMeetingLink()));
+            }
             return command;
         } else {
             return null;
