@@ -7,9 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ShowTagCommand;
-import seedu.address.logic.commands.showTag.ShowTagContactCommand;
-import seedu.address.logic.commands.showTag.ShowTagEventCommand;
-import seedu.address.logic.commands.showTag.ShowTagTodoCommand;
+import seedu.address.logic.commands.showtag.ShowTagContactCommand;
+import seedu.address.logic.commands.showtag.ShowTagEventCommand;
+import seedu.address.logic.commands.showtag.ShowTagTodoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ContactTagMatchesKeywordPredicate;
 import seedu.address.model.task.TaskTagMatchesKeywordPredicate;
@@ -26,10 +26,16 @@ public class ShowTagCommandParser implements Parser<ShowTagCommand> {
      */
     public ShowTagCommand parse(String args) throws ParseException {
         String[] splitArgs = args.trim().split(" ", 2);
-        ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_TAG);
 
         if (splitArgs[0].equals("contact")) {
+            if (splitArgs.length < 2) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ShowTagContactCommand.MESSAGE_USAGE));
+            }
+
+            ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_TAG);
+
             if (!arePrefixesPresent(argMultimap, PREFIX_TAG)
                 || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -43,6 +49,14 @@ public class ShowTagCommandParser implements Parser<ShowTagCommand> {
             }
             return new ShowTagContactCommand(new ContactTagMatchesKeywordPredicate(keywords[0]));
         } else if (splitArgs[0].equals("todo")) {
+            if (splitArgs.length < 2) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ShowTagTodoCommand.MESSAGE_USAGE));
+            }
+
+            ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_TAG);
+
             if (!arePrefixesPresent(argMultimap, PREFIX_TAG)
                 || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -56,6 +70,14 @@ public class ShowTagCommandParser implements Parser<ShowTagCommand> {
             }
             return new ShowTagTodoCommand(new TaskTagMatchesKeywordPredicate(keywords[0]));
         } else if (splitArgs[0].equals("event")) {
+            if (splitArgs.length < 2) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ShowTagEventCommand.MESSAGE_USAGE));
+            }
+
+            ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_TAG);
+
             if (!arePrefixesPresent(argMultimap, PREFIX_TAG)
                 || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,

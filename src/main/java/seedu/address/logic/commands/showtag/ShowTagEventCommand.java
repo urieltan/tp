@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.showTag;
+package seedu.address.logic.commands.showtag;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;

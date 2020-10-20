@@ -15,6 +15,7 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.showtag.ShowTagContactCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.TaskList;
@@ -22,9 +23,9 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.ContactTagMatchesKeywordPredicate;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code ShowTagCommand}.
+ * Contains integration tests (interaction with the Model) for {@code ShowTagContactCommand}.
  */
-public class ShowTagCommandTest {
+public class ShowTagContactCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new TaskList());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new TaskList());
 
@@ -35,14 +36,14 @@ public class ShowTagCommandTest {
         ContactTagMatchesKeywordPredicate secondPredicate =
             new ContactTagMatchesKeywordPredicate("second");
 
-        ShowTagCommand showTagFirstCommand = new ShowTagCommand(firstPredicate);
-        ShowTagCommand showTagSecondCommand = new ShowTagCommand(secondPredicate);
+        ShowTagContactCommand showTagFirstCommand = new ShowTagContactCommand(firstPredicate);
+        ShowTagContactCommand showTagSecondCommand = new ShowTagContactCommand(secondPredicate);
 
         // same object -> returns true
         assertTrue(showTagFirstCommand.equals(showTagFirstCommand));
 
         // same values -> returns true
-        ShowTagCommand showTagFirstCommandCopy = new ShowTagCommand(firstPredicate);
+        ShowTagContactCommand showTagFirstCommandCopy = new ShowTagContactCommand(firstPredicate);
         assertTrue(showTagFirstCommand.equals(showTagFirstCommandCopy));
 
         // different types -> returns false
@@ -59,30 +60,30 @@ public class ShowTagCommandTest {
     public void execute_notExistingTag_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         ContactTagMatchesKeywordPredicate predicate = preparePredicate("Clown");
-        ShowTagCommand command = new ShowTagCommand(predicate);
+        ShowTagContactCommand command = new ShowTagContactCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, "CONTACT", expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), expectedModel.getFilteredPersonList());
     }
 
     @Test
     public void execute_insesitiveCaseTag_personsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         ContactTagMatchesKeywordPredicate predicate = preparePredicate("OWESmOnEY");
-        ShowTagCommand command = new ShowTagCommand(predicate);
+        ShowTagContactCommand command = new ShowTagContactCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, "CONTACT", expectedModel);
-        assertEquals(Arrays.asList(BENSON), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(BENSON), expectedModel.getFilteredPersonList());
     }
 
     @Test
     public void execute_existingTag_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         ContactTagMatchesKeywordPredicate predicate = preparePredicate("friends");
-        ShowTagCommand command = new ShowTagCommand(predicate);
+        ShowTagContactCommand command = new ShowTagContactCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, "CONTACT", expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), expectedModel.getFilteredPersonList());
     }
 
     /**

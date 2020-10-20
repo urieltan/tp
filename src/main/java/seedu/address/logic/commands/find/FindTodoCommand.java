@@ -14,10 +14,11 @@ import seedu.address.model.task.DescriptionContainsKeywordsPredicate;
  */
 public class FindTodoCommand extends FindCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " todo" + ": Finds all todos whose descriptions contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " todo assignment";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " todo"
+        + ": Finds all todos whose descriptions contain any of "
+        + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+        + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+        + "Example: " + COMMAND_WORD + " todo assignment";
 
     private final DescriptionContainsKeywordsPredicate predicate;
 
