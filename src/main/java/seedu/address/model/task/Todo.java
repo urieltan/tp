@@ -187,7 +187,7 @@ public class Todo extends Task {
         super(description);
         this.deadline = deadline;
         this.recurrence = recurrence;
-        this.link = link;
+        this.collaborativeLink = link;
     }
 
     /**
@@ -214,7 +214,12 @@ public class Todo extends Task {
         if (this.recurrence != null) {
             LocalDateTime newDateTime = this.getLocalDateTime()
                     .plus(this.recurrence.getValue(), this.recurrence.getChronoUnit());
-            AddTodoCommand command = new AddTodoCommand(new Todo(description, newDateTime, recurrence));
+            AddTodoCommand command;
+            if (this.getLink().isEmpty()) {
+                command = new AddTodoCommand(new Todo(description, newDateTime, recurrence));
+            } else {
+                command = new AddTodoCommand(new Todo(description, newDateTime, recurrence, collaborativeLink));
+            }
             return command;
         } else {
             return null;
