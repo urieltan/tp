@@ -143,11 +143,11 @@ public class Event extends Task {
      * @param link the Meeting Link of event.
      * @param end the ending date and time of event.
      */
-    public Event(boolean isDone, String description, LocalDateTime start,
-                 LocalDateTime end, MeetingLink link) {
-        super(isDone, description);
-        this.start = start;
-        this.end = end;
+    public Event(String description, String start, String end, Recurrence recurrence, MeetingLink link) {
+        super(description);
+        this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
+        this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
+        this.recurrence = recurrence;
         this.meetingLink = link;
     }
 
