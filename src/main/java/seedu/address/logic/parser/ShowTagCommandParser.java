@@ -1,13 +1,18 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.UNKNOWN_SHOW_TAG_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ShowTagCommand;
+import seedu.address.logic.commands.showTag.ShowTagContactCommand;
+import seedu.address.logic.commands.showTag.ShowTagEventCommand;
+import seedu.address.logic.commands.showTag.ShowTagTodoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.TagMatchesKeywordPredicate;
+import seedu.address.model.person.ContactTagMatchesKeywordPredicate;
+import seedu.address.model.task.TaskTagMatchesKeywordPredicate;
 
 /**
  * Parses input arguments and creates a new ShowTagCommand object
@@ -20,22 +25,52 @@ public class ShowTagCommandParser implements Parser<ShowTagCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ShowTagCommand parse(String args) throws ParseException {
+        String[] splitArgs = args.trim().split(" ", 2);
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(" " + args, PREFIX_TAG);
+            ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_TAG)
-            || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                ShowTagCommand.MESSAGE_USAGE));
+        if (splitArgs[0].equals("contact")) {
+            if (!arePrefixesPresent(argMultimap, PREFIX_TAG)
+                || !argMultimap.getPreamble().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ShowTagContactCommand.MESSAGE_USAGE));
+            }
+            String[] keywords = argMultimap.getValue(PREFIX_TAG).get().trim().split("\\s+");
+
+            if (keywords.length != 1 || keywords[0].trim().equals("")) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ShowTagContactCommand.MESSAGE_USAGE));
+            }
+            return new ShowTagContactCommand(new ContactTagMatchesKeywordPredicate(keywords[0]));
+        } else if (splitArgs[0].equals("todo")) {
+            if (!arePrefixesPresent(argMultimap, PREFIX_TAG)
+                || !argMultimap.getPreamble().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ShowTagTodoCommand.MESSAGE_USAGE));
+            }
+            String[] keywords = argMultimap.getValue(PREFIX_TAG).get().trim().split("\\s+");
+
+            if (keywords.length != 1 || keywords[0].trim().equals("")) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ShowTagTodoCommand.MESSAGE_USAGE));
+            }
+            return new ShowTagTodoCommand(new TaskTagMatchesKeywordPredicate(keywords[0]));
+        } else if (splitArgs[0].equals("event")) {
+            if (!arePrefixesPresent(argMultimap, PREFIX_TAG)
+                || !argMultimap.getPreamble().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ShowTagEventCommand.MESSAGE_USAGE));
+            }
+            String[] keywords = argMultimap.getValue(PREFIX_TAG).get().trim().split("\\s+");
+
+            if (keywords.length != 1 || keywords[0].trim().equals("")) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ShowTagEventCommand.MESSAGE_USAGE));
+            }
+            return new ShowTagEventCommand(new TaskTagMatchesKeywordPredicate(keywords[0]));
+        } else {
+            throw new ParseException(UNKNOWN_SHOW_TAG_COMMAND);
         }
-        String[] keywords = argMultimap.getValue(PREFIX_TAG).get().trim().split("\\s+");
-
-        if (keywords.length != 1 || keywords[0].trim().equals("")) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                ShowTagCommand.MESSAGE_USAGE));
-        }
-
-        return new ShowTagCommand(new TagMatchesKeywordPredicate(keywords[0]));
     }
 
     /**

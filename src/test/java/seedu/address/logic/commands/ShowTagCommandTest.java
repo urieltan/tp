@@ -19,7 +19,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.TaskList;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.TagMatchesKeywordPredicate;
+import seedu.address.model.person.ContactTagMatchesKeywordPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code ShowTagCommand}.
@@ -30,10 +30,10 @@ public class ShowTagCommandTest {
 
     @Test
     public void equals() {
-        TagMatchesKeywordPredicate firstPredicate =
-            new TagMatchesKeywordPredicate("first");
-        TagMatchesKeywordPredicate secondPredicate =
-            new TagMatchesKeywordPredicate("second");
+        ContactTagMatchesKeywordPredicate firstPredicate =
+            new ContactTagMatchesKeywordPredicate("first");
+        ContactTagMatchesKeywordPredicate secondPredicate =
+            new ContactTagMatchesKeywordPredicate("second");
 
         ShowTagCommand showTagFirstCommand = new ShowTagCommand(firstPredicate);
         ShowTagCommand showTagSecondCommand = new ShowTagCommand(secondPredicate);
@@ -58,7 +58,7 @@ public class ShowTagCommandTest {
     @Test
     public void execute_notExistingTag_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        TagMatchesKeywordPredicate predicate = preparePredicate("Clown");
+        ContactTagMatchesKeywordPredicate predicate = preparePredicate("Clown");
         ShowTagCommand command = new ShowTagCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, "CONTACT", expectedModel);
@@ -68,7 +68,7 @@ public class ShowTagCommandTest {
     @Test
     public void execute_insesitiveCaseTag_personsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
-        TagMatchesKeywordPredicate predicate = preparePredicate("OWESmOnEY");
+        ContactTagMatchesKeywordPredicate predicate = preparePredicate("OWESmOnEY");
         ShowTagCommand command = new ShowTagCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, "CONTACT", expectedModel);
@@ -78,7 +78,7 @@ public class ShowTagCommandTest {
     @Test
     public void execute_existingTag_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        TagMatchesKeywordPredicate predicate = preparePredicate("friends");
+        ContactTagMatchesKeywordPredicate predicate = preparePredicate("friends");
         ShowTagCommand command = new ShowTagCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, "CONTACT", expectedModel);
@@ -86,9 +86,9 @@ public class ShowTagCommandTest {
     }
 
     /**
-     * Parses {@code userInput} into a {@code TagMatchesKeywordPredicate}.
+     * Parses {@code userInput} into a {@code ContactTagMatchesKeywordPredicate}.
      */
-    private TagMatchesKeywordPredicate preparePredicate(String userInput) {
-        return new TagMatchesKeywordPredicate(userInput);
+    private ContactTagMatchesKeywordPredicate preparePredicate(String userInput) {
+        return new ContactTagMatchesKeywordPredicate(userInput);
     }
 }
