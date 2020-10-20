@@ -62,11 +62,12 @@ public class JsonAdaptedEvent extends JsonAdaptedTask {
         if (source.getLink().isPresent()) {
             linkDesc = source.getLink().get().getDescription().split(" ", 2)[0];
             linkUrl = source.getLink().get().getUrl();
+            linkTime = ((Event) source).getMeetingLink().saveTimeFormat();
         } else {
             linkDesc = null;
             linkUrl = null;
+            linkTime = null;
         }
-        linkTime = ((Event) source).getMeetingLink().saveTimeFormat();
         recurrence = source.getRecurrence();
         tagged.addAll(source.getTags().stream()
             .map(JsonAdaptedTag::new)

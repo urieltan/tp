@@ -93,7 +93,7 @@ public class JsonAdaptedTodo extends JsonAdaptedTask {
         final Recurrence modelRecurrence = recurrence;
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        if (linkUrl == null || linkDesc == null) {
+        if (linkUrl == "" || linkDesc == "") {
             if (modelRecurrence == null) {
                 return new Todo(modelIsDone, modelDescription, modelDeadline, modelTags);
             } else {
