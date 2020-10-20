@@ -52,7 +52,14 @@ public class LinkCollaborativeCommand extends LinkCommand {
         }
         try {
             Todo todoToEdit = (Todo) lastShownList.get(index.getZeroBased());
-            Todo editedTodo = new Todo(todoToEdit.getDescription(), todoToEdit.getDeadline(), collaborativeLink);
+            Todo editedTodo;
+            if (todoToEdit.getRecurrence() != null) {
+                editedTodo = new Todo(todoToEdit.getDescription(), todoToEdit.getDeadline(),
+                        todoToEdit.getRecurrence(), collaborativeLink);
+            } else {
+                editedTodo = new Todo(todoToEdit.getDescription(), todoToEdit.getDeadline(), collaborativeLink);
+            }
+
             model.setTask(todoToEdit, editedTodo);
             model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
         } catch (ClassCastException e) {

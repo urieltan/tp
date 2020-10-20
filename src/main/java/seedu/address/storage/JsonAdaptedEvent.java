@@ -90,7 +90,8 @@ public class JsonAdaptedEvent extends JsonAdaptedTask {
             }
         } else {
             if (modelRecurrence == null) {
-                return new Event(modelIsDone, modelDescription, modelStart, modelEnd, new MeetingLink(linkDesc, linkUrl, linkTime));
+                return new Event(modelIsDone, modelDescription, modelStart,
+                        modelEnd, new MeetingLink(linkDesc, linkUrl, linkTime));
             } else {
                 return new Event(modelIsDone, modelDescription,
                         modelStart, modelEnd, modelRecurrence, new MeetingLink(linkDesc, linkUrl, linkTime));
