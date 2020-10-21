@@ -156,6 +156,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`      | disorganised student                       | add, remove, and view zoom links for meetings to an event         | remember my Zoom Links                                          |               
 | `* *`    | forgetful/disorganised student | search what tasks/meetings are due soon or by a specific date/time (filter) | remember to finish before the deadline|
 | `*`      | user with many contacts in the Lifebook | sort persons by name           | locate a person easily                                                 |
+| `*`      | student with weekly lectures and tutorials | add recurring tasks         | save time by not adding the same task every week, which is time-consuming|
 
 *{More to be added}*
 
@@ -270,6 +271,10 @@ Use case ends.
     * 1a1. Lifebook shows an error message
 
     Use case restarts at step 1.
+    
+* 1b. User chooses to input the task as a recurring one
+
+    * 1b1. Lifebook will add the task as a recurring one instead.
 
 **Use case: Perform an action (remove, show, mark as done) on a To Do from the To Do list**
 
@@ -298,6 +303,10 @@ Use case ends.
     * 3b1. Lifebook shows an error message.
 
      Use case resumes at step 2.
+     
+* 3c. The user marks a recurring task as done.
+    
+    * 3c1. Lifebook will automatically add a new task with the same details, with a new deadline given by the recurrence.
 
 **Use case: Filter items due on a specific date/time**
 
@@ -315,6 +324,12 @@ Use case ends.
     * 1a1. Lifebook shows an error message.
 
       Use case restarts at step 1.
+      
+* 1b. The given date/time format is invalid.
+
+    * 1b1. Lifebook shows an error message.
+    
+        Use case restarts at step 1.
 
 * 2a. The list is empty.
 
