@@ -5,10 +5,10 @@ import java.util.function.Predicate;
 /**
  * Tests that a {@code Person}'s {@code Tag} matches the tag keyword given.
  */
-public class TagMatchesKeywordPredicate implements Predicate<Person> {
+public class ContactTagMatchesKeywordPredicate implements Predicate<Person> {
     private final String keyword;
 
-    public TagMatchesKeywordPredicate(String keyword) {
+    public ContactTagMatchesKeywordPredicate(String keyword) {
         this.keyword = keyword;
     }
 
@@ -21,7 +21,7 @@ public class TagMatchesKeywordPredicate implements Predicate<Person> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-            || (other instanceof TagMatchesKeywordPredicate // instanceof handles nulls
-            && keyword.equals(((TagMatchesKeywordPredicate) other).keyword)); // state check
+            || (other instanceof ContactTagMatchesKeywordPredicate // instanceof handles nulls
+            && keyword.equals(((ContactTagMatchesKeywordPredicate) other).keyword)); // state check
     }
 }

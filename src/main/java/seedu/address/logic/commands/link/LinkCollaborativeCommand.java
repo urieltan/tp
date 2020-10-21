@@ -55,9 +55,10 @@ public class LinkCollaborativeCommand extends LinkCommand {
             Todo editedTodo;
             if (todoToEdit.getRecurrence() != null) {
                 editedTodo = new Todo(todoToEdit.getDescription(), todoToEdit.getDeadline(),
-                        todoToEdit.getRecurrence(), collaborativeLink);
+                        todoToEdit.getRecurrence(), collaborativeLink, todoToEdit.getTags());
             } else {
-                editedTodo = new Todo(todoToEdit.getDescription(), todoToEdit.getDeadline(), collaborativeLink);
+                editedTodo = new Todo(todoToEdit.getDescription(), todoToEdit.getDeadline(),
+                    collaborativeLink, todoToEdit.getTags());
             }
 
             model.setTask(todoToEdit, editedTodo);

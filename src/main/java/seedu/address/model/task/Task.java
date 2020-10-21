@@ -1,8 +1,13 @@
 package seedu.address.model.task;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.model.tag.Tag;
 
 public abstract class Task {
     /** A brief description of the task. */
@@ -11,7 +16,11 @@ public abstract class Task {
     /** Tracks the completion of the task */
     protected boolean isDone;
 
+    /** Optional link for documents and online meetings */
     protected Link link;
+
+    /** Optional tag of the task**/
+    protected final Set<Tag> tags = new HashSet<>();
 
     protected Recurrence recurrence;
 
@@ -19,10 +28,12 @@ public abstract class Task {
      * Constructs a task that has not been completed with a description.
      *
      * @param description a brief description of the task
+     * @param tags        a set of tags attached to the task.
      */
-    public Task(String description) {
+    public Task(String description, Set<Tag> tags) {
         this.description = description;
         this.isDone = false;
+        this.tags.addAll(tags);
     }
 
     /**
@@ -30,10 +41,12 @@ public abstract class Task {
      *
      * @param isDone indicates if the task has been completed.
      * @param description a brief description of the task.
+     * @param tags        a set of tags attached to the task.
      */
-    public Task(boolean isDone, String description) {
+    public Task(boolean isDone, String description, Set<Tag> tags) {
         this.description = description;
         this.isDone = isDone;
+        this.tags.addAll(tags);
     }
 
     /**
@@ -71,6 +84,20 @@ public abstract class Task {
     }
 
     /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
+    }
+
+    public String getTagsToString() {
+        StringBuilder builder = new StringBuilder();
+        getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
+    /**
      * Returns a boolean value indicating if the task is equal to
      * another object by determining if descriptions and isDone parameters
      * are equal.
@@ -95,6 +122,15 @@ public abstract class Task {
         return this.equals(task);
     }
 
+    /** Tracks if there is a link present in this task */
+    public boolean hasLink() {
+        if (this.link != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * Returns the string representation of task, which includes the status icon
      * and description.
@@ -103,7 +139,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + getDescription();
+        return "[" + getStatusIcon() + "]" + getDescription() + " " + getTagsToString();
     }
 
     /**
@@ -113,9 +149,9 @@ public abstract class Task {
      */
     public String saveFormat() {
         if (isDone) {
-            return "T | 1 | " + this.getDescription();
+            return "T | 1 | " + this.getDescription() + " | " + getTagsToString();
         } else {
-            return "T | 0 | " + this.getDescription();
+            return "T | 0 | " + this.getDescription() + " | " + getTagsToString();
         }
     }
 
@@ -123,7 +159,7 @@ public abstract class Task {
     public abstract LocalDateTime getStart();
     public abstract LocalDateTime getEnd();
     public abstract String getDateTime();
-    public abstract Link getLink();
+    public abstract Optional<Link> getLink();
     public abstract LocalDateTime getLocalDateTime();
     public abstract boolean isTodo();
     public abstract boolean isEvent();

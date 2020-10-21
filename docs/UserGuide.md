@@ -297,7 +297,7 @@ Format:
 * `link meeting desc/DESCRIPTION url/MEETING LINK i/INDEX_OF_TODO date/DD-MM-YYYY time/HHmm`
 
 Examples:
-* `link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf i/2 date/22-9-2020 time/1400`
+* `link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf i/2 date/22-09-2020 time/1400`
 
 ### Adding a collaborative folder link: `link doc`
 
@@ -391,6 +391,6 @@ Action | Format, Examples
 **Mark To Do/Event as Complete** | `done INDEX` <br> e.g., `done 5`
 **Find tasks due by** | `itemsDueBy date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueBy date/12-12-2020 time/2359`
 **Find tasks due before** |  `itemsDueBefore date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueBefore date/12-12-2020 time/2359`
-**Link meeting** | `link meeting desc/DESCRIPTION url/LINK todo/event i/INDEX_OF_TASK` <br> e.g.,`link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf event i/2 date/22/9/2020 time/1400`
-**Link doc** | `link doc desc/DESCRIPTION url/LINK todo/event i/INDEX_OF_TASK` <br> e.g.,`link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoIkfacr0asqV9A4kh todo i/2`
 **Sort** | `sort OPTION` <br> `OPTION` refers to `contact`, `task`, or `clear` 
+**Link meeting** | `link meeting desc/DESCRIPTION url/LINK i/INDEX_OF_TASK` <br> e.g.,`link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf i/2 date/22/09/2020 time/1400`
+**Link doc** | `link doc desc/DESCRIPTION url/LINK i/INDEX_OF_TASK` <br> e.g.,`link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoIkfacr0asqV9A4kh i/2`
