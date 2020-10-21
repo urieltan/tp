@@ -83,7 +83,7 @@ public class TaskList implements ReadOnlyTaskList {
     public void setTask(Task target, Task editedTask) {
         requireNonNull(editedTask);
 
-        tasks.setPerson(target, editedTask);
+        tasks.setTask(target, editedTask);
     }
 
     /**

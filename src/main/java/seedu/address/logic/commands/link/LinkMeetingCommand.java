@@ -59,10 +59,10 @@ public class LinkMeetingCommand extends LinkCommand {
             Event editedEvent;
             if (eventToEdit.getRecurrence() != null) {
                 editedEvent = new Event(eventToEdit.getDescription(), eventToEdit.getStartTime(),
-                        eventToEdit.getEndTime(), eventToEdit.getRecurrence(), meetingLink);
+                        eventToEdit.getEndTime(), eventToEdit.getRecurrence(), meetingLink, eventToEdit.getTags());
             } else {
                 editedEvent = new Event(eventToEdit.getDescription(), eventToEdit.getStartTime(),
-                        eventToEdit.getEndTime(), meetingLink);
+                        eventToEdit.getEndTime(), meetingLink, eventToEdit.getTags());
             }
             model.setTask(eventToEdit, editedEvent);
             model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);

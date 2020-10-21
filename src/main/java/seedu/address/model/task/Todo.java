@@ -3,9 +3,11 @@ package seedu.address.model.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.add.AddTodoCommand;
+import seedu.address.model.tag.Tag;
 
 public class Todo extends Task {
     /**
@@ -37,9 +39,10 @@ public class Todo extends Task {
      *
      * @param description a brief description of the deadline.
      * @param deadline    a String in a specific format (inputFormatter) which specifies a date.
+     * @param tags        a set of tags attached to the todo.
      */
-    public Todo(String description, String deadline) {
-        super(description);
+    public Todo(String description, String deadline, Set<Tag> tags) {
+        super(description, tags);
         this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
     }
 
@@ -50,9 +53,10 @@ public class Todo extends Task {
      * @param description a brief description of the deadline.
      * @param deadline    a String in a specific format (inputFormatter) which specifies a date.
      * @param collaborativeLink the collaborative link of todo.
+     * @param tags        a set of tags attached to the todo.
      */
-    public Todo(String description, String deadline, CollaborativeLink collaborativeLink) {
-        super(description);
+    public Todo(String description, String deadline, CollaborativeLink collaborativeLink, Set<Tag> tags) {
+        super(description, tags);
         this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
         this.collaborativeLink = collaborativeLink;
     }
@@ -64,9 +68,10 @@ public class Todo extends Task {
      * @param description a brief description of the deadline.
      * @param deadline    a String in a specific format (inputFormatter) which specifies a date.
      * @param collaborativeLink the collaborative link of todo.
+     * @param tags        a set of tags attached to the todo.
      */
-    public Todo(String description, LocalDateTime deadline, CollaborativeLink collaborativeLink) {
-        super(description);
+    public Todo(String description, LocalDateTime deadline, CollaborativeLink collaborativeLink, Set<Tag> tags) {
+        super(description, tags);
         this.deadline = deadline;
         this.collaborativeLink = collaborativeLink;
     }
@@ -78,9 +83,10 @@ public class Todo extends Task {
      * @param description a brief description of the deadline.
      * @param deadline    a String in a specific format (inputFormatter) which specifies a date.
      * @param recurrence the recurrence of todo.
+     * @param tags        a set of tags attached to the todo.
      */
-    public Todo(String description, String deadline, Recurrence recurrence) {
-        super(description);
+    public Todo(String description, String deadline, Recurrence recurrence, Set<Tag> tags) {
+        super(description, tags);
         this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
         this.recurrence = recurrence;
     }
@@ -92,9 +98,10 @@ public class Todo extends Task {
      * @param description a brief description of the deadline.
      * @param deadline    a LocalDateTime in a specific format (inputFormatter) which specifies a date.
      * @param recurrence the recurrence of todo.
+     * @param tags        a set of tags attached to the todo.
      */
-    public Todo(String description, LocalDateTime deadline, Recurrence recurrence) {
-        super(description);
+    public Todo(String description, LocalDateTime deadline, Recurrence recurrence, Set<Tag> tags) {
+        super(description, tags);
         this.deadline = deadline;
         this.recurrence = recurrence;
     }
@@ -109,10 +116,11 @@ public class Todo extends Task {
      * @param deadline    a LocalDateTime in a specific format (inputFormatter) which specifies a date.
      * @param recurrence the recurrence of todo.
      * @param link        the Collaborative Link of todo.
+     * @param tags        a set of tags attached to the todo.
      */
     public Todo(boolean isDone, String description, LocalDateTime deadline,
-                Recurrence recurrence, CollaborativeLink link) {
-        super(isDone, description);
+                Recurrence recurrence, CollaborativeLink link, Set<Tag> tags) {
+        super(isDone, description, tags);
         this.deadline = deadline;
         this.recurrence = recurrence;
         this.collaborativeLink = link;
@@ -125,9 +133,10 @@ public class Todo extends Task {
      * @param isDone      indicates if the deadline has been completed.
      * @param description a brief description of the deadline.
      * @param deadline    a String in a specific format (inputFormatter) which specifies a date.
+     * @param tags        a set of tags attached to the todo.
      */
-    public Todo(boolean isDone, String description, String deadline) {
-        super(isDone, description);
+    public Todo(boolean isDone, String description, String deadline, Set<Tag> tags) {
+        super(isDone, description, tags);
         this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
     }
 
@@ -139,9 +148,10 @@ public class Todo extends Task {
      * @param description a brief description of the deadline.
      * @param deadline    a String in a specific format (inputFormatter) which specifies a date.
      * @param recurrence the recurrence of todo.
+     * @param tags        a set of tags attached to the todo.
      */
-    public Todo(boolean isDone, String description, LocalDateTime deadline, Recurrence recurrence) {
-        super(isDone, description);
+    public Todo(boolean isDone, String description, LocalDateTime deadline, Recurrence recurrence, Set<Tag> tags) {
+        super(isDone, description, tags);
         this.deadline = deadline;
         this.recurrence = recurrence;
     }
@@ -153,9 +163,10 @@ public class Todo extends Task {
      * @param isDone      indicates if the deadline has been completed.
      * @param description a brief description of the deadline.
      * @param deadline    a date and time specifies a deadline.
+     * @param tags        a set of tags attached to the todo.
      */
-    public Todo(boolean isDone, String description, LocalDateTime deadline) {
-        super(isDone, description);
+    public Todo(boolean isDone, String description, LocalDateTime deadline, Set<Tag> tags) {
+        super(isDone, description, tags);
         this.deadline = deadline;
     }
 
@@ -167,9 +178,10 @@ public class Todo extends Task {
      * @param description a brief description of the deadline.
      * @param deadline    a date and time specifies a deadline.
      * @param link        a Collaborative Link for the todo.
+     * @param tags        a set of tags attached to the todo
      */
-    public Todo(boolean isDone, String description, LocalDateTime deadline, CollaborativeLink link) {
-        super(isDone, description);
+    public Todo(boolean isDone, String description, LocalDateTime deadline, CollaborativeLink link, Set<Tag> tags) {
+        super(isDone, description, tags);
         this.deadline = deadline;
         this.collaborativeLink = link;
     }
@@ -182,9 +194,11 @@ public class Todo extends Task {
      * @param deadline    a date and time specifies a deadline.
      * @param recurrence the recurrence of todo.
      * @param link        a Collaborative Link for the todo.
+     * @param tags        a set of tags attached to the todo.
      */
-    public Todo(String description, LocalDateTime deadline, Recurrence recurrence, CollaborativeLink link) {
-        super(description);
+    public Todo(String description, LocalDateTime deadline,
+                Recurrence recurrence, CollaborativeLink link, Set<Tag> tags) {
+        super(description, tags);
         this.deadline = deadline;
         this.recurrence = recurrence;
         this.collaborativeLink = link;
@@ -214,11 +228,12 @@ public class Todo extends Task {
         if (this.recurrence != null) {
             LocalDateTime newDateTime = this.getLocalDateTime()
                     .plus(this.recurrence.getValue(), this.recurrence.getChronoUnit());
+
             AddTodoCommand command;
             if (this.getLink().isEmpty()) {
-                command = new AddTodoCommand(new Todo(description, newDateTime, recurrence));
+                command = new AddTodoCommand(new Todo(description, newDateTime, recurrence, tags));
             } else {
-                command = new AddTodoCommand(new Todo(description, newDateTime, recurrence, collaborativeLink));
+                command = new AddTodoCommand(new Todo(description, newDateTime, recurrence, collaborativeLink, tags));
             }
             return command;
         } else {
@@ -234,7 +249,8 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + getDescription() + " (by: " + deadlineToString() + ")";
+        return "[" + getStatusIcon() + "] " + getDescription()
+            + " (by: " + deadlineToString() + ") " + getTagsToString();
     }
 
     /**
@@ -267,9 +283,12 @@ public class Todo extends Task {
     @Override
     public String saveFormat() {
         if (isDone) {
-            return "D | 1 | " + this.getDescription() + " | " + this.deadline.format(INPUT_DATE_TIME_FORMAT).toString();
+            return "D | 1 | " + this.getDescription() + " | "
+                + this.deadline.format(INPUT_DATE_TIME_FORMAT).toString()
+                + " | " + getTagsToString();
         } else {
-            return "D | 0 | " + this.getDescription() + " | " + this.deadline.format(INPUT_DATE_TIME_FORMAT).toString();
+            return "D | 0 | " + this.getDescription() + " | " + this.deadline.format(INPUT_DATE_TIME_FORMAT).toString()
+                + " | " + getTagsToString();
         }
     }
 
@@ -309,7 +328,7 @@ public class Todo extends Task {
 
     @Override
     public LocalDateTime getStart() {
-        return null;
+        return this.deadline;
     }
 
     @Override

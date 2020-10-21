@@ -74,13 +74,14 @@ public class AddCommandParser implements Parser<AddCommand> {
         } else if (splitArgs[0].trim().equals("todo")) {
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_DESCRIPTION,
-                            PREFIX_DATE, PREFIX_TIME, PREFIX_RECURRING);
+                            PREFIX_DATE, PREFIX_TIME, PREFIX_RECURRING, PREFIX_TAG);
             if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_TIME)
                     || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         AddTodoCommand.MESSAGE_USAGE));
             }
             String description = argMultimap.getValue(PREFIX_DESCRIPTION).get().trim();
+            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
             String date = argMultimap.getValue(PREFIX_DATE).get().trim();
             String time = argMultimap.getValue(PREFIX_TIME).get().trim();
             String deadline = date + " " + time;
@@ -95,7 +96,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                     if (checkChronoUnitValidity(recurrenceTimePeriod)
                             && checkRecurrenceValueValidity(recurrenceValue)) {
                         Recurrence recurrence = new Recurrence(recurrenceValue, recurrenceTimePeriod);
-                        todo = new Todo(description, deadline, recurrence);
+                        todo = new Todo(description, deadline, recurrence, tagList);
                     } else {
                         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                                 AddTodoCommand.MESSAGE_USAGE));
@@ -105,13 +106,13 @@ public class AddCommandParser implements Parser<AddCommand> {
                             AddTodoCommand.MESSAGE_USAGE));
                 }
             } else {
-                todo = new Todo(description, deadline);
+                todo = new Todo(description, deadline, tagList);
             }
             return new AddTodoCommand(todo);
         } else if (splitArgs[0].trim().equals("event")) {
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_DESCRIPTION, PREFIX_STARTDATE,
-                            PREFIX_STARTTIME, PREFIX_ENDDATE, PREFIX_ENDTIME, PREFIX_RECURRING);
+                            PREFIX_STARTTIME, PREFIX_ENDDATE, PREFIX_ENDTIME, PREFIX_RECURRING, PREFIX_TAG);
             if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION, PREFIX_STARTDATE,
                     PREFIX_STARTTIME, PREFIX_ENDDATE, PREFIX_ENDTIME)
                     || !argMultimap.getPreamble().isEmpty()) {
@@ -119,6 +120,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                         AddEventCommand.MESSAGE_USAGE));
             }
             String description = argMultimap.getValue(PREFIX_DESCRIPTION).get().trim();
+            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
             String stDate = argMultimap.getValue(PREFIX_STARTDATE).get().trim();
             String stTime = argMultimap.getValue(PREFIX_STARTTIME).get().trim();
             String endDate = argMultimap.getValue(PREFIX_ENDDATE).get().trim();
@@ -137,7 +139,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                     if (checkChronoUnitValidity(recurrenceTimePeriod)
                             && checkRecurrenceValueValidity(recurrenceValue)) {
                         Recurrence recurrence = new Recurrence(recurrenceValue, recurrenceTimePeriod);
-                        event = new Event(description, stDateTime, endDateTime, recurrence);
+                        event = new Event(description, stDateTime, endDateTime, recurrence, tagList);
                     } else {
                         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                                 AddEventCommand.MESSAGE_USAGE));
@@ -147,7 +149,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                             AddEventCommand.MESSAGE_USAGE));
                 }
             } else {
-                event = new Event(description, stDateTime, endDateTime, meetingLink);
+                event = new Event(description, stDateTime, endDateTime, meetingLink, tagList);
             }
             return new AddEventCommand(event);
         } else {
