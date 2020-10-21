@@ -307,7 +307,7 @@ public class Todo extends Task {
 
     @Override
     public LocalDateTime getStart() {
-        return null;
+        return this.deadline;
     }
 
     @Override

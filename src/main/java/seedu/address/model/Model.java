@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -17,7 +18,6 @@ import seedu.address.model.task.Todo;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-
     Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
 
     /**
@@ -115,4 +115,8 @@ public interface Model {
     ReadOnlyTaskList getTaskList();
 
     AddCommand markAsDone(Task target);
+
+    void updateSortedTaskList(Comparator<Task> taskComparator);
+
+    void updateSortedPersonList(Comparator<Person> personComparator);
 }

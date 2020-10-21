@@ -56,7 +56,7 @@ public class UniqueTaskList implements Iterable<Task> {
      * {@code target} must exist in the list.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
      */
-    public void setPerson(Task target, Task editedPerson) {
+    public void setTask(Task target, Task editedPerson) {
         requireAllNonNull(target, editedPerson);
 
         int index = internalList.indexOf(target);

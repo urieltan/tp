@@ -47,8 +47,12 @@ public class SampleDataUtil {
     }
     public static Task[] getSampleTasks() {
         return new Task[] {
-            new Todo("Finish assignment", "19-05-2020 2359"),
-            new Event("Attend group meeting", "20-05-2020 1000", "20-05-2020 1200", new MeetingLink())
+            new Todo("Finish assignment", "19-10-2020 2359"),
+            new Todo("Finish tutorial worksheet", "16-10-2020 2359"),
+            new Todo("Complete next CS2103T team project iteration", "22-10-2020 2359"),
+            new Event("Attend group meeting", "20-10-2020 1000", "20-10-2020 1200", new MeetingLink()),
+            new Event("Attend computer science lecture", "17-10-2020 1200", "17-10-2020 1300"),
+            new Event("Meet friends for lunch", "17-10-2020 1300", "17-10-2020 1400")
         };
     }
 
