@@ -335,6 +335,15 @@ Outputs a list of results.
     Example: `itemsDueBefore date/12-12-2020 time/2359`
     It will output a list of todos/meetings that are due specifically **before** 12th December 2020, 2359.
 
+### Sorting contacts and tasks: `sort`
+
+Sorts tasks or contacts according to date or name, respectively. Sorting may also be cleared, such that the natural order of lists are restored.
+
+Format: `sort OPTION`
+
+* Contact, task, and clear are the available options for sort and should be used individually. 
+* Using the clear option restores all lists (i.e. both contact list and task list) to their natural order.
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -384,3 +393,4 @@ Action | Format, Examples
 **Find tasks due before** |  `itemsDueBefore date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueBefore date/12-12-2020 time/2359`
 **Link meeting** | `link meeting desc/DESCRIPTION url/LINK todo/event i/INDEX_OF_TASK` <br> e.g.,`link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf event i/2 date/22/9/2020 time/1400`
 **Link doc** | `link doc desc/DESCRIPTION url/LINK todo/event i/INDEX_OF_TASK` <br> e.g.,`link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoIkfacr0asqV9A4kh todo i/2`
+**Sort** | `sort OPTION` <br> `OPTION` refers to `contact`, `task`, or `clear` 
