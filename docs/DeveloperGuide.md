@@ -94,17 +94,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
 | `* * *`  | user                                       | add a new person               |                                                                        |
+| `* * *`  | forgetful student                          | add todos and events        | remember to complete important tasks for projects and  attend important events|
 | `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
+| `* * *`  | forgetful student                          | remove todos and events        | remove tasks that I no longer need |
 | `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* * *`  | forgetful student                          | add and remove to do's         | remember to complete important tasks for projects or assignments |
-| `* * *`  | student                                    | mark to do's as done           | remember the tasks or assignments that I have completed          |
-| `* * *`  | forgetful student                           | view details of a to do        | recall the details of an assignment or task.                     |
-| ` * * ` | forgetful student                           |  search for contacts under a particular tag  | find people I'm working with easily
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `* *`    | disorganised student                                       | add and remove collaborative links (Google Drive, and many more)   | find the collaborative link for the project easily                |
+| `* * *`  | user                                       | find todos by description          | locate details of todos without having to go through the entire list |
+| `* * *`  | user                                       | find events by description          | locate details of events without having to go through the entire list |
+| `* * *`  | student                                    | mark todos and events as done  | remember the tasks or assignments that I have completed          |
+| ` * * ` | forgetful student                           | search for contacts under a particular tag  | find people I am working with easily
+| ` * * ` | forgetful student                           | search for todos and events under a particular tag  | find the task that I am working on
+| `* *`    | disorganised student                       | add and remove collaborative links (Google Drive, and many more) to a todo   | find the collaborative link for the project easily |
+| `* *`      | disorganised student                       | add, remove, and view zoom links for meetings to an event         | remember my Zoom Links                                          |               
 | `* *`    | forgetful/disorganised student | search what tasks/meetings are due soon or by a specific date/time (filter) | remember to finish before the deadline|
 | `*`      | user with many contacts in the Lifebook | sort persons by name           | locate a person easily                                                 |
-| `*`      | disorganised student |  add, remove, and view zoom links for meetings          | remember my Zoom Links                                          |
 
 *{More to be added}*
 
@@ -157,6 +159,52 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Lifebook shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: Show Todos with a specific tag**
+
+**MSS**
+
+1.  User requests to list todos
+2.  Lifebook shows a list of todos
+3.  User requests to show all todos with a specific tag in the list
+4.  Lifebook shows all the todos whose tag matching the tag searched
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given tag is empty or invalid.
+
+    * 3a1. Lifebook shows an error message.
+
+      Use case resumes at step 2.
+      
+**Use case: Show Events with a specific tag**
+
+**MSS**
+
+1.  User requests to list events
+2.  Lifebook shows a list of events
+3.  User requests to show all events with a specific tag in the list
+4.  Lifebook shows all the events whose tag matching the tag searched
+
+  Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+Use case ends.
+
+* 3a. The given tag is empty or invalid.
+
+  * 3a1. Lifebook shows an error message.
+
+    Use case resumes at step 2.
 
 **Use case: Add a To Do to the To Do List**
 
