@@ -51,7 +51,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #####Parser: 
 
-<INSERT UML DIAG HERE FOR PARSER>
+![ParserClassDiagram](images/filterFunction/ParserClassDiagram.png)
 
 * `DueBeforeCommandParser` implements `Parser<DueBeforeCommand>`
  
@@ -66,18 +66,19 @@ This section describes some noteworthy details on how certain features are imple
 
 #####Predicate:
 
+![PredicateClassDiagram](images/filterFunction/PredicateClassDiagram.png)
+
 The way dueBy and dueBefore works is very similar, the difference only being the dueBefore and dueBy predicate.
 
 `DueBeforePredicate` and `DueByPredicate` extends `DuePredicate`.
 
-<INSERT UML DIAG HERE FOR PREDICATE>
 
 * `DueBeforePredicate` compares the LocalDateTime input and every task's LocalDateTime, and returns true if the task's LocalDateTime *is before* the input's LocalDateTime.
 * `DueByPredicate` compares the LocalDateTime input and every task's LocalDateTime, and returns true if the task's LocalDateTime *equals* the input's LocalDateTime.
 
 #####Command: 
 
-<INSERT UML DIAG HERE FOR COMMAND>
+![CommandClassDiagram](images/filterFunction/CommandClassDiagram.png)
 
 * `DueBeforeCommand` and `DueByCommand` extends `Command`.
 * The command will be executed with the `Model`, which will update the `FilteredTaskList` based on the `DueByPredicate`/`DueBeforePredicate`
@@ -85,7 +86,11 @@ The way dueBy and dueBefore works is very similar, the difference only being the
 
 The following sequence diagram shows how the dueBy filtering works:
 
-<INSERT SEQ DIAG>
+![FilterSequenceDiagram](images/filterFunction/FilterSequenceDiagram.png)
+
+The following activity diagram shows what happens when the user enters the filter command:
+
+![FilterActivityDiagram](images/filterFunction/FilterActivityDiagram.png)
 
 #### Design consideration:
 
