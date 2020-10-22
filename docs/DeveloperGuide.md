@@ -45,15 +45,64 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Filter tasks (dueBy and dueBefore) feature
 
-#### Proposed Implementation
+#### Implementation
+
+#####Parser: 
+
+![ParserClassDiagram](images/filterFunction/ParserClassDiagram.png)
+
+* `DueBeforeCommandParser` implements `Parser<DueBeforeCommand>`
+ 
+    * It checks for the phrase `itemsDueBefore` and parses the input after the prefixes: date `date/` and time `time/`. 
+    * If the input are in the correct date and time format, a new DueBeforePredicate object is created and passed to a new DueBeforeCommand constructor.
+    
+    
+* `DueByCommandParser` implements `Parser<DueByCommand>`
+
+    * It checks for the phrase `itemsDueBy` and parses the content after the prefixes: date `date/` and time `time/`.
+    * If the input are in the correct date and time format, a new DueByPredicate object is created and passed to a new DueByCommand constructor.
+
+#####Predicate:
+
+![PredicateClassDiagram](images/filterFunction/PredicateClassDiagram.png)
+
+The way dueBy and dueBefore works is very similar, the difference only being the dueBefore and dueBy predicate.
+
+`DueBeforePredicate` and `DueByPredicate` extends `DuePredicate`.
+
+
+* `DueBeforePredicate` compares the LocalDateTime input and every task's LocalDateTime, and returns true if the task's LocalDateTime *is before* the input's LocalDateTime.
+* `DueByPredicate` compares the LocalDateTime input and every task's LocalDateTime, and returns true if the task's LocalDateTime *equals* the input's LocalDateTime.
+
+#####Command: 
+
+![CommandClassDiagram](images/filterFunction/CommandClassDiagram.png)
+
+* `DueBeforeCommand` and `DueByCommand` extends `Command`.
+* The command will be executed with the `Model`, which will update the `FilteredTaskList` based on the `DueByPredicate`/`DueBeforePredicate`
+* If it is successful, it will return a `CommandResult` with a successful message to the UI.
+
+The following sequence diagram shows how the dueBy filtering works:
+
+![FilterSequenceDiagram](images/filterFunction/FilterSequenceDiagram.png)
+
+The following activity diagram shows what happens when the user enters the filter command:
+
+![FilterActivityDiagram](images/filterFunction/FilterActivityDiagram.png)
 
 #### Design consideration:
 
-##### Aspect: How undo & redo executes
+##### Aspect: How dueBy and dueBefore executes
 
-### \[Proposed\] Data archiving
+After implementing the task operations, there is `FilteredTaskList` which we can utilise to filter tasks.
+
+By using the same function, we can prevent duplication of code.
+
+Furthermore, we have adhered a similar design to the task's operations (Using of Command, Parser classes) to maintain code consistency.
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -107,6 +156,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`      | disorganised student                       | add, remove, and view zoom links for meetings to an event         | remember my Zoom Links                                          |               
 | `* *`    | forgetful/disorganised student | search what tasks/meetings are due soon or by a specific date/time (filter) | remember to finish before the deadline|
 | `*`      | user with many contacts in the Lifebook | sort persons by name           | locate a person easily                                                 |
+| `*`      | student with weekly lectures and tutorials | add recurring tasks         | save time by not adding the same task every week, which is time-consuming|
 
 *{More to be added}*
 
@@ -221,6 +271,10 @@ Use case ends.
     * 1a1. Lifebook shows an error message
 
     Use case restarts at step 1.
+    
+* 1b. User chooses to input the task as a recurring one
+
+    * 1b1. Lifebook will add the task as a recurring one instead.
 
 **Use case: Perform an action (remove, show, mark as done) on a To Do from the To Do list**
 
@@ -249,6 +303,10 @@ Use case ends.
     * 3b1. Lifebook shows an error message.
 
      Use case resumes at step 2.
+     
+* 3c. The user marks a recurring task as done.
+    
+    * 3c1. Lifebook will automatically add a new task with the same details, with a new deadline given by the recurrence.
 
 **Use case: Filter items due on a specific date/time**
 
@@ -266,6 +324,12 @@ Use case ends.
     * 1a1. Lifebook shows an error message.
 
       Use case restarts at step 1.
+      
+* 1b. The given date/time format is invalid.
+
+    * 1b1. Lifebook shows an error message.
+    
+        Use case restarts at step 1.
 
 * 2a. The list is empty.
 
