@@ -26,8 +26,10 @@ public class AddEventCommandParserTest {
     private static final String PARTY_END_TIME = "endtime/0600 ";
     private static final String PARTY_RECURRENCE = "recurring/1 year";
 
-    private static final String INVALID_DATE = "date/1-1-2020 ";
-    private static final String INVALID_TIME = "time/12000 ";
+    private static final String INVALID_START_DATE = "startdate/1-15-2020 ";
+    private static final String INVALID_START_TIME = "starttime/2500 ";
+    private static final String INVALID_END_DATE = "enddate/1-15-2020 ";
+    private static final String INVALID_END_TIME = "endtime/2500";
     private static final String INVALID_RECURRENCE_VALUE = "recurring/0 day";
     private static final String INVALID_RECURRENCE_UNIT = "recurring/1 sleep";
 
@@ -68,16 +70,27 @@ public class AddEventCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.DATE_TIME_USAGE);
 
-        // invalid date
-        assertParseFailure(parser, "event " + MEETING_DESC + INVALID_DATE + MEETING_START_TIME
-                        + MEETING_END_DATE + MEETING_END_TIME, expectedMessage);
+        // invalid startDate
+        assertParseFailure(parser, "event " + MEETING_DESC + INVALID_START_DATE + MEETING_START_TIME
+                + MEETING_END_DATE + MEETING_END_TIME, expectedMessage);
 
-        //Todo
-        // invalid time (after implementing exceptions for wrong time format)
-        //assertParseFailure(parser, "event " + MEETING_DESC + MEETING_DATE + INVALID_TIME,
-        //        expectedMessage);
+        // invalid endDate
+        assertParseFailure(parser, "event " + MEETING_DESC + MEETING_START_DATE + MEETING_START_TIME
+                + INVALID_END_DATE + MEETING_END_TIME, expectedMessage);
+
+        // invalid startTime
+        assertParseFailure(parser, "event " + MEETING_DESC + MEETING_START_DATE + INVALID_START_TIME
+                + MEETING_END_DATE + MEETING_END_TIME, expectedMessage);
+
+        // invalid endTime
+        assertParseFailure(parser, "event " + MEETING_DESC + MEETING_START_DATE + MEETING_START_TIME
+                + MEETING_END_DATE + INVALID_END_TIME, expectedMessage);
+
+        // invalid fields for all date and time
+        assertParseFailure(parser, "event " + MEETING_DESC + INVALID_START_DATE + INVALID_START_TIME
+                + INVALID_END_DATE + INVALID_END_TIME, expectedMessage);
     }
 
     @Test
