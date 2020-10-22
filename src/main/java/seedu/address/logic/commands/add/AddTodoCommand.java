@@ -31,6 +31,8 @@ public class AddTodoCommand extends AddCommand {
             + PREFIX_TIME + "2359 "
             + PREFIX_TAG + "CS2100";
 
+    public static final String DATE_TIME_USAGE = "Date and time format should be: date/DD-MM-YYYY time/HHmm (24-hour)";
+
     public static final String MESSAGE_SUCCESS = "New todo added: %1$s";
     public static final String MESSAGE_DUPLICATE_TODO = "This todo already exists in the TodoList";
 
