@@ -25,7 +25,7 @@ AddressBookParser -> AddCommandParser
 activate AddCommandParser
 
 create Todo
-AddCommandParser -> Todo
+AddCommandParser -> Todo : new Todo("Complete homework date", "12-12-2020 2359" )
 activate Todo
 
 Todo --> AddCommandParser : t
