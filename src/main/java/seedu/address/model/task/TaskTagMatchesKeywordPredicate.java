@@ -9,6 +9,8 @@ public class TaskTagMatchesKeywordPredicate implements Predicate<Task> {
     private final String keyword;
 
     public TaskTagMatchesKeywordPredicate(String keyword) {
+        // make sure keyword is only one word
+        assert !keyword.contains("\\s+");
         this.keyword = keyword;
     }
 

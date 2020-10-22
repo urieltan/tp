@@ -9,6 +9,8 @@ public class ContactTagMatchesKeywordPredicate implements Predicate<Person> {
     private final String keyword;
 
     public ContactTagMatchesKeywordPredicate(String keyword) {
+        // make sure keyword is only one word
+        assert !keyword.contains("\\s+");
         this.keyword = keyword;
     }
 
