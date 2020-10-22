@@ -164,7 +164,7 @@ Furthermore, we have adhered a similar design to the task's operations (Using of
 ![CommandClassDiagram](images/linkFunction/CommandClassDiagram.png)
 
 -----
-The following sequence diagram shows how the dueBy filtering works:
+The following sequence diagram shows how the LinkCommand works:
 * `LinkCollaborativeCommand` and `LinkMeetingCommand` extends `Command`.
 * The command will be parsed by `AddressBookParser` and further parsed by `LinkCommandParser`.
 * The `LinkCommandParser` will determine whether the command is a `LinkMeetingCommand` or a `LinkCollaborativeCommand`.
@@ -178,6 +178,66 @@ which will update the `TaskList`.
 The following activity diagram shows what happens when the user enters the link command:
 
 ![FilterActivityDiagram](images/linkFunction/LinkActivityDiagram.png)
+
+### Show tag (`show contact`, `show todo`, and `show event`) feature
+
+#### Parser:
+
+![ParserClassDiagram](images/showTagFunction/ShowTagCommandParserClassDiagram.png)
+
+* `ShowTagCommandParser` implements `Parser<ShowTagCommand>`
+
+    * It checks for the phrase `show contact` for ShowTagContactCommand and parses the input
+    after the prefixes: `t/`.
+    * It checks for the phrase `show event` for ShowTagEventCommand and parses the input
+    after the prefixes: `t/`.
+    * It checks for the phrase `show todo` for ShowTagTodoCommand and parses the input
+    after the prefixes: `t/`.
+    * If the input is correct, a new Predicate object is created and passed to a new ShowTagCommand constructor.
+
+##### Predicate:
+
+![PredicateClassDiagram](images/showTagFunction/ContactTagMatchesKeywordPredicate.png)
+![PredicateClassDiagram](images/showTagFunction/TaskTagMatchesKeywordPredicate.png)
+
+The way these predicate works is very similar, where the `ContactTagMatchesKeywordPredicate` handles the Person object
+and the `TaskTagMatchesKeywordPredicate` handles the Task object.
+
+`ContactTagMatchesKeywordPredicate` implements `Predicate<Person>`.
+`TaskTagMatchesKeywordPredicate` implements `Predicate<Task>`.
+
+* `ContactTagMatchesKeywordPredicate` returns true if the tag input matches one of the contact's tags.
+* `TaskTagMatchesKeywordPredicate` returns true if the tag input matches one of the task's (event's or todo's) tags.
+
+##### Command:
+ The class diagram
+
+![CommandClassDiagram](images/showTagFunction/ShowTagCommandClassDiagram.png)
+
+-----
+The sequence diagram:
+* `ShowTagContactCommand`, `ShowTagEventCommand` and `ShowTagTodoCommand` extends `ShowTagCommand`.
+* The command will be parsed by `AddressBookParser` and further parsed by `ShowTagCommandParser`.
+* The `ShowTagCommandParser` will determine whether the command is a `ShowTagContactCommand`, `ShowTagEventCommand` or a `ShowTagTodoCommand`.
+* After returning the suitable ShowTagCommand, the command will be executed,
+calling the `updateFiltertedPersonList()` method of `Model` and update the `AddressBook` if it is a `ShowTagContactCommand`, or
+the `updateFiltertedTaskList()` method of `Model` and update the `TaskList` if it is a `ShowTagEventCommand` or `ShowTagTodoCommand`.
+* After updating the model, the `LogicManager` will call the sorage to save the file.
+* If all are successful, `ShowTagCommand` will return a `CommandResult` with a successful message to the UI.
+
+The following sequence diagram shows how the `ShowTagContactCommand` works.
+The sequence diagrams for `ShowTagEventCommand` and `ShowTagTodoCommand` are very similar to the diagram below
+with minor differences in the type of ShowTagCommand returned and function called to update the model.
+
+![FilterSequenceDiagram](images/showTagFunction/ShowTagCommandSequenceDiagram.png)
+
+![SaveFileDiagram](images/showTagFunction/SaveLifebook.png)
+
+The following activity diagram shows what happens when the user enters the show contact command:
+
+![FilterActivityDiagram](images/showTagFunction/ShowTagCommandActivityDiagram.png)
+
+The activity diagram when user enters the show event or show todo command is similar to the diagram above.
 
 --------------------------------------------------------------------------------------------------------------------
 
