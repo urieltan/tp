@@ -53,9 +53,9 @@ This section describes some noteworthy details on how certain features are imple
 
 * `AddCommandParser` implements `Parser<AddCommand>`
 
-* It parses the user input to determine if the user intends to add a `todo`, `event`, or `person`. 
+* It parses the user input to determine if the user intends to add a `todo`, `event`, or `person`.
 * It parses the input after the prefixes required to create the intended `todo`, `event`, or `person`.
-* If the user input has all all required prefixes and matches the required syntax and format, it creates the new intended Task or `person` and passes it to its respective AddCommand constructor. 
+* If the user input has all all required prefixes and matches the required syntax and format, it creates the new intended Task or `person` and passes it to its respective AddCommand constructor.
 
 ##### Command:
 
