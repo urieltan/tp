@@ -53,9 +53,9 @@ This section describes some noteworthy details on how certain features are imple
 
 * `AddCommandParser` implements `Parser<AddCommand>`
 
-    * It parses the user input to determine if the user intends to add a `todo`, `event`, or `person`. 
-    * It parses the input after the prefixes required to create the intended `todo`, `event`, or `person`.
-    * If the user input has all all required prefixes and matches the required syntax and format, it creates the new intended Task or `person` and passes it to its respective AddCommand constructor. 
+* It parses the user input to determine if the user intends to add a `todo`, `event`, or `person`. 
+* It parses the input after the prefixes required to create the intended `todo`, `event`, or `person`.
+* If the user input has all all required prefixes and matches the required syntax and format, it creates the new intended Task or `person` and passes it to its respective AddCommand constructor. 
 
 ##### Command:
 
@@ -69,7 +69,7 @@ This section describes some noteworthy details on how certain features are imple
 ---
 The following sequence diagrams displays a `Todo` being added to the Task List. Adding an `Event` follows a similar sequence.
 
-![AddSequenceDiagram](images/addTask/AddSequenceDiagram.png) 
+![AddSequenceDiagram](images/addTask/AddSequenceDiagram.png)
 
 The following sequence diagram exhibits the behavior of logic.
 
@@ -83,7 +83,7 @@ The following activity diagram shows what happens when the user enters an add ta
 
 #### How command works:
 
-* An alternative approach would be to have a single `AddTaskCommand` which extends `AddCommand`. The `AddCommandParser` could pass either `todo` or `event` to this class' constructor. 
+* An alternative approach would be to have a single `AddTaskCommand` which extends `AddCommand`. The `AddCommandParser` could pass either `todo` or `event` to this class' constructor.
 * This could reduce the replication of code, since both `AddTodoCommand` and `AddEventCommand` are almost identical.
 * However, by having two distinct commands, different and more specific success or error messages can be produced by the execution of respective commands.
 
@@ -228,7 +228,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | ` * * ` | forgetful student                           | search for contacts under a particular tag  | find people I am working with easily
 | ` * * ` | forgetful student                           | search for todos and events under a particular tag  | find the task that I am working on
 | `* *`    | disorganised student                       | add and remove collaborative links (Google Drive, and many more) to a todo   | find the collaborative link for the project easily |
-| `* *`      | disorganised student                       | add, remove, and view zoom links for meetings to an event         | remember my Zoom Links                                      |            
+| `* *`      | disorganised student                       | add, remove, and view zoom links for meetings to an event         | remember my Zoom Links                                      |
 | `* *`    | forgetful/disorganised student | search what tasks/meetings are due soon or by a specific date/time (filter) | remember to finish before the deadline|
 | `*`      | user with many contacts in the Lifebook | sort persons by name           | locate a person easily                                                 |
 | `*`      | student with weekly lectures and tutorials | add recurring tasks         | save time by not adding the same task every week, which is time-consuming|
@@ -307,7 +307,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Lifebook shows an error message.
 
       Use case resumes at step 2.
-      
+
 **Use case: Show Events with a specific tag**
 
 **MSS**
