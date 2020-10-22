@@ -132,7 +132,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             if (!checkDateValidity(stDate) || !checkTimeValidity(stTime)
                     || !checkDateValidity(endDate) || !checkTimeValidity(endTime)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddTodoCommand.DATE_TIME_USAGE));
+                        AddEventCommand.DATE_TIME_USAGE));
             }
             String stDateTime = stDate + " " + stTime;
             String endDateTime = endDate + " " + endTime;
