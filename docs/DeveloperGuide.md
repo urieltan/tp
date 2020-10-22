@@ -45,20 +45,18 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Filter tasks (dueBy and dueBefore) feature
+### Filter tasks (`dueBy` and `dueBefore`) feature
 
-#### Implementation
-
-##### Parser: 
+##### Parser:
 
 ![ParserClassDiagram](images/filterFunction/ParserClassDiagram.png)
 
 * `DueBeforeCommandParser` implements `Parser<DueBeforeCommand>`
- 
-    * It checks for the phrase `itemsDueBefore` and parses the input after the prefixes: date `date/` and time `time/`. 
-    * If the input are in the correct date and time format, a new DueBeforePredicate object is created and passed to a new DueBeforeCommand constructor.
-    
-    
+
+    * It checks for the phrase `itemsDueBefore` and parses the input after the prefixes: date `date/` and time `time/`.
+    * If the input are in the correct date and time format, a new DueBeforePredicate object is created and passed
+    to a new DueBeforeCommand constructor.
+
 * `DueByCommandParser` implements `Parser<DueByCommand>`
 
     * It checks for the phrase `itemsDueBy` and parses the content after the prefixes: date `date/` and time `time/`.
@@ -76,15 +74,17 @@ The way dueBy and dueBefore works is very similar, the difference only being the
 * `DueBeforePredicate` compares the LocalDateTime input and every task's LocalDateTime, and returns true if the task's LocalDateTime *is before* the input's LocalDateTime.
 * `DueByPredicate` compares the LocalDateTime input and every task's LocalDateTime, and returns true if the task's LocalDateTime *equals* the input's LocalDateTime.
 
-##### Command: 
+##### Command:
+The class diagram
 
 ![CommandClassDiagram](images/filterFunction/CommandClassDiagram.png)
 
+---
+
+The following sequence diagram shows how the dueBy filtering works:
 * `DueBeforeCommand` and `DueByCommand` extends `Command`.
 * The command will be executed with the `Model`, which will update the `FilteredTaskList` based on the `DueByPredicate`/`DueBeforePredicate`
 * If it is successful, it will return a `CommandResult` with a successful message to the UI.
-
-The following sequence diagram shows how the dueBy filtering works:
 
 ![FilterSequenceDiagram](images/filterFunction/FilterSequenceDiagram.png)
 
@@ -102,7 +102,40 @@ By using the same function, we can prevent duplication of code.
 
 Furthermore, we have adhered a similar design to the task's operations (Using of Command, Parser classes) to maintain code consistency.
 
+### Add link to tasks (`link meeting` and `link doc`) feature
 
+##### Parser:
+
+![ParserClassDiagram](images/linkFunction/ParserClassDiagram.png)
+
+* `LinkCommandParser` implements `Parser<LinkCommand>`
+
+    * It checks for the phrase `link meeting` for LinkMeetingCommand and parses the input
+    after the prefixes: desc `desc/`, url `url/`, index `i/`, date `date/DD-MM-YYYY`, and time `time/HHmm`.
+    * It checks for the phrase `link doc` for LinkCollaborativeCommand and parses the input
+    after the prefixes: desc `desc/`, url `url/`, and index `i/`.
+    * If the inputs are all in the correct format, a new Link object is created and added to an existing task.
+
+##### Command:
+ The class diagram
+
+![CommandClassDiagram](images/linkFunction/CommandClassDiagram.png)
+
+-----
+The following sequence diagram shows how the dueBy filtering works:
+* `LinkCollaborativeCommand` and `LinkMeetingCommand` extends `Command`.
+* The command will be parsed by `AddressBookParser` and further parsed by `LinkCommandParser`.
+* The `LinkCommandParser` will determine whether the command is a `LinkMeetingCommand` or a `LinkCollaborativeCommand`.
+* After returning the suitable Link Command, the command will be executed, calling the `setTask()` method of `Model`,
+which will update the `TaskList`.
+* After updating the task, the `LogicManager` will call `saveLifeBook()` method of `Storage` class to store the update.
+* If all are successful, `LinkCommand` will return a `CommandResult` with a successful message to the UI.
+
+![FilterSequenceDiagram](images/linkFunction/LinkSequenceDiagram.png)
+
+The following activity diagram shows what happens when the user enters the link command:
+
+![FilterActivityDiagram](images/linkFunction/LinkActivityDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -153,7 +186,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | ` * * ` | forgetful student                           | search for contacts under a particular tag  | find people I am working with easily
 | ` * * ` | forgetful student                           | search for todos and events under a particular tag  | find the task that I am working on
 | `* *`    | disorganised student                       | add and remove collaborative links (Google Drive, and many more) to a todo   | find the collaborative link for the project easily |
-| `* *`      | disorganised student                       | add, remove, and view zoom links for meetings to an event         | remember my Zoom Links                                          |               
+| `* *`      | disorganised student                       | add, remove, and view zoom links for meetings to an event         | remember my Zoom Links                                      |            
 | `* *`    | forgetful/disorganised student | search what tasks/meetings are due soon or by a specific date/time (filter) | remember to finish before the deadline|
 | `*`      | user with many contacts in the Lifebook | sort persons by name           | locate a person easily                                                 |
 | `*`      | student with weekly lectures and tutorials | add recurring tasks         | save time by not adding the same task every week, which is time-consuming|
@@ -271,7 +304,7 @@ Use case ends.
     * 1a1. Lifebook shows an error message
 
     Use case restarts at step 1.
-    
+
 * 1b. User chooses to input the task as a recurring one
 
     * 1b1. Lifebook will add the task as a recurring one instead.
@@ -303,9 +336,9 @@ Use case ends.
     * 3b1. Lifebook shows an error message.
 
      Use case resumes at step 2.
-     
+
 * 3c. The user marks a recurring task as done.
-    
+
     * 3c1. Lifebook will automatically add a new task with the same details, with a new deadline given by the recurrence.
 
 **Use case: Filter items due on a specific date/time**
@@ -324,11 +357,11 @@ Use case ends.
     * 1a1. Lifebook shows an error message.
 
       Use case restarts at step 1.
-      
+
 * 1b. The given date/time format is invalid.
 
     * 1b1. Lifebook shows an error message.
-    
+
         Use case restarts at step 1.
 
 * 2a. The list is empty.
