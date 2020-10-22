@@ -146,11 +146,11 @@ The following activity diagram shows what happens when the user enters the link 
 * `ShowTagCommandParser` implements `Parser<ShowTagCommand>`
 
     * It checks for the phrase `show contact` for ShowTagContactCommand and parses the input
-    after the prefixes: desc `t/`.
+    after the prefixes: `t/`.
     * It checks for the phrase `show event` for ShowTagEventCommand and parses the input
-    after the prefixes: desc `t/`.
+    after the prefixes: `t/`.
     * It checks for the phrase `show todo` for ShowTagTodoCommand and parses the input
-    after the prefixes: desc `t/`.
+    after the prefixes: `t/`.
     * If the input is correct, a new Predicate object is created and passed to a new ShowTagCommand constructor.
 
 ##### Predicate:
@@ -159,13 +159,13 @@ The following activity diagram shows what happens when the user enters the link 
 ![PredicateClassDiagram](images/showTagFunction/TaskTagMatchesKeywordPredicate.png)
 
 The way these predicate works is very similar, where the `ContactTagMatchesKeywordPredicate` handles the Person object
-and the `TaskTagMatchesKeywordPredicate` handles the task object.
+and the `TaskTagMatchesKeywordPredicate` handles the Task object.
 
 `ContactTagMatchesKeywordPredicate` implements `Predicate<Person>`.
 `TaskTagMatchesKeywordPredicate` implements `Predicate<Task>`.
 
-* `ContactTagMatchesKeywordPredicate` returns true if the tag input matches the contact's tags.
-* `TaskTagMatchesKeywordPredicate` returns true if the tag input matches the task's (event's or todo's) tags.
+* `ContactTagMatchesKeywordPredicate` returns true if the tag input matches one of the contact's tags.
+* `TaskTagMatchesKeywordPredicate` returns true if the tag input matches one of the task's (event's or todo's) tags.
 
 ##### Command:
  The class diagram
@@ -183,7 +183,7 @@ the `updateFiltertedTaskList()` method of `Model` and update the `TaskList` if i
 * After updating the model, the `LogicManager` will call the sorage to save the file.
 * If all are successful, `ShowTagCommand` will return a `CommandResult` with a successful message to the UI.
 
-The following sequence diagram shows how the `ShowTagContactCommand` works,
+The following sequence diagram shows how the `ShowTagContactCommand` works.
 The sequence diagrams for `ShowTagEventCommand` and `ShowTagTodoCommand` are very similar to the diagram below
 with minor differences in the type of ShowTagCommand returned and function called to update the model.
 
