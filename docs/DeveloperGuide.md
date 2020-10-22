@@ -45,6 +45,48 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add tasks (`todo` and `event`) feature
+
+##### Parser:
+
+![AddTaskParserClassDiagram](images/addTask/AddTaskParserClassDiagram.png)
+
+* `AddCommandParser` implements `Parser<AddCommand>`
+
+    * It parses the user input to determine if the user intends to add a `todo`, `event`, or `person`. 
+    * It parses the input after the prefixes required to create the intended `todo`, `event`, or `person`.
+    * If the user input has all all required prefixes and matches the required syntax and format, it creates the new intended Task or `person` and passes it to its respective AddCommand constructor. 
+
+##### Command:
+
+![AddTaskCommandClassDiagram](images/addTask/CommandClassDiagram.png)
+
+* The abstract class `AddCommand` extends `Command`.
+* The concrete classes `AddTodoCommand` and `AddEventCommand` extends `AddCommand`.
+* The command will be executed by the Model, which will update the FilteredTaskList based on the added task.
+* If it is successful, it will return a CommandResult with a successful message to the UI.
+
+---
+The following sequence diagrams displays a `Todo` being added to the Task List. Adding an `Event` follows a similar sequence.
+
+![AddSequenceDiagram](images/addTask/AddSequenceDiagram.png) 
+
+The following sequence diagram exhibits the behavior of logic.
+
+![AddTaskSequenceDiagram](images/addTask/AddTaskSequenceDiagram.png)
+
+The following activity diagram shows what happens when the user enters an add task command:
+
+![AddTaskActivityDiagram](images/addTask/AddTaskActivityDiagram.png)
+
+#### Design consideration
+
+#### How command works:
+
+* An alternative approach would be to have a single `AddTaskCommand` which extends `AddCommand`. The `AddCommandParser` could pass either `todo` or `event` to this class' constructor. 
+* This could reduce the replication of code, since both `AddTodoCommand` and `AddEventCommand` are almost identical.
+* However, by having two distinct commands, different and more specific success or error messages can be produced by the execution of respective commands.
+
 ### Filter tasks (`dueBy` and `dueBefore`) feature
 
 ##### Parser:
