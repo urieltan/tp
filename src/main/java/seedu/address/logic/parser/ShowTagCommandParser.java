@@ -25,6 +25,7 @@ public class ShowTagCommandParser implements Parser<ShowTagCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ShowTagCommand parse(String args) throws ParseException {
+        assert args != null;
         String[] splitArgs = args.trim().split(" ", 2);
 
         if (splitArgs[0].equals("contact")) {
