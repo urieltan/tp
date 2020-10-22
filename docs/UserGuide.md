@@ -15,7 +15,7 @@ and module details.** Lifebook supports Command Line Interface (CLI) for efficie
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `lifebook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `lifebook.jar` from [here](https://github.com/AY2021S1-CS2103T-F12-4/tp/releases/tag/v1.3a).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your Lifebook.
 
