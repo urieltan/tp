@@ -31,6 +31,8 @@ public abstract class Task {
      * @param tags        a set of tags attached to the task.
      */
     public Task(String description, Set<Tag> tags) {
+        assert description != null;
+        assert tags != null;
         this.description = description;
         this.isDone = false;
         this.tags.addAll(tags);
@@ -44,6 +46,8 @@ public abstract class Task {
      * @param tags        a set of tags attached to the task.
      */
     public Task(boolean isDone, String description, Set<Tag> tags) {
+        assert description != null;
+        assert tags != null;
         this.description = description;
         this.isDone = isDone;
         this.tags.addAll(tags);

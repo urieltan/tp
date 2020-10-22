@@ -57,6 +57,7 @@ public class Todo extends Task {
      */
     public Todo(String description, String deadline, CollaborativeLink collaborativeLink, Set<Tag> tags) {
         super(description, tags);
+        assert deadline != null;
         this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
         this.collaborativeLink = collaborativeLink;
     }
@@ -72,6 +73,7 @@ public class Todo extends Task {
      */
     public Todo(String description, LocalDateTime deadline, CollaborativeLink collaborativeLink, Set<Tag> tags) {
         super(description, tags);
+        assert deadline != null;
         this.deadline = deadline;
         this.collaborativeLink = collaborativeLink;
     }
@@ -87,6 +89,7 @@ public class Todo extends Task {
      */
     public Todo(String description, String deadline, Recurrence recurrence, Set<Tag> tags) {
         super(description, tags);
+        assert deadline != null;
         this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
         this.recurrence = recurrence;
     }
@@ -102,6 +105,7 @@ public class Todo extends Task {
      */
     public Todo(String description, LocalDateTime deadline, Recurrence recurrence, Set<Tag> tags) {
         super(description, tags);
+        assert deadline != null;
         this.deadline = deadline;
         this.recurrence = recurrence;
     }
@@ -121,6 +125,7 @@ public class Todo extends Task {
     public Todo(boolean isDone, String description, LocalDateTime deadline,
                 Recurrence recurrence, CollaborativeLink link, Set<Tag> tags) {
         super(isDone, description, tags);
+        assert deadline != null;
         this.deadline = deadline;
         this.recurrence = recurrence;
         this.collaborativeLink = link;
@@ -137,6 +142,7 @@ public class Todo extends Task {
      */
     public Todo(boolean isDone, String description, String deadline, Set<Tag> tags) {
         super(isDone, description, tags);
+        assert deadline != null;
         this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
     }
 
@@ -152,6 +158,7 @@ public class Todo extends Task {
      */
     public Todo(boolean isDone, String description, LocalDateTime deadline, Recurrence recurrence, Set<Tag> tags) {
         super(isDone, description, tags);
+        assert deadline != null;
         this.deadline = deadline;
         this.recurrence = recurrence;
     }
@@ -167,6 +174,7 @@ public class Todo extends Task {
      */
     public Todo(boolean isDone, String description, LocalDateTime deadline, Set<Tag> tags) {
         super(isDone, description, tags);
+        assert deadline != null;
         this.deadline = deadline;
     }
 
@@ -182,6 +190,7 @@ public class Todo extends Task {
      */
     public Todo(boolean isDone, String description, LocalDateTime deadline, CollaborativeLink link, Set<Tag> tags) {
         super(isDone, description, tags);
+        assert deadline != null;
         this.deadline = deadline;
         this.collaborativeLink = link;
     }
@@ -199,6 +208,7 @@ public class Todo extends Task {
     public Todo(String description, LocalDateTime deadline,
                 Recurrence recurrence, CollaborativeLink link, Set<Tag> tags) {
         super(description, tags);
+        assert deadline != null;
         this.deadline = deadline;
         this.recurrence = recurrence;
         this.collaborativeLink = link;
