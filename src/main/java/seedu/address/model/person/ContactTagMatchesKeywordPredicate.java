@@ -8,6 +8,10 @@ import java.util.function.Predicate;
 public class ContactTagMatchesKeywordPredicate implements Predicate<Person> {
     private final String keyword;
 
+    /**
+     * Construct a predicate to match keyword tag to contact's tag
+     * @param keyword the keyword for the tag
+     */
     public ContactTagMatchesKeywordPredicate(String keyword) {
         // make sure keyword is only one word
         assert !keyword.contains("\\s+");

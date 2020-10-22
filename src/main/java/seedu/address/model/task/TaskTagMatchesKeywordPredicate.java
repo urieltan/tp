@@ -8,6 +8,10 @@ import java.util.function.Predicate;
 public class TaskTagMatchesKeywordPredicate implements Predicate<Task> {
     private final String keyword;
 
+    /**
+     * Construct a predicate to match keyword tag to task's tag
+     * @param keyword the keyword for the tag
+     */
     public TaskTagMatchesKeywordPredicate(String keyword) {
         // make sure keyword is only one word
         assert !keyword.contains("\\s+");
