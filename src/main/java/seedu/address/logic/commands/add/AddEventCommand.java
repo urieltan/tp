@@ -38,7 +38,8 @@ public class AddEventCommand extends AddCommand {
             + PREFIX_ENDTIME + "1400 "
             + PREFIX_TAG + "CS2103T";
 
-    public static final String DATE_TIME_USAGE = "Date and time format should be: startdate/DD-MM-YYYY starttime/HHmm (24-hour) enddate/DD-MM-YYYY endtime/HHmm (24-hour)";
+    public static final String DATE_TIME_USAGE = "Date and time format should be: startdate/DD-MM-YYYY "
+            + "starttime/HHmm (24-hour) enddate/DD-MM-YYYY endtime/HHmm (24-hour)";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book";
