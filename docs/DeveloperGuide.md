@@ -49,7 +49,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-#####Parser: 
+##### Parser: 
 
 ![ParserClassDiagram](images/filterFunction/ParserClassDiagram.png)
 
@@ -64,7 +64,7 @@ This section describes some noteworthy details on how certain features are imple
     * It checks for the phrase `itemsDueBy` and parses the content after the prefixes: date `date/` and time `time/`.
     * If the input are in the correct date and time format, a new DueByPredicate object is created and passed to a new DueByCommand constructor.
 
-#####Predicate:
+##### Predicate:
 
 ![PredicateClassDiagram](images/filterFunction/PredicateClassDiagram.png)
 
@@ -76,7 +76,7 @@ The way dueBy and dueBefore works is very similar, the difference only being the
 * `DueBeforePredicate` compares the LocalDateTime input and every task's LocalDateTime, and returns true if the task's LocalDateTime *is before* the input's LocalDateTime.
 * `DueByPredicate` compares the LocalDateTime input and every task's LocalDateTime, and returns true if the task's LocalDateTime *equals* the input's LocalDateTime.
 
-#####Command: 
+##### Command: 
 
 ![CommandClassDiagram](images/filterFunction/CommandClassDiagram.png)
 
