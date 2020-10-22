@@ -72,7 +72,6 @@ public class Event extends Task {
         super(description, tags);
         assert start != null;
         assert end != null;
-        assert meetingLink != null;
         this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
         this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
         this.meetingLink = meetingLink;
@@ -92,7 +91,6 @@ public class Event extends Task {
         super(isDone, description, tags);
         assert start != null;
         assert end != null;
-        assert meetingLink != null;
         this.start = start;
         this.end = end;
         this.meetingLink = meetingLink;
@@ -150,8 +148,6 @@ public class Event extends Task {
         super(isDone, description, tags);
         assert start != null;
         assert end != null;
-        assert link != null;
-        assert recurrence != null;
         this.start = start;
         this.end = end;
         this.recurrence = recurrence;
@@ -172,8 +168,6 @@ public class Event extends Task {
         super(description, tags);
         assert start != null;
         assert end != null;
-        assert link != null;
-        assert recurrence != null;
         this.start = start;
         this.end = end;
         this.recurrence = recurrence;
@@ -194,8 +188,6 @@ public class Event extends Task {
         super(description, tags);
         assert start != null;
         assert end != null;
-        assert link != null;
-        assert recurrence != null;
         this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
         this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
         this.recurrence = recurrence;
@@ -218,7 +210,6 @@ public class Event extends Task {
         super(isDone, description, tags);
         assert start != null;
         assert end != null;
-        assert recurrence != null;
         this.start = start;
         this.end = end;
         this.recurrence = recurrence;
@@ -236,9 +227,6 @@ public class Event extends Task {
      */
     public Event(String description, String start, String end, Recurrence recurrence, Set<Tag> tags) {
         super(description, tags);
-        assert start != null;
-        assert end != null;
-        assert recurrence != null;
         this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
         this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
         this.recurrence = recurrence;
@@ -258,7 +246,6 @@ public class Event extends Task {
         super(description, tags);
         assert start != null;
         assert end != null;
-        assert recurrence != null;
         this.start = start;
         this.end = end;
         this.recurrence = recurrence;
