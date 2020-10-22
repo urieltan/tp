@@ -45,9 +45,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Filter tasks (dueBy and dueBefore) feature
-
-#### Implementation
+### Filter tasks (`dueBy` and `dueBefore`) feature
 
 ##### Parser: 
 
@@ -57,7 +55,6 @@ This section describes some noteworthy details on how certain features are imple
  
     * It checks for the phrase `itemsDueBefore` and parses the input after the prefixes: date `date/` and time `time/`. 
     * If the input are in the correct date and time format, a new DueBeforePredicate object is created and passed to a new DueBeforeCommand constructor.
-    
     
 * `DueByCommandParser` implements `Parser<DueByCommand>`
 
@@ -77,14 +74,16 @@ The way dueBy and dueBefore works is very similar, the difference only being the
 * `DueByPredicate` compares the LocalDateTime input and every task's LocalDateTime, and returns true if the task's LocalDateTime *equals* the input's LocalDateTime.
 
 ##### Command: 
+The class diagram
 
 ![CommandClassDiagram](images/filterFunction/CommandClassDiagram.png)
 
+---
+
+The following sequence diagram shows how the dueBy filtering works:
 * `DueBeforeCommand` and `DueByCommand` extends `Command`.
 * The command will be executed with the `Model`, which will update the `FilteredTaskList` based on the `DueByPredicate`/`DueBeforePredicate`
 * If it is successful, it will return a `CommandResult` with a successful message to the UI.
-
-The following sequence diagram shows how the dueBy filtering works:
 
 ![FilterSequenceDiagram](images/filterFunction/FilterSequenceDiagram.png)
 
@@ -101,8 +100,42 @@ After implementing the task operations, there is `FilteredTaskList` which we can
 By using the same function, we can prevent duplication of code.
 
 Furthermore, we have adhered a similar design to the task's operations (Using of Command, Parser classes) to maintain code consistency.
+    
 
+### Add link to tasks (`link meeting` and `link doc`) feature
 
+##### Parser: 
+
+![ParserClassDiagram](images/linkFunction/ParserClassDiagram.png)
+
+* `LinkCommandParser` implements `Parser<LinkCommand>`
+ 
+    * It checks for the phrase `link meeting` for LinkMeetingCommand and parses the input
+    after the prefixes: desc `desc/`, url `url/`, index `i/`, date `date/DD-MM-YYYY`, and time `time/HHmm`.
+    * It checks for the phrase `link doc` for LinkCollaborativeCommand and parses the input
+    after the prefixes: desc `desc/`, url `url/`, and index `i/`.
+    * If the inputs are all in the correct format, a new Link object is created and added to an existing task.
+    
+##### Command: 
+ The class diagram
+
+![CommandClassDiagram](images/linkFunction/CommandClassDiagram.png)
+
+-----
+The following sequence diagram shows how the dueBy filtering works:
+* `LinkCollaborativeCommand` and `LinkMeetingCommand` extends `Command`.
+* The command will be parsed by `AddressBookParser` and further parsed by `LinkCommandParser`.
+* The `LinkCommandParser` will determine whether the command is a `LinkMeetingCommand` or a `LinkCollaborativeCommand`.
+* After returning the suitable Link Command, the command will be executed, calling the `setTask()` method of `Model`,
+which will update the `TaskList`.
+* After updating the task, the `LogicManager` will call `saveLifeBook()` method of `Storage` class to store the update.
+* If all are successful, `LinkCommand` will return a `CommandResult` with a successful message to the UI.
+
+![FilterSequenceDiagram](images/linkFunction/LinkSequenceDiagram.png)
+
+The following activity diagram shows what happens when the user enters the link command:
+
+![FilterActivityDiagram](images/linkFunction/LinkActivityDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
