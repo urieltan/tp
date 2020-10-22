@@ -121,12 +121,11 @@ The class diagram
 
 ![CommandClassDiagram](images/filterFunction/CommandClassDiagram.png)
 
----
-
-The following sequence diagram shows how the dueBy filtering works:
 * `DueBeforeCommand` and `DueByCommand` extends `Command`.
 * The command will be executed with the `Model`, which will update the `FilteredTaskList` based on the `DueByPredicate`/`DueBeforePredicate`
 * If it is successful, it will return a `CommandResult` with a successful message to the UI.
+
+The following sequence diagram shows how the dueBy filtering works:
 
 ![FilterSequenceDiagram](images/filterFunction/FilterSequenceDiagram.png)
 
