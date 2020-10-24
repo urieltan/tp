@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalTodos.CHORES;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -54,7 +55,7 @@ public class AddTodoCommandTest {
         ModelStub modelStub = new ModelStubWithTodo(validTodo);
 
         assertThrows(CommandException.class,
-                AddTodoCommand.MESSAGE_DUPLICATE_PERSON, () -> addTodoCommand.execute(modelStub));
+                AddTodoCommand.MESSAGE_DUPLICATE_TODO, () -> addTodoCommand.execute(modelStub));
     }
 
     @Test
@@ -209,6 +210,16 @@ public class AddTodoCommandTest {
 
         @Override
         public AddCommand markAsDone(Task target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateSortedTaskList(Comparator<Task> taskComparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateSortedPersonList(Comparator<Person> personComparator) {
             throw new AssertionError("This method should not be called.");
         }
 

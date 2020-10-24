@@ -11,6 +11,7 @@ import seedu.address.logic.commands.find.FindEventCommand;
 import seedu.address.logic.commands.find.FindTodoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.task.DescriptionContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -42,22 +43,22 @@ public class FindCommandParser implements Parser<FindCommand> {
             String trimmedArgs = splitArgs[1].trim();
             if (trimmedArgs.isEmpty()) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindContactCommand.MESSAGE_USAGE));
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTodoCommand.MESSAGE_USAGE));
             }
 
             String[] nameKeywords = trimmedArgs.split("\\s+");
 
-            return new FindTodoCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+            return new FindTodoCommand(new DescriptionContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
         } else if (splitArgs[0].equals("event")) {
             String trimmedArgs = splitArgs[1].trim();
             if (trimmedArgs.isEmpty()) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindContactCommand.MESSAGE_USAGE));
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindEventCommand.MESSAGE_USAGE));
             }
 
             String[] nameKeywords = trimmedArgs.split("\\s+");
 
-            return new FindEventCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+            return new FindEventCommand(new DescriptionContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
         } else {
             throw new ParseException(UNKNOWN_FIND_COMMAND);
         }

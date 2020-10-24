@@ -4,11 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
@@ -25,8 +27,10 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
+    private final SortedList<Person> sortedPersons;
     private final FilteredList<Person> filteredPersons;
-    private FilteredList<Task> filteredTasks;
+    private final SortedList<Task> sortedTasks;
+    private final FilteredList<Task> filteredTasks;
     private final TaskList taskList;
 
     /**
@@ -41,9 +45,10 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.taskList = new TaskList(taskList);
-
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredTasks = new FilteredList<>(this.taskList.getTaskList());
+        sortedPersons = new SortedList<>(this.addressBook.getPersonList());
+        filteredPersons = new FilteredList<>(sortedPersons);
+        sortedTasks = new SortedList<>(this.taskList.getTaskList());
+        filteredTasks = new FilteredList<>(sortedTasks);
     }
 
     public ModelManager() {
@@ -156,6 +161,11 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
     }
+
+    @Override
+    public void updateSortedPersonList(Comparator<Person> personComparator) {
+        sortedPersons.setComparator(personComparator);
+    }
     //=========== TaskList ================================================================================
     @Override
     public void addTodo(Todo todo) {
@@ -205,4 +215,9 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredTasks.setPredicate(predicate);
     }
+    @Override
+    public void updateSortedTaskList(Comparator<Task> taskComparator) {
+        sortedTasks.setComparator(taskComparator);
+    }
+
 }

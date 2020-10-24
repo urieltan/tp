@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import seedu.address.logic.commands.AddCommand;
@@ -22,15 +23,23 @@ public class AddTodoCommand extends AddCommand {
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_DATE + "DATE "
             + PREFIX_TIME + "TIME"
-            + " [" + PREFIX_RECURRING + "RECURRING]";
+            + " [" + PREFIX_RECURRING + "RECURRING]"
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_DESCRIPTION + "Finish assignment "
+            + PREFIX_DATE + "23-11-2020 "
+            + PREFIX_TIME + "2359 "
+            + PREFIX_TAG + "CS2100";
+
+    public static final String DATE_TIME_USAGE = "Date and time format should be: date/DD-MM-YYYY time/HHmm (24-hour)";
 
     public static final String MESSAGE_SUCCESS = "New todo added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This todo already exists in the TodoList";
+    public static final String MESSAGE_DUPLICATE_TODO = "This todo already exists in the TodoList";
 
     private final Todo toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Todo}
      */
     public AddTodoCommand(Todo todo) {
         requireNonNull(todo);
@@ -41,7 +50,7 @@ public class AddTodoCommand extends AddCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (model.hasTask(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_TODO);
         }
         model.addTodo(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getDescriptionDateTime()), "TASK");

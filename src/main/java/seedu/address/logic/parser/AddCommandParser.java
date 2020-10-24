@@ -74,15 +74,20 @@ public class AddCommandParser implements Parser<AddCommand> {
         } else if (splitArgs[0].trim().equals("todo")) {
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_DESCRIPTION,
-                            PREFIX_DATE, PREFIX_TIME, PREFIX_RECURRING);
+                            PREFIX_DATE, PREFIX_TIME, PREFIX_RECURRING, PREFIX_TAG);
             if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_TIME)
                     || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         AddTodoCommand.MESSAGE_USAGE));
             }
             String description = argMultimap.getValue(PREFIX_DESCRIPTION).get().trim();
+            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
             String date = argMultimap.getValue(PREFIX_DATE).get().trim();
             String time = argMultimap.getValue(PREFIX_TIME).get().trim();
+            if (!checkDateValidity(date) || !checkTimeValidity(time)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddTodoCommand.DATE_TIME_USAGE));
+            }
             String deadline = date + " " + time;
 
             Todo todo;
@@ -95,7 +100,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                     if (checkChronoUnitValidity(recurrenceTimePeriod)
                             && checkRecurrenceValueValidity(recurrenceValue)) {
                         Recurrence recurrence = new Recurrence(recurrenceValue, recurrenceTimePeriod);
-                        todo = new Todo(description, deadline, recurrence);
+                        todo = new Todo(description, deadline, recurrence, tagList);
                     } else {
                         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                                 AddTodoCommand.MESSAGE_USAGE));
@@ -105,13 +110,13 @@ public class AddCommandParser implements Parser<AddCommand> {
                             AddTodoCommand.MESSAGE_USAGE));
                 }
             } else {
-                todo = new Todo(description, deadline);
+                todo = new Todo(description, deadline, tagList);
             }
             return new AddTodoCommand(todo);
         } else if (splitArgs[0].trim().equals("event")) {
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_DESCRIPTION, PREFIX_STARTDATE,
-                            PREFIX_STARTTIME, PREFIX_ENDDATE, PREFIX_ENDTIME, PREFIX_RECURRING);
+                            PREFIX_STARTTIME, PREFIX_ENDDATE, PREFIX_ENDTIME, PREFIX_RECURRING, PREFIX_TAG);
             if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION, PREFIX_STARTDATE,
                     PREFIX_STARTTIME, PREFIX_ENDDATE, PREFIX_ENDTIME)
                     || !argMultimap.getPreamble().isEmpty()) {
@@ -119,10 +124,16 @@ public class AddCommandParser implements Parser<AddCommand> {
                         AddEventCommand.MESSAGE_USAGE));
             }
             String description = argMultimap.getValue(PREFIX_DESCRIPTION).get().trim();
+            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
             String stDate = argMultimap.getValue(PREFIX_STARTDATE).get().trim();
             String stTime = argMultimap.getValue(PREFIX_STARTTIME).get().trim();
             String endDate = argMultimap.getValue(PREFIX_ENDDATE).get().trim();
             String endTime = argMultimap.getValue(PREFIX_ENDTIME).get().trim();
+            if (!checkDateValidity(stDate) || !checkTimeValidity(stTime)
+                    || !checkDateValidity(endDate) || !checkTimeValidity(endTime)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddEventCommand.DATE_TIME_USAGE));
+            }
             String stDateTime = stDate + " " + stTime;
             String endDateTime = endDate + " " + endTime;
             MeetingLink meetingLink = new MeetingLink();
@@ -137,7 +148,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                     if (checkChronoUnitValidity(recurrenceTimePeriod)
                             && checkRecurrenceValueValidity(recurrenceValue)) {
                         Recurrence recurrence = new Recurrence(recurrenceValue, recurrenceTimePeriod);
-                        event = new Event(description, stDateTime, endDateTime, recurrence);
+                        event = new Event(description, stDateTime, endDateTime, recurrence, tagList);
                     } else {
                         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                                 AddEventCommand.MESSAGE_USAGE));
@@ -147,7 +158,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                             AddEventCommand.MESSAGE_USAGE));
                 }
             } else {
-                event = new Event(description, stDateTime, endDateTime, meetingLink);
+                event = new Event(description, stDateTime, endDateTime, meetingLink, tagList);
             }
             return new AddEventCommand(event);
         } else {
@@ -180,6 +191,48 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     private static boolean checkRecurrenceValueValidity(Integer value) {
         return value > 0;
+    }
+
+    /**
+     * Returns true if date is valid.
+     * @param date input by user
+     * @return boolean
+     */
+    private static boolean checkDateValidity(String date) {
+        String[] dateSplit = date.split("-");
+        String strDay = dateSplit[0];
+        String strMonth = dateSplit[1];
+        String strYear = dateSplit[2];
+
+        Integer day = Integer.parseInt(strDay);
+        Integer month = Integer.parseInt(strMonth);
+        Integer year = Integer.parseInt(strYear);
+
+        boolean checkLength = strDay.length() == 2 && strMonth.length() == 2 && strYear.length() == 4;
+        boolean checkDay = day <= 31 && day > 0;
+        boolean checkMonth = month > 0 && month <= 12;
+        boolean checkYear = year > 1970;
+
+        return checkLength && checkDay && checkMonth && checkYear;
+    }
+
+    /**
+     * Returns true if time is valid.
+     * @param time input by user
+     * @return boolean
+     */
+    private static boolean checkTimeValidity(String time) {
+        boolean checkLength = time.length() == 4;
+        if (checkLength) {
+            Integer hour = Integer.parseInt(time.substring(0, 2));
+            Integer minute = Integer.parseInt(time.substring(2, 4));
+
+            boolean checkHour = hour >= 0 && hour <= 23;
+            boolean checkMinute = minute >= 0 && minute <= 59;
+            return checkHour && checkMinute;
+        } else {
+            return false;
+        }
     }
 
 }

@@ -22,8 +22,8 @@ public class AddTodoCommandParserTest {
     private static final String CHORES_TIME = "time/1800 ";
     private static final String CHORES_RECURRENCE = "recurring/1 week";
 
-    private static final String INVALID_DATE = "date/1-1-2020";
-    private static final String INVALID_TIME = "time/12000";
+    private static final String INVALID_DATE = "date/1-15-2020 ";
+    private static final String INVALID_TIME = "time/2500";
     private static final String INVALID_RECURRENCE_VALUE = "recurring/0 day";
     private static final String INVALID_RECURRENCE_UNIT = "recurring/1 sleep";
 
@@ -53,16 +53,16 @@ public class AddTodoCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTodoCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTodoCommand.DATE_TIME_USAGE);
 
         // invalid date
         assertParseFailure(parser, "todo " + HOMEWORK_DESC + INVALID_DATE + HOMEWORK_TIME,
                 expectedMessage);
 
-        //Todo
-        // invalid time (after implementing exceptions for wrong time format)
-        //assertParseFailure(parser, "todo " + HOMEWORK_DESC + HOMEWORK_DATE + INVALID_TIME,
-        //        expectedMessage);
+
+        // invalid time
+        assertParseFailure(parser, "todo " + HOMEWORK_DESC + HOMEWORK_DATE + INVALID_TIME,
+                expectedMessage);
     }
 
     @Test

@@ -15,7 +15,7 @@ and module details.** Lifebook supports Command Line Interface (CLI) for efficie
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `lifebook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `lifebook.jar` from [here](https://github.com/AY2021S1-CS2103T-F12-4/tp/releases/tag/v1.3a).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your Lifebook.
 
@@ -110,18 +110,18 @@ Examples:
 *  `edit contact 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit contact 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Showing persons with a specific tag: `show`
+### Showing persons with a specific tag: `show contact`
 Shows persons whose tags match the tag being searched.
 
-Format: `show t/TAG`
+Format: `show contact t/TAG`
 * The search is case-insensitive. e.g `friends` will match `Friends`
 * Only full words will be matched. e.g. `friend` will not match `friends`
 * Persons whose one of the tag(s) matches the tag searched will be returned.
 e.g. Hans with tag `friends` and `colleagues` will be returned when tag `friends` is searched.
 
 Examples:
-* `show t/colleagues`
-* `show t/friends`
+* `show contact t/colleagues`
+* `show contact t/friends`
 
 ### Locating persons by name: `find contact`
 
@@ -185,6 +185,36 @@ Shows a list of all To Do's in the TodoList.
 
 Format: `list todo`
 
+### Showing todos with a specific tag: `show todo`
+Shows todos whose tags match the tag being searched.
+
+Format: `show todo t/TAG`
+* The search is case-insensitive. e.g `cs2100` will match `CS2100`
+* Only full words will be matched. e.g. `cs210` will not match `cs2100`
+* Todos whose one of the tag(s) matches the tag searched will be returned.
+e.g. Finish assignment with tag `CS2100` and `Graded` will be returned when tag `CS2100` is searched.
+
+Examples:
+* `show todo t/CS2100`
+* `show todo t/CS3243`
+
+### Locating todos by description: `find todo`
+
+Finds todos whose description contain any of the given keywords.
+
+Format: `find todo KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `assignment` will match `Assignment`
+* The order of the keywords does not matter. e.g. `Finish assignment` will match `assignment Finish`
+* Only the description is searched.
+* Only full words will be matched e.g. `Assign` will not match `Assignment`
+* Todos matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Do assignment` will return `Do chores`, `Finish assignment`
+
+Examples:
+* `find todo assignment` returns `Essay assignment` and `Quiz assignment`
+* `find todo Do assignment` returns `Do chores`, `Finish assignment`<br>
+
 ### Removing To Dos : `delete todo`
 Removes a To Do from the TodoList of LifeBook.
 
@@ -244,6 +274,36 @@ Shows a list of all Events in the EventList.
 
 Format: `list event`
 
+### Showing events with a specific tag: `show events`
+Shows events whose tags match the tag being searched.
+
+Format: `show event t/TAG`
+* The search is case-insensitive. e.g `cs2100` will match `CS2100`
+* Only full words will be matched. e.g. `cs210` will not match `cs2100`
+* Events whose one of the tag(s) matches the tag searched will be returned.
+e.g. Attend meeting with tag `CS2100` and `TeamProject` will be returned when tag `CS2100` is searched.
+
+Examples:
+* `show event t/TeamProject`
+* `show event t/CS3243`
+
+### Locating todos by description: `find event`
+
+Finds events whose description contain any of the given keywords.
+
+Format: `find event KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `meeting` will match `Meeting`
+* The order of the keywords does not matter. e.g. `Attend meeting` will match `meeting Attend`
+* Only the description is searched.
+* Only full words will be matched e.g. `Meet` will not match `Meeting`
+* Events matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Attend meeting` will return `Attend workshop`, `Arrange meeting`
+
+Examples:
+* `find event meeting` returns `CCA meeting` and `Team meeting`
+* `find event Attend meeting` returns `Attend workshop`, `Arrange meeting`<br>
+
 ### Removing Events : `delete event`
 Removes an Event from the EventList of LifeBook.
 
@@ -283,9 +343,9 @@ Example:
 
 <h2> Others </h2>
 
-### Listing all contacts and tasks : `list all`
+### Listing all tasks : `list all`
 
-Shows a list of all contacts, events, and to-dos in the Lifebook.
+Shows a list of all events and to-dos in the Lifebook.
 
 Format: `list all`
 
@@ -335,6 +395,15 @@ Outputs a list of results.
     Example: `itemsDueBefore date/12-12-2020 time/2359`
     It will output a list of todos/meetings that are due specifically **before** 12th December 2020, 2359.
 
+### Sorting contacts and tasks: `sort`
+
+Sorts tasks or contacts according to date or name, respectively. Sorting may also be cleared, such that the natural order of lists are restored.
+
+Format: `sort OPTION`
+
+* Contact, task, and clear are the available options for sort and should be used individually.
+* Using the clear option restores all lists (i.e. both contact list and task list) to their natural order.
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -367,7 +436,12 @@ Action | Format, Examples
 **Delete Contact** | `delete contact INDEX`<br> e.g., `delete contact 3`
 **Edit Contact** | `edit contact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]`<br> e.g.,`edit contact 2 n/James Lee e/jameslee@example.com`
 **Find Contact** | `find contact KEYWORD [MORE_KEYWORDS]`<br> e.g., `find contact James Jake`
-**List (Contacts and Tasks)** | `list all`
+**Find To Do** | `find todo KEYWORD [MORE_KEYWORDS]`<br> e.g., `find todo Finish assignment`
+**Find Event** | `find event KEYWORD [MORE_KEYWORDS]`<br> e.g., `find event Attend meeting`
+**Show Contact** | `show contact t/TAG` <br> e.g., `show contact t/friends`
+**Show To Do** | `show todo t/TAG` <br> e.g., `show todo t/CS2100`
+**Show Event** | `show event t/TAG` <br> e.g., `show event t/CCAMeeting`
+**List Tasks** | `list all`
 **List Contacts** | `list contact`
 **Help** | `help`
 **Add To Do** | `add todo desc/DESCRIPTION date/DATE time/TIME [recurring/VALUE UNIT]` <br> e.g., `add todo desc/update user guide date/09/08/2020 time/2300 recurring/1 week`
@@ -378,9 +452,9 @@ Action | Format, Examples
 **List Events** | `list event`
 **Remove Event** | `delete event INDEX` <br> e.g., `delete event 3`
 **Show Event** | `show event INDEX` <br> e.g., `show event 3`
-**Show** | `show t/TAG` <br> e.g., `show t/friends`
 **Mark To Do/Event as Complete** | `done INDEX` <br> e.g., `done 5`
 **Find tasks due by** | `itemsDueBy date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueBy date/12-12-2020 time/2359`
 **Find tasks due before** |  `itemsDueBefore date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueBefore date/12-12-2020 time/2359`
+**Sort** | `sort OPTION` <br> `OPTION` refers to `contact`, `task`, or `clear`
 **Link meeting** | `link meeting desc/DESCRIPTION url/LINK i/INDEX_OF_TASK` <br> e.g.,`link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf i/2 date/22/09/2020 time/1400`
 **Link doc** | `link doc desc/DESCRIPTION url/LINK i/INDEX_OF_TASK` <br> e.g.,`link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoIkfacr0asqV9A4kh i/2`

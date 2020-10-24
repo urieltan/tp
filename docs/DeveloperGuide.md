@@ -45,15 +45,198 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Add tasks (`todo` and `event`) feature
 
-#### Proposed Implementation
+##### Parser:
+
+![AddTaskParserClassDiagram](images/addTask/AddTaskParserClassDiagram.png)
+
+* `AddCommandParser` implements `Parser<AddCommand>`
+
+* It parses the user input to determine if the user intends to add a `todo`, `event`, or `person`.
+* It parses the input after the prefixes required to create the intended `todo`, `event`, or `person`.
+* If the user input has all all required prefixes and matches the required syntax and format, it creates the new intended Task or `person` and passes it to its respective AddCommand constructor.
+
+##### Command:
+
+![AddTaskCommandClassDiagram](images/addTask/CommandClassDiagram.png)
+
+* The abstract class `AddCommand` extends `Command`.
+* The concrete classes `AddTodoCommand` and `AddEventCommand` extends `AddCommand`.
+* The command will be executed by the Model, which will update the FilteredTaskList based on the added task.
+* If it is successful, it will return a CommandResult with a successful message to the UI.
+
+---
+The following sequence diagrams displays a `Todo` being added to the Task List. Adding an `Event` follows a similar sequence.
+
+![AddSequenceDiagram](images/addTask/AddSequenceDiagram.png)
+
+The following sequence diagram exhibits the behavior of logic.
+
+![AddTaskSequenceDiagram](images/addTask/AddTaskSequenceDiagram.png)
+
+The following activity diagram shows what happens when the user enters an add task command:
+
+![AddTaskActivityDiagram](images/addTask/AddTaskActivityDiagram.png)
+
+#### Design consideration
+
+#### How command works:
+
+* An alternative approach would be to have a single `AddTaskCommand` which extends `AddCommand`. The `AddCommandParser` could pass either `todo` or `event` to this class' constructor.
+* This could reduce the replication of code, since both `AddTodoCommand` and `AddEventCommand` are almost identical.
+* However, by having two distinct commands, different and more specific success or error messages can be produced by the execution of respective commands.
+
+### Filter tasks (`dueBy` and `dueBefore`) feature
+
+##### Parser:
+
+![ParserClassDiagram](images/filterFunction/ParserClassDiagram.png)
+
+* `DueBeforeCommandParser` implements `Parser<DueBeforeCommand>`
+
+    * It checks for the phrase `itemsDueBefore` and parses the input after the prefixes: date `date/` and time `time/`.
+    * If the input are in the correct date and time format, a new DueBeforePredicate object is created and passed
+    to a new DueBeforeCommand constructor.
+
+* `DueByCommandParser` implements `Parser<DueByCommand>`
+
+    * It checks for the phrase `itemsDueBy` and parses the content after the prefixes: date `date/` and time `time/`.
+    * If the input are in the correct date and time format, a new DueByPredicate object is created and passed to a new DueByCommand constructor.
+
+##### Predicate:
+
+![PredicateClassDiagram](images/filterFunction/PredicateClassDiagram.png)
+
+The way dueBy and dueBefore works is very similar, the difference only being the dueBefore and dueBy predicate.
+
+`DueBeforePredicate` and `DueByPredicate` extends `DuePredicate`.
+
+
+* `DueBeforePredicate` compares the LocalDateTime input and every task's LocalDateTime, and returns true if the task's LocalDateTime *is before* the input's LocalDateTime.
+* `DueByPredicate` compares the LocalDateTime input and every task's LocalDateTime, and returns true if the task's LocalDateTime *equals* the input's LocalDateTime.
+
+##### Command:
+The class diagram
+
+![CommandClassDiagram](images/filterFunction/CommandClassDiagram.png)
+
+* `DueBeforeCommand` and `DueByCommand` extends `Command`.
+* The command will be executed with the `Model`, which will update the `FilteredTaskList` based on the `DueByPredicate`/`DueBeforePredicate`
+* If it is successful, it will return a `CommandResult` with a successful message to the UI.
+
+The following sequence diagram shows how the dueBy filtering works:
+
+![FilterSequenceDiagram](images/filterFunction/FilterSequenceDiagram.png)
+
+The following activity diagram shows what happens when the user enters the filter command:
+
+![FilterActivityDiagram](images/filterFunction/FilterActivityDiagram.png)
 
 #### Design consideration:
 
-##### Aspect: How undo & redo executes
+##### Aspect: How dueBy and dueBefore executes
 
-### \[Proposed\] Data archiving
+After implementing the task operations, there is `FilteredTaskList` which we can utilise to filter tasks.
+
+By using the same function, we can prevent duplication of code.
+
+Furthermore, we have adhered a similar design to the task's operations (Using of Command, Parser classes) to maintain code consistency.
+
+### Add link to tasks (`link meeting` and `link doc`) feature
+
+##### Parser:
+
+![ParserClassDiagram](images/linkFunction/ParserClassDiagram.png)
+
+* `LinkCommandParser` implements `Parser<LinkCommand>`
+
+    * It checks for the phrase `link meeting` for LinkMeetingCommand and parses the input
+    after the prefixes: desc `desc/`, url `url/`, index `i/`, date `date/DD-MM-YYYY`, and time `time/HHmm`.
+    * It checks for the phrase `link doc` for LinkCollaborativeCommand and parses the input
+    after the prefixes: desc `desc/`, url `url/`, and index `i/`.
+    * If the inputs are all in the correct format, a new Link object is created and added to an existing task.
+
+##### Command:
+ The class diagram
+
+![CommandClassDiagram](images/linkFunction/CommandClassDiagram.png)
+
+-----
+The following sequence diagram shows how the LinkCommand works:
+* `LinkCollaborativeCommand` and `LinkMeetingCommand` extends `Command`.
+* The command will be parsed by `AddressBookParser` and further parsed by `LinkCommandParser`.
+* The `LinkCommandParser` will determine whether the command is a `LinkMeetingCommand` or a `LinkCollaborativeCommand`.
+* After returning the suitable Link Command, the command will be executed, calling the `setTask()` method of `Model`,
+which will update the `TaskList`.
+* After updating the task, the `LogicManager` will call `saveLifeBook()` method of `Storage` class to store the update.
+* If all are successful, `LinkCommand` will return a `CommandResult` with a successful message to the UI.
+
+![FilterSequenceDiagram](images/linkFunction/LinkSequenceDiagram.png)
+
+The following activity diagram shows what happens when the user enters the link command:
+
+![FilterActivityDiagram](images/linkFunction/LinkActivityDiagram.png)
+
+### Show tag (`show contact`, `show todo`, and `show event`) feature
+
+#### Parser:
+
+![ParserClassDiagram](images/showTagFunction/ShowTagCommandParserClassDiagram.png)
+
+* `ShowTagCommandParser` implements `Parser<ShowTagCommand>`
+
+    * It checks for the phrase `show contact` for ShowTagContactCommand and parses the input
+    after the prefixes: `t/`.
+    * It checks for the phrase `show event` for ShowTagEventCommand and parses the input
+    after the prefixes: `t/`.
+    * It checks for the phrase `show todo` for ShowTagTodoCommand and parses the input
+    after the prefixes: `t/`.
+    * If the input is correct, a new Predicate object is created and passed to a new ShowTagCommand constructor.
+
+##### Predicate:
+
+![PredicateClassDiagram](images/showTagFunction/ContactTagMatchesKeywordPredicate.png)
+![PredicateClassDiagram](images/showTagFunction/TaskTagMatchesKeywordPredicate.png)
+
+The way these predicate works is very similar, where the `ContactTagMatchesKeywordPredicate` handles the Person object
+and the `TaskTagMatchesKeywordPredicate` handles the Task object.
+
+`ContactTagMatchesKeywordPredicate` implements `Predicate<Person>`.
+`TaskTagMatchesKeywordPredicate` implements `Predicate<Task>`.
+
+* `ContactTagMatchesKeywordPredicate` returns true if the tag input matches one of the contact's tags.
+* `TaskTagMatchesKeywordPredicate` returns true if the tag input matches one of the task's (event's or todo's) tags.
+
+##### Command:
+ The class diagram
+
+![CommandClassDiagram](images/showTagFunction/ShowTagCommandClassDiagram.png)
+
+-----
+The sequence diagram:
+* `ShowTagContactCommand`, `ShowTagEventCommand` and `ShowTagTodoCommand` extends `ShowTagCommand`.
+* The command will be parsed by `AddressBookParser` and further parsed by `ShowTagCommandParser`.
+* The `ShowTagCommandParser` will determine whether the command is a `ShowTagContactCommand`, `ShowTagEventCommand` or a `ShowTagTodoCommand`.
+* After returning the suitable ShowTagCommand, the command will be executed,
+calling the `updateFiltertedPersonList()` method of `Model` and update the `AddressBook` if it is a `ShowTagContactCommand`, or
+the `updateFiltertedTaskList()` method of `Model` and update the `TaskList` if it is a `ShowTagEventCommand` or `ShowTagTodoCommand`.
+* After updating the model, the `LogicManager` will call the sorage to save the file.
+* If all are successful, `ShowTagCommand` will return a `CommandResult` with a successful message to the UI.
+
+The following sequence diagram shows how the `ShowTagContactCommand` works.
+The sequence diagrams for `ShowTagEventCommand` and `ShowTagTodoCommand` are very similar to the diagram below
+with minor differences in the type of ShowTagCommand returned and function called to update the model.
+
+![FilterSequenceDiagram](images/showTagFunction/ShowTagCommandSequenceDiagram.png)
+
+![SaveFileDiagram](images/showTagFunction/SaveLifebook.png)
+
+The following activity diagram shows what happens when the user enters the show contact command:
+
+![FilterActivityDiagram](images/showTagFunction/ShowTagCommandActivityDiagram.png)
+
+The activity diagram when user enters the show event or show todo command is similar to the diagram above.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -94,17 +277,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
 | `* * *`  | user                                       | add a new person               |                                                                        |
+| `* * *`  | forgetful student                          | add todos and events        | remember to complete important tasks for projects and  attend important events|
 | `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
+| `* * *`  | forgetful student                          | remove todos and events        | remove tasks that I no longer need |
 | `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* * *`  | forgetful student                          | add and remove to do's         | remember to complete important tasks for projects or assignments |
-| `* * *`  | student                                    | mark to do's as done           | remember the tasks or assignments that I have completed          |
-| `* * *`  | forgetful student                           | view details of a to do        | recall the details of an assignment or task.                     |
-| ` * * ` | forgetful student                           |  search for contacts under a particular tag  | find people I'm working with easily
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `* *`    | disorganised student                                       | add and remove collaborative links (Google Drive, and many more)   | find the collaborative link for the project easily                |
+| `* * *`  | user                                       | find todos by description          | locate details of todos without having to go through the entire list |
+| `* * *`  | user                                       | find events by description          | locate details of events without having to go through the entire list |
+| `* * *`  | student                                    | mark todos and events as done  | remember the tasks or assignments that I have completed          |
+| ` * * ` | forgetful student                           | search for contacts under a particular tag  | find people I am working with easily
+| ` * * ` | forgetful student                           | search for todos and events under a particular tag  | find the task that I am working on
+| `* *`    | disorganised student                       | add and remove collaborative links (Google Drive, and many more) to a todo   | find the collaborative link for the project easily |
+| `* *`      | disorganised student                       | add, remove, and view zoom links for meetings to an event         | remember my Zoom Links                                      |
 | `* *`    | forgetful/disorganised student | search what tasks/meetings are due soon or by a specific date/time (filter) | remember to finish before the deadline|
 | `*`      | user with many contacts in the Lifebook | sort persons by name           | locate a person easily                                                 |
-| `*`      | disorganised student |  add, remove, and view zoom links for meetings          | remember my Zoom Links                                          |
+| `*`      | student with weekly lectures and tutorials | add recurring tasks         | save time by not adding the same task every week, which is time-consuming|
 
 *{More to be added}*
 
@@ -158,6 +344,52 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Show Todos with a specific tag**
+
+**MSS**
+
+1.  User requests to list todos
+2.  Lifebook shows a list of todos
+3.  User requests to show all todos with a specific tag in the list
+4.  Lifebook shows all the todos whose tag matching the tag searched
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given tag is empty or invalid.
+
+    * 3a1. Lifebook shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Show Events with a specific tag**
+
+**MSS**
+
+1.  User requests to list events
+2.  Lifebook shows a list of events
+3.  User requests to show all events with a specific tag in the list
+4.  Lifebook shows all the events whose tag matching the tag searched
+
+  Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+Use case ends.
+
+* 3a. The given tag is empty or invalid.
+
+  * 3a1. Lifebook shows an error message.
+
+    Use case resumes at step 2.
+
 **Use case: Add a To Do to the To Do List**
 
 **MSS**
@@ -173,6 +405,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. Lifebook shows an error message
 
     Use case restarts at step 1.
+
+* 1b. User chooses to input the task as a recurring one
+
+    * 1b1. Lifebook will add the task as a recurring one instead.
 
 **Use case: Perform an action (remove, show, mark as done) on a To Do from the To Do list**
 
@@ -202,6 +438,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
      Use case resumes at step 2.
 
+* 3c. The user marks a recurring task as done.
+
+    * 3c1. Lifebook will automatically add a new task with the same details, with a new deadline given by the recurrence.
+
 **Use case: Filter items due on a specific date/time**
 
 **MSS**
@@ -218,6 +458,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. Lifebook shows an error message.
 
       Use case restarts at step 1.
+
+* 1b. The given date/time format is invalid.
+
+    * 1b1. Lifebook shows an error message.
+
+        Use case restarts at step 1.
 
 * 2a. The list is empty.
 
