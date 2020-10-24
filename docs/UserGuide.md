@@ -256,7 +256,7 @@ Format: `done INDEX`
 * If it is a recurring todo, it will proceed to add a new Todo based on the new deadline given by the recurrence.
 
 Example:
-* `list todo` followed by `done todo 3`  marks the 3rd To Do on the To Do list as complete.
+* `list todo` followed by `done 3` marks the 3rd todo on the Todo List as complete.
 
 <h2> Event </h2>
 
@@ -334,18 +334,18 @@ Format: `show event INDEX`
 Example:
 * `list event` followed by `show event 3`  shows all details of the 3rd Event on the Event list.
 
-### Mark To Do as complete: `done`
+### Mark Event as complete: `done`
 Marks an Event on the EventList as complete.
 
 Format: `done INDEX`
 
 * Marks the Event at the specified `INDEX` as done.
-* The index refers to the index number shown in the displayed EventList.
+* The index refers to the index number shown in the displayed Event list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * If it is a recurring event, it will proceed to add a new Event based on the new deadline given by the recurrence.
 
 Example:
-* `list event` followed by `done event 3`  marks the 3rd Event on the Event list as complete.
+* `list event` followed by `done 3` marks the 3rd Event on the Event list as complete.
 
 <h2> Others </h2>
 
@@ -450,7 +450,7 @@ Action | Format, Examples
 **List Tasks** | `list all`
 **List Contacts** | `list contact`
 **Help** | `help`
-**Add To Do** | `add todo desc/DESCRIPTION date/DATE time/TIME [recurring/VALUE UNIT]` <br> e.g., `add todo desc/update user guide date/09/08/2020 time/2300 recurring/1 week`
+**Add To Do** | `add todo desc/DESCRIPTION date/DATE time/TIME [recurring/VALUE UNIT]` <br> e.g., `add todo desc/update user guide date/09-08-2020 time/2300 recurring/1 week`
 **List To Dos** | `list todo`
 **Remove To Do** | `delete todo INDEX` <br> e.g., `delete todo 3`
 **Show To Do** | `show todo INDEX` <br> e.g., `show todo 3`
