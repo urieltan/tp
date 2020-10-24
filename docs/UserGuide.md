@@ -178,7 +178,7 @@ Format: `add todo desc/DESCRIPTION date/DATE time/TIME [recurring/VALUE UNIT]`
 
 If a task is recurring, it will be displayed in the GUI.
 
-<img src="https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/ExampleOfARecurringTask.png" height="214" width="414">
+<img src="https://github.com/lerxcl/tp/blob/recurringTask/docs/images/ExampleOfARecurringTask.png" height="100" width="150">
 
 Examples:
 
