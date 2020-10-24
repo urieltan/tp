@@ -10,6 +10,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.task.Recurrence;
 import seedu.address.model.task.Task;
 
 /**
@@ -74,8 +75,9 @@ public class TaskCard extends UiPart<Region> {
             });
             linkDescription.setText(task.getLink().get().getDescription());
         }
-        if (task.getRecurrence() != null) {
-            recurring.setText("Recurring task");
+        Recurrence recurrence = task.getRecurrence();
+        if (recurrence != null) {
+            recurring.setText("Recurring task [" + recurrence.getValue() + " " + recurrence.getUnit() + "]");
         }
     }
 

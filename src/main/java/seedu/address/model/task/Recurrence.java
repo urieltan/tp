@@ -46,4 +46,11 @@ public class Recurrence {
     public ChronoUnit getChronoUnit() {
         return this.chronoUnit;
     }
+
+    public String getUnit() {
+        String rawChronoUnitToString = this.chronoUnit.toString();
+        String unit = rawChronoUnitToString.substring(0, rawChronoUnitToString.length() - 1);
+        unit += "(s)";
+        return unit;
+    }
 }
