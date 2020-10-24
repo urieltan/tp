@@ -174,6 +174,12 @@ Format: `add todo desc/DESCRIPTION date/DATE time/TIME [recurring/VALUE UNIT]`
 * `VALUE` must be > 0
 * `UNIT` must be "day", "week", "month" or "year"
 
+### Recurrence
+
+If a task is recurring, it will be displayed in the GUI.
+
+<img src="https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/ExampleOfARecurringTask.png" height="214" width="414">
+
 Examples:
 
 * `add todo desc/cs2101 Oral Presentation reflection date/08-08-2020 time/2359`
@@ -456,5 +462,5 @@ Action | Format, Examples
 **Find tasks due by** | `itemsDueBy date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueBy date/12-12-2020 time/2359`
 **Find tasks due before** |  `itemsDueBefore date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueBefore date/12-12-2020 time/2359`
 **Sort** | `sort OPTION` <br> `OPTION` refers to `contact`, `task`, or `clear`
-**Link meeting** | `link meeting desc/DESCRIPTION url/LINK i/INDEX_OF_TASK` <br> e.g.,`link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf i/2 date/22/09/2020 time/1400`
+**Link meeting** | `link meeting desc/DESCRIPTION url/LINK i/INDEX_OF_TASK` <br> e.g.,`link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf i/2 date/22-09-2020 time/1400`
 **Link doc** | `link doc desc/DESCRIPTION url/LINK i/INDEX_OF_TASK` <br> e.g.,`link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoIkfacr0asqV9A4kh i/2`
