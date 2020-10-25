@@ -112,6 +112,8 @@ public interface Model {
 
     ObservableList<Task> getFilteredTaskList();
 
+    ObservableList<Task> getDueSoonTaskList();
+
     ReadOnlyTaskList getTaskList();
 
     AddCommand markAsDone(Task target);
