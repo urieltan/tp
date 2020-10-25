@@ -30,9 +30,14 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             } else {
                 throw new ParseException(UNKNOWN_DELETE_COMMAND);
             }
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteContactCommand.MESSAGE_USAGE), pe);
+        } catch (ParseException | ArrayIndexOutOfBoundsException pe) {
+            if (args.contains("task")) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTaskCommand.MESSAGE_USAGE), pe);
+            } else {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteContactCommand.MESSAGE_USAGE), pe);
+            }
         }
     }
 
