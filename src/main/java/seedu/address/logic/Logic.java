@@ -50,4 +50,6 @@ public interface Logic {
     void setGuiSettings(GuiSettings guiSettings);
 
     ObservableList<Task> getFilteredTaskList();
+
+    ObservableList<Task> getDueSoonTaskList();
 }

@@ -164,6 +164,12 @@ public class AddEventCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        // Needs to be null to update "Due Soon" section in GUI after adding a task.
+        @Override
+        public ObservableList<Task> getDueSoonTaskList() {
+            return null;
+        }
+
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
