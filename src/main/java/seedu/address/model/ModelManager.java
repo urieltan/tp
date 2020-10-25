@@ -60,6 +60,7 @@ public class ModelManager implements Model {
             } else if (task instanceof Event) {
                 deadline = task.getEnd();
             }
+            assert deadline != null : "Task's deadline is not defined properly!";
             return deadline.isBefore(currentDateTimePlusOneWeek);
         });
     }
