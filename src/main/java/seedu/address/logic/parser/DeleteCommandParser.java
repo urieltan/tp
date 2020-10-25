@@ -6,8 +6,7 @@ import static seedu.address.commons.core.Messages.UNKNOWN_DELETE_COMMAND;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.delete.DeleteContactCommand;
-import seedu.address.logic.commands.delete.DeleteEventCommand;
-import seedu.address.logic.commands.delete.DeleteTodoCommand;
+import seedu.address.logic.commands.delete.DeleteTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -26,10 +25,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             Index index = ParserUtil.parseIndex(splitArgs[1]);
             if (splitArgs[0].trim().equals("contact")) {
                 return new DeleteContactCommand(index);
-            } else if (splitArgs[0].trim().equals("todo")) {
-                return new DeleteTodoCommand(index);
-            } else if (splitArgs[0].trim().equals("event")) {
-                return new DeleteEventCommand(index);
+            } else if (splitArgs[0].trim().equals("task")) {
+                return new DeleteTaskCommand(index);
             } else {
                 throw new ParseException(UNKNOWN_DELETE_COMMAND);
             }
