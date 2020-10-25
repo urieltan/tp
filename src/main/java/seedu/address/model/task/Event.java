@@ -309,9 +309,18 @@ public class Event extends Task {
                 command = new AddEventCommand(
                         new Event(description, newStartDateTime, newEndDateTime, recurrence, tags));
             } else {
+                MeetingLink currentMeeting = this.getMeetingLink();
+                LocalDateTime newTiming = currentMeeting.getLocalDateTime()
+                        .plus(this.recurrence.getValue(), this.recurrence.getChronoUnit());
+
+                String description = currentMeeting.getDescription();
+                int positionOfOldTiming = description.indexOf("(on: ");
+                description = description.substring(0, positionOfOldTiming - 1);
+
+                MeetingLink newMeeting = new MeetingLink(description, currentMeeting.getUrl(), newTiming);
                 command = new AddEventCommand(
                         new Event(description, newStartDateTime, newEndDateTime,
-                            recurrence, this.getMeetingLink(), tags));
+                            recurrence, newMeeting, tags));
             }
             return command;
         } else {
