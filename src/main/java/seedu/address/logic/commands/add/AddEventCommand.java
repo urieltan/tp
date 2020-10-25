@@ -61,6 +61,7 @@ public class AddEventCommand extends AddCommand {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
         model.addEvent(toAdd);
+        model.getDueSoonTaskList();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getDescriptionDateTime()), "EVENT");
     }
 

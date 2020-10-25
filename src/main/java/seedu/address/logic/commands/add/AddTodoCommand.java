@@ -53,6 +53,7 @@ public class AddTodoCommand extends AddCommand {
             throw new CommandException(MESSAGE_DUPLICATE_TODO);
         }
         model.addTodo(toAdd);
+        model.getDueSoonTaskList();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getDescriptionDateTime()), "TASK");
     }
 
