@@ -221,17 +221,17 @@ Examples:
 * `find todo assignment` returns `Essay assignment` and `Quiz assignment`
 * `find todo Do assignment` returns `Do chores`, `Finish assignment`<br>
 
-### Removing To Dos : `delete todo`
+### Removing To Dos : `delete task`
 Removes a To Do from the TodoList of LifeBook.
 
-Format: `delete todo INDEX`
+Format: `delete task INDEX`
 
 * Removes the To Do at the specified `INDEX`.
 * The index refers to the index number shown in the displayed TodoList.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example:
-* `list todo` followed by `delete todo 3`  removes the 3rd To Do from the To Do list.
+* `list todo` followed by `delete task 3`  removes the 3rd To Do from the To Do list.
 
 ### View details of a specific To Do: `show todo`
 Shows all details of a specific To Do on the TodoList.
@@ -310,17 +310,17 @@ Examples:
 * `find event meeting` returns `CCA meeting` and `Team meeting`
 * `find event Attend meeting` returns `Attend workshop`, `Arrange meeting`<br>
 
-### Removing Events : `delete event`
+### Removing Events : `delete task`
 Removes an Event from the EventList of LifeBook.
 
-Format: `delete event INDEX`
+Format: `delete task INDEX`
 
 * Removes the Event at the specified `INDEX`.
 * The index refers to the index number shown in the displayed EventList.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example:
-* `list event` followed by `delete event 3`  removes the 3rd Event from the Event list.
+* `list event` followed by `delete task 3`  removes the 3rd Event from the Event list.
 
 ### View details of a specific Event: `show event`
 Shows all details of a specific Event on the EventList.
@@ -452,11 +452,10 @@ Action | Format, Examples
 **Help** | `help`
 **Add To Do** | `add todo desc/DESCRIPTION date/DATE time/TIME [recurring/VALUE UNIT]` <br> e.g., `add todo desc/update user guide date/09-08-2020 time/2300 recurring/1 week`
 **List To Dos** | `list todo`
-**Remove To Do** | `delete todo INDEX` <br> e.g., `delete todo 3`
+**Remove Task (Todo and Event)** | `delete task INDEX` <br> e.g., `delete task 3`
 **Show To Do** | `show todo INDEX` <br> e.g., `show todo 3`
 **Add Event** | `add event desc/DESCRIPTION startdate/DATE starttime/TIME enddate/DATE endtime/TIME [recurring/VALUE UNIT]` <br> e.g., `add event desc/meeting startdate/12-12-2020 starttime/1000 enddate/12-12-2020 endtime/1130 recurring/1 week`
 **List Events** | `list event`
-**Remove Event** | `delete event INDEX` <br> e.g., `delete event 3`
 **Show Event** | `show event INDEX` <br> e.g., `show event 3`
 **Mark To Do/Event as Complete** | `done INDEX` <br> e.g., `done 5`
 **Find tasks due by** | `itemsDueBy date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueBy date/12-12-2020 time/2359`
