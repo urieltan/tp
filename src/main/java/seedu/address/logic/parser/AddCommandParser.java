@@ -136,7 +136,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             }
             String stDateTime = stDate + " " + stTime;
             String endDateTime = endDate + " " + endTime;
-            MeetingLink meetingLink = new MeetingLink();
+//            MeetingLink meetingLink = new MeetingLink();
 
             Event event;
             if (arePrefixesPresent(argMultimap, PREFIX_RECURRING)) {
@@ -158,7 +158,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                             AddEventCommand.MESSAGE_USAGE));
                 }
             } else {
-                event = new Event(description, stDateTime, endDateTime, meetingLink, tagList);
+                event = new Event(description, stDateTime, endDateTime, tagList);
             }
             return new AddEventCommand(event);
         } else {

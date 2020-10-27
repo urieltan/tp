@@ -73,7 +73,7 @@
 
                     <StackPane fx:id="resultDisplayPlaceholder" maxHeight="130" minHeight="130" prefHeight="130" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.vgrow="NEVER" VBox.vgrow="NEVER">
                         <padding>
-                            <Insets bottom="10" left="10" right="10" top="10" />
+                            <Insets bottom="10" left="10" right="10" top="5" />
                         </padding>
                     </StackPane>
                     <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.rowSpan="1">
@@ -95,8 +95,7 @@
                            <Insets top="30.0" />
                         </HBox.margin>
                             </VBox>
-                            <ImageView fx:id="imageView" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true"
-                                       preserveRatio="true">
+                            <ImageView fx:id="imageView" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                 <image>
                                     <Image url="@/images/icon.png" />
                                 </image>
@@ -106,20 +105,19 @@
                      <Insets bottom="25.0" right="10.0" top="25.0" />
                   </GridPane.margin>
                     </HBox>
-                    <VBox fx:id="dueSoonTaskListPanel" prefHeight="300.0" prefWidth="1000.0"
-                          GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="3" GridPane.vgrow="ALWAYS">
+                    <VBox fx:id="dueSoonTaskListPanel" prefHeight="300.0" prefWidth="1000.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="3" GridPane.vgrow="ALWAYS">
                         <padding>
                             <Insets bottom="10" left="10" right="10" top="10" />
                         </padding>
                         <children>
                             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="What is due soon?">
                                 <font>
-                                    <Font name="System Bold" size="20.0" />
+                                    <Font name="Segoe UI Semibold" size="18.0" />
                                 </font>
                             </Text>
                             <StackPane fx:id="dueSoonTasksPanelPlaceholder" VBox.vgrow="ALWAYS">
                         <VBox.margin>
-                           <Insets />
+                           <Insets top="5.0" />
                         </VBox.margin></StackPane>
                         </children>
                   <GridPane.margin>
@@ -128,10 +126,10 @@
                     </VBox>
                <columnConstraints>
                   <ColumnConstraints />
-                  <ColumnConstraints maxWidth="550" minWidth="400"/>
+                  <ColumnConstraints maxWidth="550" minWidth="400" />
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints minHeight="250" maxHeight="300" />
+                  <RowConstraints maxHeight="300" minHeight="250" />
                   <RowConstraints minHeight="0.0" vgrow="ALWAYS" />
                   <RowConstraints minHeight="10.0" vgrow="NEVER" />
                   <RowConstraints maxHeight="130.0" minHeight="130.0" prefHeight="130.0" vgrow="NEVER" />

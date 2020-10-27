@@ -62,7 +62,7 @@ public class AddEventCommand extends AddCommand {
         }
         model.addEvent(toAdd);
         model.getDueSoonTaskList();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getDescriptionDateTime()), "EVENT");
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getDescriptionDateTime()), "TASK");
     }
 
     @Override
