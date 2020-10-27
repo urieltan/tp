@@ -35,7 +35,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Event;
-import seedu.address.model.task.MeetingLink;
 import seedu.address.model.task.Recurrence;
 import seedu.address.model.task.Todo;
 
@@ -136,7 +135,6 @@ public class AddCommandParser implements Parser<AddCommand> {
             }
             String stDateTime = stDate + " " + stTime;
             String endDateTime = endDate + " " + endTime;
-//            MeetingLink meetingLink = new MeetingLink();
 
             Event event;
             if (arePrefixesPresent(argMultimap, PREFIX_RECURRING)) {

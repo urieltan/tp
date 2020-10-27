@@ -45,15 +45,8 @@ public class TaskCard extends UiPart<Region> {
     private Label dateTime;
     @FXML
     private Label statusIcon;
-//    @FXML
-//    private Hyperlink meetingLink;
-//    @FXML
-//    private Label linkDescription;
     @FXML
     private VBox additionalInfo;
-//    private Label recurring;
-//    @FXML
-//    private VBox linkContainer;
     @FXML
     private FlowPane tags;
 
@@ -80,7 +73,6 @@ public class TaskCard extends UiPart<Region> {
             String text = "Recurring task: " + recurrence.getValue() + " " + recurrence.getUnit();
             Label recurring = new Label(text);
             recurring.getStyleClass().add("recurring");
-//            recurring.setStyle("-fx-text-fill: #FFD540");
             additionalInfo.getChildren().add(recurring);
         }
 
