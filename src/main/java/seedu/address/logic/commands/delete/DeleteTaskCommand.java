@@ -12,18 +12,17 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.task.Task;
 
-public class DeleteEventCommand extends DeleteCommand {
-
+public class DeleteTaskCommand extends DeleteCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + ": Deletes the task identified by the index number used in the displayed TaskList.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + COMMAND_WORD + " task 1";
 
-    public static final String MESSAGE_DELETE_EVENT_SUCCESS = "Deleted Event: %1$s";
+    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
 
     private final Index targetIndex;
 
-    public DeleteEventCommand(Index targetIndex) {
+    public DeleteTaskCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -36,14 +35,15 @@ public class DeleteEventCommand extends DeleteCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        Task eventToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteTodo(eventToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, eventToDelete), "TASK");
+        Task taskToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deleteTodo(taskToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete), "TASK");
     }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteEventCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteEventCommand) other).targetIndex)); // state check
+                || (other instanceof DeleteTaskCommand // instanceof handles nulls
+                && targetIndex.equals(((DeleteTaskCommand) other).targetIndex)); // state check
     }
 }

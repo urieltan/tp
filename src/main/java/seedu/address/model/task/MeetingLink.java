@@ -27,13 +27,26 @@ public class MeetingLink extends Link {
      * Constructs a Meeting Link
      * with a brief description, url, and meeting time.
      *
-     * @param description a brief description of the deadline.
+     * @param description a brief description of the meeting link.
      * @param url    a String in a URL format which specifies the link.
      * @param meetingTime a String which describes the meeting time.
      */
     public MeetingLink(String description, String url, String meetingTime) {
         super(description, url);
         this.meetingTime = LocalDateTime.parse(meetingTime, INPUT_DATE_TIME_FORMAT);
+    }
+
+    /**
+     * Constructs a updated Meeting Link for recurring events
+     * with the description, url, and new meeting time.
+     *
+     * @param description a brief description of the meeting link.
+     * @param url    a String in a URL format which specifies the link.
+     * @param newTiming a LocalDateTime of the new meeting time.
+     */
+    public MeetingLink(String description, String url, LocalDateTime newTiming) {
+        super(description, url);
+        this.meetingTime = newTiming;
     }
 
     /**

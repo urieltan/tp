@@ -1,9 +1,11 @@
 package seedu.address.model;
 
+import static java.time.temporal.ChronoUnit.WEEKS;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -31,6 +33,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final SortedList<Task> sortedTasks;
     private final FilteredList<Task> filteredTasks;
+    private final FilteredList<Task> dueSoonTasks;
     private final TaskList taskList;
 
     /**
@@ -49,6 +52,17 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(sortedPersons);
         sortedTasks = new SortedList<>(this.taskList.getTaskList());
         filteredTasks = new FilteredList<>(sortedTasks);
+        dueSoonTasks = new FilteredList<>(sortedTasks, task -> {
+            LocalDateTime currentDateTimePlusOneWeek = LocalDateTime.now().plus(1, WEEKS);
+            LocalDateTime deadline = null;
+            if (task instanceof Todo) {
+                deadline = task.getDeadline();
+            } else if (task instanceof Event) {
+                deadline = task.getEnd();
+            }
+            assert deadline != null : "Task's deadline is not defined properly!";
+            return deadline.isBefore(currentDateTimePlusOneWeek);
+        });
     }
 
     public ModelManager() {
@@ -209,6 +223,10 @@ public class ModelManager implements Model {
         return filteredTasks;
     }
 
+    @Override
+    public ObservableList<Task> getDueSoonTaskList() {
+        return dueSoonTasks;
+    }
 
     @Override
     public void updateFilteredTaskList(Predicate<? super Task> predicate) {

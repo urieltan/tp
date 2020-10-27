@@ -37,6 +37,7 @@ public class DoneCommand extends Command {
         AddCommand recurrenceAddCommand = model.markAsDone(taskToMark);
         if (recurrenceAddCommand != null) {
             recurrenceAddCommand.execute(model);
+            model.getDueSoonTaskList();
         }
 
         return new CommandResult(String.format(MESSAGE_MARK_TASK_AS_DONE_SUCCESS, taskToMark), "TASK");
