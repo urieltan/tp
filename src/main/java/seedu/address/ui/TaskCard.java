@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.task.Recurrence;
 import seedu.address.model.task.Task;
 
@@ -45,11 +46,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label statusIcon;
     @FXML
-    private Hyperlink meetingLink;
-    @FXML
-    private Label linkDescription;
-    @FXML
-    private Label recurring;
+    private VBox additionalInfo;
     @FXML
     private FlowPane tags;
 
@@ -64,6 +61,21 @@ public class TaskCard extends UiPart<Region> {
         description.setText(task.getDescription());
         dateTime.setText(task.getDateTime());
         statusIcon.setText("Status: " + task.getStatusIcon());
+        Hyperlink meetingLink = new Hyperlink();
+        Label linkDescription = new Label();
+        VBox linkContainer = new VBox();
+        meetingLink.getStyleClass().add("meetingLink");
+        linkDescription.getStyleClass().add("linkDescription");
+        linkContainer.getStyleClass().add("linkContainer");
+
+        Recurrence recurrence = task.getRecurrence();
+        if (recurrence != null) {
+            String text = "Recurring task: " + recurrence.getValue() + " " + recurrence.getUnit();
+            Label recurring = new Label(text);
+            recurring.getStyleClass().add("recurring");
+            additionalInfo.getChildren().add(recurring);
+        }
+
         if (task.getLink().isPresent()) {
             meetingLink.setText(task.getLink().get().getUrl());
             meetingLink.setOnAction(e -> {
@@ -78,11 +90,10 @@ public class TaskCard extends UiPart<Region> {
                 }
             });
             linkDescription.setText(task.getLink().get().getDescription());
+            linkContainer.getChildren().addAll(meetingLink, linkDescription);
+            additionalInfo.getChildren().add(linkContainer);
         }
-        Recurrence recurrence = task.getRecurrence();
-        if (recurrence != null) {
-            recurring.setText("Recurring task [" + recurrence.getValue() + " " + recurrence.getUnit() + "]");
-        }
+
         task.getTags().stream()
             .sorted(Comparator.comparing(tag -> tag.tagName))
             .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
