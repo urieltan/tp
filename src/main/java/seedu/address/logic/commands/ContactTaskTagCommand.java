@@ -23,6 +23,9 @@ import seedu.address.model.task.Event;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Todo;
 
+/**
+ * Adds a same tag to an existing person and task in the Lifebook.
+ */
 public class ContactTaskTagCommand extends Command {
     public static final String COMMAND_WORD = "contactTaskTag";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a same tag for a specified Person and Task.\n"
@@ -39,6 +42,13 @@ public class ContactTaskTagCommand extends Command {
     private final EditPersonTags editPersonTags;
     private final EditTaskTags editTaskTags;
 
+    /**
+     * Creates a ContactTaskTagCommand to modify a Person and a Task.
+     * @param contactIndex index of the Person.
+     * @param taskIndex index of the Task.
+     * @param editPersonTags the tag that is to be added to the person.
+     * @param editTaskTags the tag that is to be added to the task.
+     */
     public ContactTaskTagCommand(Index contactIndex, Index taskIndex,
                                  EditPersonTags editPersonTags, EditTaskTags editTaskTags) {
         requireNonNull(contactIndex);
@@ -126,8 +136,8 @@ public class ContactTaskTagCommand extends Command {
                 .orElse(taskToEdit.getTags()), taskToEdit.getTags());
 
         if (taskToEdit.isTodo()) {
-            return new Todo(taskToEdit.getDescription(), taskToEdit.getDeadline(), taskToEdit.getRecurrence(),
-                    ((Todo) taskToEdit).getCollaborativeLink(), updatedTags);
+            return new Todo(taskToEdit.getDescription(), taskToEdit.getDeadline(), taskToEdit.getRecurrence(), (
+                    (Todo) taskToEdit).getCollaborativeLink(), updatedTags);
         } else if (taskToEdit.isEvent()) {
             return new Event(taskToEdit.getDescription(), taskToEdit.getStart(), taskToEdit.getEnd(),
                     taskToEdit.getRecurrence(), updatedTags);
@@ -192,8 +202,8 @@ public class ContactTaskTagCommand extends Command {
 
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the task with. Each non-empty field value will replace the
+     * corresponding field value of the task.
      */
     public static class EditTaskTags {
         private Set<Tag> tags;
@@ -244,15 +254,20 @@ public class ContactTaskTagCommand extends Command {
         }
     }
 
-    // Function merging two sets using DoubleBrace Initialisation
-    public static <T> Set<T> mergeSet(Set<T> a, Set<T> b) {
-        if (a.equals(b)) {
-            return a;
+    /**
+     * Merges two sets of tags.
+     * @param currentTags current tags of a Person/Task.
+     * @param newTags new tags to be added to Person and Task.
+     * @return a merged set.
+     */
+    public static <Tag> Set<Tag> mergeSet(Set<Tag> currentTags, Set<Tag> newTags) {
+        if (currentTags.equals(newTags)) {
+            return currentTags;
         } else {
-            return new HashSet<T>() {
+            return new HashSet<Tag>() {
                 {
-                    addAll(a);
-                    addAll(b);
+                    addAll(currentTags);
+                    addAll(newTags);
                 }
             };
         }

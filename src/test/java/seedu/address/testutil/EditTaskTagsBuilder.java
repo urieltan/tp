@@ -25,9 +25,9 @@ public class EditTaskTagsBuilder {
     /**
      * Returns a {@code EditTaskTags} with fields containing {@code Task}'s details
      */
-    public EditTaskTagsBuilder(Task Task) {
+    public EditTaskTagsBuilder(Task task) {
         editTaskTags = new EditTaskTags();
-        editTaskTags.setTags(Task.getTags());
+        editTaskTags.setTags(task.getTags());
     }
 
     /**
