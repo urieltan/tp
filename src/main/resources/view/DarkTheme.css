@@ -60,7 +60,7 @@
 .tab .tab-label {
     -fx-alignment: CENTER;
     -fx-text-fill: white;
-    -fx-font-size: 13px;
+    -fx-font-size: 14px;
     -fx-font-family: "Segoe UI Semibold";
     -fx-background-color: transparent;
 }
@@ -206,8 +206,8 @@
 
 .result-display {
     -fx-background-color: transparent;
-    -fx-font-family: "Segoe UI Light";
-    -fx-font-size: 13pt;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 12pt;
     -fx-text-fill: white;
 }
 
@@ -256,7 +256,7 @@
 }
 
 .menu-bar .label {
-    -fx-font-size: 13pt;
+    -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
     -fx-opacity: 0.9;
@@ -392,13 +392,14 @@
 #commandTextPanel {
     -fx-background-color: #485563;
     -fx-background-radius: 15;
+    -fx-padding: 5 10 5 10;
 }
 
 #commandTextField {
     -fx-background-color: transparent #485563 transparent #485563;
     -fx-background-insets: 0;
-    -fx-font-family: "Segoe UI Light";
-    -fx-font-size: 13pt;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 12pt;
     -fx-text-fill: white;
 }
 
@@ -476,6 +477,7 @@
     -fx-background-color: #485563;
     -fx-background-radius: 15 15 15 15;
     -fx-border-width: 0;
+    -fx-padding: 10;
 }
 
 .linkContainer {
