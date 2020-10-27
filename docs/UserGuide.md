@@ -410,6 +410,18 @@ Format: `sort OPTION`
 * Contact, task, and clear are the available options for sort and should be used individually.
 * Using the clear option restores all lists (i.e. both contact list and task list) to their natural order.
 
+### Add common tag to contact + task: `contactTaskTag`
+
+Adds a common tag to a contact and task (Todo or Event) based on the given indexes of the contact and task.
+The user can choose to add as many common tags as they want, where they simply just need to input the `t/` prefix.
+
+Format: 
+* `contactTaskTag t/TAG... contactIndex/INDEX taskIndex/INDEX`
+
+Examples: 
+* `contactTaskTag t/CS2103T t/ProjMate contactIndex/1 taskIndex/1`
+* `contactTaskTag t/helpBuddy contactIndex/5 taskIndex/2`
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -463,3 +475,4 @@ Action | Format, Examples
 **Sort** | `sort OPTION` <br> `OPTION` refers to `contact`, `task`, or `clear`
 **Link meeting** | `link meeting desc/DESCRIPTION url/LINK i/INDEX_OF_TASK` <br> e.g.,`link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf i/2 date/22-09-2020 time/1400`
 **Link doc** | `link doc desc/DESCRIPTION url/LINK i/INDEX_OF_TASK` <br> e.g.,`link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoIkfacr0asqV9A4kh i/2`
+**Add common tag to Contact + Task** | `contactTaskTag t/TAG... contactIndex/INDEX taskIndex/INDEX` <br> e.g., `contactTaskTag t/CS2103T t/ProjMate contactIndex/1 taskIndex/1`
