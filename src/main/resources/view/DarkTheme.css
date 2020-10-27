@@ -232,8 +232,8 @@
 }
 
 .grid-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 30%);
+    -fx-background-color: red;
+    -fx-border-color: red;
     -fx-border-width: 1px;
 }
 
@@ -374,6 +374,10 @@
     -fx-padding: 8 1 8 1;
 }
 
+#root {
+    -fx-background-color: #29323C;
+}
+
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-width: 0;
@@ -461,6 +465,12 @@
 }
 
 #taskListPanel {
+    -fx-background-color: #485563;
+    -fx-background-radius: 15 15 15 15;
+    -fx-border-width: 0;
+}
+
+#dueSoonTaskListPanel {
     -fx-background-color: #485563;
     -fx-background-radius: 15 15 15 15;
     -fx-border-width: 0;
