@@ -15,8 +15,6 @@ import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
-import seedu.address.logic.commands.edit.EditContactCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -38,17 +36,17 @@ public class ContactTaskTagCommand extends Command {
 
     private final Index contactIndex;
     private final Index taskIndex;
-    private final EditPersonDescriptor editPersonDescriptor;
-    private final EditTaskDescriptor editTaskDescriptor;
+    private final EditPersonTags editPersonTags;
+    private final EditTaskTags editTaskTags;
 
     public ContactTaskTagCommand(Index contactIndex, Index taskIndex,
-                                 EditPersonDescriptor editPersonDescriptor, EditTaskDescriptor editTaskDescriptor) {
+                                 EditPersonTags editPersonTags, EditTaskTags editTaskTags) {
         requireNonNull(contactIndex);
         requireNonNull(taskIndex);
         this.contactIndex = contactIndex;
         this.taskIndex = taskIndex;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
-        this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
+        this.editPersonTags = new EditPersonTags(editPersonTags);
+        this.editTaskTags = new EditTaskTags(editTaskTags);
     }
 
     @Override
@@ -68,8 +66,8 @@ public class ContactTaskTagCommand extends Command {
         Person personToEdit = contactList.get(contactIndex.getZeroBased());
         Task taskToEdit = taskList.get(taskIndex.getZeroBased());
 
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        Person editedPerson = createEditedPerson(personToEdit, editPersonTags);
+        Task editedTask = createEditedTask(taskToEdit, editTaskTags);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -91,26 +89,26 @@ public class ContactTaskTagCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditContactCommand)) {
+        if (!(other instanceof ContactTaskTagCommand)) {
             return false;
         }
 
         // state check
         ContactTaskTagCommand e = (ContactTaskTagCommand) other;
         return contactIndex.equals(e.contactIndex)
-                && editPersonDescriptor.equals(e.editPersonDescriptor)
+                && editPersonTags.equals(e.editPersonTags)
                 && taskIndex.equals(e.taskIndex)
-                && editTaskDescriptor.equals(e.editTaskDescriptor);
+                && editTaskTags.equals(e.editTaskTags);
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * edited with {@code editPersonTags}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Person createEditedPerson(Person personToEdit, EditPersonTags editPersonTags) {
         assert personToEdit != null;
 
-        Set<Tag> updatedTags = mergeSet(editPersonDescriptor.getTags()
+        Set<Tag> updatedTags = mergeSet(editPersonTags.getTags()
                 .orElse(personToEdit.getTags()), personToEdit.getTags());
 
         return new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
@@ -119,12 +117,12 @@ public class ContactTaskTagCommand extends Command {
 
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
-     * edited with {@code editTaskDescriptor}.
+     * edited with {@code editTaskTags}.
      */
-    private static Task createEditedTask(Task taskToEdit, EditTaskDescriptor editTaskDescriptor) {
+    private static Task createEditedTask(Task taskToEdit, EditTaskTags editTaskTags) {
         assert taskToEdit != null;
 
-        Set<Tag> updatedTags = mergeSet(editTaskDescriptor.getTags()
+        Set<Tag> updatedTags = mergeSet(editTaskTags.getTags()
                 .orElse(taskToEdit.getTags()), taskToEdit.getTags());
 
         if (taskToEdit.isTodo()) {
@@ -143,25 +141,18 @@ public class ContactTaskTagCommand extends Command {
      * Stores the details to edit the person with. Each non-empty field value will replace the
      * corresponding field value of the person.
      */
-    public static class EditPersonDescriptor {
+    public static class EditPersonTags {
         private Set<Tag> tags;
 
-        public EditPersonDescriptor() {
+        public EditPersonTags() {
         }
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditPersonTags(EditPersonTags toCopy) {
             setTags(toCopy.tags);
-        }
-
-        /**
-         * Returns true if at least one field is edited.
-         */
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(tags);
         }
 
         /**
@@ -188,12 +179,12 @@ public class ContactTaskTagCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditPersonTags)) {
                 return false;
             }
 
             // state check
-            EditPersonDescriptor e = (EditPersonDescriptor) other;
+            EditPersonTags e = (EditPersonTags) other;
 
             return getTags().equals(e.getTags());
         }
@@ -204,25 +195,18 @@ public class ContactTaskTagCommand extends Command {
      * Stores the details to edit the person with. Each non-empty field value will replace the
      * corresponding field value of the person.
      */
-    public static class EditTaskDescriptor {
+    public static class EditTaskTags {
         private Set<Tag> tags;
 
-        public EditTaskDescriptor() {
+        public EditTaskTags() {
         }
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditTaskDescriptor(EditTaskDescriptor toCopy) {
+        public EditTaskTags(EditTaskTags toCopy) {
             setTags(toCopy.tags);
-        }
-
-        /**
-         * Returns true if at least one field is edited.
-         */
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(tags);
         }
 
         /**
@@ -249,12 +233,12 @@ public class ContactTaskTagCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditTaskDescriptor)) {
+            if (!(other instanceof EditTaskTags)) {
                 return false;
             }
 
             // state check
-            EditTaskDescriptor e = (EditTaskDescriptor) other;
+            EditTaskTags e = (EditTaskTags) other;
 
             return getTags().equals(e.getTags());
         }

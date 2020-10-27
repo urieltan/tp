@@ -7,11 +7,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ContactTaskTagCommand;
-import seedu.address.logic.commands.ContactTaskTagCommand.EditPersonDescriptor;
-import seedu.address.logic.commands.ContactTaskTagCommand.EditTaskDescriptor;
+import seedu.address.logic.commands.ContactTaskTagCommand.EditPersonTags;
+import seedu.address.logic.commands.ContactTaskTagCommand.EditTaskTags;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 public class ContactTaskTagParser implements Parser<ContactTaskTagCommand> {
@@ -30,15 +31,19 @@ public class ContactTaskTagParser implements Parser<ContactTaskTagCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ContactTaskTagCommand.MESSAGE_USAGE));
         }
-        Index contactIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CONTACT_INDEX).get());
-        Index taskIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TASK_INDEX).get());
+        try {
+            Index contactIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CONTACT_INDEX).get());
+            Index taskIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TASK_INDEX).get());
+            EditPersonTags editPersonTags = new EditPersonTags();
+            editPersonTags.setTags(ParserUtil.parseTags(tag));
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-        editPersonDescriptor.setTags(ParserUtil.parseTags(tag));
+            EditTaskTags editTaskTags = new EditTaskTags();
+            editTaskTags.setTags(ParserUtil.parseTags(tag));
 
-        EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
-        editTaskDescriptor.setTags(ParserUtil.parseTags(tag));
-
-        return new ContactTaskTagCommand(contactIndex, taskIndex, editPersonDescriptor, editTaskDescriptor);
+            return new ContactTaskTagCommand(contactIndex, taskIndex, editPersonTags, editTaskTags);
+        } catch (ParseException | NoSuchElementException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ContactTaskTagCommand.MESSAGE_USAGE), pe);
+        }
     }
 }
