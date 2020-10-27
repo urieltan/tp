@@ -355,6 +355,10 @@ public class Todo extends Task {
         return Optional.ofNullable(this.collaborativeLink);
     }
 
+    public CollaborativeLink getCollaborativeLink() {
+        return this.collaborativeLink;
+    }
+
     @Override
     public Recurrence getRecurrence() {
         return this.recurrence;

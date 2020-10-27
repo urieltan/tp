@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MISSING_ADD_DETAILS;
 import static seedu.address.commons.core.Messages.UNKNOWN_ADD_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
@@ -50,117 +51,121 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         String[] splitArgs = args.trim().split(" ", 2);
-        if (splitArgs[0].trim().split(" ")[0].trim().equals("contact")) {
-            ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                            PREFIX_ADDRESS, PREFIX_TAG);
+        try {
+            if (splitArgs[0].trim().split(" ")[0].trim().equals("contact")) {
+                ArgumentMultimap argMultimap =
+                        ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                                PREFIX_ADDRESS, PREFIX_TAG);
 
-            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
-                    || !argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddContactCommand.MESSAGE_USAGE));
-            }
+                if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
+                        || !argMultimap.getPreamble().isEmpty()) {
+                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            AddContactCommand.MESSAGE_USAGE));
+                }
 
-            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-            Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-            Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+                Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+                Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+                Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+                Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+                Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-            Person person = new Person(name, phone, email, address, tagList);
+                Person person = new Person(name, phone, email, address, tagList);
 
-            return new AddContactCommand(person);
-        } else if (splitArgs[0].trim().equals("todo")) {
-            ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_DESCRIPTION,
-                            PREFIX_DATE, PREFIX_TIME, PREFIX_RECURRING, PREFIX_TAG);
-            if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_TIME)
-                    || !argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddTodoCommand.MESSAGE_USAGE));
-            }
-            String description = argMultimap.getValue(PREFIX_DESCRIPTION).get().trim();
-            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-            String date = argMultimap.getValue(PREFIX_DATE).get().trim();
-            String time = argMultimap.getValue(PREFIX_TIME).get().trim();
-            if (!checkDateValidity(date) || !checkTimeValidity(time)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddTodoCommand.DATE_TIME_USAGE));
-            }
-            String deadline = date + " " + time;
-
-            Todo todo;
-            if (arePrefixesPresent(argMultimap, PREFIX_RECURRING)) {
-                String recurrenceInput = argMultimap.getValue(PREFIX_RECURRING).get();
-                try {
-                    String[] recurrenceSplit = recurrenceInput.split(" ");
-                    Integer recurrenceValue = Integer.parseInt(recurrenceSplit[0]);
-                    String recurrenceTimePeriod = recurrenceSplit[1];
-                    if (checkChronoUnitValidity(recurrenceTimePeriod)
-                            && checkRecurrenceValueValidity(recurrenceValue)) {
-                        Recurrence recurrence = new Recurrence(recurrenceValue, recurrenceTimePeriod);
-                        todo = new Todo(description, deadline, recurrence, tagList);
-                    } else {
-                        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                                AddTodoCommand.MESSAGE_USAGE));
-                    }
-                } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                return new AddContactCommand(person);
+            } else if (splitArgs[0].trim().equals("todo")) {
+                ArgumentMultimap argMultimap =
+                        ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_DESCRIPTION,
+                                PREFIX_DATE, PREFIX_TIME, PREFIX_RECURRING, PREFIX_TAG);
+                if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_TIME)
+                        || !argMultimap.getPreamble().isEmpty()) {
                     throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                             AddTodoCommand.MESSAGE_USAGE));
                 }
-            } else {
-                todo = new Todo(description, deadline, tagList);
-            }
-            return new AddTodoCommand(todo);
-        } else if (splitArgs[0].trim().equals("event")) {
-            ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_DESCRIPTION, PREFIX_STARTDATE,
-                            PREFIX_STARTTIME, PREFIX_ENDDATE, PREFIX_ENDTIME, PREFIX_RECURRING, PREFIX_TAG);
-            if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION, PREFIX_STARTDATE,
-                    PREFIX_STARTTIME, PREFIX_ENDDATE, PREFIX_ENDTIME)
-                    || !argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddEventCommand.MESSAGE_USAGE));
-            }
-            String description = argMultimap.getValue(PREFIX_DESCRIPTION).get().trim();
-            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-            String stDate = argMultimap.getValue(PREFIX_STARTDATE).get().trim();
-            String stTime = argMultimap.getValue(PREFIX_STARTTIME).get().trim();
-            String endDate = argMultimap.getValue(PREFIX_ENDDATE).get().trim();
-            String endTime = argMultimap.getValue(PREFIX_ENDTIME).get().trim();
-            if (!checkDateValidity(stDate) || !checkTimeValidity(stTime)
-                    || !checkDateValidity(endDate) || !checkTimeValidity(endTime)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddEventCommand.DATE_TIME_USAGE));
-            }
-            String stDateTime = stDate + " " + stTime;
-            String endDateTime = endDate + " " + endTime;
+                String description = argMultimap.getValue(PREFIX_DESCRIPTION).get().trim();
+                Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+                String date = argMultimap.getValue(PREFIX_DATE).get().trim();
+                String time = argMultimap.getValue(PREFIX_TIME).get().trim();
+                if (!checkDateValidity(date) || !checkTimeValidity(time)) {
+                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            AddTodoCommand.DATE_TIME_USAGE));
+                }
+                String deadline = date + " " + time;
 
-            Event event;
-            if (arePrefixesPresent(argMultimap, PREFIX_RECURRING)) {
-                String recurrenceInput = argMultimap.getValue(PREFIX_RECURRING).get();
-                try {
-                    String[] recurrenceSplit = recurrenceInput.split(" ");
-                    Integer recurrenceValue = Integer.parseInt(recurrenceSplit[0]);
-                    String recurrenceTimePeriod = recurrenceSplit[1];
-                    if (checkChronoUnitValidity(recurrenceTimePeriod)
-                            && checkRecurrenceValueValidity(recurrenceValue)) {
-                        Recurrence recurrence = new Recurrence(recurrenceValue, recurrenceTimePeriod);
-                        event = new Event(description, stDateTime, endDateTime, recurrence, tagList);
-                    } else {
+                Todo todo;
+                if (arePrefixesPresent(argMultimap, PREFIX_RECURRING)) {
+                    String recurrenceInput = argMultimap.getValue(PREFIX_RECURRING).get();
+                    try {
+                        String[] recurrenceSplit = recurrenceInput.split(" ");
+                        Integer recurrenceValue = Integer.parseInt(recurrenceSplit[0]);
+                        String recurrenceTimePeriod = recurrenceSplit[1];
+                        if (checkChronoUnitValidity(recurrenceTimePeriod)
+                                && checkRecurrenceValueValidity(recurrenceValue)) {
+                            Recurrence recurrence = new Recurrence(recurrenceValue, recurrenceTimePeriod);
+                            todo = new Todo(description, deadline, recurrence, tagList);
+                        } else {
+                            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                    AddTodoCommand.MESSAGE_USAGE));
+                        }
+                    } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
                         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                                AddEventCommand.MESSAGE_USAGE));
+                                AddTodoCommand.MESSAGE_USAGE));
                     }
-                } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                } else {
+                    todo = new Todo(description, deadline, tagList);
+                }
+                return new AddTodoCommand(todo);
+            } else if (splitArgs[0].trim().equals("event")) {
+                ArgumentMultimap argMultimap =
+                        ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_DESCRIPTION, PREFIX_STARTDATE,
+                                PREFIX_STARTTIME, PREFIX_ENDDATE, PREFIX_ENDTIME, PREFIX_RECURRING, PREFIX_TAG);
+                if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION, PREFIX_STARTDATE,
+                        PREFIX_STARTTIME, PREFIX_ENDDATE, PREFIX_ENDTIME)
+                        || !argMultimap.getPreamble().isEmpty()) {
                     throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                             AddEventCommand.MESSAGE_USAGE));
                 }
+                String description = argMultimap.getValue(PREFIX_DESCRIPTION).get().trim();
+                Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+                String stDate = argMultimap.getValue(PREFIX_STARTDATE).get().trim();
+                String stTime = argMultimap.getValue(PREFIX_STARTTIME).get().trim();
+                String endDate = argMultimap.getValue(PREFIX_ENDDATE).get().trim();
+                String endTime = argMultimap.getValue(PREFIX_ENDTIME).get().trim();
+                if (!checkDateValidity(stDate) || !checkTimeValidity(stTime)
+                        || !checkDateValidity(endDate) || !checkTimeValidity(endTime)) {
+                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            AddEventCommand.DATE_TIME_USAGE));
+                }
+                String stDateTime = stDate + " " + stTime;
+                String endDateTime = endDate + " " + endTime;
+
+                Event event;
+                if (arePrefixesPresent(argMultimap, PREFIX_RECURRING)) {
+                    String recurrenceInput = argMultimap.getValue(PREFIX_RECURRING).get();
+                    try {
+                        String[] recurrenceSplit = recurrenceInput.split(" ");
+                        Integer recurrenceValue = Integer.parseInt(recurrenceSplit[0]);
+                        String recurrenceTimePeriod = recurrenceSplit[1];
+                        if (checkChronoUnitValidity(recurrenceTimePeriod)
+                                && checkRecurrenceValueValidity(recurrenceValue)) {
+                            Recurrence recurrence = new Recurrence(recurrenceValue, recurrenceTimePeriod);
+                            event = new Event(description, stDateTime, endDateTime, recurrence, tagList);
+                        } else {
+                            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                    AddEventCommand.MESSAGE_USAGE));
+                        }
+                    } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                AddEventCommand.MESSAGE_USAGE));
+                    }
+                } else {
+                    event = new Event(description, stDateTime, endDateTime, tagList);
+                }
+                return new AddEventCommand(event);
             } else {
-                event = new Event(description, stDateTime, endDateTime, tagList);
+                throw new ParseException(UNKNOWN_ADD_COMMAND);
             }
-            return new AddEventCommand(event);
-        } else {
-            throw new ParseException(UNKNOWN_ADD_COMMAND);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new ParseException(MISSING_ADD_DETAILS);
         }
     }
 
