@@ -1,8 +1,22 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.edit.EditTodoCommand.MESSAGE_DUPLICATE_PERSON;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.logic.commands.edit.EditContactCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -11,26 +25,13 @@ import seedu.address.model.task.Event;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Todo;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.commands.edit.EditTodoCommand.MESSAGE_DUPLICATE_PERSON;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
-
 public class ContactTaskTagCommand extends Command {
     public static final String COMMAND_WORD = "contactTaskTag";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a same tag for a specified Person and Task.\n"
-            + "Parameters:" + PREFIX_DESCRIPTION + "DESCRIPTION "
+            + "Parameters:" + PREFIX_TAG + "TAG "
             + PREFIX_CONTACT_INDEX + "CONTACT INDEX "
             + PREFIX_TASK_INDEX + "TASK INDEX\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_DESCRIPTION + "CS2103T "
+            + "Example: " + COMMAND_WORD + " " + PREFIX_TAG + "CS2103T "
             + PREFIX_CONTACT_INDEX + "1 "
             + PREFIX_TASK_INDEX + "2";
     public static final String MESSAGE_CONTACT_TASK_TAG_SUCCESS = "Created tag for \n Person: %1$s, \n Task: %2$s";
@@ -80,6 +81,26 @@ public class ContactTaskTagCommand extends Command {
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
 
         return new CommandResult(String.format(MESSAGE_CONTACT_TASK_TAG_SUCCESS, editedPerson, editedTask), "CONTACT");
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof EditContactCommand)) {
+            return false;
+        }
+
+        // state check
+        ContactTaskTagCommand e = (ContactTaskTagCommand) other;
+        return contactIndex.equals(e.contactIndex)
+                && editPersonDescriptor.equals(e.editPersonDescriptor)
+                && taskIndex.equals(e.taskIndex)
+                && editTaskDescriptor.equals(e.editTaskDescriptor);
     }
 
     /**
@@ -241,11 +262,15 @@ public class ContactTaskTagCommand extends Command {
 
     // Function merging two sets using DoubleBrace Initialisation
     public static <T> Set<T> mergeSet(Set<T> a, Set<T> b) {
-        return new HashSet<T>() {
-            {
-                addAll(a);
-                addAll(b);
-            }
-        };
+        if (a.equals(b)) {
+            return a;
+        } else {
+            return new HashSet<T>() {
+                {
+                    addAll(a);
+                    addAll(b);
+                }
+            };
+        }
     }
 }
