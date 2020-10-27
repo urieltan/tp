@@ -1,19 +1,5 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.commands.edit.EditTodoCommand.MESSAGE_DUPLICATE_PERSON;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
-
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -24,6 +10,19 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Event;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Todo;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.edit.EditTodoCommand.MESSAGE_DUPLICATE_PERSON;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 public class ContactTaskTagCommand extends Command {
     public static final String COMMAND_WORD = "contactTaskTag";
@@ -90,7 +89,8 @@ public class ContactTaskTagCommand extends Command {
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Tag> updatedTags = mergeSet(editPersonDescriptor.getTags()
+                .orElse(personToEdit.getTags()), personToEdit.getTags());
 
         return new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), updatedTags);
@@ -103,7 +103,8 @@ public class ContactTaskTagCommand extends Command {
     private static Task createEditedTask(Task taskToEdit, EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
 
-        Set<Tag> updatedTags = editTaskDescriptor.getTags().orElse(taskToEdit.getTags());
+        Set<Tag> updatedTags = mergeSet(editTaskDescriptor.getTags()
+                .orElse(taskToEdit.getTags()), taskToEdit.getTags());
 
         if (taskToEdit.isTodo()) {
             return new Todo(taskToEdit.getDescription(), taskToEdit.getDeadline(), taskToEdit.getRecurrence(),
@@ -151,12 +152,11 @@ public class ContactTaskTagCommand extends Command {
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
+         * Returns a tag set.
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+            return (tags != null) ? Optional.of(tags) : Optional.empty();
         }
 
         @Override
@@ -179,64 +179,73 @@ public class ContactTaskTagCommand extends Command {
     }
 
 
-        /**
-         * Stores the details to edit the person with. Each non-empty field value will replace the
-         * corresponding field value of the person.
-         */
-        public static class EditTaskDescriptor {
-            private Set<Tag> tags;
+    /**
+     * Stores the details to edit the person with. Each non-empty field value will replace the
+     * corresponding field value of the person.
+     */
+    public static class EditTaskDescriptor {
+        private Set<Tag> tags;
 
-            public EditTaskDescriptor() {
-            }
-
-            /**
-             * Copy constructor.
-             * A defensive copy of {@code tags} is used internally.
-             */
-            public EditTaskDescriptor(EditTaskDescriptor toCopy) {
-                setTags(toCopy.tags);
-            }
-
-            /**
-             * Returns true if at least one field is edited.
-             */
-            public boolean isAnyFieldEdited() {
-                return CollectionUtil.isAnyNonNull(tags);
-            }
-
-            /**
-             * Sets {@code tags} to this object's {@code tags}.
-             * A defensive copy of {@code tags} is used internally.
-             */
-            public void setTags(Set<Tag> tags) {
-                this.tags = (tags != null) ? new HashSet<>(tags) : null;
-            }
-
-            /**
-             * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-             * if modification is attempted.
-             * Returns {@code Optional#empty()} if {@code tags} is null.
-             */
-            public Optional<Set<Tag>> getTags() {
-                return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-            }
-
-            @Override
-            public boolean equals(Object other) {
-                // short circuit if same object
-                if (other == this) {
-                    return true;
-                }
-
-                // instanceof handles nulls
-                if (!(other instanceof EditPersonDescriptor)) {
-                    return false;
-                }
-
-                // state check
-                EditTaskDescriptor e = (EditTaskDescriptor) other;
-
-                return getTags().equals(e.getTags());
-            }
+        public EditTaskDescriptor() {
         }
+
+        /**
+         * Copy constructor.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public EditTaskDescriptor(EditTaskDescriptor toCopy) {
+            setTags(toCopy.tags);
+        }
+
+        /**
+         * Returns true if at least one field is edited.
+         */
+        public boolean isAnyFieldEdited() {
+            return CollectionUtil.isAnyNonNull(tags);
+        }
+
+        /**
+         * Sets {@code tags} to this object's {@code tags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setTags(Set<Tag> tags) {
+            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        }
+
+        /**
+         * Returns a tag set.
+         * Returns {@code Optional#empty()} if {@code tags} is null.
+         */
+        public Optional<Set<Tag>> getTags() {
+            return (tags != null) ? Optional.of(tags) : Optional.empty();
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            // short circuit if same object
+            if (other == this) {
+                return true;
+            }
+
+            // instanceof handles nulls
+            if (!(other instanceof EditTaskDescriptor)) {
+                return false;
+            }
+
+            // state check
+            EditTaskDescriptor e = (EditTaskDescriptor) other;
+
+            return getTags().equals(e.getTags());
+        }
+    }
+
+    // Function merging two sets using DoubleBrace Initialisation
+    public static <T> Set<T> mergeSet(Set<T> a, Set<T> b) {
+        return new HashSet<T>() {
+            {
+                addAll(a);
+                addAll(b);
+            }
+        };
+    }
 }
