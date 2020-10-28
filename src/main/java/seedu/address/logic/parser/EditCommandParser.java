@@ -3,11 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.UNKNOWN_EDIT_COMMAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -79,8 +75,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             return new EditContactCommand(index, editPersonDescriptor);
         } else if (splitArgs[0].equals("todo")) {
             ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_NAME,
-                            PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                    ArgumentTokenizer.tokenize(" " + splitArgs[1],
+                            PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_TIME);
 
             Index index;
 
@@ -92,20 +88,23 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
 
             EditTodoDescriptor editTodoDescriptor = new EditTodoDescriptor();
-            if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-                editTodoDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
+                editTodoDescriptor.setDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
             }
-            if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-                editTodoDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+            if (argMultimap.getValue(PREFIX_DATE).isPresent() && argMultimap.getValue(PREFIX_TIME).isPresent()) {
+                String date = argMultimap.getValue(PREFIX_DATE).get();
+                String time = argMultimap.getValue(PREFIX_TIME).get();
+                editTodoDescriptor.setDate(date);
+                editTodoDescriptor.setTime(time);
             }
-            if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-                editTodoDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+            else if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+                String date = argMultimap.getValue(PREFIX_DATE).get();
+                editTodoDescriptor.setDate(date);
             }
-            if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-                editTodoDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+            else if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
+                String time = argMultimap.getValue(PREFIX_TIME).get();
+                editTodoDescriptor.setTime(time);
             }
-            parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editTodoDescriptor::setTags);
-
             if (!editTodoDescriptor.isAnyFieldEdited()) {
                 throw new ParseException(EditContactCommand.MESSAGE_NOT_EDITED);
             }
