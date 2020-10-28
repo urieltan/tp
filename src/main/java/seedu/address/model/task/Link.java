@@ -33,7 +33,7 @@ public abstract class Link {
      * Returns if a given string is a valid email.
      */
     public static boolean isValidUrl(String url) {
-        return url.matches(VALIDATION_REGEX) || url.equals("-");
+        return url.matches(VALIDATION_REGEX) || url.equals(null);
     }
 
     /**

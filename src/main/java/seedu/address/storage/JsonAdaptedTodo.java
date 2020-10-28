@@ -61,8 +61,8 @@ public class JsonAdaptedTodo extends JsonAdaptedTask {
             linkDesc = source.getLink().get().getDescription();
             linkUrl = source.getLink().get().getUrl();
         } else {
-            linkDesc = "";
-            linkUrl = "";
+            linkDesc = null;
+            linkUrl = null;
         }
         recurrence = source.getRecurrence();
         tagged.addAll(source.getTags().stream()
@@ -93,7 +93,7 @@ public class JsonAdaptedTodo extends JsonAdaptedTask {
         final Recurrence modelRecurrence = recurrence;
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        if (linkUrl == "" || linkDesc == "") {
+        if (linkUrl == null || linkDesc == null) {
             if (modelRecurrence == null) {
                 return new Todo(modelIsDone, modelDescription, modelDeadline, modelTags);
             } else {
