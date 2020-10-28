@@ -93,20 +93,16 @@ public class EditTodoCommand extends EditCommand {
         if (todoToEdit.getLink().isPresent()) {
             CollaborativeLink link = todoToEdit.getCollaborativeLink();
             if (todoToEdit.hasRecurrence()) {
-                System.out.println("masuk if if");
                 return new Todo(todoToEdit.getStatus(), description,
                         date + " " + time, link, todoToEdit.getRecurrence());
             } else {
-                System.out.println("masuk if else");
                 return new Todo(todoToEdit.getStatus(), description, date + " " + time, link);
             }
         } else {
             if (todoToEdit.hasRecurrence()) {
-                System.out.println("masuk else if");
                 return new Todo(todoToEdit.getStatus(), description,
                         date + " " + time, todoToEdit.getRecurrence());
             } else {
-                System.out.println("masuk else else");
                 return new Todo(todoToEdit.getStatus(), description, date + " " + time);
             }
         }
