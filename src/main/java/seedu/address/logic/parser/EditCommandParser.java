@@ -41,13 +41,13 @@ public class EditCommandParser implements Parser<EditCommand> {
                         EditContactCommand.MESSAGE_USAGE));
             }
             ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_NAME,
+                    ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_INDEX, PREFIX_NAME,
                             PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
             Index index;
 
             try {
-                index = ParserUtil.parseIndex(argMultimap.getPreamble());
+                index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
             } catch (ParseException pe) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         EditContactCommand.MESSAGE_USAGE), pe);
@@ -76,12 +76,12 @@ public class EditCommandParser implements Parser<EditCommand> {
         } else if (splitArgs[0].equals("todo")) {
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(" " + splitArgs[1],
-                            PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_TIME);
+                            PREFIX_INDEX, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_TIME);
 
             Index index;
 
             try {
-                index = ParserUtil.parseIndex(argMultimap.getPreamble());
+                index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
             } catch (ParseException pe) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         EditContactCommand.MESSAGE_USAGE), pe);
@@ -91,17 +91,11 @@ public class EditCommandParser implements Parser<EditCommand> {
             if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
                 editTodoDescriptor.setDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
             }
-            if (argMultimap.getValue(PREFIX_DATE).isPresent() && argMultimap.getValue(PREFIX_TIME).isPresent()) {
-                String date = argMultimap.getValue(PREFIX_DATE).get();
-                String time = argMultimap.getValue(PREFIX_TIME).get();
-                editTodoDescriptor.setDate(date);
-                editTodoDescriptor.setTime(time);
-            }
-            else if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+            if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
                 String date = argMultimap.getValue(PREFIX_DATE).get();
                 editTodoDescriptor.setDate(date);
             }
-            else if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
+            if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
                 String time = argMultimap.getValue(PREFIX_TIME).get();
                 editTodoDescriptor.setTime(time);
             }
@@ -112,33 +106,34 @@ public class EditCommandParser implements Parser<EditCommand> {
             return new EditTodoCommand(index, editTodoDescriptor);
         } else if (splitArgs[0].equals("event")) {
             ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_NAME,
-                            PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                    ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_INDEX, PREFIX_DESCRIPTION,
+                            PREFIX_STARTDATE, PREFIX_STARTTIME, PREFIX_ENDDATE, PREFIX_ENDTIME);
 
             Index index;
 
             try {
-                index = ParserUtil.parseIndex(argMultimap.getPreamble());
+                index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
             } catch (ParseException pe) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         EditContactCommand.MESSAGE_USAGE), pe);
             }
 
             EditEventDescriptor editEventDescriptor = new EditEventDescriptor();
-            if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-                editEventDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
+                editEventDescriptor.setDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
             }
-            if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-                editEventDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+            if (argMultimap.getValue(PREFIX_STARTDATE).isPresent()) {
+                editEventDescriptor.setStartDate(argMultimap.getValue(PREFIX_STARTDATE).get());
             }
-            if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-                editEventDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+            if (argMultimap.getValue(PREFIX_STARTTIME).isPresent()) {
+                editEventDescriptor.setStartTime(argMultimap.getValue(PREFIX_STARTTIME).get());
             }
-            if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-                editEventDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+            if (argMultimap.getValue(PREFIX_ENDDATE).isPresent()) {
+                editEventDescriptor.setEndDate(argMultimap.getValue(PREFIX_ENDDATE).get());
             }
-            parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editEventDescriptor::setTags);
-
+            if (argMultimap.getValue(PREFIX_ENDTIME).isPresent()) {
+                editEventDescriptor.setEndTime(argMultimap.getValue(PREFIX_ENDTIME).get());
+            }
             if (!editEventDescriptor.isAnyFieldEdited()) {
                 throw new ParseException(EditContactCommand.MESSAGE_NOT_EDITED);
             }

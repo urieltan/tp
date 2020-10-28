@@ -48,6 +48,22 @@ public class Event extends Task {
      * @param description a brief description of the event.
      * @param start       the starting date and time of event.
      * @param end         the ending date and time of event.
+     */
+    public Event (String description, String start, String end) {
+        super(description);
+        assert start != null;
+        assert end != null;
+        this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
+        this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
+    }
+
+    /**
+     * Constructs an event that has not been completed with a brief
+     * description and period of time.
+     *
+     * @param description a brief description of the event.
+     * @param start       the starting date and time of event.
+     * @param end         the ending date and time of event.
      * @param tags        a set of tags attached to the event.
      */
     public Event (String description, String start, String end, Set<Tag> tags) {
@@ -293,6 +309,20 @@ public class Event extends Task {
     public void reschedule(String newPeriod) {
         this.start = LocalDateTime.parse(newPeriod.substring(0, END_OF_FIRST_DATE_TIME_INDEX), INPUT_DATE_TIME_FORMAT);
         this.end = LocalDateTime.parse(newPeriod.substring(START_OF_SECOND_DATE_TIME_INDEX), INPUT_DATE_TIME_FORMAT);
+    }
+
+    /**
+     * Returns true if both events of the same description have at least one other identity field that is the same.
+     * This defines a weaker notion of equality between two events.
+     */
+    public boolean isSameEvent(Event otherEvent) {
+        if (otherEvent == this) {
+            return true;
+        }
+
+        return otherEvent != null
+                && otherEvent.getDescription().equals(getDescription())
+                && (otherEvent.getDescriptionDateTime().equals(getDescriptionDateTime()));
     }
 
     @Override

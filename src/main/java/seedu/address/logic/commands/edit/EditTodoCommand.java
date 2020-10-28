@@ -1,16 +1,13 @@
 package seedu.address.logic.commands.edit;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
-import java.sql.Struct;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -19,12 +16,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.task.CollaborativeLink;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Todo;
 
@@ -40,7 +32,7 @@ public class EditTodoCommand extends EditCommand {
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_TIME + "TIME] "
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + COMMAND_WORD + " todo 1 "
             + PREFIX_DESCRIPTION + "A new description "
             + PREFIX_DATE + "20-01-2020 "
             + PREFIX_TIME + "2350";
@@ -98,7 +90,27 @@ public class EditTodoCommand extends EditCommand {
         String date = editTodoDescriptor.getDate().orElse(previousDateTime.split(" ")[0]);
         String time = editTodoDescriptor.getTime().orElse(previousDateTime.split(" ")[1]);
 
-        return new Todo(description, date + " " + time);
+        if (todoToEdit.getLink().isPresent()) {
+            CollaborativeLink link = todoToEdit.getCollaborativeLink();
+            if (todoToEdit.hasRecurrence()) {
+                System.out.println("masuk if if");
+                return new Todo(todoToEdit.getStatus(), description,
+                        date + " " + time, link, todoToEdit.getRecurrence());
+            } else {
+                System.out.println("masuk if else");
+                return new Todo(todoToEdit.getStatus(), description, date + " " + time, link);
+            }
+        } else {
+            if (todoToEdit.hasRecurrence()) {
+                System.out.println("masuk else if");
+                return new Todo(todoToEdit.getStatus(), description,
+                        date + " " + time, todoToEdit.getRecurrence());
+            } else {
+                System.out.println("masuk else else");
+                return new Todo(todoToEdit.getStatus(), description, date + " " + time);
+            }
+        }
+
     }
 
     @Override

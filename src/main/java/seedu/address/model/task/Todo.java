@@ -40,9 +40,55 @@ public class Todo extends Task {
      * @param description a brief description of the deadline.
      * @param deadline    a String in a specific format (inputFormatter) which specifies a date.
      */
-    public Todo(String description, String deadline) {
+    public Todo(boolean isDone, String description, String deadline) {
         super(description);
+        this.isDone = isDone;
         this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
+    }
+
+    /**
+     * Constructs a task that has not been completed
+     * with a brief description and deadline for the task to be completed by.
+     *
+     * @param description a brief description of the deadline.
+     * @param deadline    a String in a specific format (inputFormatter) which specifies a date.
+     * @param recurrence the recurrence of todo.
+     */
+    public Todo(boolean isDone, String description, String deadline, Recurrence recurrence) {
+        super(description);
+        this.isDone = isDone;
+        this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
+        this.recurrence = recurrence;
+    }
+
+    /**
+     * Constructs a task that has not been completed
+     * with a brief description and deadline for the task to be completed by.
+     *
+     * @param description a brief description of the deadline.
+     * @param deadline    a String in a specific format (inputFormatter) which specifies a date.
+     */
+    public Todo(boolean isDone, String description, String deadline, CollaborativeLink link) {
+        super(description);
+        this.isDone = isDone;
+        this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
+        this.collaborativeLink = link;
+    }
+
+    /**
+     * Constructs a task that has not been completed
+     * with a brief description and deadline for the task to be completed by.
+     *
+     * @param description a brief description of the deadline.
+     * @param deadline    a String in a specific format (inputFormatter) which specifies a date.
+     * @param recurrence the recurrence of todo.
+     */
+    public Todo(boolean isDone, String description, String deadline, CollaborativeLink link, Recurrence recurrence) {
+        super(description);
+        this.isDone = isDone;
+        this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
+        this.collaborativeLink = link;
+        this.recurrence = recurrence;
     }
 
     /**
@@ -428,5 +474,9 @@ public class Todo extends Task {
     @Override
     public Recurrence getRecurrence() {
         return this.recurrence;
+    }
+
+    public boolean hasRecurrence() {
+        return getRecurrence() != null;
     }
 }
