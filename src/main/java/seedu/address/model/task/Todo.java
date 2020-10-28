@@ -261,10 +261,12 @@ public class Todo extends Task {
     public String toString() {
         if (this.recurrence == null && this.collaborativeLink != null) {
             return "[" + getStatusIcon() + "] " + getDescription()
-                    + " (by: " + deadlineToString() + ") " + "Link: " + this.collaborativeLink.toString() + " " + getTagsToString();
+                    + " (by: " + deadlineToString() + ") " + "Link: " + this.collaborativeLink.toString() + " "
+                    + getTagsToString();
         } else if (this.recurrence != null && this.collaborativeLink == null) {
             return "[" + getStatusIcon() + "] " + getDescription()
-                    + " (by: " + deadlineToString() + ") " + "Recurrence: " + this.recurrence.toString() + " " + getTagsToString();
+                    + " (by: " + deadlineToString() + ") " + "Recurrence: " + this.recurrence.toString() + " "
+                    + getTagsToString();
         } else if (this.recurrence == null && this.collaborativeLink == null) {
             return "[" + getStatusIcon() + "] " + getDescription()
                     + " (by: " + deadlineToString() + ") " + getTagsToString();
