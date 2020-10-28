@@ -49,12 +49,70 @@ public class Event extends Task {
      * @param start       the starting date and time of event.
      * @param end         the ending date and time of event.
      */
-    public Event (String description, String start, String end) {
+    public Event (boolean isDone, String description, String start, String end) {
         super(description);
         assert start != null;
         assert end != null;
+        this.isDone = isDone;
         this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
         this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
+    }
+
+    /**
+     * Constructs an event that has not been completed with a brief
+     * description and period of time.
+     *
+     * @param description a brief description of the event.
+     * @param start       the starting date and time of event.
+     * @param end         the ending date and time of event.
+     * @param recurrence  the recurrence of event.
+     */
+    public Event (boolean isDone, String description, String start, String end, Recurrence recurrence) {
+        super(description);
+        assert start != null;
+        assert end != null;
+        this.isDone = isDone;
+        this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
+        this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
+        this.recurrence = recurrence;
+    }
+
+    /**
+     * Constructs an event that has not been completed with a brief
+     * description and period of time.
+     *
+     * @param description a brief description of the event.
+     * @param start       the starting date and time of event.
+     * @param end         the ending date and time of event.
+     */
+    public Event (boolean isDone, String description, String start, String end, MeetingLink link) {
+        super(description);
+        assert start != null;
+        assert end != null;
+        this.isDone = isDone;
+        this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
+        this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
+        this.meetingLink = link;
+    }
+
+    /**
+     * Constructs an event that has not been completed with a brief
+     * description and period of time.
+     *
+     * @param description a brief description of the event.
+     * @param start       the starting date and time of event.
+     * @param end         the ending date and time of event.
+     * @param recurrence  the recurrence of event.
+     */
+    public Event (boolean isDone, String description, String start, String end, MeetingLink link, Recurrence recurrence) {
+        super(description);
+        assert start != null;
+        assert end != null;
+        this.isDone = isDone;
+        this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
+        this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
+        this.meetingLink = link;
+        this.recurrence = recurrence;
     }
 
     /**
@@ -494,5 +552,9 @@ public class Event extends Task {
     @Override
     public Recurrence getRecurrence() {
         return this.recurrence;
+    }
+
+    public boolean hasRecurrence() {
+        return getRecurrence() != null;
     }
 }

@@ -15,6 +15,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.task.Event;
+import seedu.address.model.task.MeetingLink;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Todo;
 
@@ -95,12 +96,24 @@ public class EditEventCommand extends EditCommand {
         String endDate = editEventDescriptor.getEndDate().orElse(previousEndDateTime.split(" ")[0]);
         String endTime = editEventDescriptor.getEndTime().orElse(previousEndDateTime.split(" ")[1]);
 
-        System.out.println(description);
-        System.out.println(previousStartDateTime);
-        System.out.println(previousEndDateTime);
-        System.out.println(startDate + " " + startTime);
-        System.out.println(endDate + " " + endTime);
-        return new Event(description, startDate + " " + startTime, endDate + " " + endTime);
+        if (eventToEdit.getLink().isPresent()) {
+            MeetingLink link = eventToEdit.getMeetingLink();
+            if (eventToEdit.hasRecurrence()) {
+                return new Event(eventToEdit.getStatus(), description, startDate + " " + startTime,
+                        endDate + " " + endTime, link, eventToEdit.getRecurrence());
+            } else {
+                return new Event(eventToEdit.getStatus(), description,
+                        startDate + " " + startTime, endDate + " " + endTime, link);
+            }
+        } else {
+            if (eventToEdit.hasRecurrence()) {
+                return new Event(eventToEdit.getStatus(), description,startDate + " " + startTime,
+                        endDate + " " + endTime, eventToEdit.getRecurrence());
+            } else {
+                return new Event(eventToEdit.getStatus(), description,
+                        startDate + " " + startTime, endDate + " " + endTime);
+            }
+        }
     }
 
     @Override
