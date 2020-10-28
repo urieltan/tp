@@ -76,7 +76,7 @@ public class JsonAdaptedEvent extends JsonAdaptedTask {
 
     @Override
     public Task toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final Set<Tag> personTags = new HashSet<>();
         for (JsonAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
         }

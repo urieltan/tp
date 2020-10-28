@@ -259,8 +259,22 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + getDescription()
-            + " (by: " + deadlineToString() + ") " + getTagsToString();
+        if (this.recurrence == null && this.collaborativeLink != null) {
+            return "[" + getStatusIcon() + "] " + getDescription()
+                    + " (by: " + deadlineToString() + ") " + "Link: " + this.collaborativeLink.toString() + " "
+                    + getTagsToString();
+        } else if (this.recurrence != null && this.collaborativeLink == null) {
+            return "[" + getStatusIcon() + "] " + getDescription()
+                    + " (by: " + deadlineToString() + ") " + "Recurrence: " + this.recurrence.toString() + " "
+                    + getTagsToString();
+        } else if (this.recurrence == null && this.collaborativeLink == null) {
+            return "[" + getStatusIcon() + "] " + getDescription()
+                    + " (by: " + deadlineToString() + ") " + getTagsToString();
+        } else {
+            return "[" + getStatusIcon() + "] " + getDescription()
+                    + " (by: " + deadlineToString() + ") " + "Link: " + this.collaborativeLink.toString() + " "
+                    + "Recurrence: " + this.recurrence.toString() + " " + getTagsToString();
+        }
     }
 
     /**
@@ -277,8 +291,29 @@ public class Todo extends Task {
             return true;
         } else if (o instanceof Todo) {
             Todo task = (Todo) o;
-            boolean isEqualDeadlines = this.description.equals(task.description)
-                    && this.deadline.equals(task.deadline) && this.isDone == task.isDone;
+            boolean isEqualDeadlines;
+            if (this.recurrence == null && this.collaborativeLink != null) {
+                isEqualDeadlines = this.description.equals(task.description)
+                        && this.deadline.equals(task.deadline) && this.isDone == task.isDone
+                        && this.collaborativeLink.equals(task.collaborativeLink) && task.recurrence == null
+                        && this.tags.equals(task.tags);
+            } else if (this.recurrence != null && this.collaborativeLink == null) {
+                isEqualDeadlines = this.description.equals(task.description)
+                        && this.deadline.equals(task.deadline) && this.isDone == task.isDone
+                        && this.recurrence.equals(task.recurrence) && task.collaborativeLink == null
+                        && this.tags.equals(task.tags);
+            } else if (this.recurrence == null && this.collaborativeLink == null) {
+                isEqualDeadlines = this.description.equals(task.description)
+                        && this.deadline.equals(task.deadline) && this.isDone == task.isDone
+                        && task.recurrence == null && task.collaborativeLink == null
+                        && this.tags.equals(task.tags);
+            } else {
+                isEqualDeadlines = this.description.equals(task.description)
+                        && this.deadline.equals(task.deadline) && this.isDone == task.isDone
+                        && this.recurrence.equals(task.recurrence)
+                        && this.collaborativeLink.equals(task.collaborativeLink)
+                        && this.tags.equals(task.tags);
+            }
             return isEqualDeadlines;
         } else {
             return false;

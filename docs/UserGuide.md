@@ -415,10 +415,10 @@ Format: `sort OPTION`
 Adds a common tag to a contact and task (Todo or Event) based on the given indexes of the contact and task.
 The user can choose to add as many common tags as they want, where they simply just need to input the `t/` prefix.
 
-Format: 
+Format:
 * `contactTaskTag t/TAG... contactIndex/INDEX taskIndex/INDEX`
 
-Examples: 
+Examples:
 * `contactTaskTag t/CS2103T t/ProjMate contactIndex/1 taskIndex/1`
 * `contactTaskTag t/helpBuddy contactIndex/5 taskIndex/2`
 

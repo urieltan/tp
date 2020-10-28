@@ -111,7 +111,7 @@ public class TaskList implements ReadOnlyTaskList {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TaskList // instanceof handles nulls
-                && tasks.equals(((TaskList) other).tasks));
+                && this.tasks.equals(((TaskList) other).tasks));
     }
 
     @Override
