@@ -104,7 +104,8 @@ public class Event extends Task {
      * @param end         the ending date and time of event.
      * @param recurrence  the recurrence of event.
      */
-    public Event (boolean isDone, String description, String start, String end, MeetingLink link, Recurrence recurrence) {
+    public Event (boolean isDone, String description, String start, String end,
+                  MeetingLink link, Recurrence recurrence) {
         super(description);
         assert start != null;
         assert end != null;

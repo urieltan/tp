@@ -1,7 +1,11 @@
 package seedu.address.logic.commands.edit;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDDATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDTIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTTIME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 import java.util.List;
@@ -17,7 +21,6 @@ import seedu.address.model.Model;
 import seedu.address.model.task.Event;
 import seedu.address.model.task.MeetingLink;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.Todo;
 
 /**
  * Edits the details of an existing todo in the Lifebook.
@@ -107,7 +110,7 @@ public class EditEventCommand extends EditCommand {
             }
         } else {
             if (eventToEdit.hasRecurrence()) {
-                return new Event(eventToEdit.getStatus(), description,startDate + " " + startTime,
+                return new Event(eventToEdit.getStatus(), description, startDate + " " + startTime,
                         endDate + " " + endTime, eventToEdit.getRecurrence());
             } else {
                 return new Event(eventToEdit.getStatus(), description,
