@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalEvents.PARTY;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.add.AddEventCommand;
 import seedu.address.model.task.Event;
 import seedu.address.testutil.EventBuilder;
