@@ -53,4 +53,19 @@ public class Recurrence {
         unit += "(s)";
         return unit;
     }
+    @Override
+    public boolean equals (Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof Recurrence) {
+            Recurrence recur = (Recurrence) o;
+            return this.value.equals(recur.value) && this.chronoUnit.equals(recur.chronoUnit);
+        } else {
+            return false;
+        }
+    }
+    @Override
+    public String toString() {
+        return "[" + this.value + "," + this.chronoUnit.toString() + "]";
+    }
 }

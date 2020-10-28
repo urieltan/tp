@@ -26,7 +26,7 @@ public class JsonAdaptedTodo extends JsonAdaptedTask {
     private final String linkDesc;
     private final String linkUrl;
     private final Recurrence recurrence;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final Set<JsonAdaptedTag> tagged = new HashSet<>();
 
     /**
      * Constructs a {@code JsonAdaptedTodo} with the given Todo details.
@@ -72,7 +72,7 @@ public class JsonAdaptedTodo extends JsonAdaptedTask {
 
     @Override
     public Task toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final Set<Tag> personTags = new HashSet<>();
         for (JsonAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
         }

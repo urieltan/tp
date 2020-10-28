@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import java.time.temporal.ChronoUnit;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -7,15 +9,16 @@ import seedu.address.model.task.Recurrence;
 
 public class JsonAdaptedRecurrence {
     private final Integer value;
-    private final String unit;
+    private final ChronoUnit unit;
 
     /**
      * Constructs a {code JsonAdaptedRecurrence} with the given {@code recurrence details}.
      */
     @JsonCreator
-    public JsonAdaptedRecurrence(@JsonProperty("value") Integer value, @JsonProperty("chronoUnit") String unit) {
+    public JsonAdaptedRecurrence(@JsonProperty("value") Integer value, @JsonProperty("chronoUnit") ChronoUnit unit) {
         this.value = value;
         this.unit = unit;
+        System.out.println(unit);
     }
 
     /**
@@ -23,7 +26,8 @@ public class JsonAdaptedRecurrence {
      */
     public JsonAdaptedRecurrence(Recurrence source) {
         value = source.getValue();
-        unit = source.getChronoUnit().toString();
+        unit = source.getChronoUnit();
+        System.out.println(unit);
     }
 
     /**
@@ -34,13 +38,13 @@ public class JsonAdaptedRecurrence {
         final Integer modelValue = value;
         final String modelUnit;
 
-        if (unit.equals("DAYS")) {
+        if (unit.equals(ChronoUnit.DAYS)) {
             modelUnit = "day";
-        } else if (unit.equals("WEEKS")) {
+        } else if (unit.equals(ChronoUnit.WEEKS)) {
             modelUnit = "week";
-        } else if (unit.equals("MONTHS")) {
+        } else if (unit.equals(ChronoUnit.MONTHS)) {
             modelUnit = "month";
-        } else if (unit.equals("YEARS")) {
+        } else if (unit.equals(ChronoUnit.YEARS)) {
             modelUnit = "year";
         } else {
             modelUnit = "";

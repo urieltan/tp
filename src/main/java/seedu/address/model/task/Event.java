@@ -355,8 +355,28 @@ public class Event extends Task {
             return true;
         } else if (o instanceof Event) {
             Event task = (Event) o;
-            boolean isEqualEvents = this.description.equals(task.description) && this.start.equals(task.start)
-                    && this.end.equals(task.end) && this.isDone == task.isDone;
+            boolean isEqualEvents;
+            if (this.meetingLink == null && this.recurrence != null) {
+                isEqualEvents = this.description.equals(task.description) && this.start.equals(task.start)
+                        && this.end.equals(task.end) && this.isDone == task.isDone
+                        && this.recurrence.equals(task.recurrence) && task.meetingLink == null
+                        && this.tags.equals(task.tags);
+            } else if (this.meetingLink != null && this.recurrence == null) {
+                isEqualEvents = this.description.equals(task.description) && this.start.equals(task.start)
+                        && this.end.equals(task.end) && this.isDone == task.isDone
+                        && this.meetingLink.equals(task.meetingLink) && task.recurrence == null
+                        && this.tags.equals(task.tags);
+            } else if (this.meetingLink == null && this.recurrence == null) {
+                isEqualEvents = this.description.equals(task.description) && this.start.equals(task.start)
+                        && this.end.equals(task.end) && this.isDone == task.isDone && task.meetingLink == null
+                        && task.recurrence == null
+                        && this.tags.equals(task.tags);
+            } else {
+                isEqualEvents = this.description.equals(task.description) && this.start.equals(task.start)
+                        && this.end.equals(task.end) && this.isDone == task.isDone
+                        && this.meetingLink.equals(task.meetingLink) && this.recurrence.equals(task.recurrence)
+                        && this.tags.equals(task.tags);
+            }
             return isEqualEvents;
         } else {
             return false;
@@ -446,5 +466,3 @@ public class Event extends Task {
         return this.recurrence;
     }
 }
-
-

@@ -1,6 +1,7 @@
 package seedu.address.model.task;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 public abstract class Link {
 
@@ -22,6 +23,7 @@ public abstract class Link {
      * @param url the url of the link
      */
     public Link(String description, String url) {
+        requireAllNonNull(description, url);
         this.description = description;
         checkArgument(isValidUrl(url), MESSAGE_CONSTRAINTS);
         this.url = url;
