@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.time.temporal.ChronoUnit;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.task.Recurrence;
 
 public class JsonAdaptedRecurrenceTest {
