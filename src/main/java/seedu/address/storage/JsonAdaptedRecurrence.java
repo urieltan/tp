@@ -27,7 +27,6 @@ public class JsonAdaptedRecurrence {
     public JsonAdaptedRecurrence(Recurrence source) {
         value = source.getValue();
         unit = source.getChronoUnit();
-        System.out.println(unit);
     }
 
     /**

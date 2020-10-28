@@ -5,7 +5,7 @@
     "isDone" : false,
     "deadline" : "2020-10-19T23:59:00",
     "linkDesc" : "",
-    "linkUrl" : "",
+    "linkUrl" : null,
     "recurrence" : null,
     "tagged" : [ "CS2100" ]
   }, {
@@ -14,7 +14,7 @@
     "isDone" : false,
     "deadline" : "2020-10-19T23:59:00",
     "linkDesc" : "",
-    "linkUrl" : "",
+    "linkUrl" : null,
     "recurrence" : null,
     "tagged" : [ "CS2100" ]
   } ]

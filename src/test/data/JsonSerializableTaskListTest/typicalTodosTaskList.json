@@ -5,7 +5,7 @@
     "isDone" : false,
     "deadline" : "2020-12-12T23:59:00",
     "linkDesc" : "",
-    "linkUrl" : "",
+    "linkUrl" : null,
     "recurrence" : null,
     "tagged" : [ ]
   }, {
@@ -14,7 +14,7 @@
     "isDone" : false,
     "deadline" : "2020-01-01T18:00:00",
     "linkDesc" : "",
-    "linkUrl" : "",
+    "linkUrl" : null,
     "recurrence" : {
       "value" : 1,
       "chronoUnit" : "WEEKS"
@@ -26,7 +26,7 @@
     "isDone" : false,
     "deadline" : "2020-10-01T16:00:00",
     "linkDesc" : "",
-    "linkUrl" : "",
+    "linkUrl" : null,
     "recurrence" : null,
     "tagged" : [ "cs2100" ]
   }, {
@@ -35,7 +35,7 @@
     "isDone" : false,
     "deadline" : "2021-10-05T20:00:00",
     "linkDesc" : "",
-    "linkUrl" : "",
+    "linkUrl" : null,
     "recurrence" : null,
     "tagged" : [ "CS2103T" ]
   }, {
@@ -44,7 +44,7 @@
     "isDone" : false,
     "deadline" : "2020-11-15T23:00:00",
     "linkDesc" : "",
-    "linkUrl" : "",
+    "linkUrl" : null,
     "recurrence" : null,
     "tagged" : [ "CS2103T" ]
   } ]

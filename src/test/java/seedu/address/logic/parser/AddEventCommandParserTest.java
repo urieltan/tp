@@ -37,8 +37,9 @@ public class AddEventCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Event expectedEvent = new EventBuilder(MEETING).build();
-
+        Event expectedEvent = new EventBuilder().withDescription("meeting")
+                .withStartDateTime("12-12-2020 1000").withEndDateTime("12-12-2020 1130")
+                .build();
         assertParseSuccess(parser, "event " + MEETING_DESC + MEETING_START_DATE + MEETING_START_TIME
                 + MEETING_END_DATE + MEETING_END_TIME, new AddEventCommand(expectedEvent));
     }

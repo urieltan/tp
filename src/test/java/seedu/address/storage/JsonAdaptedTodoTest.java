@@ -61,32 +61,35 @@ public class JsonAdaptedTodoTest {
         assertThrows(IllegalValueException.class, todo::toModelType);
     }
     @Test
-    public void toModelType_nullLinkDescription_throwsNullPointerException() {
+    public void toModelType_nullLinkDescription_throwsNullPointerException() throws IllegalValueException {
+        Todo modelTodo = new Todo(VALID_IS_DONE, VALID_DESCRIPTION, VALID_DEADLINE, VALID_RECURRENCE,
+                        USER_GUIDE.getTags());
         JsonAdaptedTodo todo = new JsonAdaptedTodo(VALID_DESCRIPTION, VALID_IS_DONE, VALID_DEADLINE, null,
                 VALID_LINK_URL, VALID_JSON_ADAPTED_RECURRENCE, VALID_TAGS);
-        assertThrows(NullPointerException.class, todo::toModelType);
+        assertEquals(modelTodo, todo.toModelType());
     }
     @Test
     public void toModelType_blankLinkDescription_returnsTodo() throws IllegalValueException {
         Todo modelTodo = new Todo(VALID_IS_DONE, VALID_DESCRIPTION, VALID_DEADLINE, VALID_RECURRENCE,
+                new CollaborativeLink(BLANK, VALID_LINK_URL),
                 USER_GUIDE.getTags());
         JsonAdaptedTodo todo = new JsonAdaptedTodo(VALID_DESCRIPTION, VALID_IS_DONE, VALID_DEADLINE, BLANK,
                 VALID_LINK_URL, VALID_JSON_ADAPTED_RECURRENCE, VALID_TAGS);
         assertEquals(modelTodo, todo.toModelType());
     }
     @Test
-    public void toModelType_nullLinkUrl_throwsNullPointerException() {
-        JsonAdaptedTodo todo = new JsonAdaptedTodo(VALID_DESCRIPTION, VALID_IS_DONE, VALID_DEADLINE,
-                VALID_LINK_DESCRIPTION, null, VALID_JSON_ADAPTED_RECURRENCE, VALID_TAGS);
-        assertThrows(NullPointerException.class, todo::toModelType);
-    }
-    @Test
-    public void toModelType_blankLinkUrl_returnsTodo() throws IllegalValueException {
+    public void toModelType_nullLinkUrl_returnsTodo() throws IllegalValueException {
         Todo modelTodo = new Todo(VALID_IS_DONE, VALID_DESCRIPTION, VALID_DEADLINE, VALID_RECURRENCE,
                 USER_GUIDE.getTags());
         JsonAdaptedTodo todo = new JsonAdaptedTodo(VALID_DESCRIPTION, VALID_IS_DONE, VALID_DEADLINE,
-                VALID_LINK_DESCRIPTION, BLANK, VALID_JSON_ADAPTED_RECURRENCE, VALID_TAGS);
+                VALID_LINK_DESCRIPTION, null, VALID_JSON_ADAPTED_RECURRENCE, VALID_TAGS);
         assertEquals(modelTodo, todo.toModelType());
+    }
+    @Test
+    public void toModelType_blankLinkUrl_throwsIllegalArgumentException() throws IllegalValueException {
+        JsonAdaptedTodo todo = new JsonAdaptedTodo(VALID_DESCRIPTION, VALID_IS_DONE, VALID_DEADLINE,
+                VALID_LINK_DESCRIPTION, BLANK, VALID_JSON_ADAPTED_RECURRENCE, VALID_TAGS);
+        assertThrows(IllegalArgumentException.class, todo::toModelType);
     }
     @Test
     public void toModelType_invalidLinkUrl_throwsIllegalValueException() {
@@ -109,20 +112,19 @@ public class JsonAdaptedTodoTest {
     @Test
     public void toModelType_blankLinkDescriptionNullRecurrence_returnsTodo()
             throws IllegalValueException {
-        Todo modelTodo = new Todo(VALID_IS_DONE, VALID_DESCRIPTION, VALID_DEADLINE,
+        Todo modelTodo = new Todo(VALID_IS_DONE, VALID_DESCRIPTION, VALID_DEADLINE, new CollaborativeLink(BLANK,
+                VALID_LINK_URL),
                 USER_GUIDE.getTags());
         JsonAdaptedTodo todo = new JsonAdaptedTodo(VALID_DESCRIPTION, VALID_IS_DONE, VALID_DEADLINE,
                 "", VALID_LINK_URL, null, VALID_TAGS);
         assertEquals(modelTodo, todo.toModelType());
     }
     @Test
-    public void toModelType_blankLinkUrlNullRecurrence_returnsTodo()
+    public void toModelType_blankLinkUrlNullRecurrence_throwsIllegalArgumentException()
             throws IllegalValueException {
-        Todo modelTodo = new Todo(VALID_IS_DONE, VALID_DESCRIPTION, VALID_DEADLINE,
-                USER_GUIDE.getTags());
         JsonAdaptedTodo todo = new JsonAdaptedTodo(VALID_DESCRIPTION, VALID_IS_DONE, VALID_DEADLINE,
                 VALID_LINK_DESCRIPTION, BLANK, null, VALID_TAGS);
-        assertEquals(modelTodo, todo.toModelType());
+        assertThrows(IllegalArgumentException.class, todo::toModelType);
     }
     @Test
     public void toModelType_invalidTags_throwsIllegalValueException() {
