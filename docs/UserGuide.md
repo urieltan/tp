@@ -376,7 +376,7 @@ Format: `edit event i/INDEX [desc/DESCRIPTION] [startdate/DATE] [starttime/TIME]
 * `STARTTIME` and `ENDTIME` must be specified in the format of HHmm using 24 hour time
 
 Examples:
-*  `edit event i/1 desc/CS2101 Lecture startdate/24-01-2020 endtime/2359` Edits the description, start date, and end time of the 1st event to be `CS2101 LEcture`, `24-01-2020`, and `2359` respectively.
+*  `edit event i/1 desc/CS2101 Lecture startdate/24-01-2020 endtime/2359` Edits the description, start date, and end time of the 1st event to be `CS2101 Lecture`, `24-01-2020`, and `2359` respectively.
 *  `edit event i/2 starttime/1400 enddate/30-01-2020` Edits the start time and end date of the 2nd event to be `1400` and `30-01-2020` respectively.
 
 ##### View all Events : `list event`
@@ -384,7 +384,7 @@ Shows a list of all Events in the EventList.
 
 Format: `list event`
 
-##### Showing events with a specific tag: `show events`
+##### Showing events with a specific tag: `show event`
 Shows events whose tags match the tag being searched.
 
 Format: `show event t/TAG`
@@ -444,15 +444,16 @@ Format: `help`
 ## Command summary
 
 ### General
+
 Action | Format, Examples
 --------|------------------
 **Sort** | `sort OPTION` <br> `OPTION` refers to `contact`, `task`, or `clear`
 **Help** | `help`
 **Add common tag to Contact + Task** | `contactTaskTag t/TAG... contactIndex/INDEX taskIndex/INDEX` <br> e.g., `contactTaskTag t/CS2103T t/ProjMate contactIndex/1 taskIndex/1`
 
-<p>&nbsp;</p>
 
 ### Contact Operations
+
 Action | Format, Examples
 --------|------------------
 **Add Contact** | `add contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add contact n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
@@ -463,9 +464,9 @@ Action | Format, Examples
 **Show Contact** | `show contact t/TAG` <br> e.g., `show contact t/friends`
 **List Contacts** | `list contact`
 
-<p>&nbsp;</p>
 
 ### Task Operations
+
 Action | Format, Examples
 --------|------------------
 **List Tasks** | `list task`
@@ -474,9 +475,9 @@ Action | Format, Examples
 **Find tasks due by** | `itemsDueBy date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueBy date/12-12-2020 time/2359`
 **Find tasks due before** |  `itemsDueBefore date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueBefore date/12-12-2020 time/2359`
 
-<p>&nbsp;</p>
 
 ##### Todo-specific Operations
+
 Action | Format, Examples
 --------|------------------
 **Add To Do** | `add todo desc/DESCRIPTION date/DATE time/TIME [recurring/VALUE UNIT]` <br> e.g., `add todo desc/update user guide date/09-08-2020 time/2300 recurring/1 week`
@@ -485,9 +486,9 @@ Action | Format, Examples
 **Show To Do** | `show todo t/TAG` <br> e.g., `show todo t/CS2100`
 **Link doc** | `link doc desc/DESCRIPTION url/LINK i/INDEX_OF_TASK` <br> e.g.,`link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoIkfacr0asqV9A4kh i/2`
 
-<p>&nbsp;</p>
 
 ##### Event-specific Operations
+
 Action | Format, Examples
 --------|------------------
 **Add Event** | `add event desc/DESCRIPTION startdate/DATE starttime/TIME enddate/DATE endtime/TIME [recurring/VALUE UNIT]` <br> e.g., `add event desc/meeting startdate/12-12-2020 starttime/1000 enddate/12-12-2020 endtime/1130 recurring/1 week`
