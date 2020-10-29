@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.tag.Tag;
 
 public abstract class Task {
@@ -63,7 +62,6 @@ public abstract class Task {
         this.description = description;
         this.isDone = false;
     }
-
     /**
      * Returns the status icon of the task.
      * Returns tick symbol when task is indicated as done.
@@ -88,11 +86,9 @@ public abstract class Task {
     /**
      * Indicates that the task has been completed.
      *
-     * @return AddCommand if the task is recurring.
      */
-    public AddCommand markAsDone() {
+    public void markAsDone() {
         this.isDone = true;
-        return null;
     }
     public boolean getStatus() {
         return isDone;
@@ -168,6 +164,10 @@ public abstract class Task {
         } else {
             return "T | 0 | " + this.getDescription() + " | " + getTagsToString();
         }
+    }
+    public boolean isRecurring() {
+        System.out.println(this.getRecurrence() != null);
+        return this.getRecurrence() != null;
     }
 
     public abstract LocalDateTime getDeadline();

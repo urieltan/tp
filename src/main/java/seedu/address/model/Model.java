@@ -97,6 +97,8 @@ public interface Model {
 
     void addEvent(Event event);
 
+    void addTask(Task task);
+
     /**
      * Replaces the given Task {@code target} with {@code editedTask}.
      * {@code target} must exist in the address book.
@@ -116,7 +118,7 @@ public interface Model {
 
     ReadOnlyTaskList getTaskList();
 
-    AddCommand markAsDone(Task target);
+    void markAsDone(Task target);
 
     void updateSortedTaskList(Comparator<Task> taskComparator);
 

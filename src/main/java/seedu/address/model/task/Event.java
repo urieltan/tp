@@ -5,8 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.add.AddEventCommand;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -385,36 +383,8 @@ public class Event extends Task {
     }
 
     @Override
-    public AddCommand markAsDone() {
+    public void markAsDone() {
         this.isDone = true;
-        if (this.recurrence != null) {
-            LocalDateTime newStartDateTime = this.getStart()
-                    .plus(this.recurrence.getValue(), this.recurrence.getChronoUnit());
-            LocalDateTime newEndDateTime = this.getEnd()
-                    .plus(this.recurrence.getValue(), this.recurrence.getChronoUnit());
-
-            AddCommand command;
-            if (this.meetingLink == null) {
-                command = new AddEventCommand(
-                        new Event(description, newStartDateTime, newEndDateTime, recurrence, tags));
-            } else {
-                MeetingLink currentMeeting = this.getMeetingLink();
-                LocalDateTime newTiming = currentMeeting.getLocalDateTime()
-                        .plus(this.recurrence.getValue(), this.recurrence.getChronoUnit());
-
-                String description = currentMeeting.getDescription();
-                int positionOfOldTiming = description.indexOf("(on: ");
-                description = description.substring(0, positionOfOldTiming - 1);
-
-                MeetingLink newMeeting = new MeetingLink(description, currentMeeting.getUrl(), newTiming);
-                command = new AddEventCommand(
-                        new Event(this.getDescription(), newStartDateTime, newEndDateTime,
-                            recurrence, newMeeting, tags));
-            }
-            return command;
-        } else {
-            return null;
-        }
     }
 
     /**
