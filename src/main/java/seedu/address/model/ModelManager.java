@@ -15,7 +15,6 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Event;
 import seedu.address.model.task.Task;
@@ -192,6 +191,11 @@ public class ModelManager implements Model {
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
     @Override
+    public void addTask(Task task) {
+        this.taskList.addTask(task);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+    }
+    @Override
     public void deleteTodo(Task task) {
         this.taskList.removeTask(task);
     }
@@ -213,9 +217,9 @@ public class ModelManager implements Model {
         taskList.setTask(target, editedTask);
     }
     @Override
-    public AddCommand markAsDone(Task target) {
+    public void markAsDone(Task target) {
         requireAllNonNull(target);
-        return taskList.markAsDone(target);
+        taskList.markAsDone(target);
     }
     //=========== Filtered Task List Accessors =============================================================
     @Override

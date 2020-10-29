@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
@@ -119,7 +118,7 @@ public class TaskList implements ReadOnlyTaskList {
         return tasks.hashCode();
     }
 
-    public AddCommand markAsDone(Task target) {
-        return this.tasks.markAsDone(target);
+    public void markAsDone(Task target) {
+        this.tasks.markAsDone(target);
     }
 }

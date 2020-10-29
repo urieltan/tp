@@ -5,8 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.add.AddTodoCommand;
 import seedu.address.model.tag.Tag;
 
 public class Todo extends Task {
@@ -27,11 +25,6 @@ public class Todo extends Task {
 
     /**The collaborative link url. */
     private CollaborativeLink collaborativeLink;
-
-    /**
-     * The recurrence (if any).
-     */
-    private Recurrence recurrence;
 
     /**
      * Constructs a task that has not been completed
@@ -289,26 +282,10 @@ public class Todo extends Task {
     public String deadlineToString() {
         return this.deadline.format(OUTPUT_DATE_TIME_FORMAT).toString();
     }
-
     @Override
-    public AddCommand markAsDone() {
+    public void markAsDone() {
         this.isDone = true;
-        if (this.recurrence != null) {
-            LocalDateTime newDateTime = this.getLocalDateTime()
-                    .plus(this.recurrence.getValue(), this.recurrence.getChronoUnit());
-
-            AddTodoCommand command;
-            if (this.getLink().isEmpty()) {
-                command = new AddTodoCommand(new Todo(description, newDateTime, recurrence, tags));
-            } else {
-                command = new AddTodoCommand(new Todo(description, newDateTime, recurrence, collaborativeLink, tags));
-            }
-            return command;
-        } else {
-            return null;
-        }
     }
-
     /**
      * Returns a String representation of the task.
      * This representation includes the status icon, description, and deadline in the format of outputFormatter.
