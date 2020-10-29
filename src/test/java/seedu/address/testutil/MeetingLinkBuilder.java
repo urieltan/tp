@@ -1,10 +1,6 @@
 package seedu.address.testutil;
 
 import seedu.address.model.task.MeetingLink;
-import seedu.address.model.util.SampleDataUtil;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * A utility class to help with building MeetingLink objects.

@@ -5,7 +5,9 @@ import seedu.address.testutil.MeetingLinkBuilder;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_TUTOR_MEETING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_TIME_TUTOR_MEETING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_URL_TUTOR_MEETING;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalLinks.PROJECT_DOCUMENT;
 import static seedu.address.testutil.TypicalLinks.PROJECT_MEETING;
@@ -28,7 +30,6 @@ public class MeetingLinkTest {
     public void equals() {
 
         // same values -> returns true
-        System.out.println(PROJECT_MEETING.getDescriptionDateTime());
         MeetingLink projectMeetingCopy = new MeetingLinkBuilder(PROJECT_MEETING).build();
         assertTrue(PROJECT_MEETING.equals(projectMeetingCopy));
 

@@ -39,9 +39,12 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+
     public static final String VALID_DESCRIPTION_TUTOR_MEETING = "Tutor meeting";
     public static final String VALID_URL_TUTOR_MEETING = "https://nus-sg.zoom.us/j/85350904475?pwd=T0JwTEIwNjRuMnNKUEt4L2R789JWZz09";
     public static final String VALID_DATE_TIME_TUTOR_MEETING = "10-12-2017 1445";
+    public static final String VALID_DESCRIPTION_TUTORIAL_DOCUMENT = "Tutorial 1 CS2103";
+    public static final String VALID_URL_TUTORIAL_DOCUMENT = "https://docs.google.com/document/d/1oAObtne790B1nDX123hrbAdEy1aTUtorialDOcument/edit";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

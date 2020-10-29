@@ -22,6 +22,9 @@ public class TypicalLinks {
     public static final MeetingLink TUTOR_MEETING = new MeetingLinkBuilder()
             .withDescription(VALID_DESCRIPTION_TUTOR_MEETING).withDatetime(VALID_DATE_TIME_TUTOR_MEETING)
             .withUrl(VALID_URL_TUTOR_MEETING).build();
+    public static final CollaborativeLink TUTORIAL_DOCUMENT = new CollaborativeLinkBuilder()
+            .withDescription(VALID_DESCRIPTION_TUTORIAL_DOCUMENT)
+            .withUrl(VALID_URL_TUTORIAL_DOCUMENT).build();
 
     public static List<Link> getTypicalLinks() {
         return new ArrayList<>(Arrays.asList(PROJECT_MEETING, PROJECT_DOCUMENT));
