@@ -58,6 +58,11 @@ public class EditCommandParser implements Parser<EditCommand> {
 
             Index index;
 
+            if (!argMultimap.getValue(PREFIX_INDEX).isPresent()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditContactCommand.MESSAGE_USAGE));
+            }
+
             try {
                 index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
             } catch (ParseException pe) {
@@ -86,17 +91,26 @@ public class EditCommandParser implements Parser<EditCommand> {
 
             return new EditContactCommand(index, editPersonDescriptor);
         } else if (splitArgs[0].equals("todo")) {
+            if (splitArgs.length < 2) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditTodoCommand.MESSAGE_USAGE));
+            }
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(" " + splitArgs[1],
                             PREFIX_INDEX, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_TIME);
 
             Index index;
 
+            if (!argMultimap.getValue(PREFIX_INDEX).isPresent()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditTodoCommand.MESSAGE_USAGE));
+            }
+
             try {
                 index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
             } catch (ParseException pe) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        EditContactCommand.MESSAGE_USAGE), pe);
+                        EditTodoCommand.MESSAGE_USAGE), pe);
             }
 
             EditTodoDescriptor editTodoDescriptor = new EditTodoDescriptor();
@@ -112,22 +126,31 @@ public class EditCommandParser implements Parser<EditCommand> {
                 editTodoDescriptor.setTime(time);
             }
             if (!editTodoDescriptor.isAnyFieldEdited()) {
-                throw new ParseException(EditContactCommand.MESSAGE_NOT_EDITED);
+                throw new ParseException(EditTodoCommand.MESSAGE_NOT_EDITED);
             }
 
             return new EditTodoCommand(index, editTodoDescriptor);
         } else if (splitArgs[0].equals("event")) {
+            if (splitArgs.length < 2) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditEventCommand.MESSAGE_USAGE));
+            }
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_INDEX, PREFIX_DESCRIPTION,
                             PREFIX_STARTDATE, PREFIX_STARTTIME, PREFIX_ENDDATE, PREFIX_ENDTIME);
 
             Index index;
 
+            if (!argMultimap.getValue(PREFIX_INDEX).isPresent()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditEventCommand.MESSAGE_USAGE));
+            }
+
             try {
                 index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
             } catch (ParseException pe) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        EditContactCommand.MESSAGE_USAGE), pe);
+                        EditEventCommand.MESSAGE_USAGE), pe);
             }
 
             EditEventDescriptor editEventDescriptor = new EditEventDescriptor();
@@ -147,7 +170,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 editEventDescriptor.setEndTime(argMultimap.getValue(PREFIX_ENDTIME).get());
             }
             if (!editEventDescriptor.isAnyFieldEdited()) {
-                throw new ParseException(EditContactCommand.MESSAGE_NOT_EDITED);
+                throw new ParseException(EditEventCommand.MESSAGE_NOT_EDITED);
             }
 
             return new EditEventCommand(index, editEventDescriptor);

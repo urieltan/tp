@@ -5,7 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.list.ListAllCommand;
+import seedu.address.logic.commands.list.ListTaskCommand;
 import seedu.address.logic.commands.list.ListContactCommand;
 import seedu.address.logic.commands.list.ListEventCommand;
 import seedu.address.logic.commands.list.ListTodoCommand;
@@ -28,8 +28,8 @@ public class ListCommandParser implements Parser<ListCommand> {
             return new ListTodoCommand();
         } else if (args.trim().equals("event")) {
             return new ListEventCommand();
-        } else if (args.trim().equals("all")) {
-            return new ListAllCommand();
+        } else if (args.trim().equals("task")) {
+            return new ListTaskCommand();
         } else {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));

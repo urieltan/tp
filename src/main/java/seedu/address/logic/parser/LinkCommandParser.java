@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.LinkCommand;
+import seedu.address.logic.commands.edit.EditEventCommand;
 import seedu.address.logic.commands.link.LinkCollaborativeCommand;
 import seedu.address.logic.commands.link.LinkMeetingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -30,6 +31,10 @@ public class LinkCommandParser implements Parser<LinkCommand> {
     public LinkCommand parse(String args) throws ParseException {
         String[] splitArgs = args.trim().split(" ", 2);
         if (splitArgs[0].trim().split(" ")[0].trim().equals("meeting")) {
+            if (splitArgs.length < 2) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    LinkMeetingCommand.MESSAGE_USAGE));
+            }
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_DESCRIPTION, PREFIX_URL, PREFIX_INDEX,
                             PREFIX_DATE, PREFIX_TIME);
@@ -52,6 +57,10 @@ public class LinkCommandParser implements Parser<LinkCommand> {
 
             return new LinkMeetingCommand(index, meetingLink);
         } else if (splitArgs[0].trim().split(" ")[0].trim().equals("doc")) {
+            if (splitArgs.length < 2) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    LinkCollaborativeCommand.MESSAGE_USAGE));
+            }
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_DESCRIPTION, PREFIX_URL, PREFIX_INDEX);
 

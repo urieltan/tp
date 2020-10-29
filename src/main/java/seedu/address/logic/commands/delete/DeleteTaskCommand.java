@@ -13,7 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.task.Task;
 
 public class DeleteTaskCommand extends DeleteCommand {
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " task"
             + ": Deletes the task identified by the index number used in the displayed TaskList.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " task 1";

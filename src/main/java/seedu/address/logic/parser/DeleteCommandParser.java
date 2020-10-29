@@ -34,9 +34,11 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             if (args.contains("task")) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTaskCommand.MESSAGE_USAGE), pe);
-            } else {
+            } else if (args.contains("contact")){
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteContactCommand.MESSAGE_USAGE), pe);
+            } else {
+                throw new ParseException(UNKNOWN_DELETE_COMMAND);
             }
         }
     }

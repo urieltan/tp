@@ -22,11 +22,15 @@ import seedu.address.model.task.Todo;
  */
 public class LinkCollaborativeCommand extends LinkCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add collaborative link to todo. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " doc: Add collaborative link to todo. "
             + "Parameters: "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_URL + "URL "
-            + PREFIX_INDEX + "INDEX ";
+            + PREFIX_INDEX + "INDEX\n"
+            + "Example: " + COMMAND_WORD + " doc "
+            + PREFIX_DESCRIPTION + "proposal "
+            + PREFIX_URL + "https://docs.google.com "
+            + PREFIX_INDEX + "1";
 
     public static final String MESSAGE_SUCCESS = "New collaborative folder link added: %1$s";
 
@@ -35,7 +39,7 @@ public class LinkCollaborativeCommand extends LinkCommand {
     private final Index index;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an LinkCollaborativeCommand to add collaborative link to a {@code Todo}
      */
     public LinkCollaborativeCommand(Index index, CollaborativeLink collaborativeLink) {
         requireNonNull(collaborativeLink);
@@ -48,7 +52,7 @@ public class LinkCollaborativeCommand extends LinkCommand {
         List<Task> lastShownList = model.getFilteredTaskList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_TODO_DISPLAYED_INDEX);
         }
         try {
             Todo todoToEdit = (Todo) lastShownList.get(index.getZeroBased());
@@ -64,7 +68,7 @@ public class LinkCollaborativeCommand extends LinkCommand {
             model.setTask(todoToEdit, editedTodo);
             model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
         } catch (ClassCastException e) {
-            throw new CommandException(Messages.MESSAGE_TASK_IS_NOT_EVENT);
+            throw new CommandException(Messages.MESSAGE_TASK_IS_NOT_TODO);
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, collaborativeLink.getDescription()), "TASK");
