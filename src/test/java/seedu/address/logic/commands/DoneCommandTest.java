@@ -34,7 +34,7 @@ public class DoneCommandTest {
         DoneCommand doneCommand = new DoneCommand(INDEX_FIRST_PERSON);
 
         ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new TaskList());
-        AddCommand command = todo.markAsDone();
+        todo.markAsDone();
         expectedModel.addTodo(todo);
 
         String expectedMessage = String.format(DoneCommand.MESSAGE_MARK_TASK_AS_DONE_SUCCESS, todo);
@@ -66,8 +66,7 @@ public class DoneCommandTest {
 
         ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new TaskList());
         expectedModel.addTodo(todoRecurring);
-        AddCommand addRecurringCommand = todoRecurring.markAsDone();
-        addRecurringCommand.execute(expectedModel);
+        todoRecurring.markAsDone();
 
         String expectedMessage = String.format(DoneCommand.MESSAGE_MARK_TASK_AS_DONE_SUCCESS, todoRecurring);
 
@@ -84,8 +83,7 @@ public class DoneCommandTest {
 
         ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new TaskList());
         expectedModel.addEvent(eventRecurring);
-        AddCommand addRecurringCommand = eventRecurring.markAsDone();
-        addRecurringCommand.execute(expectedModel);
+        eventRecurring.markAsDone();
 
         String expectedMessage = String.format(DoneCommand.MESSAGE_MARK_TASK_AS_DONE_SUCCESS, eventRecurring);
 
