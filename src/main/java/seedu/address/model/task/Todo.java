@@ -27,11 +27,6 @@ public class Todo extends Task {
     private CollaborativeLink collaborativeLink;
 
     /**
-     * The recurrence (if any).
-     */
-    private Recurrence recurrence;
-
-    /**
      * Constructs a task that has not been completed
      * with a brief description and deadline for the task to be completed by.
      *

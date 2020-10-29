@@ -35,11 +35,6 @@ public class Event extends Task {
     private MeetingLink meetingLink;
 
     /**
-     * The recurrence (if any).
-     */
-    private Recurrence recurrence;
-
-    /**
      * Constructs an event that has not been completed with a brief
      * description and period of time.
      *
