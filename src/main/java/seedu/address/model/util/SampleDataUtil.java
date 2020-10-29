@@ -15,7 +15,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Event;
-import seedu.address.model.task.MeetingLink;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Todo;
 
