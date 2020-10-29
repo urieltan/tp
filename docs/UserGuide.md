@@ -251,7 +251,6 @@ Format: `sort OPTION`
 
 ![sortedTaskList](images/SortedTaskList.PNG) 
 
-
 * Contact, task, and clear are the available options for sort and should be used individually.
 * Using the clear option restores all lists (i.e. both contact list and task list) to their natural order.
 
