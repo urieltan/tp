@@ -183,11 +183,11 @@ Example:
 * `list todo` followed by `done 3` marks the 3rd todo on the Todo List as complete.
 * `list event` followed by `done 3` marks the 3rd Event on the Event list as complete.
 
-#### Listing all tasks : `list all`
+#### Listing all tasks : `list task`
 
 Shows a list of all events and to-dos in the Lifebook.
 
-Format: `list all`
+Format: `list task`
 
 #### Adding a zoom meeting: `link meeting`
 
@@ -448,7 +448,7 @@ Action | Format, Examples
 **Show Contact** | `show contact t/TAG` <br> e.g., `show contact t/friends`
 **Show To Do** | `show todo t/TAG` <br> e.g., `show todo t/CS2100`
 **Show Event** | `show event t/TAG` <br> e.g., `show event t/CCAMeeting`
-**List Tasks** | `list all`
+**List Tasks** | `list task`
 **List Contacts** | `list contact`
 **Help** | `help`
 **Add To Do** | `add todo desc/DESCRIPTION date/DATE time/TIME [recurring/VALUE UNIT]` <br> e.g., `add todo desc/update user guide date/09-08-2020 time/2300 recurring/1 week`
