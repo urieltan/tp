@@ -165,6 +165,11 @@ public abstract class Task {
             return "T | 0 | " + this.getDescription() + " | " + getTagsToString();
         }
     }
+
+    /**
+     * Indicates if task is recurring.
+     * @return true if it is recurring, and false otherwise.
+     */
     public boolean isRecurring() {
         System.out.println(this.getRecurrence() != null);
         return this.getRecurrence() != null;

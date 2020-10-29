@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Event;
 import seedu.address.model.task.Task;

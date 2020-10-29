@@ -15,7 +15,6 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Event;
 import seedu.address.model.task.Task;
