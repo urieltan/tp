@@ -447,6 +447,8 @@ Action | Format, Examples
 **Help** | `help`
 **Add common tag to Contact + Task** | `contactTaskTag t/TAG... contactIndex/INDEX taskIndex/INDEX` <br> e.g., `contactTaskTag t/CS2103T t/ProjMate contactIndex/1 taskIndex/1`
 
+<p>&nbsp;</p>
+
 ### Contact Operations
 Action | Format, Examples
 --------|------------------
@@ -458,6 +460,8 @@ Action | Format, Examples
 **Show Contact** | `show contact t/TAG` <br> e.g., `show contact t/friends`
 **List Contacts** | `list contact`
 
+<p>&nbsp;</p>
+
 ### Task Operations
 Action | Format, Examples
 --------|------------------
@@ -467,6 +471,8 @@ Action | Format, Examples
 **Find tasks due by** | `itemsDueBy date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueBy date/12-12-2020 time/2359`
 **Find tasks due before** |  `itemsDueBefore date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueBefore date/12-12-2020 time/2359`
 
+<p>&nbsp;</p>
+
 ##### Todo-specific Operations
 Action | Format, Examples
 --------|------------------
@@ -475,6 +481,8 @@ Action | Format, Examples
 **Find To Do** | `find todo KEYWORD [MORE_KEYWORDS]`<br> e.g., `find todo Finish assignment`
 **Show To Do** | `show todo t/TAG` <br> e.g., `show todo t/CS2100`
 **Link doc** | `link doc desc/DESCRIPTION url/LINK i/INDEX_OF_TASK` <br> e.g.,`link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoIkfacr0asqV9A4kh i/2`
+
+<p>&nbsp;</p>
 
 ##### Event-specific Operations
 Action | Format, Examples
