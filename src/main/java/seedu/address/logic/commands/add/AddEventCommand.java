@@ -21,7 +21,7 @@ import seedu.address.model.task.Event;
 public class AddEventCommand extends AddCommand {
 
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " event: Adds a event to the TaskList. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a event to the TaskList. "
             + "Parameters: "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_STARTDATE + "START DATE "
@@ -30,7 +30,7 @@ public class AddEventCommand extends AddCommand {
             + PREFIX_ENDTIME + "END TIME"
             + " [" + PREFIX_RECURRING + "RECURRING]"
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " event "
+            + "Example: " + COMMAND_WORD + " "
             + PREFIX_DESCRIPTION + "Attend meeting "
             + PREFIX_STARTDATE + "10-11-2020 "
             + PREFIX_STARTTIME + "1200 "

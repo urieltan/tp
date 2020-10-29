@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -75,14 +76,15 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      * @returns AddCommand if task is recurring.
      */
-    public void markAsDone(Task target) {
+    public AddCommand markAsDone(Task target) {
         requireAllNonNull(target);
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new PersonNotFoundException();
         }
-        target.markAsDone();
+        AddCommand command = target.markAsDone();
         internalList.set(index, target);
+        return command;
     }
 
     /**

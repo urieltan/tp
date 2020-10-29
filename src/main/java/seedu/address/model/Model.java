@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Event;
 import seedu.address.model.task.Task;
@@ -96,8 +97,6 @@ public interface Model {
 
     void addEvent(Event event);
 
-    void addTask(Task task);
-
     /**
      * Replaces the given Task {@code target} with {@code editedTask}.
      * {@code target} must exist in the address book.
@@ -117,7 +116,7 @@ public interface Model {
 
     ReadOnlyTaskList getTaskList();
 
-    void markAsDone(Task target);
+    AddCommand markAsDone(Task target);
 
     void updateSortedTaskList(Comparator<Task> taskComparator);
 

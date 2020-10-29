@@ -18,6 +18,7 @@ public class JsonAdaptedRecurrence {
     public JsonAdaptedRecurrence(@JsonProperty("value") Integer value, @JsonProperty("chronoUnit") ChronoUnit unit) {
         this.value = value;
         this.unit = unit;
+        System.out.println(unit);
     }
 
     /**

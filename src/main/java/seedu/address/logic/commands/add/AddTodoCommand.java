@@ -18,14 +18,14 @@ import seedu.address.model.task.Todo;
  */
 public class AddTodoCommand extends AddCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " todo: Adds a todo to the TodoList. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a todo to the TodoList. "
             + "Parameters: "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_DATE + "DATE "
             + PREFIX_TIME + "TIME"
             + " [" + PREFIX_RECURRING + "RECURRING]"
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " todo "
+            + "Example: " + COMMAND_WORD + " "
             + PREFIX_DESCRIPTION + "Finish assignment "
             + PREFIX_DATE + "23-11-2020 "
             + PREFIX_TIME + "2359 "

@@ -5,6 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.add.AddEventCommand;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,79 +37,9 @@ public class Event extends Task {
     private MeetingLink meetingLink;
 
     /**
-     * Constructs an event that has not been completed with a brief
-     * description and period of time.
-     *
-     * @param description a brief description of the event.
-     * @param start       the starting date and time of event.
-     * @param end         the ending date and time of event.
+     * The recurrence (if any).
      */
-    public Event (boolean isDone, String description, String start, String end) {
-        super(description);
-        assert start != null;
-        assert end != null;
-        this.isDone = isDone;
-        this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
-        this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
-    }
-
-    /**
-     * Constructs an event that has not been completed with a brief
-     * description and period of time.
-     *
-     * @param description a brief description of the event.
-     * @param start       the starting date and time of event.
-     * @param end         the ending date and time of event.
-     * @param recurrence  the recurrence of event.
-     */
-    public Event (boolean isDone, String description, String start, String end, Recurrence recurrence) {
-        super(description);
-        assert start != null;
-        assert end != null;
-        this.isDone = isDone;
-        this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
-        this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
-        this.recurrence = recurrence;
-    }
-
-    /**
-     * Constructs an event that has not been completed with a brief
-     * description and period of time.
-     *
-     * @param description a brief description of the event.
-     * @param start       the starting date and time of event.
-     * @param end         the ending date and time of event.
-     */
-    public Event (boolean isDone, String description, String start, String end, MeetingLink link) {
-        super(description);
-        assert start != null;
-        assert end != null;
-        this.isDone = isDone;
-        this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
-        this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
-        this.meetingLink = link;
-    }
-
-    /**
-     * Constructs an event that has not been completed with a brief
-     * description and period of time.
-     *
-     * @param description a brief description of the event.
-     * @param start       the starting date and time of event.
-     * @param end         the ending date and time of event.
-     * @param recurrence  the recurrence of event.
-     */
-    public Event (boolean isDone, String description, String start, String end,
-                  MeetingLink link, Recurrence recurrence) {
-        super(description);
-        assert start != null;
-        assert end != null;
-        this.isDone = isDone;
-        this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
-        this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
-        this.meetingLink = link;
-        this.recurrence = recurrence;
-    }
+    private Recurrence recurrence;
 
     /**
      * Constructs an event that has not been completed with a brief
@@ -363,23 +295,37 @@ public class Event extends Task {
         this.end = LocalDateTime.parse(newPeriod.substring(START_OF_SECOND_DATE_TIME_INDEX), INPUT_DATE_TIME_FORMAT);
     }
 
-    /**
-     * Returns true if both events of the same description have at least one other identity field that is the same.
-     * This defines a weaker notion of equality between two events.
-     */
-    public boolean isSameEvent(Event otherEvent) {
-        if (otherEvent == this) {
-            return true;
-        }
-
-        return otherEvent != null
-                && otherEvent.getDescription().equals(getDescription())
-                && (otherEvent.getDescriptionDateTime().equals(getDescriptionDateTime()));
-    }
-
     @Override
-    public void markAsDone() {
+    public AddCommand markAsDone() {
         this.isDone = true;
+        if (this.recurrence != null) {
+            LocalDateTime newStartDateTime = this.getStart()
+                    .plus(this.recurrence.getValue(), this.recurrence.getChronoUnit());
+            LocalDateTime newEndDateTime = this.getEnd()
+                    .plus(this.recurrence.getValue(), this.recurrence.getChronoUnit());
+
+            AddCommand command;
+            if (this.meetingLink == null) {
+                command = new AddEventCommand(
+                        new Event(description, newStartDateTime, newEndDateTime, recurrence, tags));
+            } else {
+                MeetingLink currentMeeting = this.getMeetingLink();
+                LocalDateTime newTiming = currentMeeting.getLocalDateTime()
+                        .plus(this.recurrence.getValue(), this.recurrence.getChronoUnit());
+
+                String description = currentMeeting.getDescription();
+                int positionOfOldTiming = description.indexOf("(on: ");
+                description = description.substring(0, positionOfOldTiming - 1);
+
+                MeetingLink newMeeting = new MeetingLink(description, currentMeeting.getUrl(), newTiming);
+                command = new AddEventCommand(
+                        new Event(description, newStartDateTime, newEndDateTime,
+                            recurrence, newMeeting, tags));
+            }
+            return command;
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -518,9 +464,5 @@ public class Event extends Task {
     @Override
     public Recurrence getRecurrence() {
         return this.recurrence;
-    }
-
-    public boolean hasRecurrence() {
-        return getRecurrence() != null;
     }
 }

@@ -2,21 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.task.CollaborativeLink;
-import seedu.address.model.task.Event;
-import seedu.address.model.task.MeetingLink;
-import seedu.address.model.task.Recurrence;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.Todo;
 
 public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
@@ -42,42 +34,12 @@ public class DoneCommand extends Command {
         }
 
         Task taskToMark = lastShownList.get(targetIndex.getZeroBased());
-        if (taskToMark.isRecurring()) {
-            Recurrence recurrence = taskToMark.getRecurrence();
-            Set<Tag> tags = taskToMark.getTags();
-            String description = taskToMark.getDescription();
-            if (taskToMark.isTodo()) {
-                LocalDateTime newDateTime = taskToMark.getLocalDateTime().plus(taskToMark.getRecurrence().getValue(),
-                        taskToMark.getRecurrence().getChronoUnit());
-                if (taskToMark.getLink().isEmpty()) {
-                    model.addTask(new Todo(description, newDateTime, recurrence, tags));
-                } else {
-                    CollaborativeLink collaborativeLink = ((Todo) taskToMark).getCollaborativeLink();
-                    model.addTask(new Todo(description, newDateTime, recurrence, collaborativeLink, tags));
-                }
-            } else {
-                LocalDateTime newStartDateTime = taskToMark.getStart()
-                        .plus(taskToMark.getRecurrence().getValue(), taskToMark.getRecurrence().getChronoUnit());
-                LocalDateTime newEndDateTime = taskToMark.getEnd()
-                        .plus(taskToMark.getRecurrence().getValue(), taskToMark.getRecurrence().getChronoUnit());
-                if (taskToMark.getLink().isEmpty()) {
-                    model.addTask(new Event(description, newStartDateTime, newEndDateTime, recurrence, tags));
-                } else {
-                    MeetingLink currentMeeting = ((Event) taskToMark).getMeetingLink();
-                    LocalDateTime newTiming = currentMeeting.getLocalDateTime()
-                            .plus(taskToMark.getRecurrence().getValue(), taskToMark.getRecurrence().getChronoUnit());
-
-                    String meetingDescription = currentMeeting.getDescription();
-                    int positionOfOldTiming = meetingDescription.indexOf("(on: ");
-                    meetingDescription = meetingDescription.substring(0, positionOfOldTiming - 1);
-
-                    MeetingLink newMeeting = new MeetingLink(meetingDescription, currentMeeting.getUrl(), newTiming);
-                    model.addTask(new Event(description, newStartDateTime, newEndDateTime,
-                            recurrence, newMeeting, tags));
-                }
-            }
+        AddCommand recurrenceAddCommand = model.markAsDone(taskToMark);
+        if (recurrenceAddCommand != null) {
+            recurrenceAddCommand.execute(model);
+            model.getDueSoonTaskList();
         }
-        model.markAsDone(taskToMark);
+
         return new CommandResult(String.format(MESSAGE_MARK_TASK_AS_DONE_SUCCESS, taskToMark), "TASK");
     }
 

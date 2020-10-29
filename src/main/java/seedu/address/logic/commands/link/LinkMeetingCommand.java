@@ -24,19 +24,13 @@ import seedu.address.model.task.Task;
  */
 public class LinkMeetingCommand extends LinkCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " meeting: Add meeting link to event. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add meeting link to event. "
             + "Parameters: "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_URL + "URL "
             + PREFIX_INDEX + "INDEX "
             + PREFIX_DATE + "DATE "
-            + PREFIX_TIME + "TIME\n"
-            + "Example: " + COMMAND_WORD + " meeting "
-            + PREFIX_DESCRIPTION + "workshop "
-            + PREFIX_URL + "https://www.youtube.com "
-            + PREFIX_INDEX + "1 "
-            + PREFIX_DATE + "29-10-2020 "
-            + PREFIX_TIME + "1200";
+            + PREFIX_TIME + "TIME";
 
     public static final String MESSAGE_SUCCESS = "New meeting added: %1$s";
 
@@ -45,7 +39,7 @@ public class LinkMeetingCommand extends LinkCommand {
     private final Index index;
 
     /**
-     * Creates a LinkMeetingCommand to add the meeting link to an {@code Event}
+     * Creates an AddCommand to add the specified {@code Person}
      */
     public LinkMeetingCommand(Index index, MeetingLink meetingLink) {
         requireNonNull(meetingLink);
@@ -58,7 +52,7 @@ public class LinkMeetingCommand extends LinkCommand {
         List<Task> lastShownList = model.getFilteredTaskList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         try {
             Event eventToEdit = (Event) lastShownList.get(index.getZeroBased());

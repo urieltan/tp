@@ -190,11 +190,6 @@ public class AddTodoCommandTest {
         }
 
         @Override
-        public void addTask(Task task) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void deleteTodo(Task task) {
             throw new AssertionError("This method should not be called.");
         }
@@ -220,7 +215,7 @@ public class AddTodoCommandTest {
         }
 
         @Override
-        public void markAsDone(Task target) {
+        public AddCommand markAsDone(Task target) {
             throw new AssertionError("This method should not be called.");
         }
 

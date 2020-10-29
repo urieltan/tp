@@ -1,14 +1,18 @@
 package seedu.address.logic.commands.edit;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -17,38 +21,40 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.task.CollaborativeLink;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.Todo;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing todo in the Lifebook.
  */
 public class EditTodoCommand extends EditCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " todo: Edits the details of the todo identified "
-            + "by the index number used in the displayed task list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
+            + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: "
-            + PREFIX_INDEX + "INDEX (must be a positive integer) "
-            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
-            + "[" + PREFIX_DATE + "DATE] "
-            + "[" + PREFIX_TIME + "TIME] "
-            + "Example: " + COMMAND_WORD + " todo "
-            + PREFIX_INDEX + "1 "
-            + PREFIX_DESCRIPTION + "A new description "
-            + PREFIX_DATE + "20-01-2020 "
-            + PREFIX_TIME + "2350";
+            + "Parameters: INDEX (must be a positive integer) "
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_PHONE + "91234567 "
+            + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_TODO_SUCCESS = "Edited Todo: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Todo: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_TODO = "This todo already exists in the Lifebook.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This todo already exists in the Lifebook.";
 
     private final Index index;
     private final EditTodoCommand.EditTodoDescriptor editTodoDescriptor;
 
     /**
-     * @param index of the todo in the filtered task list to edit
+     * @param index of the person in the filtered person list to edit
      * @param editTodoDescriptor details to edit the todo with
      */
     public EditTodoCommand(Index index, EditTodoCommand.EditTodoDescriptor editTodoDescriptor) {
@@ -62,54 +68,39 @@ public class EditTodoCommand extends EditCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Task> lastShownList = model.getFilteredTaskList();
+        List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TODO_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Todo todoToEdit = (Todo) lastShownList.get(index.getZeroBased());
-        Todo editedTodo = createEditedTodo(todoToEdit, editTodoDescriptor);
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person editedPerson = createEditedPerson(personToEdit, editTodoDescriptor);
 
-        if (!todoToEdit.isSameTodo(editedTodo) && model.hasTask(editedTodo)) {
-            throw new CommandException(MESSAGE_DUPLICATE_TODO);
+        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setTask(todoToEdit, editedTodo);
-        model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
-        return new CommandResult(String.format(MESSAGE_EDIT_TODO_SUCCESS, editedTodo), "TASK");
+        model.setPerson(personToEdit, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson), "TASK");
     }
 
     /**
-     * Creates and returns a {@code Todo} with the details of {@code todoToEdit}
-     * edited with {@code editTodoDescriptor}.
+     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * edited with {@code editPersonDescriptor}.
      */
-    private static Todo createEditedTodo(Todo todoToEdit,
-                                             EditTodoCommand.EditTodoDescriptor editTodoDescriptor) {
-        assert todoToEdit != null;
+    private static Person createEditedPerson(Person personToEdit,
+                                             EditTodoCommand.EditTodoDescriptor editPersonDescriptor) {
+        assert personToEdit != null;
 
-        String description = editTodoDescriptor.getDescription().orElse(todoToEdit.getDescription());
-        String previousDateTime = todoToEdit.getInputDate();
-        String date = editTodoDescriptor.getDate().orElse(previousDateTime.split(" ")[0]);
-        String time = editTodoDescriptor.getTime().orElse(previousDateTime.split(" ")[1]);
+        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
+        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        if (todoToEdit.getLink().isPresent()) {
-            CollaborativeLink link = todoToEdit.getCollaborativeLink();
-            if (todoToEdit.hasRecurrence()) {
-                return new Todo(todoToEdit.getStatus(), description,
-                        date + " " + time, link, todoToEdit.getRecurrence());
-            } else {
-                return new Todo(todoToEdit.getStatus(), description, date + " " + time, link);
-            }
-        } else {
-            if (todoToEdit.hasRecurrence()) {
-                return new Todo(todoToEdit.getStatus(), description,
-                        date + " " + time, todoToEdit.getRecurrence());
-            } else {
-                return new Todo(todoToEdit.getStatus(), description, date + " " + time);
-            }
-        }
-
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
 
     @Override
@@ -131,13 +122,15 @@ public class EditTodoCommand extends EditCommand {
     }
 
     /**
-     * Stores the details to edit the todo with. Each non-empty field value will replace the
-     * corresponding field value of the todo.
+     * Stores the details to edit the person with. Each non-empty field value will replace the
+     * corresponding field value of the person.
      */
     public static class EditTodoDescriptor {
-        private String description;
-        private String date;
-        private String time;
+        private Name name;
+        private Phone phone;
+        private Email email;
+        private Address address;
+        private Set<Tag> tags;
 
         public EditTodoDescriptor() {}
 
@@ -146,40 +139,67 @@ public class EditTodoCommand extends EditCommand {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditTodoDescriptor(EditTodoCommand.EditTodoDescriptor toCopy) {
-            setDescription(toCopy.description);
-            setDate(toCopy.date);
-            setTime(toCopy.time);
+            setName(toCopy.name);
+            setPhone(toCopy.phone);
+            setEmail(toCopy.email);
+            setAddress(toCopy.address);
+            setTags(toCopy.tags);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(description, date, time);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
         }
 
-        public void setDescription(String description) {
-            this.description = description;
+        public void setName(Name name) {
+            this.name = name;
         }
 
-        public Optional<String> getDescription() {
-            return Optional.ofNullable(description);
+        public Optional<Name> getName() {
+            return Optional.ofNullable(name);
         }
 
-        public void setDate(String date) {
-            this.date = date;
+        public void setPhone(Phone phone) {
+            this.phone = phone;
         }
 
-        public Optional<String> getDate() {
-            return Optional.ofNullable(date);
+        public Optional<Phone> getPhone() {
+            return Optional.ofNullable(phone);
         }
 
-        public void setTime(String time) {
-            this.time = time;
+        public void setEmail(Email email) {
+            this.email = email;
         }
 
-        public Optional<String> getTime() {
-            return Optional.ofNullable(time);
+        public Optional<Email> getEmail() {
+            return Optional.ofNullable(email);
+        }
+
+        public void setAddress(Address address) {
+            this.address = address;
+        }
+
+        public Optional<Address> getAddress() {
+            return Optional.ofNullable(address);
+        }
+
+        /**
+         * Sets {@code tags} to this object's {@code tags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setTags(Set<Tag> tags) {
+            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code tags} is null.
+         */
+        public Optional<Set<Tag>> getTags() {
+            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
         @Override
@@ -197,9 +217,11 @@ public class EditTodoCommand extends EditCommand {
             // state check
             EditTodoCommand.EditTodoDescriptor e = (EditTodoCommand.EditTodoDescriptor) other;
 
-            return getDescription().equals(e.getDescription())
-                    && getDate().equals(e.getDate())
-                    && getTime().equals(e.getTime());
+            return getName().equals(e.getName())
+                    && getPhone().equals(e.getPhone())
+                    && getEmail().equals(e.getEmail())
+                    && getAddress().equals(e.getAddress())
+                    && getTags().equals(e.getTags());
         }
     }
 }
