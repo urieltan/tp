@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Main-Class: 
+Class-Path: javafx-base-11-win.jar jackson-core-2.7.4.jar javafx-graphic
+ s-11-linux.jar javafx-fxml-11-win.jar javafx-base-11-mac.jar junit-jupi
+ ter-api-5.4.0.jar apiguardian-api-1.0.0.jar javafx-graphics-11-win.jar 
+ javafx-controls-11-mac.jar junit-platform-engine-1.4.0.jar javafx-graph
+ ics-11.jar jackson-datatype-jsr310-2.7.4.jar javafx-controls-11-linux.j
+ ar jackson-databind-2.7.4.jar javafx-controls-11.jar junit-platform-com
+ mons-1.4.0.jar javafx-fxml-11-linux.jar opentest4j-1.1.1.jar javafx-bas
+ e-11-linux.jar javafx-base-11.jar javafx-controls-11-win.jar jackson-an
+ notations-2.7.0.jar junit-jupiter-engine-5.4.0.jar javafx-fxml-11-mac.j
+ ar javafx-graphics-11-mac.jar
+
