@@ -1,18 +1,15 @@
 package seedu.address.logic.commands.edit;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDDATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDTIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTTIME;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -21,41 +18,41 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Event;
+import seedu.address.model.task.MeetingLink;
+import seedu.address.model.task.Task;
 
 /**
- * Edits the details of an existing event in the Lifebook.
+ * Edits the details of an existing todo in the Lifebook.
  */
 public class EditEventCommand extends EditCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the event identified "
+            + "by the index number used in the displayed task list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
+            + "[" + PREFIX_STARTDATE + "STARTDATE] "
+            + "[" + PREFIX_STARTTIME + "STARTTIME] "
+            + "[" + PREFIX_ENDDATE + "ENDDATE] "
+            + "[" + PREFIX_ENDTIME + "ENDTIME] "
+            + "Example: " + COMMAND_WORD + " event 1 "
+            + PREFIX_DESCRIPTION + "A new description "
+            + PREFIX_STARTDATE + "20-01-2020 "
+            + PREFIX_STARTTIME + "2350 "
+            + PREFIX_ENDDATE + "23-01-2020 "
+            + PREFIX_ENDTIME + "2359";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Event: %1$s";
+    public static final String MESSAGE_EDIT_TODO_SUCCESS = "Edited Event: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This event already exists in the Lifebook.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This todo already exists in the Lifebook.";
 
     private final Index index;
     private final EditEventCommand.EditEventDescriptor editEventDescriptor;
 
     /**
      * @param index of the person in the filtered person list to edit
-     * @param editEventDescriptor details to edit the event with
+     * @param editEventDescriptor details to edit the todo with
      */
     public EditEventCommand(Index index, EditEventCommand.EditEventDescriptor editEventDescriptor) {
         requireNonNull(index);
@@ -68,39 +65,58 @@ public class EditEventCommand extends EditCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Task> lastShownList = model.getFilteredTaskList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editEventDescriptor);
+        Event eventToEdit = (Event) lastShownList.get(index.getZeroBased());
+        Event editedEvent = createEditedEvent(eventToEdit, editEventDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        if (!eventToEdit.isSameEvent(editedEvent) && model.hasTask(editedEvent)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson), "TASK");
+        model.setTask(eventToEdit, editedEvent);
+        model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        return new CommandResult(String.format(MESSAGE_EDIT_TODO_SUCCESS, editedEvent), "TASK");
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit,
-                                             EditEventCommand.EditEventDescriptor editEventDescriptor) {
-        assert personToEdit != null;
+    private static Event createEditedEvent(Event eventToEdit,
+                                         EditEventCommand.EditEventDescriptor editEventDescriptor) {
+        assert eventToEdit != null;
 
-        Name updatedName = editEventDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editEventDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editEventDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editEventDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editEventDescriptor.getTags().orElse(personToEdit.getTags());
+        String description = editEventDescriptor.getDescription().orElse(eventToEdit.getDescription());
+        String previousStartDateTime = eventToEdit.getStartTime();
+        String startDate = editEventDescriptor.getStartDate().orElse(previousStartDateTime.split(" ")[0]);
+        String startTime = editEventDescriptor.getStartTime().orElse(previousStartDateTime.split(" ")[1]);
+        String previousEndDateTime = eventToEdit.getEndTime();
+        String endDate = editEventDescriptor.getEndDate().orElse(previousEndDateTime.split(" ")[0]);
+        String endTime = editEventDescriptor.getEndTime().orElse(previousEndDateTime.split(" ")[1]);
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        if (eventToEdit.getLink().isPresent()) {
+            MeetingLink link = eventToEdit.getMeetingLink();
+            if (eventToEdit.hasRecurrence()) {
+                return new Event(eventToEdit.getStatus(), description, startDate + " " + startTime,
+                        endDate + " " + endTime, link, eventToEdit.getRecurrence());
+            } else {
+                return new Event(eventToEdit.getStatus(), description,
+                        startDate + " " + startTime, endDate + " " + endTime, link);
+            }
+        } else {
+            if (eventToEdit.hasRecurrence()) {
+                return new Event(eventToEdit.getStatus(), description, startDate + " " + startTime,
+                        endDate + " " + endTime, eventToEdit.getRecurrence());
+            } else {
+                return new Event(eventToEdit.getStatus(), description,
+                        startDate + " " + startTime, endDate + " " + endTime);
+            }
+        }
     }
 
     @Override
@@ -111,7 +127,7 @@ public class EditEventCommand extends EditCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditEventCommand)) {
+        if (!(other instanceof EditTodoCommand)) {
             return false;
         }
 
@@ -126,11 +142,11 @@ public class EditEventCommand extends EditCommand {
      * corresponding field value of the person.
      */
     public static class EditEventDescriptor {
-        private Name name;
-        private Phone phone;
-        private Email email;
-        private Address address;
-        private Set<Tag> tags;
+        private String description;
+        private String startDate;
+        private String startTime;
+        private String endDate;
+        private String endTime;
 
         public EditEventDescriptor() {}
 
@@ -139,67 +155,61 @@ public class EditEventCommand extends EditCommand {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditEventDescriptor(EditEventCommand.EditEventDescriptor toCopy) {
-            setName(toCopy.name);
-            setPhone(toCopy.phone);
-            setEmail(toCopy.email);
-            setAddress(toCopy.address);
-            setTags(toCopy.tags);
+            setDescription(toCopy.description);
+            setStartDate(toCopy.startDate);
+            setStartTime(toCopy.startTime);
+            setEndDate(toCopy.endDate);
+            setEndTime(toCopy.endTime);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(description, startDate, startTime, endDate, endTime);
         }
 
-        public void setName(Name name) {
-            this.name = name;
+        public void setDescription(String description) {
+            this.description = description;
         }
 
-        public Optional<Name> getName() {
-            return Optional.ofNullable(name);
+        public Optional<String> getDescription() {
+            return Optional.ofNullable(description);
         }
 
-        public void setPhone(Phone phone) {
-            this.phone = phone;
+        public void setStartDate(String startDate) {
+            System.out.println("set start date called");
+            this.startDate = startDate;
         }
 
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
+        public Optional<String> getStartDate() {
+            return Optional.ofNullable(startDate);
         }
 
-        public void setEmail(Email email) {
-            this.email = email;
+        public void setStartTime(String startTime) {
+            System.out.println("set start time called");
+            this.startTime = startTime;
         }
 
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
+        public Optional<String> getStartTime() {
+            return Optional.ofNullable(startTime);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setEndDate(String endDate) {
+            this.endDate = endDate;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<String> getEndDate() {
+            return Optional.ofNullable(endDate);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setEndTime(String endTime) {
+            System.out.println("set end time called");
+            this.endTime = endTime;
         }
 
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<String> getEndTime() {
+            return Optional.ofNullable(endTime);
         }
 
         @Override
@@ -210,18 +220,16 @@ public class EditEventCommand extends EditCommand {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditEventCommand.EditEventDescriptor)) {
+            if (!(other instanceof EditTodoCommand.EditTodoDescriptor)) {
                 return false;
             }
 
             // state check
             EditEventCommand.EditEventDescriptor e = (EditEventCommand.EditEventDescriptor) other;
 
-            return getName().equals(e.getName())
-                    && getPhone().equals(e.getPhone())
-                    && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags());
+            return getDescription().equals(e.getDescription())
+                    && getStartDate().equals(e.getStartDate())
+                    && getStartTime().equals(e.getStartTime());
         }
     }
 }

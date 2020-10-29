@@ -48,6 +48,81 @@ public class Event extends Task {
      * @param description a brief description of the event.
      * @param start       the starting date and time of event.
      * @param end         the ending date and time of event.
+     */
+    public Event (boolean isDone, String description, String start, String end) {
+        super(description);
+        assert start != null;
+        assert end != null;
+        this.isDone = isDone;
+        this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
+        this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
+    }
+
+    /**
+     * Constructs an event that has not been completed with a brief
+     * description and period of time.
+     *
+     * @param description a brief description of the event.
+     * @param start       the starting date and time of event.
+     * @param end         the ending date and time of event.
+     * @param recurrence  the recurrence of event.
+     */
+    public Event (boolean isDone, String description, String start, String end, Recurrence recurrence) {
+        super(description);
+        assert start != null;
+        assert end != null;
+        this.isDone = isDone;
+        this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
+        this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
+        this.recurrence = recurrence;
+    }
+
+    /**
+     * Constructs an event that has not been completed with a brief
+     * description and period of time.
+     *
+     * @param description a brief description of the event.
+     * @param start       the starting date and time of event.
+     * @param end         the ending date and time of event.
+     */
+    public Event (boolean isDone, String description, String start, String end, MeetingLink link) {
+        super(description);
+        assert start != null;
+        assert end != null;
+        this.isDone = isDone;
+        this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
+        this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
+        this.meetingLink = link;
+    }
+
+    /**
+     * Constructs an event that has not been completed with a brief
+     * description and period of time.
+     *
+     * @param description a brief description of the event.
+     * @param start       the starting date and time of event.
+     * @param end         the ending date and time of event.
+     * @param recurrence  the recurrence of event.
+     */
+    public Event (boolean isDone, String description, String start, String end,
+                  MeetingLink link, Recurrence recurrence) {
+        super(description);
+        assert start != null;
+        assert end != null;
+        this.isDone = isDone;
+        this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
+        this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
+        this.meetingLink = link;
+        this.recurrence = recurrence;
+    }
+
+    /**
+     * Constructs an event that has not been completed with a brief
+     * description and period of time.
+     *
+     * @param description a brief description of the event.
+     * @param start       the starting date and time of event.
+     * @param end         the ending date and time of event.
      * @param tags        a set of tags attached to the event.
      */
     public Event (String description, String start, String end, Set<Tag> tags) {
@@ -295,6 +370,20 @@ public class Event extends Task {
         this.end = LocalDateTime.parse(newPeriod.substring(START_OF_SECOND_DATE_TIME_INDEX), INPUT_DATE_TIME_FORMAT);
     }
 
+    /**
+     * Returns true if both events of the same description have at least one other identity field that is the same.
+     * This defines a weaker notion of equality between two events.
+     */
+    public boolean isSameEvent(Event otherEvent) {
+        if (otherEvent == this) {
+            return true;
+        }
+
+        return otherEvent != null
+                && otherEvent.getDescription().equals(getDescription())
+                && (otherEvent.getDescriptionDateTime().equals(getDescriptionDateTime()));
+    }
+
     @Override
     public AddCommand markAsDone() {
         this.isDone = true;
@@ -464,5 +553,9 @@ public class Event extends Task {
     @Override
     public Recurrence getRecurrence() {
         return this.recurrence;
+    }
+
+    public boolean hasRecurrence() {
+        return getRecurrence() != null;
     }
 }

@@ -39,6 +39,64 @@ public class Todo extends Task {
      *
      * @param description a brief description of the deadline.
      * @param deadline    a String in a specific format (inputFormatter) which specifies a date.
+     */
+    public Todo(boolean isDone, String description, String deadline) {
+        super(description);
+        this.isDone = isDone;
+        this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
+    }
+
+    /**
+     * Constructs a task that has not been completed
+     * with a brief description and deadline for the task to be completed by.
+     *
+     * @param description a brief description of the deadline.
+     * @param deadline    a String in a specific format (inputFormatter) which specifies a date.
+     * @param recurrence the recurrence of todo.
+     */
+    public Todo(boolean isDone, String description, String deadline, Recurrence recurrence) {
+        super(description);
+        this.isDone = isDone;
+        this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
+        this.recurrence = recurrence;
+    }
+
+    /**
+     * Constructs a task that has not been completed
+     * with a brief description and deadline for the task to be completed by.
+     *
+     * @param description a brief description of the deadline.
+     * @param deadline    a String in a specific format (inputFormatter) which specifies a date.
+     */
+    public Todo(boolean isDone, String description, String deadline, CollaborativeLink link) {
+        super(description);
+        this.isDone = isDone;
+        this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
+        this.collaborativeLink = link;
+    }
+
+    /**
+     * Constructs a task that has not been completed
+     * with a brief description and deadline for the task to be completed by.
+     *
+     * @param description a brief description of the deadline.
+     * @param deadline    a String in a specific format (inputFormatter) which specifies a date.
+     * @param recurrence the recurrence of todo.
+     */
+    public Todo(boolean isDone, String description, String deadline, CollaborativeLink link, Recurrence recurrence) {
+        super(description);
+        this.isDone = isDone;
+        this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
+        this.collaborativeLink = link;
+        this.recurrence = recurrence;
+    }
+
+    /**
+     * Constructs a task that has not been completed
+     * with a brief description and deadline for the task to be completed by.
+     *
+     * @param description a brief description of the deadline.
+     * @param deadline    a String in a specific format (inputFormatter) which specifies a date.
      * @param tags        a set of tags attached to the todo.
      */
     public Todo(String description, String deadline, Set<Tag> tags) {
@@ -321,6 +379,20 @@ public class Todo extends Task {
     }
 
     /**
+     * Returns true if both todos of the same description have at least one other identity field that is the same.
+     * This defines a weaker notion of equality between two todos.
+     */
+    public boolean isSameTodo(Todo otherTodo) {
+        if (otherTodo == this) {
+            return true;
+        }
+
+        return otherTodo != null
+                && otherTodo.getDescription().equals(getDescription())
+                && (otherTodo.getDescriptionDateTime().equals(getDescriptionDateTime()));
+    }
+
+    /**
      * Returns the string representation of the task in a format to be inputted into a text file for data storage.
      *
      * @return the string representation of the task to be saved in a text file.
@@ -329,10 +401,10 @@ public class Todo extends Task {
     public String saveFormat() {
         if (isDone) {
             return "D | 1 | " + this.getDescription() + " | "
-                + this.deadline.format(INPUT_DATE_TIME_FORMAT).toString()
+                + getInputDate()
                 + " | " + getTagsToString();
         } else {
-            return "D | 0 | " + this.getDescription() + " | " + this.deadline.format(INPUT_DATE_TIME_FORMAT).toString()
+            return "D | 0 | " + this.getDescription() + " | " + getInputDate()
                 + " | " + getTagsToString();
         }
     }
@@ -345,6 +417,10 @@ public class Todo extends Task {
     @Override
     public String getDateTime() {
         return deadlineToString();
+    }
+
+    public String getInputDate() {
+        return this.deadline.format(INPUT_DATE_TIME_FORMAT).toString();
     }
 
     @Override
@@ -380,6 +456,7 @@ public class Todo extends Task {
     public LocalDateTime getEnd() {
         return null;
     }
+
     @Override
     public String getType() {
         return "Todo";
@@ -397,5 +474,9 @@ public class Todo extends Task {
     @Override
     public Recurrence getRecurrence() {
         return this.recurrence;
+    }
+
+    public boolean hasRecurrence() {
+        return getRecurrence() != null;
     }
 }

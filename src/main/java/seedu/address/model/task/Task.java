@@ -54,6 +54,17 @@ public abstract class Task {
     }
 
     /**
+     * Constructs a task, which have not been completed, with a description.
+     *
+     * @param description a brief description of the task.
+     */
+    public Task(String description) {
+        assert description != null;
+        this.description = description;
+        this.isDone = false;
+    }
+
+    /**
      * Returns the status icon of the task.
      * Returns tick symbol when task is indicated as done.
      * Returns X symbol when task is not indicated as done.
