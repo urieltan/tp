@@ -15,6 +15,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Event;
+import seedu.address.model.task.MeetingLink;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Todo;
 
@@ -50,12 +51,14 @@ public class SampleDataUtil {
             new Todo("Finish tutorial worksheet", "16-10-2020 2359", getTagSet("CS2100")),
             new Todo("Complete next CS2103T team project iteration", "22-10-2020 2359", getTagSet("CS2103T")),
             new Event("Attend group meeting", "20-10-2020 1000", "20-10-2020 1200",
+                    new MeetingLink("Group meeting", "https://www.facebook.com", "20-10-2020 1000"),
                     getTagSet("CS2103T")),
             new Event("Attend computer science lecture", "17-10-2020 1200", "17-10-2020 1300", getTagSet("CS2100")),
             new Event("Meet friends for lunch", "17-10-2020 1300", "17-10-2020 1400", getTagSet("Friends")),
             new Todo("Finish assignment", "19-05-2020 2359", getTagSet("CS2100")),
             new Event("Attend group meeting", "20-05-2020 1000", "20-05-2020 1200",
-                 getTagSet("CS2103T"))
+                    new MeetingLink("Friends meeting", "https://www.example.com", "20-05-2020 1000"),
+                    getTagSet("CS2103T"))
         };
     }
 
