@@ -20,7 +20,7 @@ public class CollaborativeLinkTest {
     }
 
     @Test
-    public void constructor_invalidURL_throwsIllegalArgumentException() {
+    public void constructor_invalidUrl_throwsIllegalArgumentException() {
         String invalidUrl = "example.com";
         assertThrows(IllegalArgumentException.class, () -> new CollaborativeLink(VALID_DESCRIPTION_TUTORIAL_DOCUMENT,
                 invalidUrl));

@@ -1,6 +1,10 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_TIME_TUTOR_MEETING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_TUTORIAL_DOCUMENT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_TUTOR_MEETING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_URL_TUTORIAL_DOCUMENT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_URL_TUTOR_MEETING;
 
 import java.util.ArrayList;
 import java.util.Arrays;
