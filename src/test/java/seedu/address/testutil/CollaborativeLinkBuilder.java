@@ -8,7 +8,8 @@ import seedu.address.model.task.CollaborativeLink;
 public class CollaborativeLinkBuilder {
 
     public static final String DEFAULT_DESCRIPTION = "Project Document";
-    public static final String DEFAULT_URL = "https://docs.google.com/document/d/1oAObtne793B1nDX123hrbAdEy1aoeua5cTuabc326L4c/edit";
+    public static final String DEFAULT_URL =
+            "https://docs.google.com/document/d/1oAObtne793B1nDX123hrbAdEy1aoeua5cTuabc326L4c/edit";
 
     private String description;
     private String url;

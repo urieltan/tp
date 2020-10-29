@@ -1,8 +1,5 @@
 package seedu.address.model.task;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.testutil.CollaborativeLinkBuilder;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_TUTORIAL_DOCUMENT;
@@ -11,6 +8,10 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalLinks.PROJECT_DOCUMENT;
 import static seedu.address.testutil.TypicalLinks.PROJECT_MEETING;
 import static seedu.address.testutil.TypicalLinks.TUTORIAL_DOCUMENT;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.CollaborativeLinkBuilder;
 
 public class CollaborativeLinkTest {
     @Test

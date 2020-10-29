@@ -9,13 +9,16 @@ public class MeetingLinkBuilder {
 
     public static final String DEFAULT_DESCRIPTION = "Project Meeting";
     public static final String DEFAULT_DATETIME = "03-03-2020 1411";
-    public static final String DEFAULT_URL = "https://nus-sg.zoom.us/j/85350904475?pwd=T0JwTEIwNjRuMnNKUEt4L2RBMFJWZz09";
+    public static final String DEFAULT_URL =
+            "https://nus-sg.zoom.us/j/85350904475?pwd=T0JwTEIwNjRuMnNKUEt4L2RBMFJWZz09";
 
     private String description;
     private String datetime;
     private String url;
 
-
+    /**
+     * Initializes the MeetingLinkBuilder with default data.
+     */
     public MeetingLinkBuilder() {
         description = DEFAULT_DESCRIPTION;
         datetime = DEFAULT_DATETIME;

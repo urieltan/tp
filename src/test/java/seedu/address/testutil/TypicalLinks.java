@@ -1,14 +1,16 @@
 package seedu.address.testutil;
 
-import seedu.address.model.task.CollaborativeLink;
-import seedu.address.model.task.Link;
-import seedu.address.model.task.MeetingLink;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import seedu.address.model.task.CollaborativeLink;
+import seedu.address.model.task.Link;
+import seedu.address.model.task.MeetingLink;
+
+
 
 public class TypicalLinks {
     public static final MeetingLink PROJECT_MEETING = new MeetingLinkBuilder()

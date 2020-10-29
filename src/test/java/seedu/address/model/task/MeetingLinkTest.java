@@ -1,8 +1,5 @@
 package seedu.address.model.task;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.testutil.MeetingLinkBuilder;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_TUTOR_MEETING;
@@ -12,6 +9,11 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalLinks.PROJECT_DOCUMENT;
 import static seedu.address.testutil.TypicalLinks.PROJECT_MEETING;
 import static seedu.address.testutil.TypicalLinks.TUTOR_MEETING;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.MeetingLinkBuilder;
+
 
 public class MeetingLinkTest {
     @Test
