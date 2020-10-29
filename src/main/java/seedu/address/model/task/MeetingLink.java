@@ -19,10 +19,6 @@ public class MeetingLink extends Link {
      */
     private LocalDateTime meetingTime;
 
-    public MeetingLink() {
-        this("No meeting link", "-", "10-10-2020 2000");
-    }
-
     /**
      * Constructs a Meeting Link
      * with a brief description, url, and meeting time.
@@ -93,7 +89,7 @@ public class MeetingLink extends Link {
         } else if (o instanceof MeetingLink) {
             MeetingLink link = (MeetingLink) o;
             boolean isEqual = this.getDescription().equals(link.getDescription())
-                    && this.meetingTime.equals(link.meetingTime) && this.getUrl().equals(link.getUrl());
+                    && this.getMeetingTime().equals(link.getMeetingTime()) && this.getUrl().equals(link.getUrl());
             return isEqual;
         } else {
             return false;
@@ -120,6 +116,14 @@ public class MeetingLink extends Link {
         } else {
             return this.getDescriptionDateTime();
         }
+    }
+
+    public String getDateTime() {
+        return this.meetingTime.format(INPUT_DATE_TIME_FORMAT).toString();
+    }
+
+    public String getRawDescription() {
+        return super.getDescription();
     }
 
     public String getDescriptionDateTime() {
