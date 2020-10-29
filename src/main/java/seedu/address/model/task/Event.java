@@ -408,7 +408,7 @@ public class Event extends Task {
 
                 MeetingLink newMeeting = new MeetingLink(description, currentMeeting.getUrl(), newTiming);
                 command = new AddEventCommand(
-                        new Event(description, newStartDateTime, newEndDateTime,
+                        new Event(this.getDescription(), newStartDateTime, newEndDateTime,
                             recurrence, newMeeting, tags));
             }
             return command;
