@@ -373,7 +373,7 @@ Format: `edit event i/INDEX [desc/DESCRIPTION] [startdate/DATE] [starttime/TIME]
 * `STARTTIME` and `ENDTIME` must be specified in the format of HHmm using 24 hour time
 
 Examples:
-*  `edit event i/1 desc/CS2101 Lecture startdate/24-01-2020 endtime/2359` Edits the description, start date, and end time of the 1st event to be `CS2101 LEcture`, `24-01-2020`, and `2359` respectively.
+*  `edit event i/1 desc/CS2101 Lecture startdate/24-01-2020 endtime/2359` Edits the description, start date, and end time of the 1st event to be `CS2101 Lecture`, `24-01-2020`, and `2359` respectively.
 *  `edit event i/2 starttime/1400 enddate/30-01-2020` Edits the start time and end date of the 2nd event to be `1400` and `30-01-2020` respectively.
 
 ##### View all Events : `list event`
@@ -381,7 +381,7 @@ Shows a list of all Events in the EventList.
 
 Format: `list event`
 
-##### Showing events with a specific tag: `show events`
+##### Showing events with a specific tag: `show event`
 Shows events whose tags match the tag being searched.
 
 Format: `show event t/TAG`
