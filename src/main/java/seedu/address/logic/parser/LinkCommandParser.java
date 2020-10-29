@@ -11,7 +11,6 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.LinkCommand;
-import seedu.address.logic.commands.edit.EditEventCommand;
 import seedu.address.logic.commands.link.LinkCollaborativeCommand;
 import seedu.address.logic.commands.link.LinkMeetingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
