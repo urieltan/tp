@@ -11,9 +11,9 @@ import seedu.address.model.Model;
 /**
  * Lists all persons in the address book to the user.
  */
-public class ListAllCommand extends ListCommand {
+public class ListTaskCommand extends ListCommand {
 
-    public static final String MESSAGE_SUCCESS = "Listed everything";
+    public static final String MESSAGE_SUCCESS = "Listed all tasks";
 
     @Override
     public CommandResult execute(Model model) {

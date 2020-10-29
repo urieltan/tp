@@ -3,6 +3,7 @@ package seedu.address.logic.commands.edit;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
@@ -25,27 +26,29 @@ import seedu.address.model.task.Todo;
  */
 public class EditTodoCommand extends EditCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the todo identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " todo: Edits the details of the todo identified "
             + "by the index number used in the displayed task list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: "
+            + PREFIX_INDEX + "INDEX (must be a positive integer) "
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_TIME + "TIME] "
-            + "Example: " + COMMAND_WORD + " todo 1 "
+            + "Example: " + COMMAND_WORD + " todo "
+            + PREFIX_INDEX + "1 "
             + PREFIX_DESCRIPTION + "A new description "
             + PREFIX_DATE + "20-01-2020 "
             + PREFIX_TIME + "2350";
 
     public static final String MESSAGE_EDIT_TODO_SUCCESS = "Edited Todo: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This todo already exists in the Lifebook.";
+    public static final String MESSAGE_DUPLICATE_TODO = "This todo already exists in the Lifebook.";
 
     private final Index index;
     private final EditTodoCommand.EditTodoDescriptor editTodoDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param index of the todo in the filtered task list to edit
      * @param editTodoDescriptor details to edit the todo with
      */
     public EditTodoCommand(Index index, EditTodoCommand.EditTodoDescriptor editTodoDescriptor) {
@@ -62,14 +65,14 @@ public class EditTodoCommand extends EditCommand {
         List<Task> lastShownList = model.getFilteredTaskList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_TODO_DISPLAYED_INDEX);
         }
 
         Todo todoToEdit = (Todo) lastShownList.get(index.getZeroBased());
         Todo editedTodo = createEditedTodo(todoToEdit, editTodoDescriptor);
 
         if (!todoToEdit.isSameTodo(editedTodo) && model.hasTask(editedTodo)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_TODO);
         }
 
         model.setTask(todoToEdit, editedTodo);
@@ -78,8 +81,8 @@ public class EditTodoCommand extends EditCommand {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Todo} with the details of {@code todoToEdit}
+     * edited with {@code editTodoDescriptor}.
      */
     private static Todo createEditedTodo(Todo todoToEdit,
                                              EditTodoCommand.EditTodoDescriptor editTodoDescriptor) {
@@ -128,8 +131,8 @@ public class EditTodoCommand extends EditCommand {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the todo with. Each non-empty field value will replace the
+     * corresponding field value of the todo.
      */
     public static class EditTodoDescriptor {
         private String description;

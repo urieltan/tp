@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDTIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTTIME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
@@ -23,36 +24,38 @@ import seedu.address.model.task.MeetingLink;
 import seedu.address.model.task.Task;
 
 /**
- * Edits the details of an existing todo in the Lifebook.
+ * Edits the details of an existing event in the Lifebook.
  */
 public class EditEventCommand extends EditCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the event identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " event: Edits the details of the event identified "
             + "by the index number used in the displayed task list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: "
+            + PREFIX_INDEX + "INDEX (must be a positive integer) "
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
             + "[" + PREFIX_STARTDATE + "STARTDATE] "
             + "[" + PREFIX_STARTTIME + "STARTTIME] "
             + "[" + PREFIX_ENDDATE + "ENDDATE] "
             + "[" + PREFIX_ENDTIME + "ENDTIME] "
-            + "Example: " + COMMAND_WORD + " event 1 "
+            + "Example: " + COMMAND_WORD + " event "
+            + PREFIX_INDEX + "1 "
             + PREFIX_DESCRIPTION + "A new description "
             + PREFIX_STARTDATE + "20-01-2020 "
             + PREFIX_STARTTIME + "2350 "
             + PREFIX_ENDDATE + "23-01-2020 "
             + PREFIX_ENDTIME + "2359";
 
-    public static final String MESSAGE_EDIT_TODO_SUCCESS = "Edited Event: %1$s";
+    public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This todo already exists in the Lifebook.";
+    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the Lifebook.";
 
     private final Index index;
     private final EditEventCommand.EditEventDescriptor editEventDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editEventDescriptor details to edit the todo with
+     * @param index of the event in the filtered task list to edit
+     * @param editEventDescriptor details to edit the event with
      */
     public EditEventCommand(Index index, EditEventCommand.EditEventDescriptor editEventDescriptor) {
         requireNonNull(index);
@@ -68,24 +71,24 @@ public class EditEventCommand extends EditCommand {
         List<Task> lastShownList = model.getFilteredTaskList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
         Event eventToEdit = (Event) lastShownList.get(index.getZeroBased());
         Event editedEvent = createEditedEvent(eventToEdit, editEventDescriptor);
 
         if (!eventToEdit.isSameEvent(editedEvent) && model.hasTask(editedEvent)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
 
         model.setTask(eventToEdit, editedEvent);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
-        return new CommandResult(String.format(MESSAGE_EDIT_TODO_SUCCESS, editedEvent), "TASK");
+        return new CommandResult(String.format(MESSAGE_EDIT_EVENT_SUCCESS, editedEvent), "TASK");
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Event} with the details of {@code eventToEdit}
+     * edited with {@code editEventDescriptor}.
      */
     private static Event createEditedEvent(Event eventToEdit,
                                          EditEventCommand.EditEventDescriptor editEventDescriptor) {
@@ -127,7 +130,7 @@ public class EditEventCommand extends EditCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditTodoCommand)) {
+        if (!(other instanceof EditEventCommand)) {
             return false;
         }
 
@@ -138,8 +141,8 @@ public class EditEventCommand extends EditCommand {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the event with. Each non-empty field value will replace the
+     * corresponding field value of the event.
      */
     public static class EditEventDescriptor {
         private String description;
@@ -220,7 +223,7 @@ public class EditEventCommand extends EditCommand {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditTodoCommand.EditTodoDescriptor)) {
+            if (!(other instanceof EditEventCommand.EditEventDescriptor)) {
                 return false;
             }
 
