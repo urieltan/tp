@@ -204,6 +204,9 @@ Adds a meeting link for an event.
 Format:
 * `link meeting desc/DESCRIPTION url/MEETING LINK i/INDEX_OF_TODO date/DD-MM-YYYY time/HHmm`
 
+* `DATE` must be specified in the format of DD-MM-YYYY
+* `TIME` must be specified in the format of HHmm using 24 hour time
+
 Examples:
 * `link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf i/2 date/22-09-2020 time/1400`
 
@@ -282,7 +285,9 @@ Format: `add todo desc/DESCRIPTION date/DATE time/TIME [recurring/VALUE UNIT]`
 * `VALUE` must be > 0
 * `UNIT` must be "day", "week", "month" or "year"
 
-##### Editing a todo : `edit todo`
+##### Editing a todo : `edit todo` 
+
+> Coming soon 
 
 Edits an existing todo in the task list.
 
@@ -363,6 +368,8 @@ Examples:
 * `add event desc/Singapore Fintech Festival startdate/09-08-2020 starttime/1000 enddate/12-08-2020 endtime/2359`
 
 ##### Editing an event : `edit event`
+
+> Coming soon 
 
 Edits an existing event in the task list.
 
