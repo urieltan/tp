@@ -280,7 +280,7 @@ Format: `add todo desc/DESCRIPTION date/DATE time/TIME [recurring/VALUE UNIT]`
 * `VALUE` must be > 0
 * `UNIT` must be "day", "week", "month" or "year"
 
-#### Editing a todo : `edit todo`
+##### Editing a todo : `edit todo`
 
 Edits an existing todo in the task list.
 
@@ -300,7 +300,7 @@ Examples:
 
 If a task is recurring, it will be displayed in the GUI.
 
-<img src="https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/docs/images/ExampleOfARecurringTask.png" height="150" width="280">
+![recurringTask](images/ExampleOfARecurringTask.png)
 
 Examples:
 
