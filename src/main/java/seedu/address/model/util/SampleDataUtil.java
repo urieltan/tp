@@ -57,7 +57,8 @@ public class SampleDataUtil {
             new Event("Meet friends for lunch", "17-10-2020 1300", "17-10-2020 1400", getTagSet("Friends")),
             new Todo("Finish assignment", "19-05-2020 2359", getTagSet("CS2100")),
             new Event("Attend group meeting", "20-05-2020 1000", "20-05-2020 1200",
-                    new MeetingLink("Friends meeting", "https://www.example.com", "20-05-2020 1000"), getTagSet( "CS2103T"))
+                    new MeetingLink("Friends meeting", "https://www.example.com", "20-05-2020 1000"),
+                    getTagSet("CS2103T"))
         };
     }
 
