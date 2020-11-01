@@ -1,9 +1,9 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.UNKNOWN_CLEAR_COMMAND;
+
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
-import static seedu.address.commons.core.Messages.UNKNOWN_CLEAR_COMMAND;
 
 public class ClearCommandParser implements Parser<ClearCommand> {
 
@@ -21,7 +21,7 @@ public class ClearCommandParser implements Parser<ClearCommand> {
                 throw new ParseException(UNKNOWN_CLEAR_COMMAND);
             }
         } catch (ParseException | ArrayIndexOutOfBoundsException pe) {
-                throw new ParseException(UNKNOWN_CLEAR_COMMAND);
+            throw new ParseException(UNKNOWN_CLEAR_COMMAND);
         }
     }
 }
