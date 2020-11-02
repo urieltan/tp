@@ -139,6 +139,11 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public boolean filteredAddressBookIsEmpty() {
+        return filteredPersons.isEmpty();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -221,6 +226,11 @@ public class ModelManager implements Model {
         requireAllNonNull(target);
         taskList.markAsDone(target);
     }
+    @Override
+    public boolean filteredTaskListIsEmpty() {
+        return filteredTasks.isEmpty();
+    }
+
     //=========== Filtered Task List Accessors =============================================================
     @Override
     public ObservableList<Task> getFilteredTaskList() {
