@@ -9,10 +9,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ContactTaskTagCommand;
 import seedu.address.logic.commands.ContactTaskTagCommand.EditPersonTags;
 import seedu.address.logic.commands.ContactTaskTagCommand.EditTaskTags;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -50,9 +52,11 @@ public class ContactTaskTagParser implements Parser<ContactTaskTagCommand> {
             editTaskTags.setTags(ParserUtil.parseTags(tag));
 
             return new ContactTaskTagCommand(contactIndex, taskIndex, editPersonTags, editTaskTags);
-        } catch (ParseException | NoSuchElementException pe) {
+        } catch (NoSuchElementException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ContactTaskTagCommand.MESSAGE_USAGE), pe);
+        } catch (ParseException e) {
+            throw new ParseException(Messages.MESSAGE_INVALID_DISPLAYED_INDEX);
         }
     }
 }

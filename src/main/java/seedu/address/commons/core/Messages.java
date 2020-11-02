@@ -14,6 +14,8 @@ public class Messages {
     public static final String UNKNOWN_DELETE_COMMAND = "Only delete contact and task are available";
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
+    public static final String MESSAGE_INVALID_DISPLAYED_INDEX = "The person/task index provided is invalid "
+            + "(Cannot be 0, negative number, or greater than person/task list's index!)";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_INVALID_TODO_DISPLAYED_INDEX = "The todo index provided is invalid";
     public static final String MESSAGE_INVALID_EVENT_DISPLAYED_INDEX = "The event index provided is invalid";

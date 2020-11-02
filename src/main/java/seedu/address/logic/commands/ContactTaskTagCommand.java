@@ -29,7 +29,7 @@ import seedu.address.model.task.Todo;
 public class ContactTaskTagCommand extends Command {
     public static final String COMMAND_WORD = "contactTaskTag";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a same tag for a specified Person and Task.\n"
-            + "Parameters:" + PREFIX_TAG + "TAG "
+            + "Parameters: " + PREFIX_TAG + "TAG "
             + PREFIX_CONTACT_INDEX + "CONTACT INDEX "
             + PREFIX_TASK_INDEX + "TASK INDEX\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_TAG + "CS2103T "
@@ -65,11 +65,16 @@ public class ContactTaskTagCommand extends Command {
 
         List<Person> contactList = model.getFilteredPersonList();
         List<Task> taskList = model.getFilteredTaskList();
+        boolean isContactIndexValid = contactIndex.getZeroBased() >= contactList.size();
+        boolean isCheckTaskIndexValid = taskIndex.getZeroBased() >= taskList.size();
 
-        if (contactIndex.getZeroBased() >= contactList.size()) {
+        if (isContactIndexValid && isCheckTaskIndexValid) {
+            throw new CommandException(Messages.MESSAGE_INVALID_DISPLAYED_INDEX);
+        }
+        if (isContactIndexValid) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-        if (taskIndex.getZeroBased() >= taskList.size()) {
+        if (isCheckTaskIndexValid) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
