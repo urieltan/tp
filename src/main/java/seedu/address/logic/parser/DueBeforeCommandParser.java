@@ -12,7 +12,6 @@ import java.time.format.DateTimeParseException;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.due.DueBeforeCommand;
-import seedu.address.logic.commands.due.DueByCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.task.DueBeforePredicate;
 
@@ -32,7 +31,7 @@ public class DueBeforeCommandParser implements Parser<DueBeforeCommand> {
                 PREFIX_TIME);
 
         String date = argMultimap.getValue(PREFIX_DATE).orElseThrow(() -> new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DueByCommand.MESSAGE_USAGE)));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DueBeforeCommand.MESSAGE_USAGE)));
         try {
             DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             LocalDate checkDate = LocalDate.parse(date, dateFormat);
@@ -41,7 +40,7 @@ public class DueBeforeCommandParser implements Parser<DueBeforeCommand> {
         }
 
         String time = argMultimap.getValue(PREFIX_TIME).orElseThrow(() -> new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DueByCommand.MESSAGE_USAGE)));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DueBeforeCommand.MESSAGE_USAGE)));
         try {
             DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HHmm");
             LocalTime checkTime = LocalTime.parse(time, timeFormat);

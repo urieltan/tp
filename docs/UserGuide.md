@@ -199,19 +199,19 @@ Format: `list task`
 
 ##### 2.2.5 Filter deadlines : `itemsDue`
 
-User can search todos/meetings due by/before a certain date/time.
+User can search todos/meetings due at/before a certain date/time.
 
 Outputs a list of results.
 
-* Due by
-    `itemsDueBy date/DD-MM-YYYY time/HHmm`
+* Due at
+    `itemsDueAt date/DD-MM-YYYY time/HHmm`
 
     `DD-MM-YYYY`: States the Day, Month, Year.
 
     `HHmm`: States the time in 24 hours.
 
-    Example: `itemsDueBy date/12-12-2020 time/2359`
-    It will output a list of todos/meetings that are due specifically **on** 12th December 2020, 2359.
+    Example: `itemsDueAt date/12-12-2020 time/2359`
+    It will output a list of todos/meetings that are due specifically **at** 12th December 2020, 2359.
 
 * Due before
     `itemsDueBefore date/DD-MM-YYYY time/HHmm`
@@ -510,7 +510,7 @@ Action | Format, Examples
 **List Tasks** | `list task`
 **Remove Task (Todo and Event)** | `delete task INDEX` <br> e.g., `delete task 3`
 **Mark To Do/Event as Complete** | `done INDEX` <br> e.g., `done 5`
-**Find tasks due by** | `itemsDueBy date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueBy date/12-12-2020 time/2359`
+**Find tasks due at** | `itemsDueAt date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueAt date/12-12-2020 time/2359`
 **Find tasks due before** |  `itemsDueBefore date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueBefore date/12-12-2020 time/2359`
 
 
