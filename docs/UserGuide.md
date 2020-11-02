@@ -256,6 +256,15 @@ Example:
 
 Upon executing the command, the contact at index 7- “James Ho” and task at index 1- “homework” will have both the tags “CS2100” and “buddy”, which helps in the ease of searching contacts that are associated with a task.
 
+<div markdown="block" class="alert alert-danger">
+
+:warning: **Warning:**
+
+It is a coincidence in the example that the index of the "homework" task is 1 for "Due soon" and the whole Tasklist.
+Please input the task's index based from the **whole Tasklist**.
+
+</div>
+
 * `contactTaskTag t/CS2100 t/buddy contactIndex/7 taskIndex/1`
 
 ### 2.3 Todo
