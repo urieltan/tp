@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalTodos.HOMEWORK;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.add.AddTodoCommand;
 import seedu.address.model.task.Todo;
 import seedu.address.testutil.TodoBuilder;
@@ -53,16 +54,17 @@ public class AddTodoCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTodoCommand.DATE_TIME_USAGE);
+        String expectedDateMessage = Messages.MESSAGE_INVALID_DATE_FORMAT;
+        String expectedTimeMessage = Messages.MESSAGE_INVALID_TIME_FORMAT;
 
         // invalid date
         assertParseFailure(parser, "todo " + HOMEWORK_DESC + INVALID_DATE + HOMEWORK_TIME,
-                expectedMessage);
+                expectedDateMessage);
 
 
         // invalid time
         assertParseFailure(parser, "todo " + HOMEWORK_DESC + HOMEWORK_DATE + INVALID_TIME,
-                expectedMessage);
+                expectedTimeMessage);
     }
 
     @Test
