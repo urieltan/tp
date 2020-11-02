@@ -248,7 +248,8 @@ Outputs a list of results.
 
 ##### Sorting contacts and tasks: `sort`
 
-Sorts tasks or contacts according to date or name, respectively. Sorting may also be cleared, such that the natural order of lists are restored.
+Sorts the currently displayed tasks or contacts according to date or name, respectively. Sorting may also be cleared, such that the natural order of lists are restored.
+If the currently displayed list is empty, a sorted, unfiltered list will be displayed instead.
 
 Format: `sort OPTION`
 
@@ -256,6 +257,10 @@ Format: `sort OPTION`
 
 * Contact, task, and clear are the available options for sort and should be used individually.
 * Using the clear option restores all lists (i.e. both contact list and task list) to their natural order.
+
+Examples:
+* `sort task` sorts the task list.
+* `sort contact` sorts the contact list.
 
 ##### Add common tag to contact + task: `contactTaskTag`
 
