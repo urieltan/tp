@@ -1,8 +1,18 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.due.DueBeforeCommand;
+import seedu.address.logic.commands.due.DueByCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.task.DueBeforePredicate;
 
@@ -16,28 +26,31 @@ public class DueBeforeCommandParser implements Parser<DueBeforeCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DueBeforeCommand parse(String args) throws ParseException {
+        requireNonNull(args);
+        String[] splitArgs = args.trim().split(" ", 1);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(" " + splitArgs[0], PREFIX_DATE,
+                PREFIX_TIME);
+
+        String date = argMultimap.getValue(PREFIX_DATE).orElseThrow(() -> new ParseException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DueByCommand.MESSAGE_USAGE)));
         try {
-            String[] splitArgs = args.trim().split(" ", 2);
-            String date = splitArgs[0].split("/")[1];
-
-            // if date not in DD-MM-YYYY format
-            if (date.length() < 10) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DueBeforeCommand.MESSAGE_USAGE));
-            }
-            String time = splitArgs[1].split("/")[1];
-            // if time not in HHmm format
-            if (time.length() < 4) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DueBeforeCommand.MESSAGE_USAGE));
-            }
-
-            String deadline = date + " " + time;
-            return new DueBeforeCommand(new DueBeforePredicate(deadline));
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DueBeforeCommand.MESSAGE_USAGE));
+            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            LocalDate checkDate = LocalDate.parse(date, dateFormat);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Messages.MESSAGE_INVALID_DATE_FORMAT);
         }
+
+        String time = argMultimap.getValue(PREFIX_TIME).orElseThrow(() -> new ParseException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DueByCommand.MESSAGE_USAGE)));
+        try {
+            DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HHmm");
+            LocalTime checkTime = LocalTime.parse(time, timeFormat);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Messages.MESSAGE_INVALID_TIME_FORMAT);
+        }
+
+        String deadline = date + " " + time;
+        return new DueBeforeCommand(new DueBeforePredicate(deadline));
     }
 
 }
