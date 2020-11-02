@@ -223,6 +223,16 @@ public class AddContactCommandTest {
         public void updateSortedPersonList(Comparator<Person> personComparator) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean filteredTaskListIsEmpty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean filteredAddressBookIsEmpty() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

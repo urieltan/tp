@@ -236,11 +236,11 @@ If the currently displayed list is empty, a sorted, unfiltered list will be disp
 
 Format: `sort OPTION`
 
-* `OPTION` refers to `contact`, `task`, or `clear`
+* The `OPTION` field refers to `contact`, `task`, or `clear`
 
 ![sortedTaskList](images/SortedTaskList.PNG) 
 
-* Contact, task, and clear are the available options for sort and should be used individually.
+* Contact, task, and clear are the available options for sort and should be used individually in the `OPTION` field.
 * Using the clear option restores all lists (i.e. both contact list and task list) to their natural order.
 
 Examples:
