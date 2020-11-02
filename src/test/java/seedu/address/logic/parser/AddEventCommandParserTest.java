@@ -7,6 +7,7 @@ import static seedu.address.testutil.TypicalEvents.PARTY;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.add.AddEventCommand;
 import seedu.address.model.task.Event;
 import seedu.address.testutil.EventBuilder;
@@ -70,27 +71,24 @@ public class AddEventCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.DATE_TIME_USAGE);
+        String expectedDateMessage = Messages.MESSAGE_INVALID_DATE_FORMAT;
+        String expectedTimeMessage = Messages.MESSAGE_INVALID_TIME_FORMAT;
 
         // invalid startDate
         assertParseFailure(parser, "event " + MEETING_DESC + INVALID_START_DATE + MEETING_START_TIME
-                + MEETING_END_DATE + MEETING_END_TIME, expectedMessage);
+                + MEETING_END_DATE + MEETING_END_TIME, expectedDateMessage);
 
         // invalid endDate
         assertParseFailure(parser, "event " + MEETING_DESC + MEETING_START_DATE + MEETING_START_TIME
-                + INVALID_END_DATE + MEETING_END_TIME, expectedMessage);
+                + INVALID_END_DATE + MEETING_END_TIME, expectedDateMessage);
 
         // invalid startTime
         assertParseFailure(parser, "event " + MEETING_DESC + MEETING_START_DATE + INVALID_START_TIME
-                + MEETING_END_DATE + MEETING_END_TIME, expectedMessage);
+                + MEETING_END_DATE + MEETING_END_TIME, expectedTimeMessage);
 
         // invalid endTime
         assertParseFailure(parser, "event " + MEETING_DESC + MEETING_START_DATE + MEETING_START_TIME
-                + MEETING_END_DATE + INVALID_END_TIME, expectedMessage);
-
-        // invalid fields for all date and time
-        assertParseFailure(parser, "event " + MEETING_DESC + INVALID_START_DATE + INVALID_START_TIME
-                + INVALID_END_DATE + INVALID_END_TIME, expectedMessage);
+                + MEETING_END_DATE + INVALID_END_TIME, expectedTimeMessage);
     }
 
     @Test

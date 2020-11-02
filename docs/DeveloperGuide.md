@@ -87,7 +87,7 @@ The following activity diagram shows what happens when the user enters an add ta
 * This could reduce the replication of code, since both `AddTodoCommand` and `AddEventCommand` are almost identical.
 * However, by having two distinct commands, different and more specific success or error messages can be produced by the execution of respective commands.
 
-### Filter tasks (`dueBy` and `dueBefore`) feature
+### Filter tasks (`dueAt` and `dueBefore`) feature
 
 ##### Parser:
 
@@ -99,33 +99,33 @@ The following activity diagram shows what happens when the user enters an add ta
     * If the input are in the correct date and time format, a new DueBeforePredicate object is created and passed
     to a new DueBeforeCommand constructor.
 
-* `DueByCommandParser` implements `Parser<DueByCommand>`
+* `DueAtCommandParser` implements `Parser<DueAtCommand>`
 
-    * It checks for the phrase `itemsDueBy` and parses the content after the prefixes: date `date/` and time `time/`.
-    * If the input are in the correct date and time format, a new DueByPredicate object is created and passed to a new DueByCommand constructor.
+    * It checks for the phrase `itemsDueAt` and parses the content after the prefixes: date `date/` and time `time/`.
+    * If the input are in the correct date and time format, a new DueAtPredicate object is created and passed to a new DueAtCommand constructor.
 
 ##### Predicate:
 
 ![PredicateClassDiagram](images/filterFunction/PredicateClassDiagram.png)
 
-The way dueBy and dueBefore works is very similar, the difference only being the dueBefore and dueBy predicate.
+The way dueAt and dueBefore works is very similar, the difference only being the dueBefore and dueAt predicate.
 
-`DueBeforePredicate` and `DueByPredicate` extends `DuePredicate`.
+`DueBeforePredicate` and `DueAtPredicate` extends `DuePredicate`.
 
 
 * `DueBeforePredicate` compares the LocalDateTime input and every task's LocalDateTime, and returns true if the task's LocalDateTime *is before* the input's LocalDateTime.
-* `DueByPredicate` compares the LocalDateTime input and every task's LocalDateTime, and returns true if the task's LocalDateTime *equals* the input's LocalDateTime.
+* `DueAtPredicate` compares the LocalDateTime input and every task's LocalDateTime, and returns true if the task's LocalDateTime *equals* the input's LocalDateTime.
 
 ##### Command:
 The class diagram
 
 ![CommandClassDiagram](images/filterFunction/CommandClassDiagram.png)
 
-* `DueBeforeCommand` and `DueByCommand` extends `Command`.
-* The command will be executed with the `Model`, which will update the `FilteredTaskList` based on the `DueByPredicate`/`DueBeforePredicate`
+* `DueBeforeCommand` and `DueAtCommand` extends `Command`.
+* The command will be executed with the `Model`, which will update the `FilteredTaskList` based on the `DueAtPredicate`/`DueBeforePredicate`
 * If it is successful, it will return a `CommandResult` with a successful message to the UI.
 
-The following sequence diagram shows how the dueBy filtering works:
+The following sequence diagram shows how the dueAt filtering works:
 
 ![FilterSequenceDiagram](images/filterFunction/FilterSequenceDiagram.png)
 
@@ -135,7 +135,7 @@ The following activity diagram shows what happens when the user enters the filte
 
 #### Design consideration:
 
-##### Aspect: How dueBy and dueBefore executes
+##### Aspect: How dueAt and dueBefore executes
 
 After implementing the task operations, there is `FilteredTaskList` which we can utilise to filter tasks.
 
