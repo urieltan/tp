@@ -13,11 +13,11 @@ This user guide is targeted at university students who are interested in using L
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## 1. Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `lifebook.jar` from [here](https://github.com/AY2021S1-CS2103T-F12-4/tp/releases/tag/v1.3a).
+1. Download the latest `Lifebook.jar` from [here](https://github.com/AY2021S1-CS2103T-F12-4/tp/releases/tag/v1.3).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your Lifebook.
 
@@ -33,7 +33,7 @@ This user guide is targeted at university students who are interested in using L
 
    * **`add todo`**`desc/homework date/12-12-2020 time/2359`: Adds a todo with a description `homework` that is due by `12 December 2020, 2359`.
 
-   * **`link meeting`**`desc/Annual meeting url/https://nus-sg.zoom.us/j/98401234359?pwd=eG9HU1FJRDdsVHRaYkFUTC95L0abcedf todo i/2 date/20/1/2020 time/2359` : Add a zoom meeting titled 'annual meeting' at 2359, 20 Jan 2020 to the app.
+   * **`link meeting`**`desc/Annual meeting url/https://nus-sg.zoom.us/j/98401234359?pwd=eG9HU1FJRDdsVHRaYkFUTC95L0abcedf i/2 date/20/1/2020 time/2359` : Add a zoom meeting titled 'annual meeting' at 2359, 20 Jan 2020 to the app.
 
    * **`delete contact`**`3` : Deletes the 3rd contact shown in the current list.
 
@@ -45,7 +45,7 @@ This user guide is targeted at university students who are interested in using L
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## 2. Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -65,9 +65,9 @@ This user guide is targeted at university students who are interested in using L
 
 </div>
 
-### Contact
+### 2.1 Contact
 
-##### Adding a person: `add contact`
+##### 2.1.1 Adding a person: `add contact`
 
 Adds a person to the contact list.
 
@@ -81,13 +81,13 @@ Examples:
 * `add contact n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add contact n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-##### Listing all persons : `list contact`
+##### 2.1.2 Listing all persons : `list contact`
 
 Shows a list of all persons in the contact list.
 
 Format: `list contact`
 
-##### Editing a person : `edit contact`
+##### 2.1.3 Editing a person : `edit contact`
 
 Edits an existing person in the contact list.
 
@@ -104,7 +104,7 @@ Examples:
 *  `edit contact i/1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit contact i/2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-##### Showing persons with a specific tag: `show contact`
+##### 2.1.4 Showing persons with a specific tag: `show contact`
 Shows persons whose tags match the tag being searched.
 
 Format: `show contact t/TAG`
@@ -117,7 +117,7 @@ Examples:
 * `show contact t/colleagues`
 * `show contact t/friends`
 
-##### Locating person by name: `find contact`
+##### 2.1.5 Locating person by name: `find contact`
 
 Finds people whose names contain any of the given keywords.
 
@@ -136,7 +136,7 @@ Examples:
 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-##### Deleting a person : `delete contact`
+##### 2.1.6 Deleting a person : `delete contact`
 
 Deletes the specified person from the contact list.
 
@@ -150,21 +150,21 @@ Examples:
 * `list contact` followed by `delete contact 2` deletes the 2nd person in the contact list.
 * `find contact Betsy` followed by `delete contact 1` deletes the 1st person in the results of the `find` command.
 
-##### Clearing all entries : `clear contact`
+##### 2.1.7 Clearing all entries : `clear contact`
 
 Clears all entries from the contact list.
 
 Format: `clear contact`
 
-### Task
+### 2.2 Task
 
-##### Due soon Tasks
+##### 2.2.1 Due soon Tasks
 
 ![dueSoonTasks](images/dueSoonTasks.png)
 
 At the bottom right hand corner of Lifebook, a list of tasks is shown that are due **1 week from the current date/time**.
 
-##### Removing Tasks : `delete task`
+##### 2.2.2 Removing Tasks : `delete task`
 Removes a To Do or an Event from the TaskList of LifeBook.
 
 Format: `delete task INDEX`
@@ -177,7 +177,7 @@ Example:
 * `list todo` followed by `delete task 3`  removes the 3rd To Do from the To Do list.
 * `list event` followed by `delete task 3`  removes the 3rd Event from the Event list.
 
-##### Mark Task as complete: `done`
+##### 2.2.3 Mark Task as complete: `done`
 Marks a Task on the TaskList as complete.
 
 Format: `done INDEX`
@@ -191,36 +191,13 @@ Example:
 * `list todo` followed by `done 3` marks the 3rd todo on the Todo List as complete.
 * `list event` followed by `done 3` marks the 3rd Event on the Event list as complete.
 
-##### Listing all tasks : `list task`
+##### 2.2.4 Listing all tasks : `list task`
 
 Shows a list of all events and to-dos in the Lifebook.
 
 Format: `list task`
 
-##### Adding a zoom meeting: `link meeting`
-
-Adds a meeting link for an event.
-
-Format:
-* `link meeting desc/DESCRIPTION url/MEETING LINK i/INDEX_OF_TODO date/DD-MM-YYYY time/HHmm`
-
-* `DATE` must be specified in the format of DD-MM-YYYY
-* `TIME` must be specified in the format of HHmm using 24 hour time
-
-Examples:
-* `link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf i/2 date/22-09-2020 time/1400`
-
-##### Adding a collaborative folder link: `link doc`
-
-Adds a collaborative link (Google Drive, GitHub, Trello, and others) for a todo.
-
-Format:
-* `link doc desc/DESCRIPTION url/LINK i/INDEX_OF_TODO`
-
-Examples:
-* `link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoUz1JpAgynIkfacr0asqV9A4kh i/2`
-
-##### Filter deadlines : `itemsDue`
+##### 2.2.5 Filter deadlines : `itemsDue`
 
 User can search todos/meetings due by/before a certain date/time.
 
@@ -246,12 +223,20 @@ Outputs a list of results.
     Example: `itemsDueBefore date/12-12-2020 time/2359`
     It will output a list of todos/meetings that are due specifically **before** 12th December 2020, 2359.
 
-##### Sorting contacts and tasks: `sort`
+##### 2.2.6 Recurrence
+
+If a task is recurring, it will be displayed in the GUI.
+
+![recurringTask](images/ExampleOfARecurringTask.png)
+
+##### 2.2.7 Sorting contacts and tasks: `sort`
 
 Sorts the currently displayed tasks or contacts according to date or name, respectively. Sorting may also be cleared, such that the natural order of lists are restored.
 If the currently displayed list is empty, a sorted, unfiltered list will be displayed instead.
 
 Format: `sort OPTION`
+
+* `OPTION` refers to `contact`, `task`, or `clear`
 
 ![sortedTaskList](images/SortedTaskList.PNG) 
 
@@ -262,7 +247,7 @@ Examples:
 * `sort task` sorts the task list.
 * `sort contact` sorts the contact list.
 
-##### Add common tag to contact + task: `contactTaskTag`
+##### 2.2.8 Add common tag to contact + task: `contactTaskTag`
 
 Adds a common tag to a contact and task (Todo or Event) based on the given indexes of the contact and task.
 The user can choose to add as many common tags as they want, where they simply just need to input the `t/` prefix.
@@ -278,19 +263,26 @@ Upon executing the command, the contact at index 7- “James Ho” and task at i
 
 * `contactTaskTag t/CS2100 t/buddy contactIndex/7 taskIndex/1`
 
-### Todo
+### 2.3 Todo
 
-##### Adding To Dos : `add todo`
+##### 2.3.1 Adding To Dos : `add todo`
 Adds a To Do to the TodoList of LifeBook.
 
-Format: `add todo desc/DESCRIPTION date/DATE time/TIME [recurring/VALUE UNIT]`
+Format: `add todo desc/DESCRIPTION date/DATE time/TIME [recurring/VALUE UNIT] [t/TAG]…`
 
 * `DATE` must be specified in the format of DD-MM-YYYY
 * `TIME` must be specified in the format of HHmm using 24 hour time
 * `VALUE` must be > 0
+* `TAG` must be alphanumeric
 * `UNIT` must be "day", "week", "month" or "year"
 
-##### Editing a todo : `edit todo` 
+Examples:
+
+* `add todo desc/cs2101 Oral Presentation reflection date/08-08-2020 time/2359`
+* `add todo desc/user guide draft date/09-08-2020 time/2300 t/MUSTFINISHSOON`
+* `add todo desc/tutorial date/10-10-2020 time/1130 recurring/1 week`
+
+##### 2.3.2 Editing a todo : `edit todo` 
 
 > Coming soon 
 
@@ -306,26 +298,34 @@ Format: `edit todo i/INDEX [desc/DESCRIPTION] [date/DATE] [time/TIME]`
 
 Examples:
 *  `edit todo i/1 desc/CS2101 Slides date/24-01-2020` Edits the description and date of the 1st todo to be `CS2101 Slides` and `24-01-2020` respectively.
-*  `edit todo i/2 date/25-01-2020 time/2350` Edits the date and time of the 2nd todo to be `25-01-2020` and `23500` respectively.
+*  `edit todo i/2 date/25-01-2020 time/2350` Edits the date and time of the 2nd todo to be `25-01-2020` and `2350` respectively.
 
-##### Recurrence
+##### 2.3.3 View all To Dos : `list todo`
 
-If a task is recurring, it will be displayed in the GUI.
-
-![recurringTask](images/ExampleOfARecurringTask.png)
-
-Examples:
-
-* `add todo desc/cs2101 Oral Presentation reflection date/08-08-2020 time/2359`
-* `add todo desc/user guide draft date/09-08-2020 time/2300`
-* `add todo desc/tutorial date/10-10-2020 time/1130 recurring/1 week`
-
-##### View all To Dos : `list todo`
 Shows a list of all To Do's in the TodoList.
 
 Format: `list todo`
 
-##### Showing todos with a specific tag: `show todo`
+##### 2.3.4 Adding a collaborative folder link: `link doc`
+
+<div markdown="block" class="alert alert-info"> 
+
+:information_source: **Note:**
+
+* Collaborative links can only be added to a todo.
+* Only **one** collaborative link can be assigned to a todo.
+
+</div>
+
+Adds a collaborative link (Google Drive, GitHub, Trello, and others) for a todo.
+
+Format:
+* `link doc desc/DESCRIPTION url/LINK i/INDEX_OF_TODO`
+
+Examples:
+* `link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoUz1JpAgynIkfacr0asqV9A4kh i/2`
+
+##### 2.3.5 Showing todos with a specific tag: `show todo`
 Shows todos whose tags match the tag being searched.
 
 Format: `show todo t/TAG`
@@ -338,7 +338,7 @@ Examples:
 * `show todo t/CS2100`
 * `show todo t/CS3243`
 
-##### Locating todos by description: `find todo`
+##### 2.3.6 Locating todos by description: `find todo`
 
 Finds todos whose description contain any of the given keywords.
 
@@ -355,24 +355,25 @@ Examples:
 * `find todo assignment` returns `Essay assignment` and `Quiz assignment`
 * `find todo Do assignment` returns `Do chores`, `Finish assignment`<br>
 
-### Event
+### 2.4 Event
 
-##### Adding Events : `add event`
+##### 2.4.1 Adding Events : `add event`
 Adds an Event o to the EventList of LifeBook.
 
-Format: `add event desc/DESCRIPTION startdate/DATE starttime/TIME enddate/DATE endtime/TIME [recurring/VALUE UNIT]`
+Format: `add event desc/DESCRIPTION startdate/DATE starttime/TIME enddate/DATE endtime/TIME [recurring/VALUE UNIT] [t/TAG]..`
 
 * `DATE` must be specified in the format of DD-MM-YYYY
 * `TIME` must be specified in the format of HHmm using 24 hour time
 * `VALUE` must be > 0
 * `UNIT` must be "day", "week", "month" or "year"
+* `TAG` must be alphanumeric
 
 Examples:
 
 * `add event desc/Party with friends startdate/08-08-2020 starttime/2359 enddate/10-08-2020 endtime/2359 recurring/1 year`
-* `add event desc/Singapore Fintech Festival startdate/09-08-2020 starttime/1000 enddate/12-08-2020 endtime/2359`
+* `add event desc/Singapore Fintech Festival startdate/09-08-2020 starttime/1000 enddate/12-08-2020 endtime/2359 t/important`
 
-##### Editing an event : `edit event`
+##### 2.4.2 Editing an event : `edit event`
 
 > Coming soon 
 
@@ -390,12 +391,34 @@ Examples:
 *  `edit event i/1 desc/CS2101 Lecture startdate/24-01-2020 endtime/2359` Edits the description, start date, and end time of the 1st event to be `CS2101 Lecture`, `24-01-2020`, and `2359` respectively.
 *  `edit event i/2 starttime/1400 enddate/30-01-2020` Edits the start time and end date of the 2nd event to be `1400` and `30-01-2020` respectively.
 
-##### View all Events : `list event`
+##### 2.4.3 View all Events : `list event`
 Shows a list of all Events in the EventList.
 
 Format: `list event`
 
-##### Showing events with a specific tag: `show event`
+##### 2.4.4 Adding a zoom meeting: `link meeting`
+
+<div markdown="block" class="alert alert-info"> 
+
+:information_source: **Note:**
+
+* Meeting links can only be added to an event.
+* Only **one** meeting link can be assigned to an event.
+
+</div>
+
+Adds a meeting link for an event.
+
+Format:
+* `link meeting desc/DESCRIPTION url/MEETING LINK i/INDEX_OF_EVENT date/DD-MM-YYYY time/HHmm`
+
+* `DATE` must be specified in the format of DD-MM-YYYY
+* `TIME` must be specified in the format of HHmm using 24 hour time
+
+Examples:
+* `link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf i/2 date/22-09-2020 time/1400`
+
+##### 2.4.5 Showing events with a specific tag: `show event`
 Shows events whose tags match the tag being searched.
 
 Format: `show event t/TAG`
@@ -408,7 +431,7 @@ Examples:
 * `show event t/TeamProject`
 * `show event t/CS3243`
 
-##### Locating events by description: `find event`
+##### 2.4.6 Locating events by description: `find event`
 
 Finds events whose description contain any of the given keywords.
 
@@ -425,15 +448,15 @@ Examples:
 * `find event meeting` returns `CCA meeting` and `Team meeting`
 * `find event Attend meeting` returns `Attend workshop`, `Arrange meeting`<br>
 
-### Others
+### 2.5 Others
 
-##### Exiting the program : `exit`
+##### 2.5.1 Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-##### Viewing help : `help`
+##### 2.5.2 Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -443,7 +466,7 @@ Format: `help`
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## 3. FAQ
 
 **Q**: How do I save any update I made on the Lifebook?<br>
 **A**: Lifebook will automatically save any update you make upon closing the app, and the data is saved in the hard disk. There is no need to save manually.<br>
@@ -452,9 +475,9 @@ Format: `help`
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## 4. Command summary
 
-### General
+### 4.1 General
 
 Action | Format, Examples
 --------|------------------
@@ -463,20 +486,20 @@ Action | Format, Examples
 **Add common tag to Contact + Task** | `contactTaskTag t/TAG... contactIndex/INDEX taskIndex/INDEX` <br> e.g., `contactTaskTag t/CS2103T t/ProjMate contactIndex/1 taskIndex/1`
 
 
-### Contact Operations
+### 4.2 Contact Operations
 
 Action | Format, Examples
 --------|------------------
 **Add Contact** | `add contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add contact n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear Contacts** | `clear contact`
 **Delete Contact** | `delete contact INDEX`<br> e.g., `delete contact 3`
-**Edit Contact** | `edit contact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]`<br> e.g.,`edit contact i/2 n/James Lee e/jameslee@example.com`
+**Edit Contact** | `edit contact i/INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]`<br> e.g.,`edit contact i/2 n/James Lee e/jameslee@example.com`
 **Find Contact** | `find contact KEYWORD [MORE_KEYWORDS]`<br> e.g., `find contact James Jake`
 **Show Contact** | `show contact t/TAG` <br> e.g., `show contact t/friends`
 **List Contacts** | `list contact`
 
 
-### Task Operations
+### 4.3 Task Operations
 
 Action | Format, Examples
 --------|------------------
@@ -487,24 +510,24 @@ Action | Format, Examples
 **Find tasks due before** |  `itemsDueBefore date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueBefore date/12-12-2020 time/2359`
 
 
-##### Todo-specific Operations
+##### 4.3.1 Todo-specific Operations
 
 Action | Format, Examples
 --------|------------------
-**Add To Do** | `add todo desc/DESCRIPTION date/DATE time/TIME [recurring/VALUE UNIT]` <br> e.g., `add todo desc/update user guide date/09-08-2020 time/2300 recurring/1 week`
+**Add To Do** | `add todo desc/DESCRIPTION date/DATE time/TIME [recurring/VALUE UNIT] [t/TAG]…` <br> e.g., `add todo desc/update user guide date/09-08-2020 time/2300 recurring/1 week t/MUSTFINISHSOON`
 **List To Dos** | `list todo`
 **Find To Do** | `find todo KEYWORD [MORE_KEYWORDS]`<br> e.g., `find todo Finish assignment`
 **Show To Do** | `show todo t/TAG` <br> e.g., `show todo t/CS2100`
-**Link doc** | `link doc desc/DESCRIPTION url/LINK i/INDEX_OF_TASK` <br> e.g.,`link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoIkfacr0asqV9A4kh i/2`
+**Link doc** | `link doc desc/DESCRIPTION url/LINK i/INDEX_OF_TODO` <br> e.g.,`link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoIkfacr0asqV9A4kh i/2`
 
 
-##### Event-specific Operations
+##### 4.3.2 Event-specific Operations
 
 Action | Format, Examples
 --------|------------------
-**Add Event** | `add event desc/DESCRIPTION startdate/DATE starttime/TIME enddate/DATE endtime/TIME [recurring/VALUE UNIT]` <br> e.g., `add event desc/meeting startdate/12-12-2020 starttime/1000 enddate/12-12-2020 endtime/1130 recurring/1 week`
+**Add Event** | `add event desc/DESCRIPTION startdate/DATE starttime/TIME enddate/DATE endtime/TIME [recurring/VALUE UNIT] [t/TAG]` <br> e.g., `add event desc/meeting startdate/12-12-2020 starttime/1000 enddate/12-12-2020 endtime/1130 recurring/1 week t/IMPORTANT`
 **List Events** | `list event`
 **Find Event** | `find event KEYWORD [MORE_KEYWORDS]`<br> e.g., `find event Attend meeting`
 **Show Event** | `show event t/TAG` <br> e.g., `show event t/CCAMeeting`
-**Link meeting** | `link meeting desc/DESCRIPTION url/LINK i/INDEX_OF_TASK` <br> e.g.,`link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf i/2 date/22-09-2020 time/1400`
+**Link meeting** | `link meeting desc/DESCRIPTION url/LINK i/INDEX_OF_EVENT date/DATE time/TIME` <br> e.g.,`link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf i/2 date/22-09-2020 time/1400`
 
