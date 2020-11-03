@@ -80,13 +80,15 @@ public class TaskCard extends UiPart<Region> {
             meetingLink.setText(task.getLink().get().getUrl());
             meetingLink.setOnAction(e -> {
                 if (Desktop.isDesktopSupported()) {
-                    try {
-                        Desktop.getDesktop().browse(new URI(meetingLink.getText()));
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    } catch (URISyntaxException e1) {
-                        e1.printStackTrace();
-                    }
+                    new Thread(() -> {
+                        try {
+                            Desktop.getDesktop().browse(new URI(meetingLink.getText()));
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        } catch (URISyntaxException e1) {
+                            e1.printStackTrace();
+                        }
+                    }).start();
                 }
             });
             linkDescription.setText(task.getLink().get().getDescription());
