@@ -82,6 +82,9 @@ public class TodoBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code CollaborativeLink} of the {@code To-do} that we are building.
+     */
     public TodoBuilder withLink(CollaborativeLink link) {
         this.link = link;
         return this;

@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.link.LinkCollaborativeCommand.MESSAGE_SUCCESS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.*;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TASK;
 import static seedu.address.testutil.TypicalTodos.getTypicalTodosTaskList;
 
@@ -43,7 +43,7 @@ public class LinkCollaborativeCommandTest {
 
     @Test
     public void constructor_nullMeetingLink_throwsNullPointerException() {
-        Index index = INDEX_FIRST_PERSON;
+        Index index = INDEX_FIRST_TASK;
         assertThrows(NullPointerException.class, () -> new LinkCollaborativeCommand(index, null));
     }
 
@@ -97,7 +97,7 @@ public class LinkCollaborativeCommandTest {
 
     @Test
     public void equals() {
-        Index index = INDEX_FIRST_PERSON;
+        Index index = INDEX_FIRST_TASK;
         CollaborativeLink googleLink = new CollaborativeLink("Google Meet",
                 "https://www.google.com");
         CollaborativeLink zoomLink = new CollaborativeLink("Zoom Meeting",

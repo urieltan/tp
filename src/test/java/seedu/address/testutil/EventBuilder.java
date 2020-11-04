@@ -91,6 +91,9 @@ public class EventBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code MeetingLink} of the {@code Event} that we are building.
+     */
     public EventBuilder withLink(MeetingLink link) {
         this.link = link;
         return this;
