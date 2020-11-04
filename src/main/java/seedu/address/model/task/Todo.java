@@ -33,8 +33,8 @@ public class Todo extends Task {
      * @param description a brief description of the deadline.
      * @param deadline    a String in a specific format (inputFormatter) which specifies a date.
      */
-    public Todo(boolean isDone, String description, String deadline) {
-        super(description);
+    public Todo(boolean isDone, String description, String deadline, Set<Tag> tags) {
+        super(description, tags);
         this.isDone = isDone;
         this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
     }
@@ -47,8 +47,8 @@ public class Todo extends Task {
      * @param deadline    a String in a specific format (inputFormatter) which specifies a date.
      * @param recurrence the recurrence of todo.
      */
-    public Todo(boolean isDone, String description, String deadline, Recurrence recurrence) {
-        super(description);
+    public Todo(boolean isDone, String description, String deadline, Recurrence recurrence, Set<Tag> tags) {
+        super(description, tags);
         this.isDone = isDone;
         this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
         this.recurrence = recurrence;
@@ -61,8 +61,8 @@ public class Todo extends Task {
      * @param description a brief description of the deadline.
      * @param deadline    a String in a specific format (inputFormatter) which specifies a date.
      */
-    public Todo(boolean isDone, String description, String deadline, CollaborativeLink link) {
-        super(description);
+    public Todo(boolean isDone, String description, String deadline, CollaborativeLink link, Set<Tag> tags) {
+        super(description, tags);
         this.isDone = isDone;
         this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
         this.collaborativeLink = link;
@@ -76,8 +76,9 @@ public class Todo extends Task {
      * @param deadline    a String in a specific format (inputFormatter) which specifies a date.
      * @param recurrence the recurrence of todo.
      */
-    public Todo(boolean isDone, String description, String deadline, CollaborativeLink link, Recurrence recurrence) {
-        super(description);
+    public Todo(boolean isDone, String description, String deadline,
+                CollaborativeLink link, Recurrence recurrence, Set<Tag> tags) {
+        super(description, tags);
         this.isDone = isDone;
         this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
         this.collaborativeLink = link;
@@ -180,21 +181,6 @@ public class Todo extends Task {
         this.deadline = deadline;
         this.recurrence = recurrence;
         this.collaborativeLink = link;
-    }
-
-    /**
-     * Constructs a task, which may or may not have been completed,
-     * with a brief description and deadline for the task to be completed by.
-     *
-     * @param isDone      indicates if the deadline has been completed.
-     * @param description a brief description of the deadline.
-     * @param deadline    a String in a specific format (inputFormatter) which specifies a date.
-     * @param tags        a set of tags attached to the todo.
-     */
-    public Todo(boolean isDone, String description, String deadline, Set<Tag> tags) {
-        super(isDone, description, tags);
-        assert deadline != null;
-        this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
     }
 
     /**

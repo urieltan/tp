@@ -9,8 +9,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTTIME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -19,6 +22,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Event;
 import seedu.address.model.task.MeetingLink;
 import seedu.address.model.task.Task;
@@ -74,6 +78,10 @@ public class EditEventCommand extends EditCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
+        if (lastShownList.get(index.getZeroBased()).getClass() != Event.class) {
+            throw new CommandException(Messages.MESSAGE_INVALID_INDEX_NOT_EVENT);
+        }
+
         Event eventToEdit = (Event) lastShownList.get(index.getZeroBased());
         Event editedEvent = createEditedEvent(eventToEdit, editEventDescriptor);
 
@@ -101,23 +109,24 @@ public class EditEventCommand extends EditCommand {
         String previousEndDateTime = eventToEdit.getEndTime();
         String endDate = editEventDescriptor.getEndDate().orElse(previousEndDateTime.split(" ")[0]);
         String endTime = editEventDescriptor.getEndTime().orElse(previousEndDateTime.split(" ")[1]);
+        Set<Tag> updatedTags = editEventDescriptor.getTags().orElse(eventToEdit.getTags());
 
         if (eventToEdit.getLink().isPresent()) {
             MeetingLink link = eventToEdit.getMeetingLink();
             if (eventToEdit.hasRecurrence()) {
                 return new Event(eventToEdit.getStatus(), description, startDate + " " + startTime,
-                        endDate + " " + endTime, link, eventToEdit.getRecurrence());
+                        endDate + " " + endTime, link, eventToEdit.getRecurrence(), updatedTags);
             } else {
                 return new Event(eventToEdit.getStatus(), description,
-                        startDate + " " + startTime, endDate + " " + endTime, link);
+                        startDate + " " + startTime, endDate + " " + endTime, link, updatedTags);
             }
         } else {
             if (eventToEdit.hasRecurrence()) {
                 return new Event(eventToEdit.getStatus(), description, startDate + " " + startTime,
-                        endDate + " " + endTime, eventToEdit.getRecurrence());
+                        endDate + " " + endTime, eventToEdit.getRecurrence(), updatedTags);
             } else {
                 return new Event(eventToEdit.getStatus(), description,
-                        startDate + " " + startTime, endDate + " " + endTime);
+                        startDate + " " + startTime, endDate + " " + endTime, updatedTags);
             }
         }
     }
@@ -150,6 +159,7 @@ public class EditEventCommand extends EditCommand {
         private String startTime;
         private String endDate;
         private String endTime;
+        private Set<Tag> tags;
 
         public EditEventDescriptor() {}
 
@@ -163,13 +173,14 @@ public class EditEventCommand extends EditCommand {
             setStartTime(toCopy.startTime);
             setEndDate(toCopy.endDate);
             setEndTime(toCopy.endTime);
+            setTags(toCopy.tags);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(description, startDate, startTime, endDate, endTime);
+            return CollectionUtil.isAnyNonNull(description, startDate, startTime, endDate, endTime, tags);
         }
 
         public void setDescription(String description) {
@@ -181,7 +192,6 @@ public class EditEventCommand extends EditCommand {
         }
 
         public void setStartDate(String startDate) {
-            System.out.println("set start date called");
             this.startDate = startDate;
         }
 
@@ -190,7 +200,6 @@ public class EditEventCommand extends EditCommand {
         }
 
         public void setStartTime(String startTime) {
-            System.out.println("set start time called");
             this.startTime = startTime;
         }
 
@@ -207,8 +216,24 @@ public class EditEventCommand extends EditCommand {
         }
 
         public void setEndTime(String endTime) {
-            System.out.println("set end time called");
             this.endTime = endTime;
+        }
+
+        /**
+         * Sets {@code tags} to this object's {@code tags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setTags(Set<Tag> tags) {
+            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code tags} is null.
+         */
+        public Optional<Set<Tag>> getTags() {
+            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
         public Optional<String> getEndTime() {

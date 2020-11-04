@@ -18,6 +18,8 @@ public class Messages {
             + "(Cannot be 0, negative number, or greater than person/task list's index!)";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_INVALID_TODO_DISPLAYED_INDEX = "The todo index provided is invalid";
+    public static final String MESSAGE_INVALID_INDEX_NOT_TODO = "The task at the given index is not a todo";
+    public static final String MESSAGE_INVALID_INDEX_NOT_EVENT = "The task at the given index is not an event";
     public static final String MESSAGE_INVALID_EVENT_DISPLAYED_INDEX = "The event index provided is invalid";
     public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "The task index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
