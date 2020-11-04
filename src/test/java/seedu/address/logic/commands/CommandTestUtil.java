@@ -15,6 +15,8 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.edit.EditContactCommand;
+import seedu.address.logic.commands.edit.EditEventCommand;
+import seedu.address.logic.commands.edit.EditTodoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -39,6 +41,7 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TAG_IMPORTANT = "important";
     public static final String VALID_DESCRIPTION = "A description";
     public static final String VALID_URL = "https://www.google.com";
 
@@ -72,6 +75,10 @@ public class CommandTestUtil {
 
     public static final EditContactCommand.EditPersonDescriptor DESC_AMY;
     public static final EditContactCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditTodoCommand.EditTodoDescriptor DESC_TASK1;
+    public static final EditTodoCommand.EditTodoDescriptor DESC_TASK2;
+    public static final EditEventCommand.EditEventDescriptor DESC_EVENT1;
+    public static final EditEventCommand.EditEventDescriptor DESC_EVENT2;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -80,6 +87,22 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_TASK1 = new EditTodoCommand.EditTodoDescriptor();
+        DESC_TASK1.setDescription(VALID_DESCRIPTION);
+        DESC_TASK1.setDate("10-12-2017");
+        DESC_TASK1.setTime("1445");
+        DESC_TASK2 = new EditTodoCommand.EditTodoDescriptor();
+        DESC_TASK2.setDescription(VALID_DESCRIPTION);
+        DESC_TASK2.setDate("15-12-2018");
+        DESC_TASK2.setTime("1945");
+        DESC_EVENT1 = new EditEventCommand.EditEventDescriptor();
+        DESC_EVENT1.setDescription(VALID_DESCRIPTION);
+        DESC_EVENT1.setStartTime("1445");
+        DESC_EVENT1.setStartDate("10-12-2017");
+        DESC_EVENT2 = new EditEventCommand.EditEventDescriptor();
+        DESC_EVENT2.setDescription(VALID_DESCRIPTION);
+        DESC_EVENT2.setStartTime("1830");
+        DESC_EVENT1.setStartDate("12-12-2018");
     }
 
     /**

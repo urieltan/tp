@@ -21,7 +21,8 @@ public class TypicalTodos {
         .withDateTime("05-10-2021 2000").withTags("CS2103T").build();
     public static final Todo DEVELOPER_GUIDE = new TodoBuilder().withDescription("update developer guide")
         .withDateTime("15-11-2020 2300").withTags("CS2103T").build();
-
+    public static final Todo HOMEWORK2 = new TodoBuilder().withDescription("homework2")
+            .withDateTime("14-12-2020 2159").build();
     private TypicalTodos() {} // prevents instantiation
 
     /**
@@ -36,6 +37,6 @@ public class TypicalTodos {
     }
 
     public static List<Todo> getTypicalTodos() {
-        return new ArrayList<>(Arrays.asList(HOMEWORK, CHORES, ASSIGNMENT, USER_GUIDE, DEVELOPER_GUIDE));
+        return new ArrayList<>(Arrays.asList(HOMEWORK, CHORES, ASSIGNMENT, USER_GUIDE, DEVELOPER_GUIDE, HOMEWORK2));
     }
 }

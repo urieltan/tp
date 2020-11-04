@@ -4,12 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.link.LinkMeetingCommand.MESSAGE_SUCCESS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventsTaskList;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TASK;
+import static seedu.address.testutil.TypicalTodos.getTypicalTodosTaskList;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -96,6 +98,18 @@ public class LinkMeetingCommandTest {
         expectedModel.setTask(targetEvent, editedEvent);
 
         assertCommandSuccess(linkMeetingCommand, model, expectedMessage, "TASK", expectedModel);
+    }
+
+    @Test
+    public void execute_indexNotEvent_failure() {
+        MeetingLink link = new MeetingLink("Google Meet",
+                "https://www.google.com", "20-01-2020 2359");
+
+        LinkMeetingCommand linkMeetingCommand = new LinkMeetingCommand(INDEX_SECOND_TASK, link);
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_INDEX_NOT_EVENT);
+        Model todoModel = new ModelManager(new AddressBook(), new UserPrefs(), getTypicalTodosTaskList());
+
+        assertCommandFailure(linkMeetingCommand, todoModel, expectedMessage);
     }
 
     @Test

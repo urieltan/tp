@@ -257,7 +257,9 @@ public class EditEventCommand extends EditCommand {
 
             return getDescription().equals(e.getDescription())
                     && getStartDate().equals(e.getStartDate())
-                    && getStartTime().equals(e.getStartTime());
+                    && getStartTime().equals(e.getStartTime())
+                    && getEndDate().equals(e.getEndDate())
+                    && getEndTime().equals(e.getEndTime());
         }
     }
 }

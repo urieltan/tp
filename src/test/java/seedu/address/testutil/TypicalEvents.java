@@ -21,6 +21,10 @@ public class TypicalEvents {
             .withStartDateTime("23-10-2020 1600").withEndDateTime("23-10-2020 1600").withTags("CS2103T").build();
     public static final Event WORKSHOP = new EventBuilder().withDescription("attend workshop")
             .withStartDateTime("12-11-2020 1200").withEndDateTime("12-11-2020 1600").withTags("workshop").build();
+    public static final Event MEETING2 = new EventBuilder().withDescription("meeting2")
+            .withStartDateTime("12-12-2020 1000").withEndDateTime("12-12-2020 1130").build();
+    public static final Event MEETING3 = new EventBuilder().withDescription("meeting3")
+            .withStartDateTime("16-12-2020 1000").withEndDateTime("18-12-2020 1130").build();
 
     private TypicalEvents() {} // prevents instantiation
 
@@ -36,6 +40,6 @@ public class TypicalEvents {
     }
 
     public static List<Event> getTypicalEvents() {
-        return new ArrayList<>(Arrays.asList(MEETING, PARTY, LECTURE, WORKSHOP));
+        return new ArrayList<>(Arrays.asList(MEETING, PARTY, LECTURE, WORKSHOP, MEETING2, MEETING3));
     }
 }

@@ -77,7 +77,7 @@ public class LinkMeetingCommand extends LinkCommand {
             model.setTask(eventToEdit, editedEvent);
             model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
         } catch (ClassCastException e) {
-            throw new CommandException(Messages.MESSAGE_TASK_IS_NOT_EVENT);
+            throw new CommandException(Messages.MESSAGE_INVALID_INDEX_NOT_EVENT);
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, meetingLink.getDescriptionDateTime()), "TASK");

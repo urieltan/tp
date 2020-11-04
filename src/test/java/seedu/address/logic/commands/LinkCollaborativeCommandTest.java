@@ -4,9 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.link.LinkCollaborativeCommand.MESSAGE_SUCCESS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalEvents.getTypicalEventsTaskList;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TASK;
 import static seedu.address.testutil.TypicalTodos.getTypicalTodosTaskList;
@@ -93,6 +95,18 @@ public class LinkCollaborativeCommandTest {
         expectedModel.setTask(targetTodo, editedTodo);
 
         assertCommandSuccess(linkCollaborativeCommand, model, expectedMessage, "TASK", expectedModel);
+    }
+
+    @Test
+    public void execute_indexNotTodo_failure() {
+        CollaborativeLink link = new CollaborativeLink("Google Meet",
+                "https://www.google.com");
+
+        LinkCollaborativeCommand linkCollaborativeCommand = new LinkCollaborativeCommand(INDEX_SECOND_TASK, link);
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_INDEX_NOT_TODO);
+        Model todoModel = new ModelManager(new AddressBook(), new UserPrefs(), getTypicalEventsTaskList());
+
+        assertCommandFailure(linkCollaborativeCommand, todoModel, expectedMessage);
     }
 
     @Test
