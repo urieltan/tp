@@ -61,6 +61,10 @@ public class LinkMeetingCommand extends LinkCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
         try {
+            if (lastShownList.get(index.getZeroBased()).getClass() != Event.class) {
+                throw new CommandException(Messages.MESSAGE_INVALID_INDEX_NOT_EVENT);
+            }
+
             Event eventToEdit = (Event) lastShownList.get(index.getZeroBased());
             Event editedEvent;
             if (eventToEdit.getRecurrence() != null) {

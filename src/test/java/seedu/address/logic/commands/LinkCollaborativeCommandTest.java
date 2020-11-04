@@ -4,8 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.link.LinkCollaborativeCommand.MESSAGE_SUCCESS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalEvents.getTypicalEventsTaskList;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TASK;
+import static seedu.address.testutil.TypicalTodos.getTypicalTodosTaskList;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -32,13 +36,14 @@ import seedu.address.model.task.CollaborativeLink;
 import seedu.address.model.task.Event;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Todo;
+import seedu.address.testutil.TodoBuilder;
 
 public class LinkCollaborativeCommandTest {
-    private Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs(), getTypicalEventsTaskList());
+    private Model model = new ModelManager(new AddressBook(), new UserPrefs(), getTypicalTodosTaskList());
 
     @Test
     public void constructor_nullMeetingLink_throwsNullPointerException() {
-        Index index = Index.fromOneBased(1);
+        Index index = INDEX_FIRST_TASK;
         assertThrows(NullPointerException.class, () -> new LinkCollaborativeCommand(index, null));
     }
 
@@ -57,8 +62,42 @@ public class LinkCollaborativeCommandTest {
     }
 
     @Test
+    public void execute_todoNotRecurring_success() {
+        CollaborativeLink link = new CollaborativeLink("Google Meet",
+                "https://www.google.com");
+
+        Todo targetTodo = (Todo) model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
+        Todo editedTodo = new TodoBuilder().withDescription("homework")
+                .withDateTime("12-12-2020 2359").withLink(link).build();
+
+        LinkCollaborativeCommand linkCollaborativeCommand = new LinkCollaborativeCommand(INDEX_FIRST_TASK, link);
+        String expectedMessage = String.format(MESSAGE_SUCCESS, link.getDescription());
+        Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs(), getTypicalTodosTaskList());
+        expectedModel.setTask(targetTodo, editedTodo);
+
+        assertCommandSuccess(linkCollaborativeCommand, model, expectedMessage, "TASK", expectedModel);
+    }
+
+    @Test
+    public void execute_todoRecurring_success() {
+        CollaborativeLink link = new CollaborativeLink("Google Meet",
+                "https://www.google.com");
+
+        Todo targetTodo = (Todo) model.getFilteredTaskList().get(INDEX_SECOND_TASK.getZeroBased());
+        Todo editedTodo = new TodoBuilder().withDescription("do chores")
+                .withDateTime("01-01-2020 1800").withRecurrence("1 week").withLink(link).build();
+
+        LinkCollaborativeCommand linkCollaborativeCommand = new LinkCollaborativeCommand(INDEX_SECOND_TASK, link);
+        String expectedMessage = String.format(MESSAGE_SUCCESS, link.getDescription());
+        Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs(), getTypicalTodosTaskList());
+        expectedModel.setTask(targetTodo, editedTodo);
+
+        assertCommandSuccess(linkCollaborativeCommand, model, expectedMessage, "TASK", expectedModel);
+    }
+
+    @Test
     public void equals() {
-        Index index = Index.fromOneBased(1);
+        Index index = INDEX_FIRST_TASK;
         CollaborativeLink googleLink = new CollaborativeLink("Google Meet",
                 "https://www.google.com");
         CollaborativeLink zoomLink = new CollaborativeLink("Zoom Meeting",
@@ -259,7 +298,7 @@ public class LinkCollaborativeCommandTest {
 
         @Override
         public ObservableList<Task> getFilteredTaskList() {
-            return expectedModel.getFilteredTaskList();
+            return model.getFilteredTaskList();
         }
 
         @Override
