@@ -39,6 +39,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_DESCRIPTION = "A description";
+    public static final String VALID_URL = "https://www.google.com";
 
     public static final String VALID_DESCRIPTION_TUTOR_MEETING = "Tutor meeting";
     public static final String VALID_URL_TUTOR_MEETING =
