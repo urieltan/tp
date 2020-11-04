@@ -122,4 +122,6 @@ public interface Model {
     void updateSortedTaskList(Comparator<Task> taskComparator);
 
     void updateSortedPersonList(Comparator<Person> personComparator);
+    boolean filteredTaskListIsEmpty();
+    boolean filteredAddressBookIsEmpty();
 }

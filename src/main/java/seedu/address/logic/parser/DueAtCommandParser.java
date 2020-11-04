@@ -11,27 +11,27 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.due.DueBeforeCommand;
+import seedu.address.logic.commands.due.DueAtCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.task.DueBeforePredicate;
+import seedu.address.model.task.DueAtPredicate;
 
 /**
- * Parses input arguments and creates a new DueBeforeCommand object
+ * Parses input arguments and creates a new DueAtCommand object
  */
-public class DueBeforeCommandParser implements Parser<DueBeforeCommand> {
+public class DueAtCommandParser implements Parser<DueAtCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the DueBeforeCommand
-     * and returns a DueBeforeCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DueAtCommand
+     * and returns a DueAtCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public DueBeforeCommand parse(String args) throws ParseException {
+    public DueAtCommand parse(String args) throws ParseException {
         requireNonNull(args);
         String[] splitArgs = args.trim().split(" ", 1);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(" " + splitArgs[0], PREFIX_DATE,
-                PREFIX_TIME);
+            PREFIX_TIME);
 
         String date = argMultimap.getValue(PREFIX_DATE).orElseThrow(() -> new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DueBeforeCommand.MESSAGE_USAGE)));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DueAtCommand.MESSAGE_USAGE)));
         try {
             DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             LocalDate checkDate = LocalDate.parse(date, dateFormat);
@@ -40,7 +40,7 @@ public class DueBeforeCommandParser implements Parser<DueBeforeCommand> {
         }
 
         String time = argMultimap.getValue(PREFIX_TIME).orElseThrow(() -> new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DueBeforeCommand.MESSAGE_USAGE)));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DueAtCommand.MESSAGE_USAGE)));
         try {
             DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HHmm");
             LocalTime checkTime = LocalTime.parse(time, timeFormat);
@@ -49,7 +49,6 @@ public class DueBeforeCommandParser implements Parser<DueBeforeCommand> {
         }
 
         String deadline = date + " " + time;
-        return new DueBeforeCommand(new DueBeforePredicate(deadline));
+        return new DueAtCommand(new DueAtPredicate(deadline));
     }
-
 }

@@ -61,6 +61,10 @@ public class LinkMeetingCommand extends LinkCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
         try {
+            if (lastShownList.get(index.getZeroBased()).getClass() != Event.class) {
+                throw new CommandException(Messages.MESSAGE_INVALID_INDEX_NOT_EVENT);
+            }
+
             Event eventToEdit = (Event) lastShownList.get(index.getZeroBased());
             Event editedEvent;
             if (eventToEdit.getRecurrence() != null) {
@@ -73,7 +77,7 @@ public class LinkMeetingCommand extends LinkCommand {
             model.setTask(eventToEdit, editedEvent);
             model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
         } catch (ClassCastException e) {
-            throw new CommandException(Messages.MESSAGE_TASK_IS_NOT_EVENT);
+            throw new CommandException(Messages.MESSAGE_INVALID_INDEX_NOT_EVENT);
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, meetingLink.getDescriptionDateTime()), "TASK");

@@ -6,9 +6,9 @@ skinparam classBackgroundColor MODEL_COLOR
 
 abstract class "{abstract}\nCommand" as Command
 class DueBeforeCommand
-class DueByCommand
+class DueAtCommand
 
 Command <|-- DueBeforeCommand
-Command <|-- DueByCommand
+Command <|-- DueAtCommand
 
 @enduml

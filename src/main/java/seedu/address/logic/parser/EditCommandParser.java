@@ -97,7 +97,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(" " + splitArgs[1],
-                            PREFIX_INDEX, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_TIME);
+                            PREFIX_INDEX, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_TIME, PREFIX_TAG);
 
             Index index;
 
@@ -125,6 +125,8 @@ public class EditCommandParser implements Parser<EditCommand> {
                 String time = argMultimap.getValue(PREFIX_TIME).get();
                 editTodoDescriptor.setTime(time);
             }
+            parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editTodoDescriptor::setTags);
+
             if (!editTodoDescriptor.isAnyFieldEdited()) {
                 throw new ParseException(EditTodoCommand.MESSAGE_NOT_EDITED);
             }
@@ -137,7 +139,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_INDEX, PREFIX_DESCRIPTION,
-                            PREFIX_STARTDATE, PREFIX_STARTTIME, PREFIX_ENDDATE, PREFIX_ENDTIME);
+                            PREFIX_STARTDATE, PREFIX_STARTTIME, PREFIX_ENDDATE, PREFIX_ENDTIME, PREFIX_TAG);
 
             Index index;
 
@@ -169,6 +171,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             if (argMultimap.getValue(PREFIX_ENDTIME).isPresent()) {
                 editEventDescriptor.setEndTime(argMultimap.getValue(PREFIX_ENDTIME).get());
             }
+            parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editEventDescriptor::setTags);
+
             if (!editEventDescriptor.isAnyFieldEdited()) {
                 throw new ParseException(EditEventCommand.MESSAGE_NOT_EDITED);
             }

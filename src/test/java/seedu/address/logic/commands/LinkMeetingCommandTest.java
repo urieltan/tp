@@ -4,8 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.link.LinkMeetingCommand.MESSAGE_SUCCESS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventsTaskList;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TASK;
+import static seedu.address.testutil.TypicalTodos.getTypicalTodosTaskList;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -32,21 +38,22 @@ import seedu.address.model.task.Event;
 import seedu.address.model.task.MeetingLink;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Todo;
+import seedu.address.testutil.EventBuilder;
 
 
 public class LinkMeetingCommandTest {
-    private Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs(), getTypicalEventsTaskList());
+    private Model model = new ModelManager(new AddressBook(), new UserPrefs(), getTypicalEventsTaskList());
 
     @Test
     public void constructor_nullMeetingLink_throwsNullPointerException() {
-        Index index = Index.fromOneBased(1);
+        Index index = INDEX_FIRST_TASK;
         assertThrows(NullPointerException.class, () -> new LinkMeetingCommand(index, null));
     }
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
         ModelStubAcceptingLinkAdded modelStub = new ModelStubAcceptingLinkAdded();
-        Index index = Index.fromOneBased(100);
+        Index index = Index.fromOneBased(model.getFilteredTaskList().size() + 1);
         MeetingLink link = new MeetingLink("Google Meet",
                 "https://www.google.com", "20-01-2020 2359");
         try {
@@ -58,8 +65,56 @@ public class LinkMeetingCommandTest {
     }
 
     @Test
+    public void execute_eventNotRecurring_success() {
+        MeetingLink link = new MeetingLink("Google Meet",
+                "https://www.google.com", "20-01-2020 2359");
+
+        Event targetEvent = (Event) model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
+        Event editedEvent = new EventBuilder().withDescription("meeting")
+                .withStartDateTime("12-12-2020 1000").withEndDateTime("12-12-2020 1130")
+                .withTags("CS2103T").withLink(link).build();
+
+        LinkMeetingCommand linkMeetingCommand = new LinkMeetingCommand(INDEX_FIRST_TASK, link);
+        String expectedMessage = String.format(MESSAGE_SUCCESS, link.getDescriptionDateTime());
+        Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs(), getTypicalEventsTaskList());
+        expectedModel.setTask(targetEvent, editedEvent);
+
+        assertCommandSuccess(linkMeetingCommand, model, expectedMessage, "TASK", expectedModel);
+    }
+
+    @Test
+    public void execute_eventRecurring_success() {
+        MeetingLink link = new MeetingLink("Google Meet",
+                "https://www.google.com", "20-01-2020 2359");
+
+        Event targetEvent = (Event) model.getFilteredTaskList().get(INDEX_SECOND_TASK.getZeroBased());
+        Event editedEvent = new EventBuilder().withDescription("party")
+                .withStartDateTime("01-01-2020 1800").withEndDateTime("02-01-2020 0600")
+                .withRecurrence("1 year").withLink(link).build();
+
+        LinkMeetingCommand linkMeetingCommand = new LinkMeetingCommand(INDEX_SECOND_TASK, link);
+        String expectedMessage = String.format(MESSAGE_SUCCESS, link.getDescriptionDateTime());
+        Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs(), getTypicalEventsTaskList());
+        expectedModel.setTask(targetEvent, editedEvent);
+
+        assertCommandSuccess(linkMeetingCommand, model, expectedMessage, "TASK", expectedModel);
+    }
+
+    @Test
+    public void execute_indexNotEvent_failure() {
+        MeetingLink link = new MeetingLink("Google Meet",
+                "https://www.google.com", "20-01-2020 2359");
+
+        LinkMeetingCommand linkMeetingCommand = new LinkMeetingCommand(INDEX_SECOND_TASK, link);
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_INDEX_NOT_EVENT);
+        Model todoModel = new ModelManager(new AddressBook(), new UserPrefs(), getTypicalTodosTaskList());
+
+        assertCommandFailure(linkMeetingCommand, todoModel, expectedMessage);
+    }
+
+    @Test
     public void equals() {
-        Index index = Index.fromOneBased(1);
+        Index index = INDEX_FIRST_TASK;
         MeetingLink googleMeet = new MeetingLink("Google Meet",
                 "https://www.google.com", "20-01-2020 2359");
         MeetingLink zoomLink = new MeetingLink("Zoom Link",
@@ -225,6 +280,16 @@ public class LinkMeetingCommandTest {
         }
 
         @Override
+        public boolean filteredTaskListIsEmpty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean filteredAddressBookIsEmpty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasTask(Task task) {
             throw new AssertionError("This method should not be called.");
         }
@@ -250,7 +315,7 @@ public class LinkMeetingCommandTest {
 
         @Override
         public ObservableList<Task> getFilteredTaskList() {
-            return expectedModel.getFilteredTaskList();
+            return model.getFilteredTaskList();
         }
 
         @Override

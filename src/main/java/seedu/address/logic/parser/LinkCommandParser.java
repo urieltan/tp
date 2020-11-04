@@ -56,7 +56,6 @@ public class LinkCommandParser implements Parser<LinkCommand> {
             Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get().trim());
             ParserUtil.validateLink(url);
 
-
             MeetingLink meetingLink = ParserUtil.parseMeetingLink(description, url, meetingTime);
 
             return new LinkMeetingCommand(index, meetingLink);

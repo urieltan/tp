@@ -55,6 +55,10 @@ public class LinkCollaborativeCommand extends LinkCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_TODO_DISPLAYED_INDEX);
         }
         try {
+            if (lastShownList.get(index.getZeroBased()).getClass() != Todo.class) {
+                throw new CommandException(Messages.MESSAGE_INVALID_INDEX_NOT_TODO);
+            }
+
             Todo todoToEdit = (Todo) lastShownList.get(index.getZeroBased());
             Todo editedTodo;
             if (todoToEdit.getRecurrence() != null) {
@@ -68,7 +72,7 @@ public class LinkCollaborativeCommand extends LinkCommand {
             model.setTask(todoToEdit, editedTodo);
             model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
         } catch (ClassCastException e) {
-            throw new CommandException(Messages.MESSAGE_TASK_IS_NOT_TODO);
+            throw new CommandException(Messages.MESSAGE_INVALID_INDEX_NOT_TODO);
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, collaborativeLink.getDescription()), "TASK");

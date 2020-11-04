@@ -7,16 +7,16 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.due.DueByCommand;
+import seedu.address.logic.commands.due.DueAtCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.TaskList;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.task.DueByPredicate;
+import seedu.address.model.task.DueAtPredicate;
 import seedu.address.model.task.Todo;
 import seedu.address.testutil.TodoBuilder;
 
-public class DueByCommandTest {
+public class DueAtCommandTest {
     private Todo todo = new TodoBuilder().build();
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new TaskList());
 
@@ -24,10 +24,10 @@ public class DueByCommandTest {
     public void execute_rightDateAndTimeInputs_todoFound() {
         model.addTodo(todo);
 
-        DueByPredicate predicate = preparePredicate("date/13-12-2020 time/2359");
-        DueByCommand command = new DueByCommand(predicate);
+        DueAtPredicate predicate = preparePredicate("date/13-12-2020 time/2359");
+        DueAtCommand command = new DueAtCommand(predicate);
 
-        String expectedMessage = String.format(DueByCommand.MESSAGE_SUCCESS, predicate.getDateTime());
+        String expectedMessage = String.format(DueAtCommand.MESSAGE_SUCCESS, predicate.getDateTime());
 
         ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new TaskList());
 
@@ -36,17 +36,17 @@ public class DueByCommandTest {
 
     @Test
     public void equals() {
-        DueByPredicate firstPredicate = preparePredicate("date/10-10-2020 time/0000");
-        DueByPredicate secondPredicate = preparePredicate("date/30-12-2021 time/2100");
+        DueAtPredicate firstPredicate = preparePredicate("date/10-10-2020 time/0000");
+        DueAtPredicate secondPredicate = preparePredicate("date/30-12-2021 time/2100");
 
-        DueByCommand firstCommand = new DueByCommand(firstPredicate);
-        DueByCommand secondCommand = new DueByCommand(secondPredicate);
+        DueAtCommand firstCommand = new DueAtCommand(firstPredicate);
+        DueAtCommand secondCommand = new DueAtCommand(secondPredicate);
 
         // same object -> returns true
         assertTrue(firstCommand.equals(firstCommand));
 
         // same values -> returns true
-        DueByCommand firstCommandCopy = new DueByCommand(firstPredicate);
+        DueAtCommand firstCommandCopy = new DueAtCommand(firstPredicate);
         assertTrue(firstCommand.equals(firstCommandCopy));
 
         // different types -> returns false
@@ -60,11 +60,11 @@ public class DueByCommandTest {
     }
 
     /**
-     * Parses {@code userInput} into a {@code DueByPredicate}.
+     * Parses {@code userInput} into a {@code DueAtPredicate}.
      */
-    private DueByPredicate preparePredicate(String userInput) {
+    private DueAtPredicate preparePredicate(String userInput) {
         String deadline = userInput.replace("date/", "");
         deadline = deadline.replace("time/", "");
-        return new DueByPredicate(deadline);
+        return new DueAtPredicate(deadline);
     }
 }
