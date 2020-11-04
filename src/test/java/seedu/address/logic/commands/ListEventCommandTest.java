@@ -1,14 +1,19 @@
 package seedu.address.logic.commands;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.list.ListEventCommand;
-import seedu.address.model.*;
-
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showTaskAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventsTaskList;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.list.ListEventCommand;
+import seedu.address.model.AddressBook;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.TaskList;
+import seedu.address.model.UserPrefs;
 
 public class ListEventCommandTest {
 
