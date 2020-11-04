@@ -15,12 +15,13 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.find.FindEventCommand;
 import seedu.address.logic.commands.find.FindTodoCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.task.DescriptionContainsKeywordsPredicate;
+import seedu.address.model.task.TaskMatchesFindKeywordPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -31,10 +32,10 @@ public class FindTodoCommandTest {
 
     @Test
     public void equals() {
-        DescriptionContainsKeywordsPredicate firstPredicate =
-            new DescriptionContainsKeywordsPredicate(Collections.singletonList("first"));
-        DescriptionContainsKeywordsPredicate secondPredicate =
-            new DescriptionContainsKeywordsPredicate(Collections.singletonList("second"));
+        TaskMatchesFindKeywordPredicate firstPredicate =
+            new TaskMatchesFindKeywordPredicate(Collections.singletonList("first"));
+        TaskMatchesFindKeywordPredicate secondPredicate =
+            new TaskMatchesFindKeywordPredicate(Collections.singletonList("second"));
 
         FindTodoCommand findFirstCommand = new FindTodoCommand(firstPredicate);
         FindTodoCommand findSecondCommand = new FindTodoCommand(secondPredicate);
@@ -57,9 +58,9 @@ public class FindTodoCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noTodoFound() {
+    public void execute_notExistingDescription_noTodoFound() {
         String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 0);
-        DescriptionContainsKeywordsPredicate predicate = preparePredicate(" ");
+        TaskMatchesFindKeywordPredicate predicate = preparePredicateDesc("watch netflix");
         FindTodoCommand command = new FindTodoCommand(predicate);
         expectedModel.updateFilteredTaskList(predicate);
         assertCommandSuccess(command, model, expectedMessage, "TASK", expectedModel);
@@ -69,17 +70,71 @@ public class FindTodoCommandTest {
     @Test
     public void execute_multipleKeywords_multipleTodosFound() {
         String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 3);
-        DescriptionContainsKeywordsPredicate predicate = preparePredicate("update assignment");
+        TaskMatchesFindKeywordPredicate predicate = preparePredicateDesc("update assignment");
         FindTodoCommand command = new FindTodoCommand(predicate);
         expectedModel.updateFilteredTaskList(predicate);
         assertCommandSuccess(command, model, expectedMessage, "TASK", expectedModel);
         assertEquals(Arrays.asList(ASSIGNMENT, USER_GUIDE, DEVELOPER_GUIDE), expectedModel.getFilteredTaskList());
     }
 
+    @Test
+    public void execute_notExistingTag_noTodoFound() {
+        String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 0);
+        TaskMatchesFindKeywordPredicate predicate = preparePredicateTag("Clown");
+        FindTodoCommand command = new FindTodoCommand(predicate);
+        expectedModel.updateFilteredTaskList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, "TASK", expectedModel);
+        assertEquals(Collections.emptyList(), expectedModel.getFilteredTaskList());
+    }
+
+    @Test
+    public void execute_existingTag_multipleTodosFound() {
+        String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 2);
+        TaskMatchesFindKeywordPredicate predicate = preparePredicateTag("cs2103t");
+        FindTodoCommand command = new FindTodoCommand(predicate);
+        expectedModel.updateFilteredTaskList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, "TASK", expectedModel);
+        assertEquals(Arrays.asList(USER_GUIDE, DEVELOPER_GUIDE), expectedModel.getFilteredTaskList());
+    }
+
+    @Test
+    public void execute_matchNameAndTag_multipleTodosFound() {
+        String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 2);
+        TaskMatchesFindKeywordPredicate predicate = preparePredicate("homework assignment guide", "cs2103T");
+        FindEventCommand command = new FindEventCommand(predicate);
+        expectedModel.updateFilteredTaskList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, "TASK", expectedModel);
+        assertEquals(Arrays.asList(USER_GUIDE, DEVELOPER_GUIDE), expectedModel.getFilteredTaskList());
+    }
+
+    @Test
+    public void execute_notMatchNameAndTag_noTodosFound() {
+        String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 0);
+        TaskMatchesFindKeywordPredicate predicate = preparePredicate("homeweork chores", "cs2100");
+        FindEventCommand command = new FindEventCommand(predicate);
+        expectedModel.updateFilteredTaskList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, "TASK", expectedModel);
+        assertEquals(Collections.emptyList(), expectedModel.getFilteredTaskList());
+    }
+
     /**
-     * Parses {@code userInput} into a {@code DescriptionContainsKeywordsPredicate}.
+     * Parses descInput into a {@code TaskMatchesFindKeywordPredicate}.
      */
-    private DescriptionContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new DescriptionContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    private TaskMatchesFindKeywordPredicate preparePredicateDesc(String descInput) {
+        return new TaskMatchesFindKeywordPredicate(Arrays.asList(descInput.split("\\s+")));
+    }
+
+    /**
+     * Parses descInput and tagInput into a {@code TaskMatchesFindKeywordPredicate}.
+     */
+    private TaskMatchesFindKeywordPredicate preparePredicate(String descInput, String tagInput) {
+        return new TaskMatchesFindKeywordPredicate(Arrays.asList(descInput.split("\\s+")), tagInput);
+    }
+
+    /**
+     * Parses tagInput into a {@code TaskMatchesFindKeywordPredicate}.
+     */
+    private TaskMatchesFindKeywordPredicate preparePredicateTag(String tagInput) {
+        return new TaskMatchesFindKeywordPredicate(tagInput);
     }
 }

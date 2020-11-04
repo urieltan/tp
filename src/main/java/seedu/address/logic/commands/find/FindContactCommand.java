@@ -1,28 +1,35 @@
 package seedu.address.logic.commands.find;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.ContactMatchesFindKeywordPredicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
+ * Finds and lists all persons in address book whose name contains any of the name keywords
+ * and the tag matches the given tag keyword.
  * Keyword matching is case insensitive.
  */
 public class FindContactCommand extends FindCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " contact"
         + ": Finds all persons whose names contain any of "
-        + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-        + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-        + "Example: " + COMMAND_WORD + " contact alice bob charlie";
+        + "the specified name keywords and the tag matches the given tag keyword (case-insensitive) "
+        + "and displays them as a list with index numbers.\n"
+        + "Parameters: [" + PREFIX_NAME + "NAME_KEYWORD [MORE_NAME_KEYWORDS]...] "
+        + "[" + PREFIX_TAG + "TAG_KEYWORD]\n"
+        + "Notes: at least one of " + PREFIX_NAME + " or " + PREFIX_TAG + " must be included in the command. "
+        + "Keyword cannot be empty\n"
+        + "Example: " + COMMAND_WORD + " contact " + PREFIX_NAME + "alice bob charlie " + PREFIX_TAG + "friends";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final ContactMatchesFindKeywordPredicate predicate;
 
-    public FindContactCommand(NameContainsKeywordsPredicate predicate) {
+    public FindContactCommand(ContactMatchesFindKeywordPredicate predicate) {
         this.predicate = predicate;
     }
 
