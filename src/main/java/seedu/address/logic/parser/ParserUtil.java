@@ -1,7 +1,13 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DATE_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TIME_FORMAT;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -170,44 +176,28 @@ public class ParserUtil {
 
 
     /**
-     * Returns true if date is valid.
+     * Checks if date input is valid.
      * @param date input by user
-     * @return boolean
      */
-    public static boolean checkDateValidity(String date) {
-        String[] dateSplit = date.split("-");
-        String strDay = dateSplit[0];
-        String strMonth = dateSplit[1];
-        String strYear = dateSplit[2];
-
-        Integer day = Integer.parseInt(strDay);
-        Integer month = Integer.parseInt(strMonth);
-        Integer year = Integer.parseInt(strYear);
-
-        boolean checkLength = strDay.length() == 2 && strMonth.length() == 2 && strYear.length() == 4;
-        boolean checkDay = day <= 31 && day > 0;
-        boolean checkMonth = month > 0 && month <= 12;
-        boolean checkYear = year > 1970;
-
-        return checkLength && checkDay && checkMonth && checkYear;
+    public static void checkDateValidity(String date) throws ParseException {
+        try {
+            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            LocalDate checkDate = LocalDate.parse(date, dateFormat);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
+        }
     }
 
     /**
-     * Returns true if time is valid.
+     * Checks if time input is valid.
      * @param time input by user
-     * @return boolean
      */
-    public static boolean checkTimeValidity(String time) {
-        boolean checkLength = time.length() == 4;
-        if (checkLength) {
-            Integer hour = Integer.parseInt(time.substring(0, 2));
-            Integer minute = Integer.parseInt(time.substring(2, 4));
-
-            boolean checkHour = hour >= 0 && hour <= 23;
-            boolean checkMinute = minute >= 0 && minute <= 59;
-            return checkHour && checkMinute;
-        } else {
-            return false;
+    public static void checkTimeValidity(String time) throws ParseException {
+        try {
+            DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HHmm");
+            LocalTime checkTime = LocalTime.parse(time, timeFormat);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(MESSAGE_INVALID_TIME_FORMAT);
         }
     }
 }

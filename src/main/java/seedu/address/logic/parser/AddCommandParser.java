@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.UNKNOWN_ADD_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
@@ -20,14 +19,9 @@ import static seedu.address.model.task.Recurrence.MONTH;
 import static seedu.address.model.task.Recurrence.WEEK;
 import static seedu.address.model.task.Recurrence.YEAR;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.add.AddContactCommand;
 import seedu.address.logic.commands.add.AddEventCommand;
@@ -94,10 +88,8 @@ public class AddCommandParser implements Parser<AddCommand> {
             Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
             String date = argMultimap.getValue(PREFIX_DATE).get().trim();
             String time = argMultimap.getValue(PREFIX_TIME).get().trim();
-            if (!ParserUtil.checkDateValidity(date) || !ParserUtil.checkTimeValidity(time)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddTodoCommand.DATE_TIME_USAGE));
-            }
+            ParserUtil.checkDateValidity(date);
+            ParserUtil.checkTimeValidity(time);
             String deadline = date + " " + time;
 
             Todo todo;
@@ -143,11 +135,10 @@ public class AddCommandParser implements Parser<AddCommand> {
             String stTime = argMultimap.getValue(PREFIX_STARTTIME).get().trim();
             String endDate = argMultimap.getValue(PREFIX_ENDDATE).get().trim();
             String endTime = argMultimap.getValue(PREFIX_ENDTIME).get().trim();
-            if (!ParserUtil.checkDateValidity(stDate) || !ParserUtil.checkTimeValidity(stTime)
-                    || !ParserUtil.checkDateValidity(endDate) || !ParserUtil.checkTimeValidity(endTime)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddEventCommand.DATE_TIME_USAGE));
-            }
+            ParserUtil.checkDateValidity(stDate);
+            ParserUtil.checkTimeValidity(stTime);
+            ParserUtil.checkDateValidity(endDate);
+            ParserUtil.checkTimeValidity(endTime);
             String stDateTime = stDate + " " + stTime;
             String endDateTime = endDate + " " + endTime;
 
@@ -205,6 +196,4 @@ public class AddCommandParser implements Parser<AddCommand> {
     private static boolean checkRecurrenceValueValidity(Integer value) {
         return value > 0;
     }
-
-
 }

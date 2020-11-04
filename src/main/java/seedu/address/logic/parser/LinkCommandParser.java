@@ -11,7 +11,6 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.LinkCommand;
-import seedu.address.logic.commands.add.AddTodoCommand;
 import seedu.address.logic.commands.link.LinkCollaborativeCommand;
 import seedu.address.logic.commands.link.LinkMeetingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -47,10 +46,8 @@ public class LinkCommandParser implements Parser<LinkCommand> {
             String description = argMultimap.getValue(PREFIX_DESCRIPTION).get().trim();
             String date = argMultimap.getValue(PREFIX_DATE).get().trim();
             String time = argMultimap.getValue(PREFIX_TIME).get().trim();
-            if (!ParserUtil.checkDateValidity(date) || !ParserUtil.checkTimeValidity(time)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddTodoCommand.DATE_TIME_USAGE));
-            }
+            ParserUtil.checkDateValidity(date);
+            ParserUtil.checkTimeValidity(time);
             String url = argMultimap.getValue(PREFIX_URL).get().trim();
             String meetingTime = date + " " + time;
             Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get().trim());
