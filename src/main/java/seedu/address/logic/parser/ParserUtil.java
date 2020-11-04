@@ -167,4 +167,47 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+
+    /**
+     * Returns true if date is valid.
+     * @param date input by user
+     * @return boolean
+     */
+    public static boolean checkDateValidity(String date) {
+        String[] dateSplit = date.split("-");
+        String strDay = dateSplit[0];
+        String strMonth = dateSplit[1];
+        String strYear = dateSplit[2];
+
+        Integer day = Integer.parseInt(strDay);
+        Integer month = Integer.parseInt(strMonth);
+        Integer year = Integer.parseInt(strYear);
+
+        boolean checkLength = strDay.length() == 2 && strMonth.length() == 2 && strYear.length() == 4;
+        boolean checkDay = day <= 31 && day > 0;
+        boolean checkMonth = month > 0 && month <= 12;
+        boolean checkYear = year > 1970;
+
+        return checkLength && checkDay && checkMonth && checkYear;
+    }
+
+    /**
+     * Returns true if time is valid.
+     * @param time input by user
+     * @return boolean
+     */
+    public static boolean checkTimeValidity(String time) {
+        boolean checkLength = time.length() == 4;
+        if (checkLength) {
+            Integer hour = Integer.parseInt(time.substring(0, 2));
+            Integer minute = Integer.parseInt(time.substring(2, 4));
+
+            boolean checkHour = hour >= 0 && hour <= 23;
+            boolean checkMinute = minute >= 0 && minute <= 59;
+            return checkHour && checkMinute;
+        } else {
+            return false;
+        }
+    }
 }

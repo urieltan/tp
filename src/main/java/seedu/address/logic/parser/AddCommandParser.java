@@ -91,7 +91,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
             String date = argMultimap.getValue(PREFIX_DATE).get().trim();
             String time = argMultimap.getValue(PREFIX_TIME).get().trim();
-            if (!checkDateValidity(date) || !checkTimeValidity(time)) {
+            if (!ParserUtil.checkDateValidity(date) || !ParserUtil.checkTimeValidity(time)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         AddTodoCommand.DATE_TIME_USAGE));
             }
@@ -139,8 +139,8 @@ public class AddCommandParser implements Parser<AddCommand> {
             String stTime = argMultimap.getValue(PREFIX_STARTTIME).get().trim();
             String endDate = argMultimap.getValue(PREFIX_ENDDATE).get().trim();
             String endTime = argMultimap.getValue(PREFIX_ENDTIME).get().trim();
-            if (!checkDateValidity(stDate) || !checkTimeValidity(stTime)
-                    || !checkDateValidity(endDate) || !checkTimeValidity(endTime)) {
+            if (!ParserUtil.checkDateValidity(stDate) || !ParserUtil.checkTimeValidity(stTime)
+                    || !ParserUtil.checkDateValidity(endDate) || !ParserUtil.checkTimeValidity(endTime)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         AddEventCommand.DATE_TIME_USAGE));
             }
@@ -202,46 +202,5 @@ public class AddCommandParser implements Parser<AddCommand> {
         return value > 0;
     }
 
-    /**
-     * Returns true if date is valid.
-     * @param date input by user
-     * @return boolean
-     */
-    private static boolean checkDateValidity(String date) {
-        String[] dateSplit = date.split("-");
-        String strDay = dateSplit[0];
-        String strMonth = dateSplit[1];
-        String strYear = dateSplit[2];
-
-        Integer day = Integer.parseInt(strDay);
-        Integer month = Integer.parseInt(strMonth);
-        Integer year = Integer.parseInt(strYear);
-
-        boolean checkLength = strDay.length() == 2 && strMonth.length() == 2 && strYear.length() == 4;
-        boolean checkDay = day <= 31 && day > 0;
-        boolean checkMonth = month > 0 && month <= 12;
-        boolean checkYear = year > 1970;
-
-        return checkLength && checkDay && checkMonth && checkYear;
-    }
-
-    /**
-     * Returns true if time is valid.
-     * @param time input by user
-     * @return boolean
-     */
-    private static boolean checkTimeValidity(String time) {
-        boolean checkLength = time.length() == 4;
-        if (checkLength) {
-            Integer hour = Integer.parseInt(time.substring(0, 2));
-            Integer minute = Integer.parseInt(time.substring(2, 4));
-
-            boolean checkHour = hour >= 0 && hour <= 23;
-            boolean checkMinute = minute >= 0 && minute <= 59;
-            return checkHour && checkMinute;
-        } else {
-            return false;
-        }
-    }
 
 }
