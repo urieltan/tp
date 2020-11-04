@@ -92,7 +92,7 @@ public class ShowTagCommandParser implements Parser<ShowTagCommand> {
             }
             return new ShowTagEventCommand(new TaskTagMatchesKeywordPredicate(keywords[0]));
         } else {
-            throw new ParseException(UNKNOWN_SHOW_TAG_COMMAND);
+            throw new ParseException(ShowTagCommand.MESSAGE_USAGE);
         }
     }
 

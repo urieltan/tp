@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MISSING_ADD_DETAILS;
 import static seedu.address.commons.core.Messages.UNKNOWN_ADD_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
@@ -70,7 +69,6 @@ public class AddCommandParser implements Parser<AddCommand> {
             Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
             Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
             Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
             Person person = new Person(name, phone, email, address, tagList);
 
             return new AddContactCommand(person);
@@ -127,6 +125,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             }
             ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(" " + splitArgs[1], PREFIX_DESCRIPTION,
                     PREFIX_STARTDATE, PREFIX_STARTTIME, PREFIX_ENDDATE, PREFIX_ENDTIME, PREFIX_RECURRING, PREFIX_TAG);
+
             if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION, PREFIX_STARTDATE,
                     PREFIX_STARTTIME, PREFIX_ENDDATE, PREFIX_ENDTIME)
                     || !argMultimap.getPreamble().isEmpty()) {
@@ -171,7 +170,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             }
             return new AddEventCommand(event);
         } else {
-            throw new ParseException(UNKNOWN_ADD_COMMAND);
+            throw new ParseException(AddCommand.MESSAGE_USAGE);
         }
     }
 

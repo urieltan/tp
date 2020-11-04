@@ -29,8 +29,8 @@ import seedu.address.model.task.Todo;
 public class ContactTaskTagCommand extends Command {
     public static final String COMMAND_WORD = "contactTaskTag";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a same tag for a specified Person and Task.\n"
-            + "Parameters:" + PREFIX_TAG + "TAG "
-            + PREFIX_CONTACT_INDEX + "CONTACT INDEX "
+            + "Parameters: " + PREFIX_TAG + "TAG \n"
+            + PREFIX_CONTACT_INDEX + "CONTACT INDEX \n"
             + PREFIX_TASK_INDEX + "TASK INDEX\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_TAG + "CS2103T "
             + PREFIX_CONTACT_INDEX + "1 "
