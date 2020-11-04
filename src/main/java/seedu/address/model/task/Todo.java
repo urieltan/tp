@@ -76,7 +76,8 @@ public class Todo extends Task {
      * @param deadline    a String in a specific format (inputFormatter) which specifies a date.
      * @param recurrence the recurrence of todo.
      */
-    public Todo(boolean isDone, String description, String deadline, CollaborativeLink link, Recurrence recurrence, Set<Tag> tags) {
+    public Todo(boolean isDone, String description, String deadline,
+                CollaborativeLink link, Recurrence recurrence, Set<Tag> tags) {
         super(description, tags);
         this.isDone = isDone;
         this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);

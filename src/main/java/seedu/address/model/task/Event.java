@@ -60,7 +60,7 @@ public class Event extends Task {
      * @param end         the ending date and time of event.
      * @param recurrence  the recurrence of event.
      */
-    public Event (boolean isDone, String description, String start, String end, Recurrence recurrence,  Set<Tag> tags) {
+    public Event (boolean isDone, String description, String start, String end, Recurrence recurrence, Set<Tag> tags) {
         super(description, tags);
         assert start != null;
         assert end != null;
@@ -78,7 +78,7 @@ public class Event extends Task {
      * @param start       the starting date and time of event.
      * @param end         the ending date and time of event.
      */
-    public Event (boolean isDone, String description, String start, String end, MeetingLink link,  Set<Tag> tags) {
+    public Event (boolean isDone, String description, String start, String end, MeetingLink link, Set<Tag> tags) {
         super(description, tags);
         assert start != null;
         assert end != null;
@@ -98,7 +98,7 @@ public class Event extends Task {
      * @param recurrence  the recurrence of event.
      */
     public Event (boolean isDone, String description, String start, String end,
-                  MeetingLink link, Recurrence recurrence,  Set<Tag> tags) {
+                  MeetingLink link, Recurrence recurrence, Set<Tag> tags) {
         super(description, tags);
         assert start != null;
         assert end != null;

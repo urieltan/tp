@@ -9,7 +9,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTTIME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -22,7 +26,6 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Event;
 import seedu.address.model.task.MeetingLink;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.Todo;
 
 /**
  * Edits the details of an existing event in the Lifebook.
