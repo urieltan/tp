@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.CollaborativeLink;
 import seedu.address.model.task.Recurrence;
 import seedu.address.model.task.Todo;
 import seedu.address.model.util.SampleDataUtil;
@@ -29,6 +30,7 @@ public class TodoBuilder {
     private String description;
     private String dateTime;
     private Recurrence recurrence;
+    private CollaborativeLink link;
     private Set<Tag> tags;
 
     /**
@@ -49,6 +51,7 @@ public class TodoBuilder {
         // flip the output and input of LocalDateTime
         dateTime = LocalDateTime.parse(dateTimeOutput, OUTPUT_DATE_TIME_FORMAT).format(INPUT_DATE_TIME_FORMAT);
         recurrence = todoToCopy.getRecurrence();
+        link = todoToCopy.getCollaborativeLink();
         tags = new HashSet<>(todoToCopy.getTags());
     }
 
@@ -76,6 +79,14 @@ public class TodoBuilder {
         Integer recurrenceValue = Integer.parseInt(recurrenceSplit[0]);
         String recurrenceTimePeriod = recurrenceSplit[1];
         this.recurrence = new Recurrence(recurrenceValue, recurrenceTimePeriod);
+        return this;
+    }
+
+    /**
+     * Sets the {@code CollaborativeLink} of the {@code To-do} that we are building.
+     */
+    public TodoBuilder withLink(CollaborativeLink link) {
+        this.link = link;
         return this;
     }
 

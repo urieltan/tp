@@ -42,8 +42,8 @@ public class Event extends Task {
      * @param start       the starting date and time of event.
      * @param end         the ending date and time of event.
      */
-    public Event (boolean isDone, String description, String start, String end) {
-        super(description);
+    public Event (boolean isDone, String description, String start, String end, Set<Tag> tags) {
+        super(description, tags);
         assert start != null;
         assert end != null;
         this.isDone = isDone;
@@ -60,8 +60,8 @@ public class Event extends Task {
      * @param end         the ending date and time of event.
      * @param recurrence  the recurrence of event.
      */
-    public Event (boolean isDone, String description, String start, String end, Recurrence recurrence) {
-        super(description);
+    public Event (boolean isDone, String description, String start, String end, Recurrence recurrence, Set<Tag> tags) {
+        super(description, tags);
         assert start != null;
         assert end != null;
         this.isDone = isDone;
@@ -78,8 +78,8 @@ public class Event extends Task {
      * @param start       the starting date and time of event.
      * @param end         the ending date and time of event.
      */
-    public Event (boolean isDone, String description, String start, String end, MeetingLink link) {
-        super(description);
+    public Event (boolean isDone, String description, String start, String end, MeetingLink link, Set<Tag> tags) {
+        super(description, tags);
         assert start != null;
         assert end != null;
         this.isDone = isDone;
@@ -98,8 +98,8 @@ public class Event extends Task {
      * @param recurrence  the recurrence of event.
      */
     public Event (boolean isDone, String description, String start, String end,
-                  MeetingLink link, Recurrence recurrence) {
-        super(description);
+                  MeetingLink link, Recurrence recurrence, Set<Tag> tags) {
+        super(description, tags);
         assert start != null;
         assert end != null;
         this.isDone = isDone;
@@ -162,24 +162,6 @@ public class Event extends Task {
         this.start = start;
         this.end = end;
         this.meetingLink = meetingLink;
-    }
-
-    /**
-     * Constructs an event which may or may not be completed
-     * with a brief description and period of time.
-     *
-     * @param isDone      indicates if the event has been completed.
-     * @param description a brief description of the event.
-     * @param start       the starting date and time of event.
-     * @param end         the ending date and time of event.
-     * @param tags        a set of tags attached to the event.
-     */
-    public Event(boolean isDone, String description, String start, String end, Set<Tag> tags) {
-        super(isDone, description, tags);
-        assert start != null;
-        assert end != null;
-        this.start = LocalDateTime.parse(start, INPUT_DATE_TIME_FORMAT);
-        this.end = LocalDateTime.parse(end, INPUT_DATE_TIME_FORMAT);
     }
 
     /**
