@@ -52,15 +52,19 @@ public class ModelManager implements Model {
         sortedTasks = new SortedList<>(this.taskList.getTaskList());
         filteredTasks = new FilteredList<>(sortedTasks);
         dueSoonTasks = new FilteredList<>(sortedTasks, task -> {
-            LocalDateTime currentDateTimePlusOneWeek = LocalDateTime.now().plus(1, WEEKS);
-            LocalDateTime deadline = null;
-            if (task instanceof Todo) {
-                deadline = task.getDeadline();
-            } else if (task instanceof Event) {
-                deadline = task.getEnd();
+            if (task.getStatus()) {
+                return false;
+            } else {
+                LocalDateTime currentDateTimePlusOneWeek = LocalDateTime.now().plus(1, WEEKS);
+                LocalDateTime deadline = null;
+                if (task instanceof Todo) {
+                    deadline = task.getDeadline();
+                } else if (task instanceof Event) {
+                    deadline = task.getEnd();
+                }
+                assert deadline != null : "Task's deadline is not defined properly!";
+                return deadline.isBefore(currentDateTimePlusOneWeek) && deadline.isAfter(LocalDateTime.now());
             }
-            assert deadline != null : "Task's deadline is not defined properly!";
-            return deadline.isBefore(currentDateTimePlusOneWeek);
         });
     }
 
@@ -137,6 +141,11 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public boolean filteredAddressBookIsEmpty() {
+        return filteredPersons.isEmpty();
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -221,6 +230,11 @@ public class ModelManager implements Model {
         requireAllNonNull(target);
         taskList.markAsDone(target);
     }
+    @Override
+    public boolean filteredTaskListIsEmpty() {
+        return filteredTasks.isEmpty();
+    }
+
     //=========== Filtered Task List Accessors =============================================================
     @Override
     public ObservableList<Task> getFilteredTaskList() {

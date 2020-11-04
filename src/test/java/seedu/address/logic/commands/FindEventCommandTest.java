@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_TASKS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalEvents.LECTURE;
 import static seedu.address.testutil.TypicalEvents.MEETING;
 import static seedu.address.testutil.TypicalEvents.WORKSHOP;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventsTaskList;
@@ -19,7 +20,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.task.DescriptionContainsKeywordsPredicate;
+import seedu.address.model.task.TaskMatchesFindKeywordPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -30,10 +31,10 @@ public class FindEventCommandTest {
 
     @Test
     public void equals() {
-        DescriptionContainsKeywordsPredicate firstPredicate =
-            new DescriptionContainsKeywordsPredicate(Collections.singletonList("first"));
-        DescriptionContainsKeywordsPredicate secondPredicate =
-            new DescriptionContainsKeywordsPredicate(Collections.singletonList("second"));
+        TaskMatchesFindKeywordPredicate firstPredicate =
+            new TaskMatchesFindKeywordPredicate(Collections.singletonList("first"));
+        TaskMatchesFindKeywordPredicate secondPredicate =
+            new TaskMatchesFindKeywordPredicate(Collections.singletonList("second"));
 
         FindEventCommand findFirstCommand = new FindEventCommand(firstPredicate);
         FindEventCommand findSecondCommand = new FindEventCommand(secondPredicate);
@@ -56,9 +57,9 @@ public class FindEventCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noTodoFound() {
+    public void execute_notExistingDescription_noEventFound() {
         String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 0);
-        DescriptionContainsKeywordsPredicate predicate = preparePredicate(" ");
+        TaskMatchesFindKeywordPredicate predicate = preparePredicateDesc("hangout");
         FindEventCommand command = new FindEventCommand(predicate);
         expectedModel.updateFilteredTaskList(predicate);
         assertCommandSuccess(command, model, expectedMessage, "TASK", expectedModel);
@@ -66,19 +67,73 @@ public class FindEventCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_multipleTodosFound() {
+    public void execute_multipleKeywords_multipleEventsFound() {
         String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 2);
-        DescriptionContainsKeywordsPredicate predicate = preparePredicate("meeting workshop");
+        TaskMatchesFindKeywordPredicate predicate = preparePredicateDesc("meeting workshop");
         FindEventCommand command = new FindEventCommand(predicate);
         expectedModel.updateFilteredTaskList(predicate);
         assertCommandSuccess(command, model, expectedMessage, "TASK", expectedModel);
         assertEquals(Arrays.asList(MEETING, WORKSHOP), expectedModel.getFilteredTaskList());
     }
 
+    @Test
+    public void execute_notExistingTag_noEventFound() {
+        String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 0);
+        TaskMatchesFindKeywordPredicate predicate = preparePredicateTag("Clown");
+        FindEventCommand command = new FindEventCommand(predicate);
+        expectedModel.updateFilteredTaskList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, "TASK", expectedModel);
+        assertEquals(Collections.emptyList(), expectedModel.getFilteredTaskList());
+    }
+
+    @Test
+    public void execute_existingTag_multipleEventsFound() {
+        String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 2);
+        TaskMatchesFindKeywordPredicate predicate = preparePredicateTag("cs2103t");
+        FindEventCommand command = new FindEventCommand(predicate);
+        expectedModel.updateFilteredTaskList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, "TASK", expectedModel);
+        assertEquals(Arrays.asList(MEETING, LECTURE), expectedModel.getFilteredTaskList());
+    }
+
+    @Test
+    public void execute_matchNameAndTag_multipleEventsFound() {
+        String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 2);
+        TaskMatchesFindKeywordPredicate predicate = preparePredicate("meeting party lecture workshop", "cs2103T");
+        FindEventCommand command = new FindEventCommand(predicate);
+        expectedModel.updateFilteredTaskList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, "TASK", expectedModel);
+        assertEquals(Arrays.asList(MEETING, LECTURE), expectedModel.getFilteredTaskList());
+    }
+
+    @Test
+    public void execute_notMatchNameAndTag_noEventsFound() {
+        String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 0);
+        TaskMatchesFindKeywordPredicate predicate = preparePredicate("lecture party", "workshop");
+        FindEventCommand command = new FindEventCommand(predicate);
+        expectedModel.updateFilteredTaskList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, "TASK", expectedModel);
+        assertEquals(Collections.emptyList(), expectedModel.getFilteredTaskList());
+    }
+
     /**
-     * Parses {@code userInput} into a {@code DescriptionContainsKeywordsPredicate}.
+     * Parses descInput into a {@code TaskMatchesFindKeywordPredicate}.
      */
-    private DescriptionContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new DescriptionContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    private TaskMatchesFindKeywordPredicate preparePredicateDesc(String descInput) {
+        return new TaskMatchesFindKeywordPredicate(Arrays.asList(descInput.split("\\s+")));
+    }
+
+    /**
+     * Parses descInput and tagInput into a {@code TaskMatchesFindKeywordPredicate}.
+     */
+    private TaskMatchesFindKeywordPredicate preparePredicate(String descInput, String tagInput) {
+        return new TaskMatchesFindKeywordPredicate(Arrays.asList(descInput.split("\\s+")), tagInput);
+    }
+
+    /**
+     * Parses tagInput into a {@code TaskMatchesFindKeywordPredicate}.
+     */
+    private TaskMatchesFindKeywordPredicate preparePredicateTag(String tagInput) {
+        return new TaskMatchesFindKeywordPredicate(tagInput);
     }
 }

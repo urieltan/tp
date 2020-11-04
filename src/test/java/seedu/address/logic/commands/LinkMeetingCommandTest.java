@@ -225,6 +225,16 @@ public class LinkMeetingCommandTest {
         }
 
         @Override
+        public boolean filteredTaskListIsEmpty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean filteredAddressBookIsEmpty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasTask(Task task) {
             throw new AssertionError("This method should not be called.");
         }

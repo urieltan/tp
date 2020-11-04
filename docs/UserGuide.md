@@ -60,7 +60,7 @@ This user guide is targeted at university students who are interested in using L
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Parameters for contacts can be in any order.<br>
+* Parameters for contacts and task operations can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 </div>
@@ -199,19 +199,19 @@ Format: `list task`
 
 ##### 2.2.5 Filter deadlines : `itemsDue`
 
-User can search todos/meetings due by/before a certain date/time.
+User can search todos/meetings due at/before a certain date/time.
 
 Outputs a list of results.
 
-* Due by
-    `itemsDueBy date/DD-MM-YYYY time/HHmm`
+* Due at
+    `itemsDueAt date/DD-MM-YYYY time/HHmm`
 
     `DD-MM-YYYY`: States the Day, Month, Year.
 
     `HHmm`: States the time in 24 hours.
 
-    Example: `itemsDueBy date/12-12-2020 time/2359`
-    It will output a list of todos/meetings that are due specifically **on** 12th December 2020, 2359.
+    Example: `itemsDueAt date/12-12-2020 time/2359`
+    It will output a list of todos/meetings that are due specifically **at** 12th December 2020, 2359.
 
 * Due before
     `itemsDueBefore date/DD-MM-YYYY time/HHmm`
@@ -231,16 +231,21 @@ If a task is recurring, it will be displayed in the GUI.
 
 ##### 2.2.7 Sorting contacts and tasks: `sort`
 
-Sorts tasks or contacts according to date or name, respectively. Sorting may also be cleared, such that the natural order of lists are restored.
+Sorts the currently displayed tasks or contacts according to date or name, respectively. Sorting may also be cleared, such that the natural order of lists are restored.
+If the currently displayed list is empty, a sorted, unfiltered list will be displayed instead.
 
 Format: `sort OPTION`
 
-* `OPTION` refers to `contact`, `task`, or `clear`
+* The `OPTION` field refers to `contact`, `task`, or `clear`
 
 ![sortedTaskList](images/SortedTaskList.PNG) 
 
-* Contact, task, and clear are the available options for sort and should be used individually.
+* Contact, task, and clear are the available options for sort and should be used individually in the `OPTION` field.
 * Using the clear option restores all lists (i.e. both contact list and task list) to their natural order.
+
+Examples:
+* `sort task` sorts the task list.
+* `sort contact` sorts the contact list.
 
 ##### 2.2.8 Add common tag to contact + task: `contactTaskTag`
 
@@ -255,6 +260,15 @@ Format:
 Example:
 
 Upon executing the command, the contact at index 7- “James Ho” and task at index 1- “homework” will have both the tags “CS2100” and “buddy”, which helps in the ease of searching contacts that are associated with a task.
+
+<div markdown="block" class="alert alert-danger">
+
+:warning: **Warning:**
+
+It is a coincidence in the example that the index of the "homework" task is 1 for "Due soon" and the whole Tasklist.
+Please input the task's index based from the **whole Tasklist**.
+
+</div>
 
 * `contactTaskTag t/CS2100 t/buddy contactIndex/7 taskIndex/1`
 
@@ -501,7 +515,7 @@ Action | Format, Examples
 **List Tasks** | `list task`
 **Remove Task (Todo and Event)** | `delete task INDEX` <br> e.g., `delete task 3`
 **Mark To Do/Event as Complete** | `done INDEX` <br> e.g., `done 5`
-**Find tasks due by** | `itemsDueBy date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueBy date/12-12-2020 time/2359`
+**Find tasks due at** | `itemsDueAt date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueAt date/12-12-2020 time/2359`
 **Find tasks due before** |  `itemsDueBefore date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueBefore date/12-12-2020 time/2359`
 
 

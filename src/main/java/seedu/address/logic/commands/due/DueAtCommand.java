@@ -8,16 +8,16 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.task.DueByPredicate;
+import seedu.address.model.task.DueAtPredicate;
 
 /**
- * Finds all tasks (Todos and Events) that are due by a given date and time.
+ * Finds all tasks (Todos and Events) that are due at a given date and time.
  */
-public class DueByCommand extends Command {
-    public static final String COMMAND_WORD = "itemsDueBy";
+public class DueAtCommand extends Command {
+    public static final String COMMAND_WORD = "itemsDueAt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Shows Todos/Events due by a certain date and time.\n"
+            + ": Shows Todos/Events due at a certain date and time.\n"
             + "Parameters: "
             + PREFIX_DATE + "DD-MM-YYYY "
             + PREFIX_TIME + "HHmm \n"
@@ -25,11 +25,11 @@ public class DueByCommand extends Command {
             + PREFIX_DATE + "12-12-2020 "
             + PREFIX_TIME + "2359";
 
-    public static final String MESSAGE_SUCCESS = "Here are the list of Todos/Events due by: %1$s";
+    public static final String MESSAGE_SUCCESS = "Here are the list of Todos/Events due at: %1$s";
 
-    private DueByPredicate predicate;
+    private DueAtPredicate predicate;
 
-    public DueByCommand(DueByPredicate predicate) {
+    public DueAtCommand(DueAtPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -43,8 +43,8 @@ public class DueByCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DueByCommand // instanceof handles nulls
-                && predicate.equals(((DueByCommand) other).predicate));
+                || (other instanceof DueAtCommand // instanceof handles nulls
+                && predicate.equals(((DueAtCommand) other).predicate));
     }
 
 }

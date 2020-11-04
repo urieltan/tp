@@ -6,9 +6,9 @@ skinparam classBackgroundColor MODEL_COLOR
 
 abstract class "{abstract}\nDuePredicate" as DuePredicate
 class DueBeforePredicate
-class DueByPredicate
+class DueAtPredicate
 
 DuePredicate <|-- DueBeforePredicate
-DuePredicate <|-- DueByPredicate
+DuePredicate <|-- DueAtPredicate
 
 @enduml
