@@ -10,7 +10,7 @@ Lifebook is a desktop task management application used for teaching Software Eng
 Given below are my contributions to the project.
 
 * **Link Feature**: Added the ability to add a link to a task. (Pull requests [\#86](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/86), [\#100](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/100))
-  * What it does: allows the user to add a meeting link or collaborative link to a task. 
+  * What it does: allows the user to add a meeting link or collaborative link to a task.
   * Justification: This feature improves the product significantly because finding Zoom links or Google Drive links can be tedious for the users and the app should provide a convenient way for the users to find the links easily.
   * Highlights: This enhancement affects the model of the task. The implementation was quite challenging as UI matters must also be taken into consideration.
 
@@ -42,35 +42,35 @@ Given below are my contributions to the project.
     * Added user stories and use case for the `link` feature. [\#42](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/42/)
     * Added implementation details of the `link` feature. [\#116](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/116/)
     * Added UML diagrams for `link` feature. [\#116](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/116/)
-    
+
 * **Contributions to the Developer Guide**:
 
     * LinkCommandParser Class Diagram
 
         ![ParserClassDiagram](../images/linkFunction/ParserClassDiagram.png)
-    
+
     * LinkCommand Class Diagram
-   
+
         ![CommandClassDiagram](../images/linkFunction/CommandClassDiagram.png)
 
     * Sequence Diagram of Link Feature
-    
+
         ![FilterSequenceDiagram](../images/linkFunction/LinkSequenceDiagram.png)
-    
+
     * Activity Diagram of Link Feature
-    
+
         ![FilterActivityDiagram](../images/linkFunction/LinkActivityDiagram.png)
 
 * **Contributions to the User Guide**:
 
     * Table of Contents numbering
-    
+
         ![TableOfContents](../images/PPP-kevnw/tableofcontents.png)
 
     * Link Command
-    
+
         ![LinkCommand](../images/PPP-kevnw/linkmeeting.png)
-        
+  
     * And others
 
 * **Community**:

@@ -6,7 +6,7 @@ title: User Guide
 Lifebook is a **desktop application intended for university students to  manage contact details, assignments, projects,
 and module details.** Lifebook supports Command Line Interface (CLI) for efficient contacts and tasks management while still having the benefits of a Graphical User Interface (GUI).
 
-This user guide is targeted at university students who are interested in using Lifebook. 
+This user guide is targeted at university students who are interested in using Lifebook.
 
 * Table of Contents
 {:toc}
@@ -238,7 +238,7 @@ Format: `sort OPTION`
 
 * The `OPTION` field refers to `contact`, `task`, or `clear`
 
-![sortedTaskList](images/SortedTaskList.PNG) 
+![sortedTaskList](images/SortedTaskList.PNG)
 
 * Contact, task, and clear are the available options for sort and should be used individually in the `OPTION` field.
 * Using the clear option restores all lists (i.e. both contact list and task list) to their natural order.
@@ -291,9 +291,9 @@ Examples:
 * `add todo desc/user guide draft date/09-08-2020 time/2300 t/MUSTFINISHSOON`
 * `add todo desc/tutorial date/10-10-2020 time/1130 recurring/1 week`
 
-##### 2.3.2 Editing a todo : `edit todo` 
+##### 2.3.2 Editing a todo : `edit todo`
 
-> Coming soon 
+> Coming soon
 
 Edits an existing todo in the task list.
 
@@ -317,7 +317,7 @@ Format: `list todo`
 
 ##### 2.3.4 Adding a collaborative folder link: `link doc`
 
-<div markdown="block" class="alert alert-info"> 
+<div markdown="block" class="alert alert-info">
 
 :information_source: **Note:**
 
@@ -384,7 +384,7 @@ Examples:
 
 ##### 2.4.2 Editing an event : `edit event`
 
-> Coming soon 
+> Coming soon
 
 Edits an existing event in the task list.
 
@@ -407,7 +407,7 @@ Format: `list event`
 
 ##### 2.4.4 Adding a zoom meeting: `link meeting`
 
-<div markdown="block" class="alert alert-info"> 
+<div markdown="block" class="alert alert-info">
 
 :information_source: **Note:**
 
