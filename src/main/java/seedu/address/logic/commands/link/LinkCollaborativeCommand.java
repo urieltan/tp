@@ -55,6 +55,10 @@ public class LinkCollaborativeCommand extends LinkCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_TODO_DISPLAYED_INDEX);
         }
         try {
+            if (lastShownList.get(index.getZeroBased()).getClass() != Todo.class) {
+                throw new CommandException(Messages.MESSAGE_INVALID_INDEX_NOT_EVENT);
+            }
+
             Todo todoToEdit = (Todo) lastShownList.get(index.getZeroBased());
             Todo editedTodo;
             if (todoToEdit.getRecurrence() != null) {

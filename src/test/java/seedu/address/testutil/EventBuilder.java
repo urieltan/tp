@@ -6,6 +6,7 @@ import java.util.Set;
 
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Event;
+import seedu.address.model.task.MeetingLink;
 import seedu.address.model.task.Recurrence;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -30,6 +31,7 @@ public class EventBuilder {
     private String startDateTime;
     private String endDateTime;
     private Recurrence recurrence;
+    private MeetingLink link;
     private Set<Tag> tags;
 
     /**
@@ -50,6 +52,7 @@ public class EventBuilder {
         startDateTime = eventToCopy.getStartDateTime();
         endDateTime = eventToCopy.getEndDateTime();
         recurrence = eventToCopy.getRecurrence();
+        link = eventToCopy.getMeetingLink();
         tags = new HashSet<>(eventToCopy.getTags());
     }
 
@@ -85,6 +88,11 @@ public class EventBuilder {
         Integer recurrenceValue = Integer.parseInt(recurrenceSplit[0]);
         String recurrenceTimePeriod = recurrenceSplit[1];
         this.recurrence = new Recurrence(recurrenceValue, recurrenceTimePeriod);
+        return this;
+    }
+
+    public EventBuilder withLink(MeetingLink link) {
+        this.link = link;
         return this;
     }
 
