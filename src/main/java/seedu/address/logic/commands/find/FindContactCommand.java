@@ -23,7 +23,7 @@ public class FindContactCommand extends FindCommand {
         + "and displays them as a list with index numbers.\n"
         + "Parameters: [" + PREFIX_NAME + "NAME_KEYWORD [MORE_NAME_KEYWORDS]...] "
         + "[" + PREFIX_TAG + "TAG_KEYWORD]\n"
-        + "Notes: at least one of " + PREFIX_NAME + " or " + PREFIX_TAG + " must be included in the command. "
+        + "Remarks: at least one of " + PREFIX_NAME + " or " + PREFIX_TAG + " must be included in the command. "
         + "Keyword cannot be empty\n"
         + "Example: " + COMMAND_WORD + " contact " + PREFIX_NAME + "alice bob charlie " + PREFIX_TAG + "friends";
 

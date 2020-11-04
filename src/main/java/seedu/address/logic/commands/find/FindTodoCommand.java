@@ -22,7 +22,7 @@ public class FindTodoCommand extends FindCommand {
         + "and displays them as a list with index numbers.\n"
         + "Parameters: [" + PREFIX_DESCRIPTION + "DESC_KEYWORD [MORE_DESC_KEYWORDS]...] "
         + "[" + PREFIX_TAG + "TAG_KEYWORD]\n"
-        + "Notes: at least one of " + PREFIX_DESCRIPTION + " or " + PREFIX_TAG + " must be included in the command. "
+        + "Remarks: at least one of " + PREFIX_DESCRIPTION + " or " + PREFIX_TAG + " must be included in the command. "
         + "Keyword cannot be empty\n"
         + "Example: " + COMMAND_WORD + " todo " + PREFIX_DESCRIPTION + "assignment " + PREFIX_TAG + "CS2100";
 
