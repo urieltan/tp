@@ -30,7 +30,7 @@ Given below are my contributions to the project.
   * Updated exception handling for list, add, and delete command to be more meaningful (Pull request [\#79](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/79))
   * Added extra validation and meaningful exception handling for link (Pull request [\#104](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/104))
   * Updated the GUI for Meeting Link and Collaborative Link (Pull requests [\#86](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/86/))
-  * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+  * Wrote additional tests for existing features to increase coverage from 58% to 67% (Pull requests [\#213](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/213), [\#214](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/214), [\#208](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/208), [\#149](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/149))
 
 * **Documentation**:
   * User Guide:
