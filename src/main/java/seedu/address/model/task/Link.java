@@ -5,7 +5,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 public abstract class Link {
 
-    public static final String MESSAGE_CONSTRAINTS = "Link must be in URL Format.";
+    public static final String MESSAGE_CONSTRAINTS = "Link must be in URL Format: "
+            + "\"^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]\"\n"
+            + "Example: " + "https://nus-sg.zoom.us/j/12350904475?pwd=T0Jw";
 
     public static final String VALIDATION_REGEX =
             "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";

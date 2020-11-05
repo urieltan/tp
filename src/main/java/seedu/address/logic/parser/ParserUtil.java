@@ -1,7 +1,13 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DATE_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TIME_FORMAT;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -166,5 +172,32 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+
+    /**
+     * Checks if date input is valid.
+     * @param date input by user
+     */
+    public static void checkDateValidity(String date) throws ParseException {
+        try {
+            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            LocalDate checkDate = LocalDate.parse(date, dateFormat);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
+        }
+    }
+
+    /**
+     * Checks if time input is valid.
+     * @param time input by user
+     */
+    public static void checkTimeValidity(String time) throws ParseException {
+        try {
+            DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HHmm");
+            LocalTime checkTime = LocalTime.parse(time, timeFormat);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(MESSAGE_INVALID_TIME_FORMAT);
+        }
     }
 }
