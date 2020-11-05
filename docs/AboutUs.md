@@ -5,7 +5,13 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `urieltan[at]comp.nus.edu.sg`
+You may reach us through the following email addresses:
+
+* Uriel Tan: urieltan@comp.nus.edu.sg
+* Chua Chen Ler: chua.chenler@u.nus.edu
+* Kevin William: kevinwilliam@u.nus.edu
+* Lucia Tirta Gunawan: 
+* Lin Yuan Xun, Caleb: 
 
 ## Project team
 
@@ -48,5 +54,6 @@ You can reach us at the email `urieltan[at]comp.nus.edu.sg`
 <img src="images/kevnw.png" width="200px">
 
 [[github](http://github.com/kevnw)]
+[[portfolio](team/kevnw.md)]
 
 * Role: Integration, Code quality, Github Expert
