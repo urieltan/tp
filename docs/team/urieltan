@@ -23,7 +23,7 @@ Given below are my contributions to the project.
   * Added 'all' (refactored to 'task') to list feature (Pull request [\#54](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/54))
   * Added optional to links in tasks for defensive programming (Pull request [\#105](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/105))
   * Added tests for link classes in model (Pull request [\#155](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/155))
-  
+
 * **Documentation**:
   * User Guide:
     * Added documentation for the features `link`. [\#18](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/18)
