@@ -10,7 +10,7 @@ You may reach us through the following email addresses:
 * Uriel Tan: urieltan@comp.nus.edu.sg
 * Chua Chen Ler: chua.chenler@u.nus.edu
 * Kevin William: kevinwilliam@u.nus.edu
-* Lucia Tirta Gunawan: 
+* Lucia Tirta Gunawan: luciatirtag@u.nus.edu
 * Lin Yuan Xun, Caleb: 
 
 ## Project team
