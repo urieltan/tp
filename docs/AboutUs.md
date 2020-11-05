@@ -41,11 +41,12 @@ You may reach us through the following email addresses:
 * Role: User guide, Intellij expert, Merge conflict solver
 * Responsibilities: Data
 
-### Lucia Tirtia Gunawan
+### Lucia Tirta Gunawan
 
 <img src="images/luciatirta.png" width="200px">
 
 [[github](http://github.com/luciatirta)]
+[[portfolio](team/luciatirta.md)]
 
 * Role: Testing, Ui Expert
 
