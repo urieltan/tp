@@ -38,9 +38,9 @@ Given below are my contributions to the project.
 * **Enhancements to existing features**:
   * Wrote tests for the basic task operations to increase coverage from 49.89% to 56.75% (Pull requests [\#69](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/69))
   
-    Created EventBuilder and TodoBuilder, which is morphed after PersonBuilder in AB3. 
+    Created EventBuilder and TodoBuilder, which is adapted after PersonBuilder in AB3. 
     
-    Created TypicalTodos and TypicalEvents, which is morphed after TypicalPersons in AB3.
+    Created TypicalTodos and TypicalEvents, which is adapted after TypicalPersons in AB3.
     
     These stubs are useful for testing task operations.
     
