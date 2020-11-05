@@ -1,11 +1,5 @@
 package seedu.address.model.task;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.testutil.EventBuilder;
-import seedu.address.testutil.TodoBuilder;
-
-import java.time.format.DateTimeParseException;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_TIME_CLEAN;
@@ -13,6 +7,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CLE
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalEvents.LECTURE;
 import static seedu.address.testutil.TypicalEvents.MEETING;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.EventBuilder;
 
 public class EventTest {
 

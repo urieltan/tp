@@ -10,12 +10,13 @@ import static seedu.address.testutil.TypicalLinks.PROJECT_DOCUMENT;
 import static seedu.address.testutil.TypicalLinks.PROJECT_MEETING;
 import static seedu.address.testutil.TypicalLinks.TUTOR_MEETING;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.MeetingLinkBuilder;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 
 
 public class MeetingLinkTest {
