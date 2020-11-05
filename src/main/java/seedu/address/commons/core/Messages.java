@@ -8,8 +8,7 @@ public class Messages {
     public static final String UNKNOWN_EDIT_COMMAND = "Only edit contact, todo, and event are available";
     public static final String UNKNOWN_FIND_COMMAND = "Only find contact, todo, and event are available";
     public static final String UNKNOWN_ADD_COMMAND = "Only add contact, todo, and event are available";
-    public static final String MISSING_ADD_DETAILS = "Missing fields for add command!";
-    public static final String UNKNOWN_SHOW_TAG_COMMAND = "Only show contact, todo, and event are available";
+    public static final String UNKNOWN_SHOW_TAG_COMMAND = "Only add contact, todo, and event are available \n%1$s";
     public static final String UNKNOWN_CLEAR_COMMAND = "Only clear contact is available";
     public static final String UNKNOWN_DELETE_COMMAND = "Only delete contact and task are available";
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
