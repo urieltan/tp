@@ -104,39 +104,33 @@ Examples:
 *  `edit contact i/1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit contact i/2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-##### 2.1.4 Showing persons with a specific tag: `show contact`
-Shows persons whose tags match the tag being searched.
+##### 2.1.4 Locating person by name or tag: `find contact`
 
-Format: `show contact t/TAG`
-* The search is case-insensitive. e.g `friends` will match `Friends`
-* Only full words will be matched. e.g. `friend` will not match `friends`
-* Persons whose one of the tag(s) matches the tag searched will be returned.
+Finds people whose names contain any of the given name keywords and tag matches the given tag keyword.
+
+Format: `find contact [n/NAME_KEYWORD [MORE_NAME_KEYWORDS]] [t/TAG_KEYWORD]`
+
+* At least one of name keyword or tag keyword is given in the command.
+* The search is case-insensitive for both name and tag. e.g `friends` will match `Friends`
+* The order of the name keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only full words will be matched for both name and tag e.g. `Han` will not match `Hans`
+* When only name keyword is given, persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. name keyword `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* When only tag keyword is given, persons whose one of the tag(s) matches the tag searched will be returned.
 e.g. Hans with tag `friends` and `colleagues` will be returned when tag `friends` is searched.
+* When both name keyword and tag keyword are given, persons matching both keywords are returned.
+e.g. `Hans Gruber` with tag `friends` and `colleagues` will be returned on command `find contact n/Hans Bo t/friends`.
 
 Examples:
-* `show contact t/colleagues`
-* `show contact t/friends`
+* `find contact n/John` returns `john` and `John Doe`
+* `find contact n/alex david` returns `Alex Yeoh`, `David Li`
+* `find contact t/friends`
+* `find contact n/John Doe t/colleagues`<br>
 
-##### 2.1.5 Locating person by name: `find contact`
-
-Finds people whose names contain any of the given keywords.
-
-Format: `find contact KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only their names is used to compare with the keywords.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find contact John` returns `john` and `John Doe`
-* `find contact alex david` returns `Alex Yeoh`, `David Li`<br>
 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-##### 2.1.6 Deleting a person : `delete contact`
+##### 2.1.5 Deleting a person : `delete contact`
 
 Deletes the specified person from the contact list.
 
@@ -150,7 +144,7 @@ Examples:
 * `list contact` followed by `delete contact 2` deletes the 2nd person in the contact list.
 * `find contact Betsy` followed by `delete contact 1` deletes the 1st person in the results of the `find` command.
 
-##### 2.1.7 Clearing all entries : `clear contact`
+##### 2.1.6 Clearing all entries : `clear contact`
 
 Clears all entries from the contact list.
 
@@ -334,35 +328,29 @@ Format:
 Examples:
 * `link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoUz1JpAgynIkfacr0asqV9A4kh i/2`
 
-##### 2.3.5 Showing todos with a specific tag: `show todo`
-Shows todos whose tags match the tag being searched.
 
-Format: `show todo t/TAG`
-* The search is case-insensitive. e.g `cs2100` will match `CS2100`
-* Only full words will be matched. e.g. `cs210` will not match `cs2100`
-* Todos whose one of the tag(s) matches the tag searched will be returned.
-e.g. Finish assignment with tag `CS2100` and `Graded` will be returned when tag `CS2100` is searched.
+##### 2.3.5 Locating todos by description or tag: `find todo`
+Finds todos whose description contain any of the given description keywords and tag matches the given tag keyword.
 
-Examples:
-* `show todo t/CS2100`
-* `show todo t/CS3243`
+Format: `find todo [desc/DESC_KEYWORD [MORE_DESC_KEYWORDS]] [t/TAG_KEYWORD]`
 
-##### 2.3.6 Locating todos by description: `find todo`
-
-Finds todos whose description contain any of the given keywords.
-
-Format: `find todo KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `assignment` will match `Assignment`
-* The order of the keywords does not matter. e.g. `Finish assignment` will match `assignment Finish`
-* Only the description is searched.
-* Only full words will be matched e.g. `Assign` will not match `Assignment`
-* Todos matching at least one keyword will be returned (i.e. `OR` search).
+* At least one of description keyword or tag keyword is given in the command.
+* The search is case-insensitive for both description and tag. e.g `assignment` will match `Assignment`
+* The order of the description keywords does not matter. e.g. `Finish assignment` will match `assignment Finish`
+* Only full words will be matched for both description and tag e.g. `Quiz` will not match `Quizzes`
+* When only description keyword is given, todos matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Do assignment` will return `Do chores`, `Finish assignment`
+* When only tag keyword is given, todos whose one of the tag(s) matches the tag searched will be returned.
+e.g. Finish assignment with tag `CS2100` and `Graded` will be returned when tag `CS2100` is searched.
+* When both description keyword and tag keyword are given, todos matching both keywords are returned.
+e.g. `Finish assignment` with tag `CS2100` and `Graded` will be returned 
+on command `find todo desc/Do assignment t/CS2100`.
 
 Examples:
 * `find todo assignment` returns `Essay assignment` and `Quiz assignment`
 * `find todo Do assignment` returns `Do chores`, `Finish assignment`<br>
+* `find todo t/CS3243`
+* `find todo n/Finish assignment t/CS2100`<br>
 
 ### 2.4 Event
 
@@ -427,35 +415,28 @@ Format:
 Examples:
 * `link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf i/2 date/22-09-2020 time/1400`
 
-##### 2.4.5 Showing events with a specific tag: `show event`
-Shows events whose tags match the tag being searched.
+##### 2.4.5 Locating events by description or tag: `find event`
+Finds events whose description contain any of the given description keywords and tag matches the given tag keyword.
 
-Format: `show event t/TAG`
-* The search is case-insensitive. e.g `cs2100` will match `CS2100`
-* Only full words will be matched. e.g. `cs210` will not match `cs2100`
-* Events whose one of the tag(s) matches the tag searched will be returned.
+Format: `find event [desc/DESC_KEYWORD [MORE_DESC_KEYWORDS]] [t/TAG_KEYWORD]`
+
+* At least one of description keyword or tag keyword is given in the command.
+* The search is case-insensitive for both description and tag. e.g `meeting` will match `Meeting`
+* The order of the description keywords does not matter. e.g. `Attend meeting` will match `meeting Attend`
+* Only full words will be matched for both description and tag e.g. `Meet` will not match `Meeting`
+* When only description keyword is given, events matching at least one keyword will be returned (i.e. `OR` search).
+e.g. `Attend meeting` will return `Attend workshop`, `Arrange meeting`
+* When only tag keyword is given, events whose one of the tag(s) matches the tag searched will be returned.
 e.g. Attend meeting with tag `CS2100` and `TeamProject` will be returned when tag `CS2100` is searched.
-
-Examples:
-* `show event t/TeamProject`
-* `show event t/CS3243`
-
-##### 2.4.6 Locating events by description: `find event`
-
-Finds events whose description contain any of the given keywords.
-
-Format: `find event KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `meeting` will match `Meeting`
-* The order of the keywords does not matter. e.g. `Attend meeting` will match `meeting Attend`
-* Only the description is searched.
-* Only full words will be matched e.g. `Meet` will not match `Meeting`
-* Events matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Attend meeting` will return `Attend workshop`, `Arrange meeting`
+* When both description keyword and tag keyword are given, todos matching both keywords are returned.
+e.g. `Attend meeting` with tag `CS2100` and `TeamProject` will be returned 
+on command `find event desc/meeting t/TeamProject`.
 
 Examples:
 * `find event meeting` returns `CCA meeting` and `Team meeting`
-* `find event Attend meeting` returns `Attend workshop`, `Arrange meeting`<br>
+* `find event Attend meeting` returns `Attend workshop`, `Arrange meeting`
+* `find event t/CS3243`
+* `find event n/Attend meeting t/TeamProject`<br>
 
 ### 2.5 Others
 
@@ -503,8 +484,7 @@ Action | Format, Examples
 **Clear Contacts** | `clear contact`
 **Delete Contact** | `delete contact INDEX`<br> e.g., `delete contact 3`
 **Edit Contact** | `edit contact i/INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]`<br> e.g.,`edit contact i/2 n/James Lee e/jameslee@example.com`
-**Find Contact** | `find contact KEYWORD [MORE_KEYWORDS]`<br> e.g., `find contact James Jake`
-**Show Contact** | `show contact t/TAG` <br> e.g., `show contact t/friends`
+**Find Contact** | `find contact [n/NAME_KEYWORD [MORE_NAME_KEYWORDS]] [t/TAG_KEYWORD]`<br> e.g., `find contact n/James Jake t/colleagues`
 **List Contacts** | `list contact`
 
 
@@ -525,8 +505,7 @@ Action | Format, Examples
 --------|------------------
 **Add To Do** | `add todo desc/DESCRIPTION date/DATE time/TIME [recurring/VALUE UNIT] [t/TAG]…` <br> e.g., `add todo desc/update user guide date/09-08-2020 time/2300 recurring/1 week t/MUSTFINISHSOON`
 **List To Dos** | `list todo`
-**Find To Do** | `find todo KEYWORD [MORE_KEYWORDS]`<br> e.g., `find todo Finish assignment`
-**Show To Do** | `show todo t/TAG` <br> e.g., `show todo t/CS2100`
+**Find To Do** | `find todo [desc/DESC_KEYWORD [MORE_DESC_KEYWORDS]] [t/TAG_KEYWORD]`<br> e.g., `find todo desc/Finish assignment t/CS2100`
 **Link doc** | `link doc desc/DESCRIPTION url/LINK i/INDEX_OF_TODO` <br> e.g.,`link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoIkfacr0asqV9A4kh i/2`
 
 
@@ -536,7 +515,6 @@ Action | Format, Examples
 --------|------------------
 **Add Event** | `add event desc/DESCRIPTION startdate/DATE starttime/TIME enddate/DATE endtime/TIME [recurring/VALUE UNIT] [t/TAG]` <br> e.g., `add event desc/meeting startdate/12-12-2020 starttime/1000 enddate/12-12-2020 endtime/1130 recurring/1 week t/IMPORTANT`
 **List Events** | `list event`
-**Find Event** | `find event KEYWORD [MORE_KEYWORDS]`<br> e.g., `find event Attend meeting`
-**Show Event** | `show event t/TAG` <br> e.g., `show event t/CCAMeeting`
+**Find Event** | `find event [desc/DESC_KEYWORD [MORE_DESC_KEYWORDS]] [t/TAG_KEYWORD]`<br> e.g., `find event desc/Attend meeting t/CS2103T`
 **Link meeting** | `link meeting desc/DESCRIPTION url/LINK i/INDEX_OF_EVENT date/DATE time/TIME` <br> e.g.,`link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf i/2 date/22-09-2020 time/1400`
 
