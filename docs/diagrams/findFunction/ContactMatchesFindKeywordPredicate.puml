@@ -5,8 +5,8 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 interface "Predicate<Person>" <<Interface>>
-class ContactTagMatchesKeywordPredicate
+class ContactMatchesFindKeywordPredicate
 
-"Predicate<Person>" <|.. ContactTagMatchesKeywordPredicate
+"Predicate<Person>" <|.. ContactMatchesFindKeywordPredicate
 
 @enduml

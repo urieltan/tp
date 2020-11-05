@@ -5,8 +5,8 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 interface "Predicate<Task>" <<Interface>>
-class TaskTagMatchesKeywordPredicate
+class TaskMatchesFindKeywordPredicate
 
-"Predicate<Task>" <|.. TaskTagMatchesKeywordPredicate
+"Predicate<Task>" <|.. TaskMatchesFindKeywordPredicate
 
 @enduml

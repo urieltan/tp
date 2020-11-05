@@ -178,65 +178,67 @@ The following activity diagram shows what happens when the user enters the link 
 
 ![FilterActivityDiagram](images/linkFunction/LinkActivityDiagram.png)
 
-### Show tag (`show contact`, `show todo`, and `show event`) feature
+### Find (`find contact`, `find todo`, and `find event`) feature
 
 #### Parser:
 
-![ParserClassDiagram](images/showTagFunction/ShowTagCommandParserClassDiagram.png)
+![ParserClassDiagram](images/findFunction/FindCommandParserClassDiagram.png)
 
-* `ShowTagCommandParser` implements `Parser<ShowTagCommand>`
+* `FindCommandParser` implements `Parser<FindCommand>`
 
-    * It checks for the phrase `show contact` for ShowTagContactCommand and parses the input
-    after the prefixes: `t/`.
-    * It checks for the phrase `show event` for ShowTagEventCommand and parses the input
-    after the prefixes: `t/`.
-    * It checks for the phrase `show todo` for ShowTagTodoCommand and parses the input
-    after the prefixes: `t/`.
-    * If the input is correct, a new Predicate object is created and passed to a new ShowTagCommand constructor.
+    * It checks for the phrase `find contact` for FindContactCommand and parses the input
+    after the prefixes: `n/` and `t/`.
+    * It checks for the phrase `find event` for FindEventCommand and parses the input
+    after the prefixes: `desc/` and `t/`.
+    * It checks for the phrase `find todo` for FindTodoCommand and parses the input
+    after the prefixes: `desc/` and `t/`.
+    * If the input is correct, a new Predicate object is created and passed to a new FindCommand constructor.
 
 ##### Predicate:
 
-![PredicateClassDiagram](images/showTagFunction/ContactTagMatchesKeywordPredicate.png)
-![PredicateClassDiagram](images/showTagFunction/TaskTagMatchesKeywordPredicate.png)
+![PredicateClassDiagram](images/findFunction/ContactMatchesFindKeywordPredicate.png)
+![PredicateClassDiagram](images/findFunction/TaskMatchesFindKeywordPredicate.png)
 
-The way these predicate works is very similar, where the `ContactTagMatchesKeywordPredicate` handles the Person object
-and the `TaskTagMatchesKeywordPredicate` handles the Task object.
+The way these predicate works is very similar, where the `ContactMatchesFindKeywordPredicate` handles the Person object
+and the `TaskMatchesFindKeywordPredicate` handles the Task object.
 
-`ContactTagMatchesKeywordPredicate` implements `Predicate<Person>`.
-`TaskTagMatchesKeywordPredicate` implements `Predicate<Task>`.
+`ContactMatchesFindKeywordPredicate` implements `Predicate<Person>`.
+`TaskMatchesFindKeywordPredicate` implements `Predicate<Task>`.
 
-* `ContactTagMatchesKeywordPredicate` returns true if the tag input matches one of the contact's tags.
-* `TaskTagMatchesKeywordPredicate` returns true if the tag input matches one of the task's (event's or todo's) tags.
+* `ContactMatchesFindKeywordPredicate` returns true if the person's name contains one of the name keyword given AND one of the tag matches the given tag keyword.
+* `TaskMatchesFindKeywordPredicate` returns true if the task's(event or todo) description contains one of the description keyword given AND one of the tag matches the given tag keyword.
+* When only name or description prefix and keyword are given, the predicates return true if the person's name or task's description contain one of the keyword given.
+* When only tag prefix and keyword are given, the predicates return true if one of the person's or task's tag(s) matches the keyword given.
 
 ##### Command:
  The class diagram
 
-![CommandClassDiagram](images/showTagFunction/ShowTagCommandClassDiagram.png)
+![CommandClassDiagram](images/findFunction/FindCommandClassDiagram.png)
 
 -----
 The sequence diagram:
-* `ShowTagContactCommand`, `ShowTagEventCommand` and `ShowTagTodoCommand` extends `ShowTagCommand`.
-* The command will be parsed by `AddressBookParser` and further parsed by `ShowTagCommandParser`.
-* The `ShowTagCommandParser` will determine whether the command is a `ShowTagContactCommand`, `ShowTagEventCommand` or a `ShowTagTodoCommand`.
-* After returning the suitable ShowTagCommand, the command will be executed,
-calling the `updateFiltertedPersonList()` method of `Model` and update the `AddressBook` if it is a `ShowTagContactCommand`, or
-the `updateFiltertedTaskList()` method of `Model` and update the `TaskList` if it is a `ShowTagEventCommand` or `ShowTagTodoCommand`.
-* After updating the model, the `LogicManager` will call the sorage to save the file.
-* If all are successful, `ShowTagCommand` will return a `CommandResult` with a successful message to the UI.
+* `FindContactCommand`, `FindEventCommand` and `FindTodoCommand` extends `FindCommand`.
+* The command will be parsed by `AddressBookParser` and further parsed by `FindCommandParser`.
+* The `FindCommandParser` will determine whether the command is a `FindContactCommand`, `FindEventCommand` or a `FindTodoCommand`.
+* After returning the suitable FindCommand, the command will be executed,
+calling the `updateFiltertedPersonList()` method of `Model` and update the `AddressBook` if it is a `FindContactCommand`, or
+the `updateFiltertedTaskList()` method of `Model` and update the `TaskList` if it is a `FindEventCommand` or `FindTodoCommand`.
+* After updating the model, the `LogicManager` will call the storage to save the file.
+* If all are successful, `FindCommand` will return a `CommandResult` with a successful message to the UI.
 
-The following sequence diagram shows how the `ShowTagContactCommand` works.
-The sequence diagrams for `ShowTagEventCommand` and `ShowTagTodoCommand` are very similar to the diagram below
-with minor differences in the type of ShowTagCommand returned and function called to update the model.
+The following sequence diagram shows how the `FindContactCommand` works.
+The sequence diagrams for `FindEventCommand` and `FindTodoCommand` are very similar to the diagram below
+with minor differences in the type of FindCommand returned and function called to update the model.
 
-![FilterSequenceDiagram](images/showTagFunction/ShowTagCommandSequenceDiagram.png)
+![FilterSequenceDiagram](images/findFunction/FindCommandSequenceDiagram.png)
 
-![SaveFileDiagram](images/showTagFunction/SaveLifebook.png)
+![SaveFileDiagram](images/findFunction/SaveLifebook.png)
 
-The following activity diagram shows what happens when the user enters the show contact command:
+The following activity diagram shows what happens when the user enters the find contact command:
 
-![FilterActivityDiagram](images/showTagFunction/ShowTagCommandActivityDiagram.png)
+![FilterActivityDiagram](images/findFunction/FindCommandActivityDiagram.png)
 
-The activity diagram when user enters the show event or show todo command is similar to the diagram above.
+The activity diagram when user enters the find event or find todo command is similar to the diagram above.
 
 --------------------------------------------------------------------------------------------------------------------
 
