@@ -45,6 +45,9 @@ public class CommandTestUtil {
     public static final String VALID_DESCRIPTION = "A description";
     public static final String VALID_URL = "https://www.google.com";
 
+    public static final String VALID_DESCRIPTION_CLEAN = "Clean";
+    public static final String VALID_DATE_TIME_CLEAN = "01-01-2021 2000";
+
     public static final String VALID_DESCRIPTION_TUTOR_MEETING = "Tutor meeting";
     public static final String VALID_URL_TUTOR_MEETING =
             "https://nus-sg.zoom.us/j/85350904475?pwd=T0JwTEIwNjRuMnNKUEt4L2R789JWZz09";

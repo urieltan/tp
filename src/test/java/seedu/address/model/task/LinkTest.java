@@ -19,6 +19,7 @@ public class LinkTest {
         assertFalse(Link.isValidUrl("zoom"));
         assertFalse(Link.isValidUrl("zoom.com"));
         assertFalse(Link.isValidUrl("98112031234"));
+        assertFalse(Link.isValidUrl("https://."));
 
         // valid url
         assertTrue(Link.isValidUrl("https://nus-sg.zoom.us/j/85350904475?pwd=T0JwTEIwNjRuMnNKUEt4L2RBMFJWZz09"));
