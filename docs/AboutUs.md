@@ -28,6 +28,7 @@ You may reach us through the following email addresses:
 <img src="images/lerxcl.png" width="200px">
 
 [[github](http://github.com/lerxcl)]
+[[portfolio](team/lerxcl.md)]
 
 * Role: Team Lead, Deliverables and deadlines, Scheduling and tracking
 
