@@ -46,6 +46,8 @@ public class LinkCommandParser implements Parser<LinkCommand> {
             String description = argMultimap.getValue(PREFIX_DESCRIPTION).get().trim();
             String date = argMultimap.getValue(PREFIX_DATE).get().trim();
             String time = argMultimap.getValue(PREFIX_TIME).get().trim();
+            ParserUtil.checkDateValidity(date);
+            ParserUtil.checkTimeValidity(time);
             String url = argMultimap.getValue(PREFIX_URL).get().trim();
             String meetingTime = date + " " + time;
             Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get().trim());
