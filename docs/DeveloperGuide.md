@@ -178,65 +178,67 @@ The following activity diagram shows what happens when the user enters the link 
 
 ![FilterActivityDiagram](images/linkFunction/LinkActivityDiagram.png)
 
-### Show tag (`show contact`, `show todo`, and `show event`) feature
+### Find (`find contact`, `find todo`, and `find event`) feature
 
 #### Parser:
 
-![ParserClassDiagram](images/showTagFunction/ShowTagCommandParserClassDiagram.png)
+![ParserClassDiagram](images/findFunction/FindCommandParserClassDiagram.png)
 
-* `ShowTagCommandParser` implements `Parser<ShowTagCommand>`
+* `FindCommandParser` implements `Parser<FindCommand>`
 
-    * It checks for the phrase `show contact` for ShowTagContactCommand and parses the input
-    after the prefixes: `t/`.
-    * It checks for the phrase `show event` for ShowTagEventCommand and parses the input
-    after the prefixes: `t/`.
-    * It checks for the phrase `show todo` for ShowTagTodoCommand and parses the input
-    after the prefixes: `t/`.
-    * If the input is correct, a new Predicate object is created and passed to a new ShowTagCommand constructor.
+    * It checks for the phrase `find contact` for FindContactCommand and parses the input
+    after the prefixes: `n/` and `t/`.
+    * It checks for the phrase `find event` for FindEventCommand and parses the input
+    after the prefixes: `desc/` and `t/`.
+    * It checks for the phrase `find todo` for FindTodoCommand and parses the input
+    after the prefixes: `desc/` and `t/`.
+    * If the input is correct, a new Predicate object is created and passed to a new FindCommand constructor.
 
 ##### Predicate:
 
-![PredicateClassDiagram](images/showTagFunction/ContactTagMatchesKeywordPredicate.png)
-![PredicateClassDiagram](images/showTagFunction/TaskTagMatchesKeywordPredicate.png)
+![PredicateClassDiagram](images/findFunction/ContactMatchesFindKeywordPredicate.png)
+![PredicateClassDiagram](images/findFunction/TaskMatchesFindKeywordPredicate.png)
 
-The way these predicate works is very similar, where the `ContactTagMatchesKeywordPredicate` handles the Person object
-and the `TaskTagMatchesKeywordPredicate` handles the Task object.
+The way these predicate works is very similar, where the `ContactMatchesFindKeywordPredicate` handles the Person object
+and the `TaskMatchesFindKeywordPredicate` handles the Task object.
 
-`ContactTagMatchesKeywordPredicate` implements `Predicate<Person>`.
-`TaskTagMatchesKeywordPredicate` implements `Predicate<Task>`.
+`ContactMatchesFindKeywordPredicate` implements `Predicate<Person>`.
+`TaskMatchesFindKeywordPredicate` implements `Predicate<Task>`.
 
-* `ContactTagMatchesKeywordPredicate` returns true if the tag input matches one of the contact's tags.
-* `TaskTagMatchesKeywordPredicate` returns true if the tag input matches one of the task's (event's or todo's) tags.
+* `ContactMatchesFindKeywordPredicate` returns true if the person's name contains one of the name keyword given AND one of the tag matches the given tag keyword.
+* `TaskMatchesFindKeywordPredicate` returns true if the task's(event or todo) description contains one of the description keyword given AND one of the tag matches the given tag keyword.
+* When only name or description prefix and keyword are given, the predicates return true if the person's name or task's description contain one of the keyword given.
+* When only tag prefix and keyword are given, the predicates return true if one of the person's or task's tag(s) matches the keyword given.
 
 ##### Command:
  The class diagram
 
-![CommandClassDiagram](images/showTagFunction/ShowTagCommandClassDiagram.png)
+![CommandClassDiagram](images/findFunction/FindCommandClassDiagram.png)
 
 -----
 The sequence diagram:
-* `ShowTagContactCommand`, `ShowTagEventCommand` and `ShowTagTodoCommand` extends `ShowTagCommand`.
-* The command will be parsed by `AddressBookParser` and further parsed by `ShowTagCommandParser`.
-* The `ShowTagCommandParser` will determine whether the command is a `ShowTagContactCommand`, `ShowTagEventCommand` or a `ShowTagTodoCommand`.
-* After returning the suitable ShowTagCommand, the command will be executed,
-calling the `updateFiltertedPersonList()` method of `Model` and update the `AddressBook` if it is a `ShowTagContactCommand`, or
-the `updateFiltertedTaskList()` method of `Model` and update the `TaskList` if it is a `ShowTagEventCommand` or `ShowTagTodoCommand`.
-* After updating the model, the `LogicManager` will call the sorage to save the file.
-* If all are successful, `ShowTagCommand` will return a `CommandResult` with a successful message to the UI.
+* `FindContactCommand`, `FindEventCommand` and `FindTodoCommand` extends `FindCommand`.
+* The command will be parsed by `AddressBookParser` and further parsed by `FindCommandParser`.
+* The `FindCommandParser` will determine whether the command is a `FindContactCommand`, `FindEventCommand` or a `FindTodoCommand`.
+* After returning the suitable FindCommand, the command will be executed,
+calling the `updateFiltertedPersonList()` method of `Model` and update the `AddressBook` if it is a `FindContactCommand`, or
+the `updateFiltertedTaskList()` method of `Model` and update the `TaskList` if it is a `FindEventCommand` or `FindTodoCommand`.
+* After updating the model, the `LogicManager` will call the storage to save the file.
+* If all are successful, `FindCommand` will return a `CommandResult` with a successful message to the UI.
 
-The following sequence diagram shows how the `ShowTagContactCommand` works.
-The sequence diagrams for `ShowTagEventCommand` and `ShowTagTodoCommand` are very similar to the diagram below
-with minor differences in the type of ShowTagCommand returned and function called to update the model.
+The following sequence diagram shows how the `FindContactCommand` works.
+The sequence diagrams for `FindEventCommand` and `FindTodoCommand` are very similar to the diagram below
+with minor differences in the type of FindCommand returned and function called to update the model.
 
-![FilterSequenceDiagram](images/showTagFunction/ShowTagCommandSequenceDiagram.png)
+![FilterSequenceDiagram](images/findFunction/FindCommandSequenceDiagram.png)
 
-![SaveFileDiagram](images/showTagFunction/SaveLifebook.png)
+![SaveFileDiagram](images/findFunction/SaveLifebook.png)
 
-The following activity diagram shows what happens when the user enters the show contact command:
+The following activity diagram shows what happens when the user enters the find contact command:
 
-![FilterActivityDiagram](images/showTagFunction/ShowTagCommandActivityDiagram.png)
+![FilterActivityDiagram](images/findFunction/FindCommandActivityDiagram.png)
 
-The activity diagram when user enters the show event or show todo command is similar to the diagram above.
+The activity diagram when user enters the find event or find todo command is similar to the diagram above.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -280,12 +282,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | forgetful student                          | add todos and events        | remember to complete important tasks for projects and  attend important events|
 | `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
 | `* * *`  | forgetful student                          | remove todos and events        | remove tasks that I no longer need |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* * *`  | user                                       | find todos by description          | locate details of todos without having to go through the entire list |
-| `* * *`  | user                                       | find events by description          | locate details of events without having to go through the entire list |
+| `* * *`  | user                                       | find a person by name or tag          | locate details of persons without having to go through the entire list |
+| `* * *`  | user                                       | find todos by description or tag        | locate details of todos without having to go through the entire list |
+| `* * *`  | user                                       | find events by description or tag         | locate details of events without having to go through the entire list |
 | `* * *`  | student                                    | mark todos and events as done  | remember the tasks or assignments that I have completed          |
-| ` * * ` | forgetful student                           | search for contacts under a particular tag  | find people I am working with easily
-| ` * * ` | forgetful student                           | search for todos and events under a particular tag  | find the task that I am working on
 | `* *`    | disorganised student                       | add and remove collaborative links (Google Drive, and many more) to a todo   | find the collaborative link for the project easily |
 | `* *`      | disorganised student                       | add, remove, and view zoom links for meetings to an event         | remember my Zoom Links                                      |
 | `* *`    | forgetful/disorganised student | search what tasks/meetings are due soon or by a specific date/time (filter) | remember to finish before the deadline|
@@ -321,14 +321,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Show contacts with a specific tag**
+**Use case: Find contacts by name and/or tag**
 
 **MSS**
 
 1.  User requests to list persons
 2.  Lifebook shows a list of persons
-3.  User requests to show all persons with a specific tag in the list
-4.  Lifebook shows all the persons whose tag matching the tag searched
+3.  User requests to find all persons by name and/or tag
+4.  Lifebook displays all the persons who match the searched keywords
 
     Use case ends.
 
@@ -338,20 +338,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given tag is empty or invalid.
+* 3a. Both the given name and tag is empty.
 
     * 3a1. Lifebook shows an error message.
 
       Use case resumes at step 2.
+* 3b. The given name or tag is invalid.
 
-**Use case: Show Todos with a specific tag**
+    * 3b1. Lifebook shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Find todos by description and/or tag**
 
 **MSS**
 
 1.  User requests to list todos
 2.  Lifebook shows a list of todos
-3.  User requests to show all todos with a specific tag in the list
-4.  Lifebook shows all the todos whose tag matching the tag searched
+3.  User requests to find all todos by description and/or tag
+4.  Lifebook displays all the todos that match the searched keywords
 
     Use case ends.
 
@@ -361,20 +366,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given tag is empty or invalid.
+* 3a. Both the given description and tag is empty.
 
     * 3a1. Lifebook shows an error message.
 
       Use case resumes at step 2.
+* 3b. The given description or tag is invalid.
 
-**Use case: Show Events with a specific tag**
+    * 3b1. Lifebook shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Find events by description and/or tag**
 
 **MSS**
 
 1.  User requests to list events
 2.  Lifebook shows a list of events
-3.  User requests to show all events with a specific tag in the list
-4.  Lifebook shows all the events whose tag matching the tag searched
+3.  User requests to find all events by description and/or tag
+4.  Lifebook displays all the events that match the searched keywords
 
   Use case ends.
 
@@ -384,11 +394,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Use case ends.
 
-* 3a. The given tag is empty or invalid.
+* 3a. Both the given description and tag is empty.
 
-  * 3a1. Lifebook shows an error message.
+    * 3a1. Lifebook shows an error message.
 
-    Use case resumes at step 2.
+      Use case resumes at step 2.
+* 3b. The given description or tag is invalid.
+
+    * 3b1. Lifebook shows an error message.
+
+      Use case resumes at step 2.
 
 **Use case: Add a To Do to the To Do List**
 
