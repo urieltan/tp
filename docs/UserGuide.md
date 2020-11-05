@@ -225,6 +225,14 @@ Outputs a list of results.
 
 ##### 2.2.6 Recurrence
 
+A recurring task is created when a user includes the optional `recurring/` field in adding a new todo/event.
+
+When a recurring task is marked as done, it will automatically generate another recurring task with the new deadline based on the recurrence field. (while the remaining details of the task remains the same)
+
+Example: `add todo desc/CS2100 Tutorial date/04-11-2020 time/1100 recurring/1 week`
+
+When this task is marked as done, it will generate another todo with the deadline: `Date: 11-11-2020, Time: 1100`.
+
 If a task is recurring, it will be displayed in the GUI.
 
 ![recurringTask](images/ExampleOfARecurringTask.png)

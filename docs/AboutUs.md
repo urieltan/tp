@@ -8,7 +8,7 @@ We are a team based in the [School of Computing, National University of Singapor
 You may reach us through the following email addresses:
 
 * Uriel Tan: urieltan@comp.nus.edu.sg
-* Chua Chen Ler: 
+* Chua Chen Ler: chua.chenler@u.nus.edu
 * Kevin William: kevinwilliam@u.nus.edu
 * Lucia Tirta Gunawan: 
 * Lin Yuan Xun, Caleb: 
