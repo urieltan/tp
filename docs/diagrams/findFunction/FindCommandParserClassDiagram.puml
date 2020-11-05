@@ -4,9 +4,9 @@ skinparam arrowThickness 1.1
 skinparam arrowColor LOGIC_COLOR
 skinparam classBackgroundColor LOGIC_COLOR
 
-interface "Parser<ShowTagCommand>" <<Interface>>
-class ShowTagCommandParser
+interface "Parser<FindCommand>" <<Interface>>
+class FindCommandParser
 
-"Parser<ShowTagCommand>" <|.. ShowTagCommandParser
+"Parser<FindCommand>" <|.. FindCommandParser
 
 @enduml
