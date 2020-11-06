@@ -20,6 +20,7 @@ You may reach us through the following email addresses:
 <img src="images/urieltan.png" width="200px">
 
 [[github](https://github.com/urieltan)]
+[[portfolio](team/urieltan.md)]
 
 * Role: About Us expert, Developer Guide
 
