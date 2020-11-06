@@ -30,9 +30,18 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 [`Logic.java`](https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 ### Model component
-
+![UpdatedModelClassDiagram](images/UpdatedModelClassDiagram.png)
 **API** : [`Model.java`](https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
+The Model, 
+* stores a UserPref object that represents the user’s preferences.
+* stores the address book and task list data.
+* exposes an unmodifiable ObservableList<Person> and an unmodifiable ObservableList<Task>. Both of these lists can be ‘observed’ i.e. the UI can be bound to these lists so that the UI automatically updates when the data in their respective lists change.
+* does not depend on any of the other three components.
+
+:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook` and `TaskList` , which both `Person` and `Task` references. This allows `AddressBook` amd `TaskList` to only require one `Tag` object per unique `Tag`, instead of each `Person` and `Task` needing their own `Tag` object.
+
+![BetterModelClassDiagram](images/UpdatedBetterModelClassDiagram.png)
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)

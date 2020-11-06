@@ -20,4 +20,17 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 
+TaskList *-right-> "1" UniqueTaskList
+TaskList *--> "1" UniqueTagList
+UniqueTaskList o-right-> "*" "{abstract} Task"
+"{abstract} Task" -down-> "*" Tag
+Todo -left-|> "{abstract} Task"
+Event -down-|> "{abstract} Task"
+"{abstract} Task" *-down-> "1" Recurrence
+"{abstract} Task" *--> "1" "{abstract} Link"
+CollaborativeLink --|> "{abstract} Link"
+MeetingLink --|> "{abstract} Link"
+Event *--> "1" MeetingLink
+Todo *--> "1" CollaborativeLink
+
 @enduml
