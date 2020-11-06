@@ -96,6 +96,12 @@ Format: `edit contact i/INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]�
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* Emails should be of the format local-part@domain and adhere to the following constraints:
+* 1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (!#$%&'*+/=?`{|}~^.-) .
+* 2. This is followed by a '@' and then a domain name. The domain name must:
+*    - be at least 2 characters long
+*    - start and end with alphanumeric characters
+*    - consist of alphanumeric characters, a period or a hyphen for the characters in between, if any.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
