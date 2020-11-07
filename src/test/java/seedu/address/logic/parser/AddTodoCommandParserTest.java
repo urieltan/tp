@@ -25,7 +25,8 @@ public class AddTodoCommandParserTest {
 
     private static final String INVALID_DATE = "date/1-15-2020 ";
     private static final String INVALID_TIME = "time/2500";
-    private static final String INVALID_RECURRENCE_VALUE = "recurring/0 day";
+    private static final String INVALID_RECURRENCE_NUMBER = "recurring/0 day";
+    private static final String INVALID_RECURRENCE_VALUE = "recurring/xxx";
     private static final String INVALID_RECURRENCE_UNIT = "recurring/1 sleep";
 
     private AddCommandParser parser = new AddCommandParser();
@@ -50,6 +51,9 @@ public class AddTodoCommandParserTest {
 
         // missing time
         assertParseFailure(parser, "todo " + HOMEWORK_DESC + HOMEWORK_DATE, expectedMessage);
+
+        // no command details
+        assertParseFailure(parser, "todo ", expectedMessage);
     }
 
     @Test
@@ -60,7 +64,6 @@ public class AddTodoCommandParserTest {
         // invalid date
         assertParseFailure(parser, "todo " + HOMEWORK_DESC + INVALID_DATE + HOMEWORK_TIME,
                 expectedDateMessage);
-
 
         // invalid time
         assertParseFailure(parser, "todo " + HOMEWORK_DESC + HOMEWORK_DATE + INVALID_TIME,
@@ -78,13 +81,17 @@ public class AddTodoCommandParserTest {
     public void parse_allFieldsPresentWithWrongRecurrenceInput() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTodoCommand.MESSAGE_USAGE);
 
-        // invalid recurrence value
+        // invalid recurrence number
         assertParseFailure(parser, "todo " + CHORES_DESC + CHORES_DATE + CHORES_TIME
-                + INVALID_RECURRENCE_VALUE, expectedMessage);
+                + INVALID_RECURRENCE_NUMBER, expectedMessage);
 
         // invalid recurrence unit
         assertParseFailure(parser, "todo " + CHORES_DESC + CHORES_DATE + CHORES_TIME
                 + INVALID_RECURRENCE_UNIT, expectedMessage);
+
+        // invalid recurrence value
+        assertParseFailure(parser, "todo " + CHORES_DESC + CHORES_DATE + CHORES_TIME
+            + INVALID_RECURRENCE_VALUE, expectedMessage);
     }
 
 }

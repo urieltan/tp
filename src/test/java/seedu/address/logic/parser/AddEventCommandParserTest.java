@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.add.AddEventCommand;
+import seedu.address.logic.commands.add.AddTodoCommand;
 import seedu.address.model.task.Event;
 import seedu.address.testutil.EventBuilder;
 
@@ -30,7 +31,8 @@ public class AddEventCommandParserTest {
     private static final String INVALID_START_TIME = "starttime/2500 ";
     private static final String INVALID_END_DATE = "enddate/1-15-2020 ";
     private static final String INVALID_END_TIME = "endtime/2500";
-    private static final String INVALID_RECURRENCE_VALUE = "recurring/0 day";
+    private static final String INVALID_RECURRENCE_NUMBER = "recurring/0 day";
+    private static final String INVALID_RECURRENCE_VALUE = "recurring/xxx";
     private static final String INVALID_RECURRENCE_UNIT = "recurring/1 sleep";
 
     private AddCommandParser parser = new AddCommandParser();
@@ -67,6 +69,9 @@ public class AddEventCommandParserTest {
         // missing end date and time
         assertParseFailure(parser, "event " + MEETING_DESC + MEETING_START_DATE
                 + MEETING_START_TIME, expectedMessage);
+
+        // no command details
+        assertParseFailure(parser, "event ", expectedMessage);
     }
 
     @Test
@@ -103,13 +108,17 @@ public class AddEventCommandParserTest {
     public void parse_allFieldsPresentWithWrongRecurrenceInput() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE);
 
-        // invalid recurrence value
+        // invalid recurrence number
         assertParseFailure(parser, "event " + PARTY_DESC + PARTY_START_DATE + PARTY_START_TIME
-                + PARTY_END_DATE + PARTY_END_TIME + INVALID_RECURRENCE_VALUE, expectedMessage);
+                + PARTY_END_DATE + PARTY_END_TIME + INVALID_RECURRENCE_NUMBER, expectedMessage);
 
         // invalid recurrence unit
         assertParseFailure(parser, "event " + PARTY_DESC + PARTY_START_DATE + PARTY_START_TIME
                 + PARTY_END_DATE + PARTY_END_TIME + INVALID_RECURRENCE_UNIT, expectedMessage);
+
+        // invalid recurrence value
+        assertParseFailure(parser, "event " + PARTY_DESC + PARTY_START_DATE + PARTY_START_TIME
+            + PARTY_END_DATE + PARTY_END_TIME + INVALID_RECURRENCE_VALUE, expectedMessage);
     }
 
 }
