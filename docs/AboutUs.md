@@ -11,7 +11,7 @@ You may reach us through the following email addresses:
 * Chua Chen Ler: chua.chenler@u.nus.edu
 * Kevin William: kevinwilliam@u.nus.edu
 * Lucia Tirta Gunawan: luciatirtag@u.nus.edu
-* Lin Yuan Xun, Caleb: 
+* Lin Yuan Xun, Caleb: caleblyx@u.nus.edu
 
 ## Project team
 

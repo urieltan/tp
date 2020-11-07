@@ -152,4 +152,7 @@ public class UniqueTaskList implements Iterable<Task> {
         }
         return true;
     }
+    public boolean isEmpty() {
+        return internalList.isEmpty();
+    }
 }

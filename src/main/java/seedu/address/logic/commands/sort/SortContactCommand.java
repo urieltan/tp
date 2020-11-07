@@ -9,7 +9,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonNameComparator;
-
+/**
+ * Sorts contact list in alphabetical order.
+ */
 public class SortContactCommand extends SortCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts contacts by name ";
     public static final String MESSAGE_SUCCESS = "Sorted tasks by date";
@@ -33,5 +35,10 @@ public class SortContactCommand extends SortCommand {
         } else {
             return new CommandResult(MESSAGE_SUCCESS, "CONTACT");
         }
+    }
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof SortContactCommand);
     }
 }

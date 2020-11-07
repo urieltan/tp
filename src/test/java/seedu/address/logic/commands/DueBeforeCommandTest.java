@@ -19,21 +19,15 @@ import seedu.address.testutil.TodoBuilder;
 public class DueBeforeCommandTest {
     private Todo todo = new TodoBuilder().build();
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new TaskList());
-
     @Test
     public void execute_rightDateAndTimeInputs_todoFound() {
         model.addTodo(todo);
-
         DueBeforePredicate predicate = preparePredicate("date/13-12-2020 time/2359");
         DueBeforeCommand command = new DueBeforeCommand(predicate);
-
         String expectedMessage = String.format(DueBeforeCommand.MESSAGE_SUCCESS, predicate.getDateTime());
-
         ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new TaskList());
-
         assertCommandSuccess(command, model, expectedMessage, "TASK", expectedModel);
     }
-
     @Test
     public void equals() {
         DueBeforePredicate firstPredicate = preparePredicate("date/10-10-2020 time/0000");

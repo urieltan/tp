@@ -20,22 +20,50 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 **How the architecture components interact with each other**
 
 ### UI component
+![UpdatedUiClassDiagram](images/UpdatedUiClassDiagram.png)
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `TaskListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
+For example, the layout of the [`MainWindow`](https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java)
+is specified in [`MainWindow.fxml`](https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
+
+The `UI` component,
+
+* Executes user commands using the `Logic` component.
+* Listens for changes to `Model` data so that the UI can be updated with the modified data.
 
 **API** :
 [`Ui.java`](https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ### Logic component
+![Structure of the Logic Component](images/LogicClassDiagram.png)
 
 **API** :
-[`Logic.java`](https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
+[`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
+1. `Logic` uses the `AddressBookParser` class to parse the user command.
+2. This results in a `Command` object which is executed by the `LogicManager`.
+3. The command execution can affect the `Model` (e.g. adding a person).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+5. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
+
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete contact 1")` API call.
+
+![Interactions Inside the Logic Component for the `delete contact 1` Command](images/DeleteContactSequenceDiagram.png)
+
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("edit event i/1 ...")` API call.
+
+![Interactions Inside the Logic Component for the `delete contact 1` Command](images/EditEventSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 ### Model component
 ![UpdatedModelClassDiagram](images/UpdatedModelClassDiagram.png)
 **API** : [`Model.java`](https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-The Model, 
+The Model,
 * stores a UserPref object that represents the user’s preferences.
-* stores the address book and task list data.
+* stores the address book and TaskList data.
 * exposes an unmodifiable ObservableList<Person> and an unmodifiable ObservableList<Task>. Both of these lists can be ‘observed’ i.e. the UI can be bound to these lists so that the UI automatically updates when the data in their respective lists change.
 * does not depend on any of the other three components.
 
@@ -76,7 +104,7 @@ This section describes some noteworthy details on how certain features are imple
 * If it is successful, it will return a CommandResult with a successful message to the UI.
 
 ---
-The following sequence diagrams displays a `Todo` being added to the Task List. Adding an `Event` follows a similar sequence.
+The following sequence diagrams displays a `Todo` being added to the TaskList. Adding an `Event` follows a similar sequence.
 
 ![AddSequenceDiagram](images/addTask/AddSequenceDiagram.png)
 
@@ -94,6 +122,48 @@ The following activity diagram shows what happens when the user enters an add ta
 
 * An alternative approach would be to have a single `AddTaskCommand` which extends `AddCommand`. The `AddCommandParser` could pass either `todo` or `event` to this class' constructor.
 * This could reduce the replication of code, since both `AddTodoCommand` and `AddEventCommand` are almost identical.
+* However, by having two distinct commands, different and more specific success or error messages can be produced by the execution of respective commands.
+
+### Edit tasks (`todo` and `event`) feature
+
+##### Parser:
+
+![EditTaskParserClassDiagram](images/editTask/EditTaskParserClassDiagram.png)
+
+* `EditCommandParser` implements `Parser<EditCommand>`
+
+* It parses the user input to determine if the user intends to add a `todo` or `event`.
+* It parses the input after the prefixes required to create the intended `todo` or `event`.
+* If the user input has all all required prefixes and matches the required syntax and format, it edits the new intended `Todo` or `Event` and passes it to its respective EditCommand constructor.
+
+##### Command:
+
+![EditTaskCommandClassDiagram](images/editTask/CommandClassDiagram.png)
+
+* The abstract class `EditCommand` extends `Command`.
+* The concrete classes `EditEventCommand`, `EditTodoCommand`, and `EditContactCommand` extends `EditCommand`.
+* The command will be executed by the Model, which will update the FilteredTaskList based on the edited task.
+* If it is successful, it will return a CommandResult with a successful message to the UI.
+
+---
+The following sequence diagrams displays an `Event` being edited to the TaskList. Editing a `Todo` follows a similar sequence.
+
+![EditTaskSequenceDiagram](images/editTask/EditTaskSequenceDiagram.png)
+
+The following sequence diagram exhibits the behavior of logic.
+
+![AddTaskSequenceDiagram](images/editTask/EditTaskSequence.png)
+
+The following activity diagram shows what happens when the user enters an edit task command:
+
+![AddTaskActivityDiagram](images/editTask/EditTaskActivityDiagram.png)
+
+#### Design consideration
+
+#### How command works:
+
+* An alternative approach would be to have a single `EditTaskCommand` which extends `EditCommand`. The `EditCommandParser` could pass either `todo` or `event` to this class' constructor.
+* This could reduce the replication of code, since both `AddEventCommand` and `AddTodoCommand` are almost identical.
 * However, by having two distinct commands, different and more specific success or error messages can be produced by the execution of respective commands.
 
 ### Filter tasks (`dueAt` and `dueBefore`) feature
@@ -249,7 +319,7 @@ The following activity diagram shows what happens when the user enters the find 
 
 The activity diagram when user enters the find event or find todo command is similar to the diagram above.
 
-### Common Tag feature `contactTaskTag` 
+### Common Tag feature `contactTaskTag`
 
 ##### Parser:
 
@@ -259,7 +329,7 @@ The activity diagram when user enters the find event or find todo command is sim
 
 Upon calling `contactTaskTagParser`, the static classes from `contactTaskTagCommand`: `editEditPersonTags` and `EditTaskTags` will be invoked.
 
-If the person and task index are valid, and there is at least 1 tag given, it returns a new ContactTaskTagCommand.
+If the person and task index are valid, and there is at least 1 tag given, it returns a new `ContactTaskTagCommand`.
 
 ##### Command:
 
@@ -267,14 +337,14 @@ If the person and task index are valid, and there is at least 1 tag given, it re
 
 * `ContactTaskTagCommand` extends `Command`.
 
-When the `ContactTaskTagCommand` is being executed, it will retrieve the respective `Person` and `Task`, and update the `Tag` field for both 
-with the common tag(s) input. 
+When the `ContactTaskTagCommand` is being executed, it will retrieve the respective `Person` and `Task`, and update the `Tag` field for both
+with the common tag(s) input.
 
 Then, it will update the `FilteredPersonList` and `FilteredTaskList` to reflect the new changes for the `Person` and `Task` in the GUI.
 
 The following sequence diagram shows how the `contactTaskTag` works:
 
-![contactTaskTagSequenceDiagram](images/contactTaskTag/contactTaskTagSequenceDiagram.png)
+![contactTaskTagSequenceDiagram|width=2100px](images/contactTaskTag/contactTaskTagSequenceDiagram.png)
 
 Note: The details to of the `Storage` model is being omitted, as it is the same procedure as adding a new contact/task.
 
@@ -327,6 +397,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | add a new person               |                                                                        |
 | `* * *`  | forgetful student                          | add todos and events        | remember to complete important tasks for projects and  attend important events|
 | `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
+| `* * *`  | user                                       | edit a task             |   easily change wrong or outdated information                                                                     |
 | `* * *`  | forgetful student                          | remove todos and events        | remove tasks that I no longer need |
 | `* * *`  | user                                       | find a person by name or tag          | locate details of persons without having to go through the entire list |
 | `* * *`  | user                                       | find todos by description or tag        | locate details of todos without having to go through the entire list |
@@ -338,7 +409,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | forgetful/disorganised student | see what tasks are due soon | finish up the most urgent tasks first |
 | `*`      | user with many contacts in the Lifebook | sort persons by name           | locate a person easily                                                 |
 | `*`      | student with weekly lectures and tutorials | add recurring tasks         | save time by not adding the same task every week, which is time-consuming|
-| `*`       | student                                  | have a common tag for my contact and task | easily search for the associated contacts with a task |
+| `*`      | student                                  | have a common tag for my contact and task | easily find the person I am working with in a project |
 
 
 ### Use cases
@@ -358,7 +429,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
-
 **Extensions**
 
 * 2a. The list is empty.
@@ -370,31 +440,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Lifebook shows an error message.
 
       Use case resumes at step 2.
-      
+
 **Use case: UC2 Adjust sorting of tasks**
 
 1. User requests to apply/remove sorting on a displayed lists of contacts.
 2. Lifebook acknowledges by adjusting the sorting on the displayed list of contacts according to the option selected by the user.
 
     Use case ends.
-    
+
 **Extensions**
 
 * 2a. The displayed list of contacts is empty.
     * 2a1. Lifebook removes all filtering from the list and returns a list sorted according to the option selected by the user.
-   
-        Use case ends.
-        
-* 2b. The list of contacts is empty (i.e no items were added to the list to be sorted).
-    * 2b1. Lifebook displays an error message to prompt the user to add contacts to the list.
-    
+
         Use case ends.
 
-#### Task List use cases
+* 2b. The list of contacts is empty (i.e no items were added to the list to be sorted).
+    * 2b1. Lifebook displays an error message to prompt the user to add contacts to the list.
+
+        Use case ends.
+
+#### TaskList use cases
 **Use case: UC3 Add a Task to the TaskList**
 
 **MSS**
-1. User requests to add a Task and its details (i.e. description, dates, and times) to the Task list.
+1. User requests to add a Task and its details (i.e. description, dates, and times) to the TaskList.
 2. Lifebook acknowledges the request by adding the To Do to the To Do list.
 
     Use case ends.
@@ -411,7 +481,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1b1. Lifebook will add the task as a recurring one instead.
 
-**Use case: UC4 Perform an action (delete, show, mark as done) on a Task from the Task list**
+**Use case: UC4 Perform an action (delete, show, mark as done) on a Task from the Tasklist**
 
 **MSS**
 1.  User requests for list of all Tasks.
@@ -554,24 +624,24 @@ Use case ends.
 * 2a. The list is empty.
 
   Use case ends.
-  
+
 **Use case: UC9 Adjust sorting of tasks**
 
 1. User requests to apply/remove sorting on a displayed lists of tasks.
 2. LifeBook acknowledges by adjusting the sorting on the displayed list of tasks according to the option selected by the user.
 
     Use case ends.
-    
+
 **Extensions**
 
 * 2a. The displayed list of tasks is empty.
     * 2a1. Lifebook removes all filtering from the list and returns a list sorted according to the option selected by the user.
-   
+
         Use case ends.
-        
+
 * 2b. The list of tasks is empty (i.e no items were added to the list to be sorted).
     * 2b1. Lifebook displays an error message to prompt the user to add tasks to the list.
-    
+
         Use case ends.
 
 **Use case: UC10 Add or remove a collaborative link**
@@ -600,7 +670,7 @@ Use case ends.
     * 3a1. Lifebook requests permission to override the existing link.
 
       Use case ends.
-      
+
 **Use case: UC11 Store and retrieve a meeting link**
 
 **MSS**
@@ -627,7 +697,7 @@ Use case ends.
     * 3a1. Lifebook requests permission to override the existing link.
 
       Use case ends.
-      
+
 **Use case: UC12 Add + search a common tag to a contact and task**
 
 **MSS**
@@ -636,7 +706,7 @@ Use case ends.
 2. Lifebook acknowledges the request by attaching the tag(s) to the respective contact and task.
 3. User then requests to search for the tag in the contact list.
 4. Lifebook shows the contact that is associated with the tag.
-5. User also requests to search for the tag in the task list.
+5. User also requests to search for the tag in the TaskList.
 6. Lifebook shows the task that is associated with the task.
 
     Use case ends.
@@ -644,11 +714,39 @@ Use case ends.
 **Extensions**
 
 * 1a. The given person/task index is invalid.
-    
+
     * 1a1. Lifebook shows an error message.
 
-      Use case restarts at step 1. 
+      Use case restarts at step 1.
 
+**Use case: UC13 Edit a task**
+
+**MSS**
+
+1. User requests to edit some fields of a task(s).
+2. Lifebook acknowledges the request by replacing the field(s) to the respective information.
+3. User then requests to search for the tag in the contact list.
+4. Lifebook shows the contact that is associated with the tag.
+5. User also requests to search for the tag in the TaskList.
+6. Lifebook shows the task that is associated with the task.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given person/task index is invalid.
+
+    * 1a1. Lifebook shows an error message.
+
+      Use case restarts at step 1.
+
+* 2a. The list is empty.
+
+* 3a. The user does not give any additional field to be edited.
+
+    * 3a1. Lifebook shows an error message.
+
+      Use case restarts at step 1.
 
 
 ### Non-Functional Requirements
@@ -659,10 +757,10 @@ Use case ends.
 4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 5.  Commands should be intuitive so that users can quickly remember the commands.
 6.  Should work without an Internet connection.
-7.  Should not require more than 1 GB of storage space.
+7.  Should not require more than 100 MB of storage space.
 8.  Should be able to backup and restore data by simply copying the whole Lifebook folder.
-9.  A user should be able to switch contact/task list with command or by clicking on the GUI.
-10. The data saved should be in a human-readable format. 
+9.  A user should be able to switch contact/TaskList with command or by clicking on the GUI.
+10. The data saved should be in a human-readable format.
 
 
 ### Glossary
@@ -710,22 +808,22 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `delete contact 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `delete`, `delete contact x` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 ### Adding a task (e.g. Todo)
 
-1. Adding on to the task list while all tasks are being shown
+1. Adding on to the TaskList while all tasks are being shown
 
     1. Prerequisites: List all tasks using the `list task` command.
-    
+
     1. Test case: `add todo desc/test date/12-12-2020 time/2359`<br>
-       Expected: A todo with the description "test" and deadline "12-12-2020, 2359" is added to the task list.
-    
+       Expected: A todo with the description "test" and deadline "12-12-2020, 2359" is added to the TaskList.
+
     1. Test case: `add todo desc/test date/12-1-2020 time/259`<br>
-       Expected: The todo is not created as the date and time format is wrong. Task list should remain the same. 
+       Expected: The todo is not created as the date and time format is wrong. TaskList should remain the same.
        A "Parse Exception" will be thrown.
-       
+
     1. Other incorrect add commands to try: `add`, `add todo`, missing description and/or date/time <br>
        Expected: Similar to previous.
 
