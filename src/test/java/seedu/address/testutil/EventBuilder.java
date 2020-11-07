@@ -109,7 +109,7 @@ public class EventBuilder {
 
 
     public Event build() {
-        return new Event(description, startDateTime, endDateTime, recurrence, tags);
+        return new Event(description, startDateTime, endDateTime, recurrence, link, tags);
     }
 
 }

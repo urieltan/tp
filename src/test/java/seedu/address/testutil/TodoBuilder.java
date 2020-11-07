@@ -25,7 +25,7 @@ public class TodoBuilder {
     private static final DateTimeFormatter OUTPUT_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
 
     private static final String DEFAULT_DESC = "homework";
-    private static final String DEFAULT_DATETIME = "14-12-2021 2359";
+    private static final String DEFAULT_DATETIME = "14-12-2020 2359";
 
     private String description;
     private LocalDateTime dateTime;
