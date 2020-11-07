@@ -49,7 +49,7 @@ If you plan to use Intellij IDEA (highly recommended):
 
 1. **Do the tutorials**
 
-   We reccomend you do these tutorials on the [parent codebase](https://github.com/nus-cs2103-AY2021S1/tp).
+   We recommend you do these tutorials on the [parent codebase](https://github.com/nus-cs2103-AY2021S1/tp).
 
    * [Tracing code](https://se-education.org/addressbook-level3/tutorials/TracingCode.html)
    * [Removing fields](https://se-education.org/addressbook-level3/tutorials/RemovingFields.html)
