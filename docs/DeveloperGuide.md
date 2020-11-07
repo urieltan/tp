@@ -30,9 +30,18 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 [`Logic.java`](https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 ### Model component
-
+![UpdatedModelClassDiagram](images/UpdatedModelClassDiagram.png)
 **API** : [`Model.java`](https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
+The Model, 
+* stores a UserPref object that represents the user’s preferences.
+* stores the address book and task list data.
+* exposes an unmodifiable ObservableList<Person> and an unmodifiable ObservableList<Task>. Both of these lists can be ‘observed’ i.e. the UI can be bound to these lists so that the UI automatically updates when the data in their respective lists change.
+* does not depend on any of the other three components.
+
+:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook` and `TaskList` , which both `Person` and `Task` references. This allows `AddressBook` amd `TaskList` to only require one `Tag` object per unique `Tag`, instead of each `Person` and `Task` needing their own `Tag` object.
+
+![BetterModelClassDiagram](images/UpdatedBetterModelClassDiagram.png)
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
@@ -298,6 +307,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `Lifebook` and the **Actor** is the `user`, unless specified otherwise)
 
+#### Contact list use cases
 **Use case: Delete a person**
 
 **MSS**
@@ -306,6 +316,70 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  Lifebook shows a list of persons
 3.  User requests to delete a specific person in the list
 4.  Lifebook deletes the person
+
+    Use case ends.
+
+
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. Lifebook shows an error message.
+
+      Use case resumes at step 2.
+      
+**Use case: Adjust sorting of tasks**
+
+1. User requests to apply/remove sorting on a displayed lists of contacts.
+2. LifeBook acknowledges by adjusting the sorting on the displayed list of contacts according to the option selected by the user.
+
+    Use case ends.
+    
+**Extensions**
+
+* 2a. The displayed list of contacts is empty.
+    * 2a1. Lifebook removes all filtering from the list and returns a list sorted according to the option selected by the user.
+   
+        Use case ends.
+        
+* 2b. The list of contacts is empty (i.e no items were added to the list to be sorted).
+    * 2b1. Lifebook displays an error message to prompt the user to add contacts to the list.
+    
+        Use case ends.
+
+#### Task List use cases
+**Use case: Add a Task to the TaskList**
+
+**MSS**
+1. User requests to add a Task and its details (i.e. description, dates, and times) to the Task list.
+2. Lifebook acknowledges the request by adding the To Do to the To Do list.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User inputs the dates or times of the Task in the incorrect format.
+
+    * 1a1. Lifebook shows an error message
+
+    Use case restarts at step 1.
+
+* 1b. User chooses to input the task as a recurring one
+
+    * 1b1. Lifebook will add the task as a recurring one instead.
+
+**Use case: Perform an action (delete, show, mark as done) on a Task from the Task list**
+
+**MSS**
+1.  User requests for list of all Tasks.
+2.  Lifebook shows the requested list of Tasks.
+3.  User requests to perform an action on a specific Task from the list
+4.  Lifebook performs action on the Task.
 
     Use case ends.
 
@@ -320,6 +394,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Lifebook shows an error message.
 
       Use case resumes at step 2.
+
+* 3b. The given action does not exist.
+
+    * 3b1. Lifebook shows an error message.
+
+     Use case resumes at step 2.
+
+* 3c. The user marks a recurring task as done.
+
+    * 3c1. Lifebook will automatically add a new task with the same details, with a new deadline given by the recurrence.
+
 
 **Use case: Find contacts by name and/or tag**
 
@@ -405,58 +490,6 @@ Use case ends.
 
       Use case resumes at step 2.
 
-**Use case: Add a To Do to the To Do List**
-
-**MSS**
-1. User requests to add a To Do and its details (i.e. description, date, and time) to the To Do list.
-2. Lifebook acknowledges the request by adding the To Do to the To Do list.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. User inputs the date or time of the To Do in the incorrect format.
-
-    * 1a1. Lifebook shows an error message
-
-    Use case restarts at step 1.
-
-* 1b. User chooses to input the task as a recurring one
-
-    * 1b1. Lifebook will add the task as a recurring one instead.
-
-**Use case: Perform an action (remove, show, mark as done) on a To Do from the To Do list**
-
-**MSS**
-1.  User requests to list all To Do's
-2.  Lifebook shows a list of To Do's
-3.  User requests to perform an action on a specific To Do from the list
-4.  Lifebook performs action on To Do.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. Lifebook shows an error message.
-
-      Use case resumes at step 2.
-
-* 3b. The given action does not exist.
-
-    * 3b1. Lifebook shows an error message.
-
-     Use case resumes at step 2.
-
-* 3c. The user marks a recurring task as done.
-
-    * 3c1. Lifebook will automatically add a new task with the same details, with a new deadline given by the recurrence.
-
 **Use case: Filter items due on a specific date/time**
 
 **MSS**
@@ -483,6 +516,25 @@ Use case ends.
 * 2a. The list is empty.
 
   Use case ends.
+  
+**Use case: Adjust sorting of tasks**
+
+1. User requests to apply/remove sorting on a displayed lists of tasks.
+2. LifeBook acknowledges by adjusting the sorting on the displayed list of tasks according to the option selected by the user.
+
+    Use case ends.
+    
+**Extensions**
+
+* 2a. The displayed list of tasks is empty.
+    * 2a1. Lifebook removes all filtering from the list and returns a list sorted according to the option selected by the user.
+   
+        Use case ends.
+        
+* 2b. The list of tasks is empty (i.e no items were added to the list to be sorted).
+    * 2b1. Lifebook displays an error message to prompt the user to add tasks to the list.
+    
+        Use case ends.
 
 **Use case: Add or remove a collaborative link**
 
