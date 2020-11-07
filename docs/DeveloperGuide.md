@@ -442,7 +442,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3c. The user marks a recurring task as done.
 
-    * 3c1. Lifebook will automatically add a new task with the same details, with a new deadline given by the recurrence.
+    * 3c1. Lifebook will automatically add a new task with the same details, with a new deadline given by the _recurrence_.
 
 
 **Use case: UC5 Find contacts by name and/or tag**
@@ -663,7 +663,8 @@ Use case ends.
 6.  Should work without an Internet connection.
 7.  Should not require more than 1 GB of storage space.
 8.  Should be able to backup and restore data by simply copying the whole Lifebook folder.
-9.  A user should be able to switch contact/task list with command or by clicking on the GUI. 
+9.  A user should be able to switch contact/task list with command or by clicking on the GUI.
+10. The data saved should be in a human-readable format. 
 
 *{More to be added}*
 
@@ -671,6 +672,7 @@ Use case ends.
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Recurrence**: A task that is done on a fixed interval (day/week/month/year).
 
 --------------------------------------------------------------------------------------------------------------------
 
