@@ -8,10 +8,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTodos.ASSIGNMENT;
 import static seedu.address.testutil.TypicalTodos.CHORES;
 
-import java.time.format.DateTimeParseException;
-
 import org.junit.jupiter.api.Test;
-
 import seedu.address.testutil.TodoBuilder;
 
 public class TodoTest {
