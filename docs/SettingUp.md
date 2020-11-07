@@ -48,6 +48,7 @@ If you plan to use Intellij IDEA (highly recommended):
    When you are ready to start coding, we recommend that you get some sense of the overall design by reading about [Lifebook’s architecture](DeveloperGuide.md#architecture).
 
 1. **Do the tutorials**
+
    We reccomend you do these tutorials on the [parent codebase](https://github.com/nus-cs2103-AY2021S1/tp).
 
    * [Tracing code](https://se-education.org/addressbook-level3/tutorials/TracingCode.html)
