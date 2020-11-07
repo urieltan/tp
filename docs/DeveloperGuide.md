@@ -282,6 +282,10 @@ Here is an activity diagram which shows the possible scenerios when the user inp
 
 ![FilterActivityDiagram](images/contactTaskTag/contactTaskTagActivityDiagram.png)
 
+#### Design consideration:
+
+Making use of the `Tag` class is useful in this case, as this will prevent duplication of code, and reduce the chance of bugs.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -343,7 +347,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is the `Lifebook` and the **Actor** is the `user`, unless specified otherwise)
 
 #### Contact list use cases
-**Use case: Delete a person**
+**Use case: UC1 Delete a person**
 
 **MSS**
 
@@ -368,7 +372,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
       
-**Use case: Adjust sorting of tasks**
+**Use case: UC2 Adjust sorting of tasks**
 
 1. User requests to apply/remove sorting on a displayed lists of contacts.
 2. Lifebook acknowledges by adjusting the sorting on the displayed list of contacts according to the option selected by the user.
@@ -388,7 +392,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
         Use case ends.
 
 #### Task List use cases
-**Use case: Add a Task to the TaskList**
+**Use case: UC3 Add a Task to the TaskList**
 
 **MSS**
 1. User requests to add a Task and its details (i.e. description, dates, and times) to the Task list.
@@ -408,7 +412,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1b1. Lifebook will add the task as a recurring one instead.
 
-**Use case: Perform an action (delete, show, mark as done) on a Task from the Task list**
+**Use case: UC4 Perform an action (delete, show, mark as done) on a Task from the Task list**
 
 **MSS**
 1.  User requests for list of all Tasks.
@@ -441,7 +445,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3c1. Lifebook will automatically add a new task with the same details, with a new deadline given by the recurrence.
 
 
-**Use case: Find contacts by name and/or tag**
+**Use case: UC5 Find contacts by name and/or tag**
 
 **MSS**
 
@@ -469,7 +473,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Find todos by description and/or tag**
+**Use case: UC6 Find todos by description and/or tag**
 
 **MSS**
 
@@ -497,7 +501,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Find events by description and/or tag**
+**Use case: UC7 Find events by description and/or tag**
 
 **MSS**
 
@@ -525,7 +529,7 @@ Use case ends.
 
       Use case resumes at step 2.
 
-**Use case: Filter items due on a specific date/time**
+**Use case: UC8 Filter items due on a specific date/time**
 
 **MSS**
 
@@ -552,7 +556,7 @@ Use case ends.
 
   Use case ends.
   
-**Use case: Adjust sorting of tasks**
+**Use case: UC9 Adjust sorting of tasks**
 
 1. User requests to apply/remove sorting on a displayed lists of tasks.
 2. LifeBook acknowledges by adjusting the sorting on the displayed list of tasks according to the option selected by the user.
@@ -571,7 +575,7 @@ Use case ends.
     
         Use case ends.
 
-**Use case: Add or remove a collaborative link**
+**Use case: UC10 Add or remove a collaborative link**
 
 **MSS**
 
@@ -597,7 +601,8 @@ Use case ends.
     * 3a1. Lifebook requests permission to override the existing link.
 
       Use case ends.
-**Use case: Store and retrieve a meeting link**
+      
+**Use case: UC11 Store and retrieve a meeting link**
 
 **MSS**
 
@@ -624,7 +629,7 @@ Use case ends.
 
       Use case ends.
       
-**Use case: Add + search a common tag to a contact and task**
+**Use case: UC12 Add + search a common tag to a contact and task**
 
 **MSS**
 
