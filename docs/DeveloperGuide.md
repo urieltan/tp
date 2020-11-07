@@ -35,7 +35,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 The Model, 
 * stores a UserPref object that represents the user’s preferences.
-* stores the address book and task list data.
+* stores the address book and TaskList data.
 * exposes an unmodifiable ObservableList<Person> and an unmodifiable ObservableList<Task>. Both of these lists can be ‘observed’ i.e. the UI can be bound to these lists so that the UI automatically updates when the data in their respective lists change.
 * does not depend on any of the other three components.
 
@@ -76,7 +76,7 @@ This section describes some noteworthy details on how certain features are imple
 * If it is successful, it will return a CommandResult with a successful message to the UI.
 
 ---
-The following sequence diagrams displays a `Todo` being added to the Task List. Adding an `Event` follows a similar sequence.
+The following sequence diagrams displays a `Todo` being added to the TaskList. Adding an `Event` follows a similar sequence.
 
 ![AddSequenceDiagram](images/addTask/AddSequenceDiagram.png)
 
@@ -389,11 +389,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
         Use case ends.
 
-#### Task List use cases
+#### TaskList use cases
 **Use case: UC3 Add a Task to the TaskList**
 
 **MSS**
-1. User requests to add a Task and its details (i.e. description, dates, and times) to the Task list.
+1. User requests to add a Task and its details (i.e. description, dates, and times) to the TaskList.
 2. Lifebook acknowledges the request by adding the To Do to the To Do list.
 
     Use case ends.
@@ -410,7 +410,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1b1. Lifebook will add the task as a recurring one instead.
 
-**Use case: UC4 Perform an action (delete, show, mark as done) on a Task from the Task list**
+**Use case: UC4 Perform an action (delete, show, mark as done) on a Task from the Tasklist**
 
 **MSS**
 1.  User requests for list of all Tasks.
@@ -635,7 +635,7 @@ Use case ends.
 2. Lifebook acknowledges the request by attaching the tag(s) to the respective contact and task.
 3. User then requests to search for the tag in the contact list.
 4. Lifebook shows the contact that is associated with the tag.
-5. User also requests to search for the tag in the task list.
+5. User also requests to search for the tag in the TaskList.
 6. Lifebook shows the task that is associated with the task.
 
     Use case ends.
@@ -660,7 +660,7 @@ Use case ends.
 6.  Should work without an Internet connection.
 7.  Should not require more than 100 MB of storage space.
 8.  Should be able to backup and restore data by simply copying the whole Lifebook folder.
-9.  A user should be able to switch contact/task list with command or by clicking on the GUI.
+9.  A user should be able to switch contact/TaskList with command or by clicking on the GUI.
 10. The data saved should be in a human-readable format. 
 
 
@@ -714,15 +714,15 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a task (e.g. Todo)
 
-1. Adding on to the task list while all tasks are being shown
+1. Adding on to the TaskList while all tasks are being shown
 
     1. Prerequisites: List all tasks using the `list task` command.
     
     1. Test case: `add todo desc/test date/12-12-2020 time/2359`<br>
-       Expected: A todo with the description "test" and deadline "12-12-2020, 2359" is added to the task list.
+       Expected: A todo with the description "test" and deadline "12-12-2020, 2359" is added to the TaskList.
     
     1. Test case: `add todo desc/test date/12-1-2020 time/259`<br>
-       Expected: The todo is not created as the date and time format is wrong. Task list should remain the same. 
+       Expected: The todo is not created as the date and time format is wrong. TaskList should remain the same. 
        A "Parse Exception" will be thrown.
        
     1. Other incorrect add commands to try: `add`, `add todo`, missing description and/or date/time <br>
