@@ -298,8 +298,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | disorganised student                       | add and remove collaborative links (Google Drive, and many more) to a todo   | find the collaborative link for the project easily |
 | `* *`      | disorganised student                       | add, remove, and view zoom links for meetings to an event         | remember my Zoom Links                                      |
 | `* *`    | forgetful/disorganised student | search what tasks/meetings are due soon or by a specific date/time (filter) | remember to finish before the deadline|
+| `* *`    | forgetful/disorganised student | see what tasks are due soon | finish up the most urgent tasks first |
 | `*`      | user with many contacts in the Lifebook | sort persons by name           | locate a person easily                                                 |
 | `*`      | student with weekly lectures and tutorials | add recurring tasks         | save time by not adding the same task every week, which is time-consuming|
+| `*`       | student                                  | have a common tag for my contact and task | easily search for the associated contacts with a task |
 
 *{More to be added}*
 
@@ -588,6 +590,28 @@ Use case ends.
     * 3a1. Lifebook requests permission to override the existing link.
 
       Use case ends.
+      
+**Use case: Add + search a common tag to a contact and task**
+
+**MSS**
+
+1. User requests to add tag(s) to a particular contact and task.
+2. Lifebook acknowledges the request by attaching the tag(s) to the respective contact and task.
+3. User then requests to search for the tag in the contact list.
+4. Lifebook shows the contact that is associated with the tag.
+5. User also requests to search for the tag in the task list.
+6. Lifebook shows the task that is associated with the task.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given person/task index is invalid.
+    
+    * 1a1. Lifebook shows an error message.
+
+      Use case restarts at step 1. 
+
 
 *{More to be added}*
 
