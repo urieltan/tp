@@ -259,7 +259,7 @@ The activity diagram when user enters the find event or find todo command is sim
 
 Upon calling `contactTaskTagParser`, the static classes from `contactTaskTagCommand`: `editEditPersonTags` and `EditTaskTags` will be invoked.
 
-If the person and task index are valid, and there is at least 1 tag given, it returns a new ContactTaskTagCommand.
+If the person and task index are valid, and there is at least 1 tag given, it returns a new `ContactTaskTagCommand`.
 
 ##### Command:
 
@@ -274,7 +274,7 @@ Then, it will update the `FilteredPersonList` and `FilteredTaskList` to reflect 
 
 The following sequence diagram shows how the `contactTaskTag` works:
 
-![contactTaskTagSequenceDiagram](images/contactTaskTag/contactTaskTagSequenceDiagram.png)
+![contactTaskTagSequenceDiagram|width=2100px](images/contactTaskTag/contactTaskTagSequenceDiagram.png)
 
 Note: The details to of the `Storage` model is being omitted, as it is the same procedure as adding a new contact/task.
 
@@ -338,7 +338,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | forgetful/disorganised student | see what tasks are due soon | finish up the most urgent tasks first |
 | `*`      | user with many contacts in the Lifebook | sort persons by name           | locate a person easily                                                 |
 | `*`      | student with weekly lectures and tutorials | add recurring tasks         | save time by not adding the same task every week, which is time-consuming|
-| `*`       | student                                  | have a common tag for my contact and task | easily search for the associated contacts with a task |
+| `*`      | student                                  | have a common tag for my contact and task | easily find the person I am working with in a project |
 
 
 ### Use cases
@@ -356,7 +356,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  Lifebook deletes the person
 
     Use case ends.
-
 
 
 **Extensions**
@@ -659,7 +658,7 @@ Use case ends.
 4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 5.  Commands should be intuitive so that users can quickly remember the commands.
 6.  Should work without an Internet connection.
-7.  Should not require more than 1 GB of storage space.
+7.  Should not require more than 100 MB of storage space.
 8.  Should be able to backup and restore data by simply copying the whole Lifebook folder.
 9.  A user should be able to switch contact/task list with command or by clicking on the GUI.
 10. The data saved should be in a human-readable format. 
@@ -710,7 +709,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `delete contact 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `delete`, `delete contact x` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 ### Adding a task (e.g. Todo)
