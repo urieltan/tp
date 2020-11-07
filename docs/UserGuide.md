@@ -239,7 +239,7 @@ If a task is recurring, it will be displayed in the GUI.
 
 ##### 2.2.7 Sorting contacts and tasks: `sort`
 
-Sorts the currently displayed tasks or contacts according to date or name, respectively. Sorting may also be cleared, such that the natural order of lists are restored.
+Sorts the currently displayed tasks or contacts according to date or name, respectively. Sorting may also be cleared, such that the natural order of both lists are restored.
 If the currently displayed list is empty, a sorted, unfiltered list will be displayed instead.
 
 Format: `sort OPTION`

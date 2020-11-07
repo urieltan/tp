@@ -74,11 +74,16 @@ public class JsonAdaptedEvent extends JsonAdaptedTask {
             .collect(Collectors.toList()));
     }
 
+    /**
+     * Converts this Jackson-friendly adapted person object into the model's {@code Event} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the adapted event.
+     */
     @Override
     public Task toModelType() throws IllegalValueException {
-        final Set<Tag> personTags = new HashSet<>();
+        final Set<Tag> eventTags = new HashSet<>();
         for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            eventTags.add(tag.toModelType());
         }
         if (description == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "description"));
@@ -101,7 +106,7 @@ public class JsonAdaptedEvent extends JsonAdaptedTask {
 
         final LocalDateTime modelEnd = end;
         final Recurrence modelRecurrence = recurrence;
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Tag> modelTags = new HashSet<>(eventTags);
 
         if (linkUrl == null || linkDesc == null || linkTime == null) {
             if (modelRecurrence == null) {

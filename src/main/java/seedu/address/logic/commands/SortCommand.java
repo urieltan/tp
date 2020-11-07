@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.sort.SortTaskCommand;
 import seedu.address.model.Model;
 
 public abstract class SortCommand extends Command {
@@ -13,5 +14,10 @@ public abstract class SortCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         return null;
+    }
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof SortCommand);
     }
 }

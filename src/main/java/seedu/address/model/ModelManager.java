@@ -147,6 +147,10 @@ public class ModelManager implements Model {
     public boolean filteredAddressBookIsEmpty() {
         return filteredPersons.isEmpty();
     }
+    @Override
+    public boolean addressBookIsEmpty() {
+        return addressBook.isEmpty();
+    }
 
     //=========== Filtered Person List Accessors =============================================================
 
@@ -181,7 +185,10 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && sortedPersons.equals(other.sortedPersons)
+                && filteredTasks.equals(other.filteredTasks)
+                && sortedTasks.equals(other.sortedTasks);
     }
 
     @Override
@@ -233,6 +240,11 @@ public class ModelManager implements Model {
     @Override
     public boolean filteredTaskListIsEmpty() {
         return filteredTasks.isEmpty();
+    }
+
+    @Override
+    public boolean taskListIsEmpty() {
+        return taskList.isEmpty();
     }
 
     //=========== Filtered Task List Accessors =============================================================

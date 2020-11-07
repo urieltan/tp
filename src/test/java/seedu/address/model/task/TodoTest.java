@@ -71,25 +71,4 @@ public class TodoTest {
         editedAssignment = new TodoBuilder(ASSIGNMENT).withDateTime(VALID_DATE_TIME_CLEAN).build();
         assertFalse(ASSIGNMENT.equals(editedAssignment));
     }
-
-    @Test
-    public void snooze() {
-        Todo assignmentCopy = new TodoBuilder(ASSIGNMENT).build();
-        String snoozeTime = "12-12-3030 2359";
-
-        // Test bad input
-        assertThrows(DateTimeParseException.class, () -> assignmentCopy.snooze(""));
-        assertThrows(DateTimeParseException.class, () -> assignmentCopy.snooze(" "));
-        assertThrows(DateTimeParseException.class, () -> assignmentCopy.snooze("abc"));
-        assertThrows(DateTimeParseException.class, () -> assignmentCopy.snooze("123"));
-        assertThrows(DateTimeParseException.class, () -> assignmentCopy.snooze("22-22-2222 2222"));
-
-        Todo projectMeetingSnooze = new TodoBuilder(ASSIGNMENT).build();
-        projectMeetingSnooze.snooze(snoozeTime);
-        assertFalse(projectMeetingSnooze.getDateTime().equals(ASSIGNMENT.getDateTime()));
-
-        Todo editedProjectMeeting = new TodoBuilder(ASSIGNMENT).withDateTime(snoozeTime).build();
-        assertTrue(projectMeetingSnooze.getDateTime().equals(editedProjectMeeting.getDateTime()));
-
-    }
 }
