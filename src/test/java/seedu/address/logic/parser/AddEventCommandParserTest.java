@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.add.AddEventCommand;
-import seedu.address.logic.commands.add.AddTodoCommand;
 import seedu.address.model.task.Event;
 import seedu.address.testutil.EventBuilder;
 

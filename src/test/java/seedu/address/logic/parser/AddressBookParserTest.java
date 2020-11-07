@@ -13,8 +13,14 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ContactTaskTagCommand;
+import seedu.address.logic.commands.DoneCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.LinkCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.add.AddContactCommand;
 import seedu.address.logic.commands.add.AddEventCommand;
 import seedu.address.logic.commands.add.AddTodoCommand;
@@ -126,31 +132,33 @@ public class AddressBookParserTest {
         LinkCollaborativeCommand command = (LinkCollaborativeCommand) parser.parseCommand(
             LinkCommand.COMMAND_WORD + " doc desc/proposal url/https://www.google.com i/1");
         assertEquals(new LinkCollaborativeCommand(ParserUtil.parseIndex("1"),
-            new CollaborativeLink("proposal", "https://www.google.com" )), command);
+            new CollaborativeLink("proposal", "https://www.google.com")), command);
     }
 
     @Test
-    public void parseCommand_DueBefore() throws Exception {
-        assertTrue(parser.parseCommand(DueBeforeCommand.COMMAND_WORD + " date/12-10-2020 time/2359") instanceof DueBeforeCommand);
+    public void parseCommand_dueBefore() throws Exception {
+        assertTrue(parser.parseCommand(DueBeforeCommand.COMMAND_WORD + " date/12-10-2020 time/2359")
+            instanceof DueBeforeCommand);
     }
 
     @Test
-    public void parseCommand_DueAt() throws Exception {
-        assertTrue(parser.parseCommand(DueAtCommand.COMMAND_WORD + " date/12-10-2020 time/2359") instanceof DueAtCommand);
+    public void parseCommand_dueAt() throws Exception {
+        assertTrue(parser.parseCommand(DueAtCommand.COMMAND_WORD + " date/12-10-2020 time/2359")
+            instanceof DueAtCommand);
     }
 
     @Test
-    public void parseCommand_Done() throws Exception {
+    public void parseCommand_done() throws Exception {
         assertTrue(parser.parseCommand(DoneCommand.COMMAND_WORD + " 1") instanceof DoneCommand);
     }
 
     @Test
-    public void parseCommand_Sort() throws Exception {
+    public void parseCommand_sort() throws Exception {
         assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " contact") instanceof SortCommand);
     }
 
     @Test
-    public void parseCommand_ContactTaskTag() throws Exception {
+    public void parseCommand_contactTaskTag() throws Exception {
         assertTrue(parser.parseCommand(ContactTaskTagCommand.COMMAND_WORD + " t/CS2100 contactIndex/1 taskIndex/2")
             instanceof ContactTaskTagCommand);
     }

@@ -1,11 +1,12 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.ClearCommand;
-
 import static seedu.address.commons.core.Messages.UNKNOWN_CLEAR_COMMAND;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.ClearCommand;
 
 public class ClearCommandParserTest {
     private ClearCommandParser parser = new ClearCommandParser();
