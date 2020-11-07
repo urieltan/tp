@@ -51,7 +51,7 @@ public class AddressBookParserTest {
     public void parseCommand_addTodo() throws Exception {
         Todo todo = new TodoBuilder().build();
         AddTodoCommand command = (AddTodoCommand) parser.parseCommand(AddTodoCommand.COMMAND_WORD
-                + " todo desc/homework date/12-12-2020 time/2359");
+                + " todo desc/homework date/14-12-2020 time/2359");
         assertEquals(new AddTodoCommand(todo), command);
     }
 

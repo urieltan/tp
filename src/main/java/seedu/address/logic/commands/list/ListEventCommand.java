@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.task.TaskTypeMatchesKeywordsPredicate;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all events in the task list to the user.
  */
 public class ListEventCommand extends ListCommand {
 
