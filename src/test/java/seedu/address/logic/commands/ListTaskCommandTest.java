@@ -24,7 +24,7 @@ public class ListTaskCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(new AddressBook(), new UserPrefs(), getTypicalTodosTaskList());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new TaskList());
+        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), getTypicalTodosTaskList());
     }
 
     @Test

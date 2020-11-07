@@ -186,9 +186,7 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons)
-                && sortedPersons.equals(other.sortedPersons)
-                && filteredTasks.equals(other.filteredTasks)
-                && sortedTasks.equals(other.sortedTasks);
+                && filteredTasks.equals(other.filteredTasks);
     }
 
     @Override

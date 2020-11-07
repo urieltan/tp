@@ -23,7 +23,7 @@ public class ListEventCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(new AddressBook(), new UserPrefs(), getTypicalEventsTaskList());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new TaskList());
+        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), getTypicalEventsTaskList());
     }
 
     @Test

@@ -69,10 +69,12 @@ public class LinkCollaborativeCommandTest {
                 "https://www.google.com");
 
         Todo targetTodo = (Todo) model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
-        Todo editedTodo = new TodoBuilder().withDescription("homework")
+        Todo editedTodo = new TodoBuilder().withDescription(targetTodo.getDescription())
                 .withDateTime("12-12-2020 2359").withLink(link).build();
+        System.out.println(editedTodo.getCollaborativeLink() == null);
 
-        LinkCollaborativeCommand linkCollaborativeCommand = new LinkCollaborativeCommand(INDEX_FIRST_TASK, link);
+        LinkCollaborativeCommand linkCollaborativeCommand = new LinkCollaborativeCommand(INDEX_FIRST_TASK,
+                link);
         String expectedMessage = String.format(MESSAGE_SUCCESS, link.getDescription());
         Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs(), getTypicalTodosTaskList());
         expectedModel.setTask(targetTodo, editedTodo);
