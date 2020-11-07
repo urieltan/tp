@@ -314,10 +314,14 @@ public class Todo extends Task {
                         && this.recurrence.equals(task.recurrence) && task.collaborativeLink == null
                         && this.tags.equals(task.tags);
             } else if (this.recurrence == null && this.collaborativeLink == null) {
+                System.out.println("masuk else if");
+                System.out.println(this);
+                System.out.println(task);
                 isEqualDeadlines = this.description.equals(task.description)
                         && this.deadline.equals(task.deadline) && this.isDone == task.isDone
                         && task.recurrence == null && task.collaborativeLink == null
                         && this.tags.equals(task.tags);
+                System.out.println(isEqualDeadlines);
             } else {
                 isEqualDeadlines = this.description.equals(task.description)
                         && this.deadline.equals(task.deadline) && this.isDone == task.isDone
