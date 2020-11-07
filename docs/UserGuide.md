@@ -5,9 +5,8 @@ title: User Guide
 
 <div class="welcome-page">
 
-  <h1 align="center">Lifebook User Guide</h1>
   <p align="center" >
-    <img src="images/LifebookHomeScreen.png" alt="Logo" width="100" />
+    <img src="images/lifebook-Logo.png" alt="Logo" width="100" />
   </p>
 
   <p align="center">
@@ -19,6 +18,7 @@ Are you a developer? Make sure to check our <i>Developer Guide</i> also! Go back
   </p>
 
 </div>
+
 
 Lifebook is a **desktop application intended for university students to  manage contact details, assignments, projects,
 and module details.** Lifebook supports Command Line Interface (CLI) for efficient contacts and tasks management while still having the benefits of a Graphical User Interface (GUI).
