@@ -6,6 +6,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.sort.SortContactCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
