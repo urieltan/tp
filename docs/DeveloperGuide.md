@@ -249,6 +249,39 @@ The following activity diagram shows what happens when the user enters the find 
 
 The activity diagram when user enters the find event or find todo command is similar to the diagram above.
 
+### Common Tag feature `contactTaskTag` 
+
+##### Parser:
+
+![ParserClassDiagram](images/contactTaskTag/ParserClassDiagram.png)
+
+* `ContactTaskTagParser` implements `Parser<ContactTaskTagCommand>`
+
+Upon calling `contactTaskTagParser`, the static classes from `contactTaskTagCommand`: `editEditPersonTags` and `EditTaskTags` will be invoked.
+
+If the person and task index are valid, and there is at least 1 tag given, it returns a new ContactTaskTagCommand.
+
+##### Command:
+
+![CommandClassDiagram](images/contactTaskTag/CommandClassDiagram.png)
+
+* `ContactTaskTagCommand` extends `Command`.
+
+When the `ContactTaskTagCommand` is being executed, it will retrieve the respective `Person` and `Task`, and update the `Tag` field for both 
+with the common tag(s) input. 
+
+Then, it will update the `FilteredPersonList` and `FilteredTaskList` to reflect the new changes for the `Person` and `Task` in the GUI.
+
+The following sequence diagram shows how the `contactTaskTag` works:
+
+![contactTaskTagSequenceDiagram](images/contactTaskTag/contactTaskTagSequenceDiagram.png)
+
+Note: The details to of the `Storage` model is being omitted, as it is the same procedure as adding a new contact/task.
+
+Here is an activity diagram which shows the possible scenerios when the user inputs the command:
+
+![FilterActivityDiagram](images/contactTaskTag/contactTaskTagActivityDiagram.png)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -338,7 +371,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: Adjust sorting of tasks**
 
 1. User requests to apply/remove sorting on a displayed lists of contacts.
-2. LifeBook acknowledges by adjusting the sorting on the displayed list of contacts according to the option selected by the user.
+2. Lifebook acknowledges by adjusting the sorting on the displayed list of contacts according to the option selected by the user.
 
     Use case ends.
     
