@@ -340,7 +340,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | student with weekly lectures and tutorials | add recurring tasks         | save time by not adding the same task every week, which is time-consuming|
 | `*`       | student                                  | have a common tag for my contact and task | easily search for the associated contacts with a task |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -651,7 +650,6 @@ Use case ends.
       Use case restarts at step 1. 
 
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -666,7 +664,6 @@ Use case ends.
 9.  A user should be able to switch contact/task list with command or by clicking on the GUI.
 10. The data saved should be in a human-readable format. 
 
-*{More to be added}*
 
 ### Glossary
 
@@ -700,29 +697,34 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `list contact` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   1. Test case: `delete contact 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   1. Test case: `delete contact 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Adding a task (e.g. Todo)
 
-### Saving data
+1. Adding on to the task list while all tasks are being shown
 
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+    1. Prerequisites: List all tasks using the `list task` command.
+    
+    1. Test case: `add todo desc/test date/12-12-2020 time/2359`<br>
+       Expected: A todo with the description "test" and deadline "12-12-2020, 2359" is added to the task list.
+    
+    1. Test case: `add todo desc/test date/12-1-2020 time/259`<br>
+       Expected: The todo is not created as the date and time format is wrong. Task list should remain the same. 
+       A "Parse Exception" will be thrown.
+       
+    1. Other incorrect add commands to try: `add`, `add todo`, missing description and/or date/time <br>
+       Expected: Similar to previous.
