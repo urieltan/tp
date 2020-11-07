@@ -619,8 +619,13 @@ Use case ends.
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  Commands should be intuitive so that users can quickly remember the commands.
+3.  Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
+4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+5.  Commands should be intuitive so that users can quickly remember the commands.
+6.  Should work without an Internet connection.
+7.  Should not require more than 1 GB of storage space.
+8.  Should be able to backup and restore data by simply copying the whole Lifebook folder.
+9.  A user should be able to switch contact/task list with command or by clicking on the GUI. 
 
 *{More to be added}*
 
