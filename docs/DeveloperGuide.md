@@ -249,6 +249,43 @@ The following activity diagram shows what happens when the user enters the find 
 
 The activity diagram when user enters the find event or find todo command is similar to the diagram above.
 
+### Common Tag feature `contactTaskTag` 
+
+##### Parser:
+
+![ParserClassDiagram](images/contactTaskTag/ParserClassDiagram.png)
+
+* `ContactTaskTagParser` implements `Parser<ContactTaskTagCommand>`
+
+Upon calling `contactTaskTagParser`, the static classes from `contactTaskTagCommand`: `editEditPersonTags` and `EditTaskTags` will be invoked.
+
+If the person and task index are valid, and there is at least 1 tag given, it returns a new ContactTaskTagCommand.
+
+##### Command:
+
+![CommandClassDiagram](images/contactTaskTag/CommandClassDiagram.png)
+
+* `ContactTaskTagCommand` extends `Command`.
+
+When the `ContactTaskTagCommand` is being executed, it will retrieve the respective `Person` and `Task`, and update the `Tag` field for both 
+with the common tag(s) input. 
+
+Then, it will update the `FilteredPersonList` and `FilteredTaskList` to reflect the new changes for the `Person` and `Task` in the GUI.
+
+The following sequence diagram shows how the `contactTaskTag` works:
+
+![contactTaskTagSequenceDiagram](images/contactTaskTag/contactTaskTagSequenceDiagram.png)
+
+Note: The details to of the `Storage` model is being omitted, as it is the same procedure as adding a new contact/task.
+
+Here is an activity diagram which shows the possible scenerios when the user inputs the command:
+
+![FilterActivityDiagram](images/contactTaskTag/contactTaskTagActivityDiagram.png)
+
+#### Design consideration:
+
+Making use of the `Tag` class is useful in this case, as this will prevent duplication of code, and reduce the chance of bugs.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -298,17 +335,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | disorganised student                       | add and remove collaborative links (Google Drive, and many more) to a todo   | find the collaborative link for the project easily |
 | `* *`      | disorganised student                       | add, remove, and view zoom links for meetings to an event         | remember my Zoom Links                                      |
 | `* *`    | forgetful/disorganised student | search what tasks/meetings are due soon or by a specific date/time (filter) | remember to finish before the deadline|
+| `* *`    | forgetful/disorganised student | see what tasks are due soon | finish up the most urgent tasks first |
 | `*`      | user with many contacts in the Lifebook | sort persons by name           | locate a person easily                                                 |
 | `*`      | student with weekly lectures and tutorials | add recurring tasks         | save time by not adding the same task every week, which is time-consuming|
+| `*`       | student                                  | have a common tag for my contact and task | easily search for the associated contacts with a task |
 
-*{More to be added}*
 
 ### Use cases
 
 (For all use cases below, the **System** is the `Lifebook` and the **Actor** is the `user`, unless specified otherwise)
 
 #### Contact list use cases
-**Use case: Delete a person**
+**Use case: UC1 Delete a person**
 
 **MSS**
 
@@ -333,10 +371,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
       
-**Use case: Adjust sorting of tasks**
+**Use case: UC2 Adjust sorting of tasks**
 
 1. User requests to apply/remove sorting on a displayed lists of contacts.
-2. LifeBook acknowledges by adjusting the sorting on the displayed list of contacts according to the option selected by the user.
+2. Lifebook acknowledges by adjusting the sorting on the displayed list of contacts according to the option selected by the user.
 
     Use case ends.
     
@@ -353,7 +391,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
         Use case ends.
 
 #### Task List use cases
-**Use case: Add a Task to the TaskList**
+**Use case: UC3 Add a Task to the TaskList**
 
 **MSS**
 1. User requests to add a Task and its details (i.e. description, dates, and times) to the Task list.
@@ -373,7 +411,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1b1. Lifebook will add the task as a recurring one instead.
 
-**Use case: Perform an action (delete, show, mark as done) on a Task from the Task list**
+**Use case: UC4 Perform an action (delete, show, mark as done) on a Task from the Task list**
 
 **MSS**
 1.  User requests for list of all Tasks.
@@ -403,10 +441,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3c. The user marks a recurring task as done.
 
-    * 3c1. Lifebook will automatically add a new task with the same details, with a new deadline given by the recurrence.
+    * 3c1. Lifebook will automatically add a new task with the same details, with a new deadline given by the _recurrence_.
 
 
-**Use case: Find contacts by name and/or tag**
+**Use case: UC5 Find contacts by name and/or tag**
 
 **MSS**
 
@@ -434,7 +472,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Find todos by description and/or tag**
+**Use case: UC6 Find todos by description and/or tag**
 
 **MSS**
 
@@ -462,7 +500,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Find events by description and/or tag**
+**Use case: UC7 Find events by description and/or tag**
 
 **MSS**
 
@@ -490,7 +528,7 @@ Use case ends.
 
       Use case resumes at step 2.
 
-**Use case: Filter items due on a specific date/time**
+**Use case: UC8 Filter items due on a specific date/time**
 
 **MSS**
 
@@ -517,7 +555,7 @@ Use case ends.
 
   Use case ends.
   
-**Use case: Adjust sorting of tasks**
+**Use case: UC9 Adjust sorting of tasks**
 
 1. User requests to apply/remove sorting on a displayed lists of tasks.
 2. LifeBook acknowledges by adjusting the sorting on the displayed list of tasks according to the option selected by the user.
@@ -536,7 +574,7 @@ Use case ends.
     
         Use case ends.
 
-**Use case: Add or remove a collaborative link**
+**Use case: UC10 Add or remove a collaborative link**
 
 **MSS**
 
@@ -562,7 +600,8 @@ Use case ends.
     * 3a1. Lifebook requests permission to override the existing link.
 
       Use case ends.
-**Use case: Store and retrieve a meeting link**
+      
+**Use case: UC11 Store and retrieve a meeting link**
 
 **MSS**
 
@@ -588,22 +627,49 @@ Use case ends.
     * 3a1. Lifebook requests permission to override the existing link.
 
       Use case ends.
+      
+**Use case: UC12 Add + search a common tag to a contact and task**
 
-*{More to be added}*
+**MSS**
+
+1. User requests to add tag(s) to a particular contact and task.
+2. Lifebook acknowledges the request by attaching the tag(s) to the respective contact and task.
+3. User then requests to search for the tag in the contact list.
+4. Lifebook shows the contact that is associated with the tag.
+5. User also requests to search for the tag in the task list.
+6. Lifebook shows the task that is associated with the task.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given person/task index is invalid.
+    
+    * 1a1. Lifebook shows an error message.
+
+      Use case restarts at step 1. 
+
+
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  Commands should be intuitive so that users can quickly remember the commands.
+3.  Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
+4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+5.  Commands should be intuitive so that users can quickly remember the commands.
+6.  Should work without an Internet connection.
+7.  Should not require more than 1 GB of storage space.
+8.  Should be able to backup and restore data by simply copying the whole Lifebook folder.
+9.  A user should be able to switch contact/task list with command or by clicking on the GUI.
+10. The data saved should be in a human-readable format. 
 
-*{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Recurrence**: A task that is done on a fixed interval (day/week/month/year).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -631,29 +697,43 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `list contact` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   1. Test case: `delete contact 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   1. Test case: `delete contact 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Adding a task (e.g. Todo)
 
-### Saving data
+1. Adding on to the task list while all tasks are being shown
 
-1. Dealing with missing/corrupted data files
+    1. Prerequisites: List all tasks using the `list task` command.
+    
+    1. Test case: `add todo desc/test date/12-12-2020 time/2359`<br>
+       Expected: A todo with the description "test" and deadline "12-12-2020, 2359" is added to the task list.
+    
+    1. Test case: `add todo desc/test date/12-1-2020 time/259`<br>
+       Expected: The todo is not created as the date and time format is wrong. Task list should remain the same. 
+       A "Parse Exception" will be thrown.
+       
+    1. Other incorrect add commands to try: `add`, `add todo`, missing description and/or date/time <br>
+       Expected: Similar to previous.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+
+
+
+
+
+
+
