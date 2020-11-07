@@ -334,17 +334,6 @@ public class Event extends Task {
     public String getEndTime() {
         return this.end.format(INPUT_DATE_TIME_FORMAT).toString();
     }
-
-    /**
-     * Reschedules the period of an event to be of a provided period.
-     *
-     * @param newPeriod the period that the event should be rescheduled to.
-     */
-    public void reschedule(String newPeriod) {
-        this.start = LocalDateTime.parse(newPeriod.substring(0, END_OF_FIRST_DATE_TIME_INDEX), INPUT_DATE_TIME_FORMAT);
-        this.end = LocalDateTime.parse(newPeriod.substring(START_OF_SECOND_DATE_TIME_INDEX), INPUT_DATE_TIME_FORMAT);
-    }
-
     /**
      * Returns true if both events of the same description have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two events.

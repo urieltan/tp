@@ -14,4 +14,9 @@ public abstract class SortCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         return null;
     }
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof SortCommand);
+    }
 }

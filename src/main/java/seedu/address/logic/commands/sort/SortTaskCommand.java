@@ -9,7 +9,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDateComparator;
-
+/**
+ * Sorts task list according to date and time in ascending order.
+ */
 public class SortTaskCommand extends SortCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts tasks by date ";
     public static final String MESSAGE_SUCCESS = "Sorted tasks by date";
@@ -33,5 +35,10 @@ public class SortTaskCommand extends SortCommand {
         } else {
             return new CommandResult(MESSAGE_SUCCESS, "TASK");
         }
+    }
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof SortTaskCommand);
     }
 }

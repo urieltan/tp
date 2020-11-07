@@ -250,16 +250,6 @@ public class Todo extends Task {
         this.recurrence = recurrence;
         this.collaborativeLink = link;
     }
-
-    /**
-     * Changes the deadline of the task to a provided new deadline.
-     *
-     * @param newDeadline the deadline of the task to be changed to
-     */
-    public void snooze(String newDeadline) {
-        this.deadline = LocalDateTime.parse(newDeadline, INPUT_DATE_TIME_FORMAT);
-    }
-
     /**
      * Returns a String representation of the deadline with the format of outputFormatter.
      *

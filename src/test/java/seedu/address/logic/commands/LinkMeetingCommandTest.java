@@ -73,7 +73,6 @@ public class LinkMeetingCommandTest {
         Event editedEvent = new EventBuilder().withDescription("meeting")
                 .withStartDateTime("12-12-2020 1000").withEndDateTime("12-12-2020 1130")
                 .withTags("CS2103T").withLink(link).build();
-
         LinkMeetingCommand linkMeetingCommand = new LinkMeetingCommand(INDEX_FIRST_TASK, link);
         String expectedMessage = String.format(MESSAGE_SUCCESS, link.getDescriptionDateTime());
         Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs(), getTypicalEventsTaskList());
@@ -286,6 +285,16 @@ public class LinkMeetingCommandTest {
 
         @Override
         public boolean filteredAddressBookIsEmpty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean taskListIsEmpty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean addressBookIsEmpty() {
             throw new AssertionError("This method should not be called.");
         }
 
