@@ -670,7 +670,7 @@ Use case ends.
     * 3a1. Lifebook requests permission to override the existing link.
 
       Use case ends.
-      
+
 **Use case: UC11 Store and retrieve a meeting link**
 
 **MSS**
