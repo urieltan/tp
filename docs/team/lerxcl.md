@@ -23,13 +23,13 @@ Given below are my contributions to the project.
   * What it does: With a single command, you can add the same tag(s) to a particular contact and task.
   * Justification: This feature helps to speed up the process of adding a tag to a contact and a task if the user decides to have a commonn tag.
   * Highlights: Instead of writing all new code, I have used the "tagging" feature for a contact and task (individually) to reduce chance of bugs and overlaps.
-  
+
 * **New Feature**: Added ability to add a recurring task.
   * What it does: A recurring task is created when a user includes the optional `recurring/` field in adding a new todo/event.
                   When a recurring task is marked as done, it will automatically generate another recurring task with the new deadline based on the recurrence field. (while the remaining details of the task remains the same)
   * Justification: This feature improves the product functionality as the user would not have to manually add recurring tasks every time.
   * Highlights: I have to ensure that the recurring task is generated properly after it is marked as done. We have considered whether should the "done" recurrence task be deleted automatically too, but we decide to leave it in case the user wants to trace back their done tasks.
-  
+
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=f12&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=lerxcl&tabRepo=AY2021S1-CS2103T-F12-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other)
 
 * **Project management**:
@@ -37,18 +37,18 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
   * Wrote tests for the basic task operations to increase coverage from 49.89% to 56.75% (Pull requests [\#69](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/69))
-  
-    Created EventBuilder and TodoBuilder, which is adapted after PersonBuilder in AB3. 
-    
+
+    Created EventBuilder and TodoBuilder, which is adapted after PersonBuilder in AB3.
+
     Created TypicalTodos and TypicalEvents, which is adapted after TypicalPersons in AB3.
-    
+
     These stubs are useful for testing task operations.
-    
+
   * Wrote tests for:
     - Filter function [\#71](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/71)
     - Recurring function [\#98](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/98)
     - Common tag for contact and task [\#132](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/132)
-    
+
   * Modify GUI to show "Recurring task" [\#125](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/125)
   * Modify GUI to show "Due soon" panel [\#126](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/126)
 
@@ -74,7 +74,7 @@ Given below are my contributions to the project.
 
 * **Community**:
   * PRs reviewed: [\#98](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/98), [\#107](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/107), [\#112](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/112), [\#116](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/116), [\#118](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/118), [\#120](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/120), [\#130](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/130), [\#145](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/145), [\#151](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/151)
-  * Contributed to forum discussions: 
+  * Contributed to forum discussions:
     - Sharing tips: [Testing your application using Windows Sandbox](https://github.com/nus-cs2103-AY2021S1/forum/issues/227), [iP .jar tip](https://github.com/nus-cs2103-AY2021S1/forum/issues/174)
     - Asking for help: [Unable to display ✓ and ✘](https://github.com/nus-cs2103-AY2021S1/forum/issues/64)
 

@@ -3,11 +3,29 @@ layout: page
 title: User Guide
 ---
 
+<div class="welcome-page">
+
+  <h1 align="center">Lifebook User Guide</h1>
+  <p align="center" >
+    <img src="images/LifebookHomeScreen.png" alt="Logo" width="100" />
+  </p>
+
+  <p align="center">
+Welcome to <i>Lifebook User Guide</i>! Choose a section from the table of contents below to <br>find answers, step-by-step guides and know about Lifebook better.
+  </p>
+
+  <p align="center" >
+Are you a developer? Make sure to check our <i>Developer Guide</i> also! Go back to our <a href="https://ay2021s1-cs2103t-f12-4.github.io/tp/DeveloperGuide.html"><i>Lifebook Developer Guide Page</i></a> to find out more resources.
+  </p>
+
+</div>
+
 Lifebook is a **desktop application intended for university students to  manage contact details, assignments, projects,
 and module details.** Lifebook supports Command Line Interface (CLI) for efficient contacts and tasks management while still having the benefits of a Graphical User Interface (GUI).
 
 This user guide is targeted at university students who are interested in using Lifebook.
 
+<summary align="center"><h2>Table of Contents</h2></summary>
 * Table of Contents
 {:toc}
 
@@ -310,8 +328,6 @@ Examples:
 
 ##### 2.3.2 Editing a todo : `edit todo`
 
-> Coming soon
-
 Edits an existing todo in the task list.
 
 Format: `edit todo i/INDEX [desc/DESCRIPTION] [date/DATE] [time/TIME]`
@@ -366,7 +382,7 @@ Format: `find todo [desc/DESC_KEYWORD [MORE_DESC_KEYWORDS]] [t/TAG_KEYWORD]`
 * When only tag keyword is given, todos whose one of the tag(s) matches the tag searched will be returned.
 e.g. Finish assignment with tag `CS2100` and `Graded` will be returned when tag `CS2100` is searched.
 * When both description keyword and tag keyword are given, todos matching both keywords are returned.
-e.g. `Finish assignment` with tag `CS2100` and `Graded` will be returned 
+e.g. `Finish assignment` with tag `CS2100` and `Graded` will be returned
 on command `find todo desc/Do assignment t/CS2100`.
 
 Examples:
@@ -394,8 +410,6 @@ Examples:
 * `add event desc/Singapore Fintech Festival startdate/09-08-2020 starttime/1000 enddate/12-08-2020 endtime/2359 t/important`
 
 ##### 2.4.2 Editing an event : `edit event`
-
-> Coming soon
 
 Edits an existing event in the task list.
 
@@ -452,7 +466,7 @@ e.g. `Attend meeting` will return `Attend workshop`, `Arrange meeting`
 * When only tag keyword is given, events whose one of the tag(s) matches the tag searched will be returned.
 e.g. Attend meeting with tag `CS2100` and `TeamProject` will be returned when tag `CS2100` is searched.
 * When both description keyword and tag keyword are given, todos matching both keywords are returned.
-e.g. `Attend meeting` with tag `CS2100` and `TeamProject` will be returned 
+e.g. `Attend meeting` with tag `CS2100` and `TeamProject` will be returned
 on command `find event desc/meeting t/TeamProject`.
 
 Examples:

@@ -23,8 +23,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 ![UpdatedUiClassDiagram](images/UpdatedUiClassDiagram.png)
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `TaskListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. 
-For example, the layout of the [`MainWindow`](https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) 
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
+For example, the layout of the [`MainWindow`](https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java)
 is specified in [`MainWindow.fxml`](https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
@@ -61,7 +61,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 ![UpdatedModelClassDiagram](images/UpdatedModelClassDiagram.png)
 **API** : [`Model.java`](https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-The Model, 
+The Model,
 * stores a UserPref object that represents the user’s preferences.
 * stores the address book and TaskList data.
 * exposes an unmodifiable ObservableList<Person> and an unmodifiable ObservableList<Task>. Both of these lists can be ‘observed’ i.e. the UI can be bound to these lists so that the UI automatically updates when the data in their respective lists change.
@@ -319,7 +319,7 @@ The following activity diagram shows what happens when the user enters the find 
 
 The activity diagram when user enters the find event or find todo command is similar to the diagram above.
 
-### Common Tag feature `contactTaskTag` 
+### Common Tag feature `contactTaskTag`
 
 ##### Parser:
 
@@ -337,8 +337,8 @@ If the person and task index are valid, and there is at least 1 tag given, it re
 
 * `ContactTaskTagCommand` extends `Command`.
 
-When the `ContactTaskTagCommand` is being executed, it will retrieve the respective `Person` and `Task`, and update the `Tag` field for both 
-with the common tag(s) input. 
+When the `ContactTaskTagCommand` is being executed, it will retrieve the respective `Person` and `Task`, and update the `Tag` field for both
+with the common tag(s) input.
 
 Then, it will update the `FilteredPersonList` and `FilteredTaskList` to reflect the new changes for the `Person` and `Task` in the GUI.
 
@@ -440,24 +440,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Lifebook shows an error message.
 
       Use case resumes at step 2.
-      
+
 **Use case: UC2 Adjust sorting of tasks**
 
 1. User requests to apply/remove sorting on a displayed lists of contacts.
 2. Lifebook acknowledges by adjusting the sorting on the displayed list of contacts according to the option selected by the user.
 
     Use case ends.
-    
+
 **Extensions**
 
 * 2a. The displayed list of contacts is empty.
     * 2a1. Lifebook removes all filtering from the list and returns a list sorted according to the option selected by the user.
-   
+
         Use case ends.
-        
+
 * 2b. The list of contacts is empty (i.e no items were added to the list to be sorted).
     * 2b1. Lifebook displays an error message to prompt the user to add contacts to the list.
-    
+
         Use case ends.
 
 #### TaskList use cases
@@ -624,24 +624,24 @@ Use case ends.
 * 2a. The list is empty.
 
   Use case ends.
-  
+
 **Use case: UC9 Adjust sorting of tasks**
 
 1. User requests to apply/remove sorting on a displayed lists of tasks.
 2. LifeBook acknowledges by adjusting the sorting on the displayed list of tasks according to the option selected by the user.
 
     Use case ends.
-    
+
 **Extensions**
 
 * 2a. The displayed list of tasks is empty.
     * 2a1. Lifebook removes all filtering from the list and returns a list sorted according to the option selected by the user.
-   
+
         Use case ends.
-        
+
 * 2b. The list of tasks is empty (i.e no items were added to the list to be sorted).
     * 2b1. Lifebook displays an error message to prompt the user to add tasks to the list.
-    
+
         Use case ends.
 
 **Use case: UC10 Add or remove a collaborative link**
@@ -697,7 +697,7 @@ Use case ends.
     * 3a1. Lifebook requests permission to override the existing link.
 
       Use case ends.
-      
+
 **Use case: UC12 Add + search a common tag to a contact and task**
 
 **MSS**
@@ -714,10 +714,10 @@ Use case ends.
 **Extensions**
 
 * 1a. The given person/task index is invalid.
-    
+
     * 1a1. Lifebook shows an error message.
 
-      Use case restarts at step 1. 
+      Use case restarts at step 1.
 
 **Use case: UC13 Edit a task**
 
@@ -735,20 +735,20 @@ Use case ends.
 **Extensions**
 
 * 1a. The given person/task index is invalid.
-    
+
     * 1a1. Lifebook shows an error message.
 
-      Use case restarts at step 1. 
+      Use case restarts at step 1.
 
 * 2a. The list is empty.
 
 * 3a. The user does not give any additional field to be edited.
-    
+
     * 3a1. Lifebook shows an error message.
 
-      Use case restarts at step 1. 
-      
- 
+      Use case restarts at step 1.
+
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -760,7 +760,7 @@ Use case ends.
 7.  Should not require more than 100 MB of storage space.
 8.  Should be able to backup and restore data by simply copying the whole Lifebook folder.
 9.  A user should be able to switch contact/TaskList with command or by clicking on the GUI.
-10. The data saved should be in a human-readable format. 
+10. The data saved should be in a human-readable format.
 
 
 ### Glossary
@@ -816,14 +816,14 @@ testers are expected to do more *exploratory* testing.
 1. Adding on to the TaskList while all tasks are being shown
 
     1. Prerequisites: List all tasks using the `list task` command.
-    
+
     1. Test case: `add todo desc/test date/12-12-2020 time/2359`<br>
        Expected: A todo with the description "test" and deadline "12-12-2020, 2359" is added to the TaskList.
-    
+
     1. Test case: `add todo desc/test date/12-1-2020 time/259`<br>
-       Expected: The todo is not created as the date and time format is wrong. TaskList should remain the same. 
+       Expected: The todo is not created as the date and time format is wrong. TaskList should remain the same.
        A "Parse Exception" will be thrown.
-       
+
     1. Other incorrect add commands to try: `add`, `add todo`, missing description and/or date/time <br>
        Expected: Similar to previous.
 
