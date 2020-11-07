@@ -39,6 +39,7 @@ You may reach us through the following email addresses:
 <img src="images/caleblyx.png" width="200px">
 
 [[github](http://github.com/caleblyx)]
+[[portfolio](team/caleblyx.md)]
 
 * Role: User guide, Intellij expert, Merge conflict solver
 * Responsibilities: Data
