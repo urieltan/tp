@@ -27,4 +27,10 @@ public class ListEventCommand extends ListCommand {
         model.updateFilteredTaskList(new TaskTypeMatchesKeywordsPredicate(keyword));
         return new CommandResult(MESSAGE_SUCCESS, "TASK");
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+            || other instanceof ListEventCommand;
+    }
 }
