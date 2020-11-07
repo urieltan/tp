@@ -164,6 +164,15 @@ Format: `clear contact`
 
 At the bottom right hand corner of Lifebook, a list of tasks is shown that are due **1 week from the current date/time**.
 
+<div markdown="block" class="alert alert-danger">
+
+:warning: **Warning:**
+
+For all task operations, input the task's index based from the **whole Tasklist**, NOT from "Due soon".
+
+</div>
+
+
 ##### 2.2.2 Removing Tasks : `delete task`
 Removes a To Do or an Event from the TaskList of LifeBook.
 
@@ -231,7 +240,7 @@ When a recurring task is marked as done, it will automatically generate another 
 
 Example: `add todo desc/CS2100 Tutorial date/04-11-2020 time/1100 recurring/1 week`
 
-When this task is marked as done, it will generate another todo with the deadline: `Date: 11-11-2020, Time: 1100`.
+When this task is marked as done, it will generate another todo with the deadline: `Date: 11-11-2020, Time: 1100`
 
 If a task is recurring, it will be displayed in the GUI.
 
@@ -274,7 +283,7 @@ Upon executing the command, the contact at index 7- “James Ho” and task at i
 :warning: **Warning:**
 
 It is a coincidence in the example that the index of the "homework" task is 1 for "Due soon" and the whole Tasklist.
-Please input the task's index based from the **whole Tasklist**.
+Input the task's index based from the **whole Tasklist** instead.
 
 </div>
 
