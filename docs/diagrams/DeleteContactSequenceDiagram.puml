@@ -5,7 +5,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
-participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant "d:DeleteContactCommand" as DeleteContactCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -13,10 +13,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("delete contact 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
+LogicManager -> AddressBookParser : parseCommand("delete contact 1")
 activate AddressBookParser
 
 create DeleteCommandParser
@@ -26,15 +26,15 @@ activate DeleteCommandParser
 DeleteCommandParser --> AddressBookParser
 deactivate DeleteCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
+AddressBookParser -> DeleteCommandParser : parse("contact 1")
 activate DeleteCommandParser
 
-create DeleteCommand
-DeleteCommandParser -> DeleteCommand
-activate DeleteCommand
+create DeleteContactCommand
+DeleteCommandParser -> DeleteContactCommand
+activate DeleteContactCommand
 
-DeleteCommand --> DeleteCommandParser : d
-deactivate DeleteCommand
+DeleteContactCommand --> DeleteCommandParser : d
+deactivate DeleteContactCommand
 
 DeleteCommandParser --> AddressBookParser : d
 deactivate DeleteCommandParser
@@ -45,24 +45,24 @@ destroy DeleteCommandParser
 AddressBookParser --> LogicManager : d
 deactivate AddressBookParser
 
-LogicManager -> DeleteCommand : execute()
-activate DeleteCommand
+LogicManager -> DeleteContactCommand : execute()
+activate DeleteContactCommand
 
-DeleteCommand -> Model : deletePerson(1)
+DeleteContactCommand -> Model : deletePerson(1)
 activate Model
 
-Model --> DeleteCommand
+Model --> DeleteContactCommand
 deactivate Model
 
 create CommandResult
-DeleteCommand -> CommandResult
+DeleteContactCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> DeleteContactCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : result
-deactivate DeleteCommand
+DeleteContactCommand --> LogicManager : result
+deactivate DeleteContactCommand
 
 [<--LogicManager
 deactivate LogicManager

@@ -36,10 +36,27 @@ The `UI` component,
 [`Ui.java`](https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ### Logic component
+![Structure of the Logic Component](images/LogicClassDiagram.png)
 
 **API** :
-[`Logic.java`](https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
+[`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
+1. `Logic` uses the `AddressBookParser` class to parse the user command.
+2. This results in a `Command` object which is executed by the `LogicManager`.
+3. The command execution can affect the `Model` (e.g. adding a person).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+5. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
+
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete contact 1")` API call.
+
+![Interactions Inside the Logic Component for the `delete contact 1` Command](images/DeleteContactSequenceDiagram.png)
+
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("edit event i/1 ...")` API call.
+
+![Interactions Inside the Logic Component for the `delete contact 1` Command](images/EditEventSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 ### Model component
 ![UpdatedModelClassDiagram](images/UpdatedModelClassDiagram.png)
 **API** : [`Model.java`](https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -105,6 +122,48 @@ The following activity diagram shows what happens when the user enters an add ta
 
 * An alternative approach would be to have a single `AddTaskCommand` which extends `AddCommand`. The `AddCommandParser` could pass either `todo` or `event` to this class' constructor.
 * This could reduce the replication of code, since both `AddTodoCommand` and `AddEventCommand` are almost identical.
+* However, by having two distinct commands, different and more specific success or error messages can be produced by the execution of respective commands.
+
+### Edit tasks (`todo` and `event`) feature
+
+##### Parser:
+
+![EditTaskParserClassDiagram](images/editTask/EditTaskParserClassDiagram.png)
+
+* `EditCommandParser` implements `Parser<EditCommand>`
+
+* It parses the user input to determine if the user intends to add a `todo` or `event`.
+* It parses the input after the prefixes required to create the intended `todo` or `event`.
+* If the user input has all all required prefixes and matches the required syntax and format, it edits the new intended `Todo` or `Event` and passes it to its respective EditCommand constructor.
+
+##### Command:
+
+![EditTaskCommandClassDiagram](images/editTask/CommandClassDiagram.png)
+
+* The abstract class `EditCommand` extends `Command`.
+* The concrete classes `EditEventCommand`, `EditTodoCommand`, and `EditContactCommand` extends `EditCommand`.
+* The command will be executed by the Model, which will update the FilteredTaskList based on the edited task.
+* If it is successful, it will return a CommandResult with a successful message to the UI.
+
+---
+The following sequence diagrams displays an `Event` being edited to the TaskList. Editing a `Todo` follows a similar sequence.
+
+![EditTaskSequenceDiagram](images/editTask/EditTaskSequenceDiagram.png)
+
+The following sequence diagram exhibits the behavior of logic.
+
+![AddTaskSequenceDiagram](images/editTask/EditTaskSequence.png)
+
+The following activity diagram shows what happens when the user enters an edit task command:
+
+![AddTaskActivityDiagram](images/editTask/EditTaskActivityDiagram.png)
+
+#### Design consideration
+
+#### How command works:
+
+* An alternative approach would be to have a single `EditTaskCommand` which extends `EditCommand`. The `EditCommandParser` could pass either `todo` or `event` to this class' constructor.
+* This could reduce the replication of code, since both `AddEventCommand` and `AddTodoCommand` are almost identical.
 * However, by having two distinct commands, different and more specific success or error messages can be produced by the execution of respective commands.
 
 ### Filter tasks (`dueAt` and `dueBefore`) feature
@@ -338,6 +397,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | add a new person               |                                                                        |
 | `* * *`  | forgetful student                          | add todos and events        | remember to complete important tasks for projects and  attend important events|
 | `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
+| `* * *`  | user                                       | edit a task             |   easily change wrong or outdated information                                                                     |
 | `* * *`  | forgetful student                          | remove todos and events        | remove tasks that I no longer need |
 | `* * *`  | user                                       | find a person by name or tag          | locate details of persons without having to go through the entire list |
 | `* * *`  | user                                       | find todos by description or tag        | locate details of todos without having to go through the entire list |
@@ -659,8 +719,36 @@ Use case ends.
 
       Use case restarts at step 1. 
 
+**Use case: UC13 Edit a task**
 
+**MSS**
 
+1. User requests to edit some fields of a task(s).
+2. Lifebook acknowledges the request by replacing the field(s) to the respective information.
+3. User then requests to search for the tag in the contact list.
+4. Lifebook shows the contact that is associated with the tag.
+5. User also requests to search for the tag in the TaskList.
+6. Lifebook shows the task that is associated with the task.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given person/task index is invalid.
+    
+    * 1a1. Lifebook shows an error message.
+
+      Use case restarts at step 1. 
+
+* 2a. The list is empty.
+
+* 3a. The user does not give any additional field to be edited.
+    
+    * 3a1. Lifebook shows an error message.
+
+      Use case restarts at step 1. 
+      
+ 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
