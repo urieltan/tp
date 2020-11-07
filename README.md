@@ -16,9 +16,9 @@
 
     * It comes with a reasonable level of user and developer documentation.
 
-* For the detailed user documentation of this project, see [here](https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/docs/UserGuide.md).
+* For the detailed user documentation of this project, see [here](https://ay2021s1-cs2103t-f12-4.github.io/tp/UserGuide.html).
 
-* For contributing to the ongoing development of the Lifebook, do check out the [Developer Guide](https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/docs/DeveloperGuide.md).
+* For contributing to the ongoing development of the Lifebook, do check out the [Developer Guide](https://ay2021s1-cs2103t-f12-4.github.io/tp/DeveloperGuide.html).
 
 This project is developed from an se-education.org initiative. If you would like to contribute code to the initiative, see [se-education.org](https://se-education.org#https://se-education.org/#contributing) for more info.
 
