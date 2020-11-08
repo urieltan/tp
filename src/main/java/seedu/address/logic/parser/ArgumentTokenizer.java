@@ -78,7 +78,7 @@ public class ArgumentTokenizer {
     }
 
     /**
-     * Finds all zero-based prefix positions in the given arguments string.
+     * Finds every zero-based prefix positions in the given arguments string.
      * Primarily used for finding out prefixes that don't fit.
      *
      * @param argsString Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
@@ -91,7 +91,6 @@ public class ArgumentTokenizer {
         ArrayList<PrefixPosition> everyPrefixPosition = new ArrayList<>();
         Matcher m = p.matcher(argsString);
         while(m.find()){
-            System.out.println(argsString.substring(m.start(),m.end()));
             everyPrefixPosition.add(new PrefixPosition(new Prefix(argsString.substring(m.start() + 1,m.end()))
                     , m.start() + 1));
         }
