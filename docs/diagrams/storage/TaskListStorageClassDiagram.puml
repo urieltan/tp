@@ -18,7 +18,7 @@ JsonAdaptedEvent .up.|> JsonAdaptedTask
 
 JsonAdaptedTodo --> " * " JsonAdaptedTag
 JsonAdaptedEvent --> " * " JsonAdaptedTag
-JsonAdaptedTodo --> " * " JsonAdaptedRecurrence
-JsonAdaptedEvent --> " * " JsonAdaptedRecurrence
+JsonAdaptedTodo --> " 0,1     " JsonAdaptedRecurrence
+JsonAdaptedEvent --> "0,1 " JsonAdaptedRecurrence
 
 @enduml
