@@ -22,4 +22,10 @@ public class ListTaskCommand extends ListCommand {
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         return new CommandResult(MESSAGE_SUCCESS, "TASK");
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+            || other instanceof ListTaskCommand;
+    }
 }

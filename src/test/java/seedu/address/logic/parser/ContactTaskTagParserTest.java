@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ContactTaskTagCommand;
 import seedu.address.logic.commands.ContactTaskTagCommand.EditPersonTags;
@@ -22,6 +23,16 @@ public class ContactTaskTagParserTest {
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, ContactTaskTagCommand.MESSAGE_USAGE);
 
     private ContactTaskTagParser parser = new ContactTaskTagParser();
+
+    @Test
+    public void parse_invalidArgs_failure() {
+        // invalid index
+        assertParseFailure(parser, "t/test contactIndex/1 taskIndex/a",
+            Messages.MESSAGE_INVALID_DISPLAYED_INDEX);
+
+        // no args
+        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+    }
 
     @Test
     public void parse_missingParts_failure() {
