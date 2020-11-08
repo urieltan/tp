@@ -115,7 +115,7 @@ Format: `edit contact i/INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]â€
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * Emails should be of the format local-part@domain and adhere to the following constraints:
-* 1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (!#$%&'*+/=?`{|}~^.-) .
+* 1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, ``(!#$%&'*+/=?`{|}~^.-)`` .
 * 2. This is followed by a '@' and then a domain name. The domain name must:
 *    - be at least 2 characters long
 *    - start and end with alphanumeric characters
@@ -497,6 +497,8 @@ Format: `help`
 
 **Q**: How do I save any update I made on the Lifebook?<br>
 **A**: Lifebook will automatically save any update you make upon closing the app, and the data is saved in the hard disk. There is no need to save manually.<br>
+**Q**: Can I add past todos and events to LifeBook?<br>
+**A**: Yes you can, make sure the date format fits DD-MM-YYYY<br>
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Lifebook home folder.
 
