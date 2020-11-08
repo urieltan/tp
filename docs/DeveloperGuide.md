@@ -485,7 +485,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1b1. Lifebook will add the task as a recurring one instead.
 
-**Use case: UC4 Perform an action (delete, show, mark as done) on a Task from the Tasklist**
+**Use case: UC4 Perform an action (delete or mark as done) on a Task from the Tasklist**
 
 **MSS**
 1.  User requests for list of all Tasks.
@@ -831,11 +831,53 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect add commands to try: `add`, `add todo`, missing description and/or date/time <br>
        Expected: Similar to previous.
 
+### Marking a Task as done and Task deletion
 
+1. Marking a task as done or deleting a task while the TaskList is being shown.
+    1. Prerequisites: Have tasks in the displayed TaskList. The list may be filtered or unfiltered.
+    
+    1. Test case: `done VALID INDEX` e.g. if there is a task with an index of 5, input the command `done 5`. <br>
+       Expected: The task at the index of 5 should be marked as done.
+       
+    1. Test case: `delete task VALID INDEX` e.g. if there is a task with an index of 5, input the command `delete task 5`. <br>
+       Expected: The task at the index of 5 should be deleted.
+       
+    1. Test case: `done INVALID INDEX` e.g. if the TaskList has 10 items, input the command `done 12`. <br>
+       Expected: An error message should be provided indicating that the provided index is invalid.
+    
+    1. Test case: `delete task INVALID INDEX` e.g. if the TaskList has 10 items, input the command `delete task 12`. <br>
+           Expected: An error message should be provided indicating that the provided index is invalid.
 
+### Sorting
+Sorting the contact list and TaskList with different states. There are different inputs for each sorting command.
 
+1. Command: `sort task`
 
+    1. Input: Have an unsorted displayed list of tasks. <br>
+       Expected: The list of task should be sorted according to date and time in ascending order.
+    
+    1. Input: Have an empty displayed list of tasks due to filtering. <br>
+       Expected: An unfiltered list of tasks sorted according to date and time in ascending order should be displayed.
+    
+    1. Input:: Have a TaskList without added Tasks.
+       Expected: An error prompting the user to add tasks should be displayed.    
+           
+1. Command: `sort contact`
+    1. Input: Have an unsorted displayed list of contacts. <br>
+       Expected: The list of contacts should be sorted according to name in alphabetical order.
+    
+    1. Input: Have an empty displayed list of contacts due to filtering. <br>
+       Expected: An unfiltered list of contacts sorted according to name in alphabetical order should be displayed.
+            
+    1. Input: Have a contact list without added contacts.
+       Expected: An error prompting the user to add contacts should be displayed.
 
-
-
-
+1. Command: `sort clear`
+    1. Input: Sorted displayed lists of tasks and contacts.
+        Expected: Both lists should be restored to their natural orders.
+    
+    1. Input: Empty displayed list or lists due to filtering  (i.e. both or one of the displayed lists can be empty).
+        Expected: The empty displayed list or lists should now be unfiltered and restored to natural orders.
+    
+    1. Input: List or lists without added tasks or contacts (i.e. both or one of the lists can have no added tasks or contacts).
+       Expected: An error message prompting the user to add tasks or contacts to the list or lists without added items should be displayed. If one of the list had items, that list will be restored to its natural order.
