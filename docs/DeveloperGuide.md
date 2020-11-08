@@ -843,7 +843,7 @@ testers are expected to do more *exploratory* testing.
        Expected: An error message should be provided indicating that the provided index is invalid.
     1. Test case: `delete task INVALID INDEX` e.g. if the TaskList has 10 items, input the command `delete task 12`. <br>
            Expected: An error message should be provided indicating that the provided index is invalid.
-           
+    
 ### Sorting
 Sorting the contact list and TaskList with different states. There are different inputs for each sorting command.
 
@@ -854,7 +854,7 @@ Sorting the contact list and TaskList with different states. There are different
        Expected: An unfiltered list of tasks sorted according to date and time in ascending order should be displayed.
     1. Input:: Have a TaskList without added Tasks.
        Expected: An error prompting the user to add tasks should be displayed.
-           
+   
 1. Command: `sort contact`
     1. Input: Have an unsorted displayed list of contacts. <br>
        Expected: The list of contacts should be sorted according to name in alphabetical order.
@@ -870,4 +870,3 @@ Sorting the contact list and TaskList with different states. There are different
         Expected: The empty displayed list or lists should now be unfiltered and restored to natural orders.
     1. Input: List or lists without added tasks or contacts (i.e. both or one of the lists can have no added tasks or contacts).
        Expected: An error message prompting the user to add tasks or contacts to the list or lists without added items should be displayed. If one of the list had items, that list will be restored to its natural order.
-       
