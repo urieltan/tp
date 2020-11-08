@@ -5,26 +5,21 @@ skinparam arrowColor STORAGE_COLOR
 skinparam classBackgroundColor STORAGE_COLOR
 
 
-
-note right of AbcStorage
-""Abc"" = ""TaskList"",
-""UserPrefs"", ""AddressBook""
-end note
-note right of JsonAbcStorage
-""Abc"" = ""TaskList"",
-""UserPrefs"", ""AddressBook""
-end note
 Class Storage <<Interface>>
 Class UserPrefsStorage <<Interface>>
-Class AbcStorage <<Interface>>
+Class TaskListStorage <<Interface>>
+Class AddressBookStorage <<Interface>>
 Class StorageManager
 Class JsonUserPrefsStorage
-Class JsonAbcStorage
+Class JsonTaskListStorage
 
 
 StorageManager .up.|> Storage
-StorageManager o-left> UserPrefsStorage
-StorageManager o-right> AbcStorage
+StorageManager o-down-> UserPrefsStorage
+StorageManager o-down-> AddressBookStorage
+StorageManager o-down-> TaskListStorage
+
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAbcStorage .up.|> AbcStorage
+JsonAddressBookStorage .up.|> AddressBookStorage
+JsonTaskListStorage .up.|> TaskListStorage
 @enduml
