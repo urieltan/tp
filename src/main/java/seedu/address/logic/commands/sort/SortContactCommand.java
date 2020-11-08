@@ -14,7 +14,7 @@ import seedu.address.model.person.PersonNameComparator;
  */
 public class SortContactCommand extends SortCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts contacts by name ";
-    public static final String MESSAGE_SUCCESS = "Sorted tasks by date";
+    public static final String MESSAGE_SUCCESS = "Sorted contacts by name";
     public static final String MESSAGE_EMPTY_FILTERED_PERSON_LIST = "The list is empty. Displaying an unfiltered"
             + " sorted person"
             + " list instead.";
