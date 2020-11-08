@@ -73,6 +73,19 @@ The Model,
 ![BetterModelClassDiagram](images/UpdatedBetterModelClassDiagram.png)
 ### Storage component
 
+![StorageClassDiagram](images/storage/StorageClassDiagram.png)
+The `UserPrefsStorage` and `TaskListStorage` and `AddressBookStorage` defines the API for reading and saving the Model from and to the computer's memory. 
+* `UserPrefsStorage` keeps track of `UserPrefs`
+* `TaskListStorage` keeps track of `Task` items in the `Model`
+* `AddressBookStorage` keeps track of `Person` items in the `Model`
+Storage is responsible for keeping the `UserPrefs`, `Task` and `Person` in JSON file format.
+
+The following class diagram shows how `TaskListStorage` makes use of OOP to handle additional data such as Tags and Recurrence, as well as to differentiate between `Task` and `Event`. 
+
+![TaskListStorageClassDiagram](images/storage/TaskListStorageClassDiagram.png)
+
+The `AddressBookStorage` class is much simpler and only makes use of `JsonAdaptedTag`, while `UserPrefsStorage` is even simpler and doesn't require it.
+
 **API** : [`Storage.java`](https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 ### Common classes
@@ -345,13 +358,15 @@ Then, it will update the `FilteredPersonList` and `FilteredTaskList` to reflect 
 
 The following sequence diagram shows how the `contactTaskTag` works:
 
-![contactTaskTagSequenceDiagram|width=2100px](images/contactTaskTag/contactTaskTagSequenceDiagram.png)
+![SequenceDiagram](images/contactTaskTag/contactTaskTagSequenceDiagram.png)
 
-Note: The details to of the `Storage` model is being omitted, as it is the same procedure as adding a new contact/task.
+**Full command : "contactTaskTag t/CS2103T contactIndex/1 taskIndex/1"** (Due to space constraints in the sequence diagram)
+
+_Note: The details to of the `Storage` model is being omitted, as it is the same procedure as adding a new contact/task._
 
 Here is an activity diagram which shows the possible scenerios when the user inputs the command:
 
-![FilterActivityDiagram](images/contactTaskTag/contactTaskTagActivityDiagram.png)
+![ActivityDiagram](images/contactTaskTag/contactTaskTagActivityDiagram.png)
 
 #### Design consideration:
 

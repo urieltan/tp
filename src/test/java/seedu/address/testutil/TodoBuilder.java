@@ -70,6 +70,14 @@ public class TodoBuilder {
     }
 
     /**
+     * Sets the {@code DateTime} of the {@code To-do} that we are building.
+     */
+    public TodoBuilder withDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+        return this;
+    }
+
+    /**
      * Sets the {@code Recurrence} of the {@code To-do} that we are building.
      */
     public TodoBuilder withRecurrence(String recurrenceInput) {
