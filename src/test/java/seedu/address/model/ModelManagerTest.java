@@ -1,7 +1,7 @@
 package seedu.address.model;
 
+import static java.time.temporal.ChronoUnit.DAYS;
 import static java.time.temporal.ChronoUnit.MONTHS;
-import static java.time.temporal.ChronoUnit.WEEKS;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -122,16 +122,16 @@ public class ModelManagerTest {
 
     @Test
     public void notADueSoonTask_taskInAddressBook_returnsFalse() {
-        LocalDateTime currentDateTimePlusOneWeek = LocalDateTime.now().plus(1, MONTHS);
-        Todo todo = new TodoBuilder().withDateTime(currentDateTimePlusOneWeek).build();
+        LocalDateTime currentDateTimePlusOneMonth = LocalDateTime.now().plus(1, MONTHS);
+        Todo todo = new TodoBuilder().withDateTime(currentDateTimePlusOneMonth).build();
         modelManager.addTask(todo);
         assertFalse(modelManager.getDueSoonTaskList().size() > 0);
     }
 
     @Test
     public void hasDueSoonTask_taskInAddressBook_returnsTrue() {
-        LocalDateTime currentDateTimePlusOneWeek = LocalDateTime.now().plus(1, WEEKS);
-        Todo todo = new TodoBuilder().withDateTime(currentDateTimePlusOneWeek).build();
+        LocalDateTime currentDateTimePlusAlmostAWeek = LocalDateTime.now().plus(6, DAYS);
+        Todo todo = new TodoBuilder().withDateTime(currentDateTimePlusAlmostAWeek).build();
         modelManager.addTask(todo);
         assertTrue(modelManager.getDueSoonTaskList().get(0).equals(todo));
     }
