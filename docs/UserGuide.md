@@ -264,25 +264,8 @@ If a task is recurring, it will be displayed in the GUI.
 
 ![recurringTask](images/ExampleOfARecurringTask.png)
 
-##### 2.2.7 Sorting contacts and tasks: `sort`
 
-Sorts the currently displayed tasks or contacts according to date or name, respectively. Sorting may also be cleared, such that the natural order of both lists are restored.
-If the currently displayed list is empty, a sorted, unfiltered list will be displayed instead.
-
-Format: `sort OPTION`
-
-* The `OPTION` field refers to `contact`, `task`, or `clear`
-
-![sortedTaskList](images/SortedTaskList.PNG)
-
-* Contact, task, and clear are the available options for sort and should be used individually in the `OPTION` field.
-* Using the clear option restores all lists (i.e. both contact list and task list) to their natural order.
-
-Examples:
-* `sort task` sorts the task list.
-* `sort contact` sorts the contact list.
-
-##### 2.2.8 Add common tag to contact + task: `contactTaskTag`
+##### 2.2.7 Add common tag to contact + task: `contactTaskTag`
 
 Adds a common tag to a contact and task (Todo or Event) based on the given indexes of the contact and task.
 The user can choose to add as many common tags as they want, where they simply just need to input the `t/` prefix.
@@ -477,13 +460,32 @@ Examples:
 
 ### 2.5 Others
 
-##### 2.5.1 Exiting the program : `exit`
+##### 2.5.1 Sorting contacts and tasks: `sort`
+
+Sorts the currently displayed tasks or contacts according to date or name, respectively. Sorting may also be cleared, such that the natural order of both lists are restored.
+If the currently displayed list is empty, a sorted, unfiltered list will be displayed instead.
+
+Format: `sort OPTION`
+
+* The `OPTION` field refers to `contact`, `task`, or `clear`
+
+![sortedTaskList](images/SortedTaskList.PNG)
+
+* Contact, task, and clear are the available options for sort and should be used individually in the `OPTION` field.
+* Using the clear option restores all lists (i.e. both contact list and task list) to their natural order.
+
+Examples:
+* `sort task` sorts the task list.
+* `sort contact` sorts the contact list.
+
+
+##### 2.5.2 Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-##### 2.5.2 Viewing help : `help`
+##### 2.5.3 Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 

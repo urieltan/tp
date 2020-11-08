@@ -847,13 +847,13 @@ testers are expected to do more *exploratory* testing.
 ### Listing
 1. List all contacts, tasks, events, or todos.
     1. Prerequisites: Have tasks and contacts added to LifeBook.
-    1. Test case: `List task` <br>
+    1. Test case: `list task` <br>
         Expected: GUI should switch to the task tab (if previously on the contact tab) that displays a complete list of all added tasks.
-    1. Test case: `List contact` <br>
+    1. Test case: `list contact` <br>
         Expected: GUI should switch to the contact tab (if previously on the the task tab) that displays a complete list of all added contacts.
-    1. Test case: `List todo` <br>
+    1. Test case: `list todo` <br>
         Expected: GUI should switch to the task tab (if previously on the contact tab) that displays a complete list of only all added todos.
-    1. Test case: `List event` <br>
+    1. Test case: `list event` <br>
         Expected: GUI should switch to the task tab (if previously on the contact tab) that displays a complete list of only all added events.
 
 ### Sorting
