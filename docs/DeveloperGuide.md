@@ -57,6 +57,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
 ### Model component
 ![UpdatedModelClassDiagram](images/UpdatedModelClassDiagram.png)
 **API** : [`Model.java`](https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -71,6 +72,19 @@ The Model,
 
 ![BetterModelClassDiagram](images/UpdatedBetterModelClassDiagram.png)
 ### Storage component
+
+![StorageClassDiagram](images/storage/StorageClassDiagram.png)
+The `UserPrefsStorage` and `TaskListStorage` and `AddressBookStorage` defines the API for reading and saving the Model from and to the computer's memory. 
+* `UserPrefsStorage` keeps track of `UserPrefs`
+* `TaskListStorage` keeps track of `Task` items in the `Model`
+* `AddressBookStorage` keeps track of `Person` items in the `Model`
+Storage is responsible for keeping the `UserPrefs`, `Task` and `Person` in JSON file format.
+
+The following class diagram shows how `TaskListStorage` makes use of OOP to handle additional data such as Tags and Recurrence, as well as to differentiate between `Task` and `Event`. 
+
+![TaskListStorageClassDiagram](images/storage/TaskListStorageClassDiagram.png)
+
+The `AddressBookStorage` class is much simpler and only makes use of `JsonAdaptedTag`, while `UserPrefsStorage` is even simpler and doesn't require it.
 
 **API** : [`Storage.java`](https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
@@ -104,14 +118,12 @@ This section describes some noteworthy details on how certain features are imple
 * If it is successful, it will return a CommandResult with a successful message to the UI.
 
 ---
-The following sequence diagrams displays a `Todo` being added to the TaskList. Adding an `Event` follows a similar sequence.
+The following sequence diagrams displays a `Todo` being added to the TaskList after inputting the following command: `add todo desc/Complete homework date/12-12-2020 time/2359`. Adding an `Event` follows a similar sequence.
 
 ![AddSequenceDiagram](images/addTask/AddSequenceDiagram.png)
-
 The following sequence diagram exhibits the behavior of logic.
 
 ![AddTaskSequenceDiagram](images/addTask/AddTaskSequenceDiagram.png)
-
 The following activity diagram shows what happens when the user enters an add task command:
 
 ![AddTaskActivityDiagram](images/addTask/AddTaskActivityDiagram.png)
@@ -344,13 +356,15 @@ Then, it will update the `FilteredPersonList` and `FilteredTaskList` to reflect 
 
 The following sequence diagram shows how the `contactTaskTag` works:
 
-![contactTaskTagSequenceDiagram|width=2100px](images/contactTaskTag/contactTaskTagSequenceDiagram.png)
+![SequenceDiagram](images/contactTaskTag/contactTaskTagSequenceDiagram.png)
 
-Note: The details to of the `Storage` model is being omitted, as it is the same procedure as adding a new contact/task.
+**Full command : "contactTaskTag t/CS2103T contactIndex/1 taskIndex/1"** (Due to space constraints in the sequence diagram)
+
+_Note: The details to of the `Storage` model is being omitted, as it is the same procedure as adding a new contact/task._
 
 Here is an activity diagram which shows the possible scenerios when the user inputs the command:
 
-![FilterActivityDiagram](images/contactTaskTag/contactTaskTagActivityDiagram.png)
+![ActivityDiagram](images/contactTaskTag/contactTaskTagActivityDiagram.png)
 
 #### Design consideration:
 
@@ -407,6 +421,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`      | disorganised student                       | add, remove, and view zoom links for meetings to an event         | remember my Zoom Links                                      |
 | `* *`    | forgetful/disorganised student | search what tasks/meetings are due soon or by a specific date/time (filter) | remember to finish before the deadline|
 | `* *`    | forgetful/disorganised student | see what tasks are due soon | finish up the most urgent tasks first |
+| `* *`    | disorganised student |sort contacts alphabetically | have a more organised contact list to locate contact details more easily|
+| `* *`    | disorganised student |sort tasks according to order of imminence | have a more organised task list to select tasks that are most imminent|
+| `* *`    | disorganised student |filter the task list to display all tasks, todos, or events | have a complete or more focused view of my Task List |
 | `*`      | user with many contacts in the Lifebook | sort persons by name           | locate a person easily                                                 |
 | `*`      | student with weekly lectures and tutorials | add recurring tasks         | save time by not adding the same task every week, which is time-consuming|
 | `*`      | student                                  | have a common tag for my contact and task | easily find the person I am working with in a project |
@@ -481,7 +498,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1b1. Lifebook will add the task as a recurring one instead.
 
-**Use case: UC4 Perform an action (delete, show, mark as done) on a Task from the Tasklist**
+**Use case: UC4 Perform an action (delete or mark as done) on a Task from the Tasklist**
 
 **MSS**
 1.  User requests for list of all Tasks.
@@ -827,11 +844,54 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect add commands to try: `add`, `add todo`, missing description and/or date/time <br>
        Expected: Similar to previous.
 
+### Marking a Task as done and Task deletion
 
+1. Marking a task as done or deleting a task while the TaskList is being shown.
+    1. Prerequisites: Have tasks in the displayed TaskList. The list may be filtered or unfiltered.
+    1. Test case: `done VALID INDEX` e.g. if there is a task with an index of 5, input the command `done 5`. <br>
+       Expected: The task at the index of 5 should be marked as done.
+    1. Test case: `delete task VALID INDEX` e.g. if there is a task with an index of 5, input the command `delete task 5`. <br>
+       Expected: The task at the index of 5 should be deleted.
+    1. Test case: `done INVALID INDEX` e.g. if the TaskList has 10 items, input the command `done 12`. <br>
+       Expected: An error message should be provided indicating that the provided index is invalid.
+    1. Test case: `delete task INVALID INDEX` e.g. if the TaskList has 10 items, input the command `delete task 12`. <br>
+           Expected: An error message should be provided indicating that the provided index is invalid.
 
+### Listing
+1. List all contacts, tasks, events, or todos.
+    1. Prerequisites: Have tasks and contacts added to LifeBook.
+    1. Test case: `list task` <br>
+        Expected: GUI should switch to the task tab (if previously on the contact tab) that displays a complete list of all added tasks.
+    1. Test case: `list contact` <br>
+        Expected: GUI should switch to the contact tab (if previously on the the task tab) that displays a complete list of all added contacts.
+    1. Test case: `list todo` <br>
+        Expected: GUI should switch to the task tab (if previously on the contact tab) that displays a complete list of only all added todos.
+    1. Test case: `list event` <br>
+        Expected: GUI should switch to the task tab (if previously on the contact tab) that displays a complete list of only all added events.
 
+### Sorting
+Sorting the contact list and TaskList with different states. There are different inputs for each sorting command.
 
+1. Command: `sort task`
+    1. Input: Have an unsorted displayed list of tasks. <br>
+       Expected: The list of task should be sorted according to date and time in ascending order.
+    1. Input: Have an empty displayed list of tasks due to filtering. <br>
+       Expected: An unfiltered list of tasks sorted according to date and time in ascending order should be displayed.
+    1. Input:: Have a TaskList without added Tasks.
+       Expected: An error prompting the user to add tasks should be displayed.
+   
+1. Command: `sort contact`
+    1. Input: Have an unsorted displayed list of contacts. <br>
+       Expected: The list of contacts should be sorted according to name in alphabetical order.
+    1. Input: Have an empty displayed list of contacts due to filtering. <br>
+       Expected: An unfiltered list of contacts sorted according to name in alphabetical order should be displayed.
+    1. Input: Have a contact list without added contacts.
+       Expected: An error prompting the user to add contacts should be displayed.
 
-
-
-
+1. Command: `sort clear`
+    1. Input: Sorted displayed lists of tasks and contacts.
+        Expected: Both lists should be restored to their natural orders.
+    1. Input: Empty displayed list or lists due to filtering  (i.e. both or one of the displayed lists can be empty).
+        Expected: The empty displayed list or lists should now be unfiltered and restored to natural orders.
+    1. Input: List or lists without added tasks or contacts (i.e. both or one of the lists can have no added tasks or contacts).
+       Expected: An error message prompting the user to add tasks or contacts to the list or lists without added items should be displayed. If one of the list had items, that list will be restored to its natural order.
