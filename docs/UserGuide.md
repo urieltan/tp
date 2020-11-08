@@ -250,6 +250,14 @@ Outputs a list of results.
     Example: `itemsDueBefore date/12-12-2020 time/2359`
     It will output a list of todos/meetings that are due specifically **before** 12th December 2020, 2359.
 
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Note:**
+
+* It is designed to show your completed tasks as well.
+
+</div>
+
 ##### 2.2.6 Recurrence
 
 A recurring task is created when a user includes the optional `recurring/` field in adding a new todo/event.
