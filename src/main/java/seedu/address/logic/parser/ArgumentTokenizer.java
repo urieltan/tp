@@ -30,31 +30,31 @@ public class ArgumentTokenizer {
      * @param prefixes   Prefixes to tokenize the arguments string with
      * @return           ArgumentMultimap object that maps prefixes to their arguments
      */
-    public static ArgumentMultimap tokenize (String argsString, Prefix... prefixes) throws ParseException{
+    public static ArgumentMultimap tokenize (String argsString, Prefix... prefixes) throws ParseException {
         List<PrefixPosition> positions = findAllPrefixPositions(argsString, prefixes);
         List<PrefixPosition> allPrefixPositions = findEveryPrefixPositions(argsString);
 
         // Check that there are no extra prefixes
-        for(PrefixPosition prefixPosX : allPrefixPositions){
+        for (PrefixPosition prefixPosX : allPrefixPositions) {
             boolean isPrefixExist = false;
-            for(PrefixPosition prefixPosY : positions){
-                if(prefixPosX.equals(prefixPosY)){
+            for (PrefixPosition prefixPosY : positions) {
+                if (prefixPosX.equals(prefixPosY)) {
                     isPrefixExist = true;
                 }
             }
-            if(!isPrefixExist) {
+            if (!isPrefixExist) {
                 throw new ParseException(String.format(EXTRA_ARGUMENT_MESSAGE, prefixPosX));
             }
         }
         List<Prefix> singularPrefixList = positions
                 .stream()
                 .map(PrefixPosition::getPrefix)
-                .dropWhile(CliSyntax::isPrefixPlural)
+                .filter(CliSyntax::isPrefixSingular)
                 .collect(Collectors.toList());
 
         List<Prefix> checkDuplicateList = new ArrayList<>();
         for (Prefix prefix : singularPrefixList) {
-            if(checkDuplicateList.stream().anyMatch(prefix::equals)){
+            if (checkDuplicateList.stream().anyMatch(prefix::equals)) {
                 throw new ParseException(String.format(EXTRA_SINGULAR_ARGUMENT_MESSAGE, prefix));
             } else {
                 checkDuplicateList.add(prefix);
@@ -90,9 +90,9 @@ public class ArgumentTokenizer {
 
         ArrayList<PrefixPosition> everyPrefixPosition = new ArrayList<>();
         Matcher m = p.matcher(argsString);
-        while(m.find()){
-            everyPrefixPosition.add(new PrefixPosition(new Prefix(argsString.substring(m.start() + 1,m.end()))
-                    , m.start() + 1));
+        while (m.find()) {
+            everyPrefixPosition.add(new PrefixPosition(new Prefix(argsString.substring(m.start() + 1, m.end())),
+                    m.start() + 1));
         }
         return everyPrefixPosition;
     }
@@ -215,7 +215,7 @@ public class ArgumentTokenizer {
         }
 
         @Override
-        public String toString(){
+        public String toString() {
             return prefix.toString();
         }
     }

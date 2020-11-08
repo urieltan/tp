@@ -26,10 +26,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_CONTACT_INDEX = new Prefix("contactIndex/");
     public static final Prefix PREFIX_TASK_INDEX = new Prefix("taskIndex/");
 
-    public static final Prefix[] PLURAL_PREFIX_ARRAY = {
-            PREFIX_TAG, PREFIX_RECURRING};
+    public static final Prefix[] PLURAL_PREFIX_ARRAY = {PREFIX_TAG};
 
-    public static boolean isPrefixPlural(Prefix p){
-        return Arrays.asList(PLURAL_PREFIX_ARRAY).contains(p);
+    public static boolean isPrefixSingular(Prefix p) {
+        return !Arrays.asList(PLURAL_PREFIX_ARRAY).contains(p);
     }
 }

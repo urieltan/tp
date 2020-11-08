@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.EXTRA_ARGUMENT_MESSAGE;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.UNKNOWN_FIND_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -31,7 +32,7 @@ public class FindContactCommandParserTest {
 
         // wrong prefix
         assertParseFailure(parser, "contact i/2",
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindContactCommand.MESSAGE_USAGE));
+            String.format(EXTRA_ARGUMENT_MESSAGE, "i/"));
 
         // no tag keyword given
         assertParseFailure(parser, "contact " + PREFIX_TAG,

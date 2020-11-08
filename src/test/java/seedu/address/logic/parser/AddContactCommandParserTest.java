@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.EXTRA_SINGULAR_ARGUMENT_MESSAGE;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
@@ -24,6 +25,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.AMY;
@@ -50,27 +55,37 @@ public class AddContactCommandParserTest {
     }
 
     @Test
+    public void parse_multipleFieldsPresent_failure() {
+        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+
+        // multiple names - not accepted
+        assertParseFailure(parser, "contact " + NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND,
+                String.format(EXTRA_SINGULAR_ARGUMENT_MESSAGE , PREFIX_NAME));
+
+
+        // multiple phones - not accepted
+        assertParseFailure(parser, "contact " + NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND,
+                String.format(EXTRA_SINGULAR_ARGUMENT_MESSAGE , PREFIX_PHONE));
+
+        // multiple emails - not accepted
+        assertParseFailure(parser, "contact " + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
+                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND,
+                String.format(EXTRA_SINGULAR_ARGUMENT_MESSAGE , PREFIX_EMAIL));
+
+        // multiple addresses - not accepted
+        assertParseFailure(parser, "contact " + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
+                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND,
+                String.format(EXTRA_SINGULAR_ARGUMENT_MESSAGE , PREFIX_ADDRESS));
+    }
+
+    @Test
     public void parse_allFieldsPresent_success() {
         Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, "contact " + PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddContactCommand(expectedPerson));
-
-        // multiple names - last name accepted
-        assertParseSuccess(parser, "contact " + NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddContactCommand(expectedPerson));
-
-        // multiple phones - last phone accepted
-        assertParseSuccess(parser, "contact " + NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddContactCommand(expectedPerson));
-
-        // multiple emails - last email accepted
-        assertParseSuccess(parser, "contact " + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddContactCommand(expectedPerson));
-
-        // multiple addresses - last address accepted
-        assertParseSuccess(parser, "contact " + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddContactCommand(expectedPerson));
 
         // multiple tags - all accepted
