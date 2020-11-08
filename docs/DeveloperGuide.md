@@ -344,13 +344,15 @@ Then, it will update the `FilteredPersonList` and `FilteredTaskList` to reflect 
 
 The following sequence diagram shows how the `contactTaskTag` works:
 
-![contactTaskTagSequenceDiagram|width=2100px](images/contactTaskTag/contactTaskTagSequenceDiagram.png)
+![SequenceDiagram](images/contactTaskTag/contactTaskTagSequenceDiagram.png)
 
-Note: The details to of the `Storage` model is being omitted, as it is the same procedure as adding a new contact/task.
+**Full command : "contactTaskTag t/CS2103T contactIndex/1 taskIndex/1"** (Due to space constraints in the sequence diagram)
+
+_Note: The details to of the `Storage` model is being omitted, as it is the same procedure as adding a new contact/task._
 
 Here is an activity diagram which shows the possible scenerios when the user inputs the command:
 
-![FilterActivityDiagram](images/contactTaskTag/contactTaskTagActivityDiagram.png)
+![ActivityDiagram](images/contactTaskTag/contactTaskTagActivityDiagram.png)
 
 #### Design consideration:
 
