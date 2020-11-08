@@ -118,14 +118,12 @@ This section describes some noteworthy details on how certain features are imple
 * If it is successful, it will return a CommandResult with a successful message to the UI.
 
 ---
-The following sequence diagrams displays a `Todo` being added to the TaskList. Adding an `Event` follows a similar sequence.
+The following sequence diagrams displays a `Todo` being added to the TaskList after inputting the following command: `add todo desc/Complete homework date/12-12-2020 time/2359`. Adding an `Event` follows a similar sequence.
 
 ![AddSequenceDiagram](images/addTask/AddSequenceDiagram.png)
-
 The following sequence diagram exhibits the behavior of logic.
 
 ![AddTaskSequenceDiagram](images/addTask/AddTaskSequenceDiagram.png)
-
 The following activity diagram shows what happens when the user enters an add task command:
 
 ![AddTaskActivityDiagram](images/addTask/AddTaskActivityDiagram.png)
