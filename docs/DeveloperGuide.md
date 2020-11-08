@@ -52,11 +52,10 @@ The `UserPrefsStorage` and `TaskListStorage` and `AddressBookStorage` defines th
 Storage is responsible for keeping the `UserPrefs`, `Task` and `Person` in JSON file format.
 
 The following class diagram shows how `TaskListStorage` makes use of OOP to handle additional data such as Tags and Recurrence, as well as to differentiate between `Task` and `Event`. 
+
 ![TaskListStorageClassDiagram](images/storage/TaskListStorageClassDiagram.png)
 
 The `AddressBookStorage` class is much simpler and only makes use of `JsonAdaptedTag`, while `UserPrefsStorage` is even simpler and doesn't require it.
-
-
 
 **API** : [`Storage.java`](https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
