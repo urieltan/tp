@@ -129,6 +129,14 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void notADueSoonTask_taskBeforeCurrentDateTimeInAddressBook_returnsFalse() {
+        LocalDateTime currentDateTimePlusOneMonth = LocalDateTime.now().minus(1, MONTHS);
+        Todo todo = new TodoBuilder().withDateTime(currentDateTimePlusOneMonth).build();
+        modelManager.addTask(todo);
+        assertFalse(modelManager.getDueSoonTaskList().size() > 0);
+    }
+
+    @Test
     public void hasDueSoonTask_taskInAddressBook_returnsTrue() {
         LocalDateTime currentDateTimePlusAlmostAWeek = LocalDateTime.now().plus(6, DAYS);
         Todo todo = new TodoBuilder().withDateTime(currentDateTimePlusAlmostAWeek).build();
