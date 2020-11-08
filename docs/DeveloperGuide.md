@@ -57,6 +57,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
 ### Model component
 ![UpdatedModelClassDiagram](images/UpdatedModelClassDiagram.png)
 **API** : [`Model.java`](https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -407,6 +408,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`      | disorganised student                       | add, remove, and view zoom links for meetings to an event         | remember my Zoom Links                                      |
 | `* *`    | forgetful/disorganised student | search what tasks/meetings are due soon or by a specific date/time (filter) | remember to finish before the deadline|
 | `* *`    | forgetful/disorganised student | see what tasks are due soon | finish up the most urgent tasks first |
+| `* *`    | disorganised student |sort contacts alphabetically | have a more organised contact list to locate contact details more easily|
+| `* *`    | disorganised student |sort tasks according to order of imminence | have a more organised task list to select tasks that are most imminent|
+| `* *`    | disorganised student |filter the task list to display all tasks, todos, or events | have a complete or more focused view of my Task List |
 | `*`      | user with many contacts in the Lifebook | sort persons by name           | locate a person easily                                                 |
 | `*`      | student with weekly lectures and tutorials | add recurring tasks         | save time by not adding the same task every week, which is time-consuming|
 | `*`      | student                                  | have a common tag for my contact and task | easily find the person I am working with in a project |
