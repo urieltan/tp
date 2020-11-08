@@ -73,7 +73,8 @@ The Model,
 ![BetterModelClassDiagram](images/UpdatedBetterModelClassDiagram.png)
 ### Storage component
 
-![StorageClassDiagram](images/storage/StorageClassDiagram.png)
+<img width="500" src="images/storage/StorageClassDiagram.png">
+
 The `UserPrefsStorage` and `TaskListStorage` and `AddressBookStorage` defines the API for reading and saving the Model from and to the computer's memory. 
 * `UserPrefsStorage` keeps track of `UserPrefs`
 * `TaskListStorage` keeps track of `Task` items in the `Model`
@@ -82,9 +83,20 @@ Storage is responsible for keeping the `UserPrefs`, `Task` and `Person` in JSON 
 
 The following class diagram shows how `TaskListStorage` makes use of OOP to handle additional data such as Tags and Recurrence, as well as to differentiate between `Task` and `Event`. 
 
-![TaskListStorageClassDiagram](images/storage/TaskListStorageClassDiagram.png)
+<img height="500" src="images/storage/TaskListStorageClassDiagram.png">
 
 The `AddressBookStorage` class is much simpler and only makes use of `JsonAdaptedTag`, while `UserPrefsStorage` is even simpler and doesn't require it.
+
+These 2 sequence diagrams show a high level view of reading and saving the `Task` from the `LogicManager`. 
+
+<img width="500" src="images/storage/ReadTaskList.png">
+<img width="500" src="images/storage/SaveTaskList.png">
+
+<img width="500" src="images/storage/ReadFileActivityDiagram.png">
+
+The activity diagram gives a slightly deeper view of how reading `Task` is done.
+If the file parsing has issues, an exception will be thrown.
+
 
 **API** : [`Storage.java`](https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
