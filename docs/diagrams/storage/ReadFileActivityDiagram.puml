@@ -1,0 +1,21 @@
+@startuml
+start
+:Lifebook reads TaskList from file;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([hasFile])
+    : Parse file;
+    if () then ([hasException]);
+        : Throw exception;
+        stop
+    else ([success])
+        : Return TaskList;
+    endif
+
+else ([else])
+    : Return empty;
+endif
+stop
+@enduml
