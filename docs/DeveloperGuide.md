@@ -843,6 +843,18 @@ testers are expected to do more *exploratory* testing.
        Expected: An error message should be provided indicating that the provided index is invalid.
     1. Test case: `delete task INVALID INDEX` e.g. if the TaskList has 10 items, input the command `delete task 12`. <br>
            Expected: An error message should be provided indicating that the provided index is invalid.
+
+### Listing
+1. List all contacts, tasks, events, or todos. 
+    1. Prerequisites: Have tasks and contacts added to LifeBook.
+    1. Test case: `List task` <br>
+        Expected: GUI should switch to the task tab (if previously on the contact tab) that displays a complete list of all added tasks.
+    1. Test case: `List contact` <br>
+        Expected: GUI should switch to the contact tab (if previously on the the task tab) that displays a complete list of all added contacts.
+    1. Test case: `List todo` <br>
+        Expected: GUI should switch to the task tab (if previously on the contact tab) that displays a complete list of only all added todos.
+    1. Test case: `List event` <br>
+        Expected: GUI should switch to the task tab (if previously on the contact tab) that displays a complete list of only all added events.
     
 ### Sorting
 Sorting the contact list and TaskList with different states. There are different inputs for each sorting command.
