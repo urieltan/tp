@@ -118,14 +118,12 @@ This section describes some noteworthy details on how certain features are imple
 * If it is successful, it will return a CommandResult with a successful message to the UI.
 
 ---
-The following sequence diagrams displays a `Todo` being added to the TaskList. Adding an `Event` follows a similar sequence.
+The following sequence diagrams displays a `Todo` being added to the TaskList after inputting the following command: `add todo desc/Complete homework date/12-12-2020 time/2359`. Adding an `Event` follows a similar sequence.
 
 ![AddSequenceDiagram](images/addTask/AddSequenceDiagram.png)
-
 The following sequence diagram exhibits the behavior of logic.
 
 ![AddTaskSequenceDiagram](images/addTask/AddTaskSequenceDiagram.png)
-
 The following activity diagram shows what happens when the user enters an add task command:
 
 ![AddTaskActivityDiagram](images/addTask/AddTaskActivityDiagram.png)
@@ -862,13 +860,13 @@ testers are expected to do more *exploratory* testing.
 ### Listing
 1. List all contacts, tasks, events, or todos.
     1. Prerequisites: Have tasks and contacts added to LifeBook.
-    1. Test case: `List task` <br>
+    1. Test case: `list task` <br>
         Expected: GUI should switch to the task tab (if previously on the contact tab) that displays a complete list of all added tasks.
-    1. Test case: `List contact` <br>
+    1. Test case: `list contact` <br>
         Expected: GUI should switch to the contact tab (if previously on the the task tab) that displays a complete list of all added contacts.
-    1. Test case: `List todo` <br>
+    1. Test case: `list todo` <br>
         Expected: GUI should switch to the task tab (if previously on the contact tab) that displays a complete list of only all added todos.
-    1. Test case: `List event` <br>
+    1. Test case: `list event` <br>
         Expected: GUI should switch to the task tab (if previously on the contact tab) that displays a complete list of only all added events.
 
 ### Sorting
