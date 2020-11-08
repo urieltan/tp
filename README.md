@@ -12,7 +12,7 @@
 
     * It is written in OOP fashion. It provides a reasonably well-written code base bigger (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
 
-    * It is morphed from AddressBook Level 3 (AB3).
+    * It is evolved from AddressBook Level 3 (AB3).
 
     * It comes with a reasonable level of user and developer documentation.
 
