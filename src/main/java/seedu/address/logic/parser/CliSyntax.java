@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import java.util.ArrayList;
+
 /**
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
  */
@@ -23,4 +25,10 @@ public class CliSyntax {
     public static final Prefix PREFIX_RECURRING = new Prefix("recurring/");
     public static final Prefix PREFIX_CONTACT_INDEX = new Prefix("contactIndex/");
     public static final Prefix PREFIX_TASK_INDEX = new Prefix("taskIndex/");
+
+    public static final Prefix[] FULL_PREFIX_ARRAY = {
+                    PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
+                    PREFIX_INDEX, PREFIX_URL, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_TIME,
+                    PREFIX_STARTDATE, PREFIX_STARTTIME, PREFIX_ENDDATE, PREFIX_ENDTIME,
+                    PREFIX_RECURRING, PREFIX_CONTACT_INDEX, PREFIX_TASK_INDEX};
 }

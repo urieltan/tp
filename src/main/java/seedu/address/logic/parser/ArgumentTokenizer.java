@@ -145,4 +145,29 @@ public class ArgumentTokenizer {
         }
     }
 
+
+    /**
+     * Checks if the prefixes in argString are correct.
+     *
+     * Makes sure that all prefixes that need to be in are in, and
+     * all prefixes that need to be out, are out.
+     *
+     * Returns the index of the first occurrence of {@code prefix} in
+     * {@code argsString} starting from index {@code fromIndex}. An occurrence
+     * is valid if there is a whitespace before {@code prefix}. Returns -1 if no
+     * such occurrence can be found.
+     *
+     * E.g if {@code argsString} = "e/hip/900", {@code prefix} = "p/" and
+     * {@code fromIndex} = 0, this method returns -1 as there are no valid
+     * occurrences of "p/" with whitespace before it. However, if
+     * {@code argsString} = "e/hi p/900", {@code prefix} = "p/" and
+     * {@code fromIndex} = 0, this method returns 5.
+     */
+    public boolean checkPrefixList(Prefix... prefixes, String argsString){
+        for(Prefix p : argMultimap.keySet()){
+            if(Arrays.stream(prefixes).findAny(p)) {
+                return false;
+            }
+        }
+    }
 }
