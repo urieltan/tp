@@ -19,7 +19,12 @@ public class FindEventCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
+        // no prefix
         assertParseFailure(parser, "event     ",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindEventCommand.MESSAGE_USAGE));
+
+        // wrong prefix
+        assertParseFailure(parser, "event i/2",
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindEventCommand.MESSAGE_USAGE));
 
         // no tag keyword given
@@ -31,7 +36,15 @@ public class FindEventCommandParserTest {
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindEventCommand.MESSAGE_USAGE));
 
         // no desc keyword given
-        assertParseFailure(parser, "event " + PREFIX_DESCRIPTION,
+        assertParseFailure(parser, "event " + PREFIX_DESCRIPTION + "  " + PREFIX_TAG + "tag",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindEventCommand.MESSAGE_USAGE));
+
+        // no desc keyword given
+        assertParseFailure(parser, "event " + PREFIX_DESCRIPTION + "  ",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindEventCommand.MESSAGE_USAGE));
+
+        // no tag keyword given
+        assertParseFailure(parser, "event " + PREFIX_DESCRIPTION + "desc " + PREFIX_TAG + "tag1 tag2",
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindEventCommand.MESSAGE_USAGE));
     }
 

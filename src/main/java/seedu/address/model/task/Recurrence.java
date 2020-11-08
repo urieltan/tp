@@ -53,6 +53,7 @@ public class Recurrence {
         unit += "(s)";
         return unit;
     }
+
     @Override
     public boolean equals (Object o) {
         if (this == o) {
@@ -64,6 +65,7 @@ public class Recurrence {
             return false;
         }
     }
+
     @Override
     public String toString() {
         return "[" + this.value + "," + this.chronoUnit.toString() + "]";

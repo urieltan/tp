@@ -10,8 +10,8 @@ You may reach us through the following email addresses:
 * Uriel Tan: urieltan@comp.nus.edu.sg
 * Chua Chen Ler: chua.chenler@u.nus.edu
 * Kevin William: kevinwilliam@u.nus.edu
-* Lucia Tirta Gunawan: 
-* Lin Yuan Xun, Caleb: 
+* Lucia Tirta Gunawan: luciatirtag@u.nus.edu
+* Lin Yuan Xun, Caleb: caleblyx@u.nus.edu
 
 ## Project team
 
@@ -20,6 +20,7 @@ You may reach us through the following email addresses:
 <img src="images/urieltan.png" width="200px">
 
 [[github](https://github.com/urieltan)]
+[[portfolio](team/urieltan.md)]
 
 * Role: About Us expert, Developer Guide
 
@@ -28,6 +29,7 @@ You may reach us through the following email addresses:
 <img src="images/lerxcl.png" width="200px">
 
 [[github](http://github.com/lerxcl)]
+[[portfolio](team/lerxcl.md)]
 
 * Role: Team Lead, Deliverables and deadlines, Scheduling and tracking
 
@@ -37,15 +39,17 @@ You may reach us through the following email addresses:
 <img src="images/caleblyx.png" width="200px">
 
 [[github](http://github.com/caleblyx)]
+[[portfolio](team/caleblyx.md)]
 
 * Role: User guide, Intellij expert, Merge conflict solver
 * Responsibilities: Data
 
-### Lucia Tirtia Gunawan
+### Lucia Tirta Gunawan
 
 <img src="images/luciatirta.png" width="200px">
 
 [[github](http://github.com/luciatirta)]
+[[portfolio](team/luciatirta.md)]
 
 * Role: Testing, Ui Expert
 

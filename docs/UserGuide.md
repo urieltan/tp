@@ -3,11 +3,29 @@ layout: page
 title: User Guide
 ---
 
+<div class="welcome-page">
+
+  <p align="center" >
+    <img src="images/lifebook-Logo.png" alt="Logo" width="100" />
+  </p>
+
+  <p align="center">
+Welcome to <i>Lifebook User Guide</i>! Choose a section from the table of contents below to <br>find answers, step-by-step guides and know about Lifebook better.
+  </p>
+
+  <p align="center" >
+Are you a developer? Make sure to check our <i>Developer Guide</i> also! Go back to our <a href="https://ay2021s1-cs2103t-f12-4.github.io/tp/DeveloperGuide.html"><i>Lifebook Developer Guide Page</i></a> to find out more resources.
+  </p>
+
+</div>
+
+
 Lifebook is a **desktop application intended for university students to  manage contact details, assignments, projects,
 and module details.** Lifebook supports Command Line Interface (CLI) for efficient contacts and tasks management while still having the benefits of a Graphical User Interface (GUI).
 
 This user guide is targeted at university students who are interested in using Lifebook.
 
+<summary align="center"><h2>Table of Contents</h2></summary>
 * Table of Contents
 {:toc}
 
@@ -96,6 +114,12 @@ Format: `edit contact i/INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]�
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* Emails should be of the format local-part@domain and adhere to the following constraints:
+* 1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (!#$%&'*+/=?`{|}~^.-) .
+* 2. This is followed by a '@' and then a domain name. The domain name must:
+*    - be at least 2 characters long
+*    - start and end with alphanumeric characters
+*    - consist of alphanumeric characters, a period or a hyphen for the characters in between, if any.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
@@ -157,6 +181,15 @@ Format: `clear contact`
 ![dueSoonTasks](images/dueSoonTasks.png)
 
 At the bottom right hand corner of Lifebook, a list of tasks is shown that are due **1 week from the current date/time**.
+
+<div markdown="block" class="alert alert-danger">
+
+:warning: **Warning:**
+
+For all task operations, input the task's index based from the **whole Tasklist**, NOT from "Due soon".
+
+</div>
+
 
 ##### 2.2.2 Removing Tasks : `delete task`
 Removes a To Do or an Event from the TaskList of LifeBook.
@@ -225,7 +258,7 @@ When a recurring task is marked as done, it will automatically generate another 
 
 Example: `add todo desc/CS2100 Tutorial date/04-11-2020 time/1100 recurring/1 week`
 
-When this task is marked as done, it will generate another todo with the deadline: `Date: 11-11-2020, Time: 1100`.
+When this task is marked as done, it will generate another todo with the deadline: `Date: 11-11-2020, Time: 1100`
 
 If a task is recurring, it will be displayed in the GUI.
 
@@ -233,7 +266,7 @@ If a task is recurring, it will be displayed in the GUI.
 
 ##### 2.2.7 Sorting contacts and tasks: `sort`
 
-Sorts the currently displayed tasks or contacts according to date or name, respectively. Sorting may also be cleared, such that the natural order of lists are restored.
+Sorts the currently displayed tasks or contacts according to date or name, respectively. Sorting may also be cleared, such that the natural order of both lists are restored.
 If the currently displayed list is empty, a sorted, unfiltered list will be displayed instead.
 
 Format: `sort OPTION`
@@ -268,7 +301,7 @@ Upon executing the command, the contact at index 7- “James Ho” and task at i
 :warning: **Warning:**
 
 It is a coincidence in the example that the index of the "homework" task is 1 for "Due soon" and the whole Tasklist.
-Please input the task's index based from the **whole Tasklist**.
+Input the task's index based from the **whole Tasklist** instead.
 
 </div>
 
@@ -294,8 +327,6 @@ Examples:
 * `add todo desc/tutorial date/10-10-2020 time/1130 recurring/1 week`
 
 ##### 2.3.2 Editing a todo : `edit todo`
-
-> Coming soon
 
 Edits an existing todo in the task list.
 
@@ -351,7 +382,7 @@ Format: `find todo [desc/DESC_KEYWORD [MORE_DESC_KEYWORDS]] [t/TAG_KEYWORD]`
 * When only tag keyword is given, todos whose one of the tag(s) matches the tag searched will be returned.
 e.g. Finish assignment with tag `CS2100` and `Graded` will be returned when tag `CS2100` is searched.
 * When both description keyword and tag keyword are given, todos matching both keywords are returned.
-e.g. `Finish assignment` with tag `CS2100` and `Graded` will be returned 
+e.g. `Finish assignment` with tag `CS2100` and `Graded` will be returned
 on command `find todo desc/Do assignment t/CS2100`.
 
 Examples:
@@ -379,8 +410,6 @@ Examples:
 * `add event desc/Singapore Fintech Festival startdate/09-08-2020 starttime/1000 enddate/12-08-2020 endtime/2359 t/important`
 
 ##### 2.4.2 Editing an event : `edit event`
-
-> Coming soon
 
 Edits an existing event in the task list.
 
@@ -437,7 +466,7 @@ e.g. `Attend meeting` will return `Attend workshop`, `Arrange meeting`
 * When only tag keyword is given, events whose one of the tag(s) matches the tag searched will be returned.
 e.g. Attend meeting with tag `CS2100` and `TeamProject` will be returned when tag `CS2100` is searched.
 * When both description keyword and tag keyword are given, todos matching both keywords are returned.
-e.g. `Attend meeting` with tag `CS2100` and `TeamProject` will be returned 
+e.g. `Attend meeting` with tag `CS2100` and `TeamProject` will be returned
 on command `find event desc/meeting t/TeamProject`.
 
 Examples:

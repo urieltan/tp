@@ -31,6 +31,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.add.AddContactCommand;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -42,6 +43,11 @@ import seedu.address.testutil.PersonBuilder;
 
 public class AddContactCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
+
+    @Test
+    public void parse_unknownCommand_failure() {
+        assertParseFailure(parser, "randominput", AddCommand.MESSAGE_USAGE);
+    }
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -105,6 +111,9 @@ public class AddContactCommandParserTest {
         // all prefixes missing
         assertParseFailure(parser, "contact " + VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB,
                 expectedMessage);
+
+        // no command details
+        assertParseFailure(parser, "contact ", expectedMessage);
     }
 
     @Test

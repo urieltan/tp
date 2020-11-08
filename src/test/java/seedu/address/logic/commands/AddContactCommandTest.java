@@ -233,6 +233,14 @@ public class AddContactCommandTest {
         public boolean filteredAddressBookIsEmpty() {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public boolean taskListIsEmpty() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public boolean addressBookIsEmpty() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

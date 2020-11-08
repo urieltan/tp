@@ -12,7 +12,6 @@ import seedu.address.logic.commands.list.ListEventCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.TaskList;
 import seedu.address.model.UserPrefs;
 
 public class ListEventCommandTest {
@@ -23,7 +22,7 @@ public class ListEventCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(new AddressBook(), new UserPrefs(), getTypicalEventsTaskList());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new TaskList());
+        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), getTypicalEventsTaskList());
     }
 
     @Test

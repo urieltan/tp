@@ -17,7 +17,9 @@ import seedu.address.model.task.MeetingLink;
 import seedu.address.model.task.Recurrence;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Todo;
-
+/**
+ * Marks a task identified using it's displayed index from the task list as done.
+ */
 public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
     public static final String MESSAGE_MARK_TASK_AS_DONE_SUCCESS = "Task marked as done: %1$s";

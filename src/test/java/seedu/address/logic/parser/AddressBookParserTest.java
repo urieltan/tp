@@ -14,20 +14,28 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ContactTaskTagCommand;
+import seedu.address.logic.commands.DoneCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.LinkCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.add.AddContactCommand;
 import seedu.address.logic.commands.add.AddEventCommand;
 import seedu.address.logic.commands.add.AddTodoCommand;
 import seedu.address.logic.commands.delete.DeleteContactCommand;
+import seedu.address.logic.commands.due.DueAtCommand;
+import seedu.address.logic.commands.due.DueBeforeCommand;
 import seedu.address.logic.commands.edit.EditContactCommand;
 import seedu.address.logic.commands.edit.EditContactCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.find.FindContactCommand;
+import seedu.address.logic.commands.link.LinkCollaborativeCommand;
 import seedu.address.logic.commands.list.ListContactCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ContactMatchesFindKeywordPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.CollaborativeLink;
 import seedu.address.model.task.Event;
 import seedu.address.model.task.Todo;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -51,7 +59,7 @@ public class AddressBookParserTest {
     public void parseCommand_addTodo() throws Exception {
         Todo todo = new TodoBuilder().build();
         AddTodoCommand command = (AddTodoCommand) parser.parseCommand(AddTodoCommand.COMMAND_WORD
-                + " todo desc/homework date/12-12-2020 time/2359");
+                + " todo desc/homework date/14-12-2020 time/2359");
         assertEquals(new AddTodoCommand(todo), command);
     }
 
@@ -117,6 +125,42 @@ public class AddressBookParserTest {
     public void parseCommand_list_throwsParseException() throws Exception {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE), ()
             -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3"));
+    }
+
+    @Test
+    public void parseCommand_link() throws Exception {
+        LinkCollaborativeCommand command = (LinkCollaborativeCommand) parser.parseCommand(
+            LinkCommand.COMMAND_WORD + " doc desc/proposal url/https://www.google.com i/1");
+        assertEquals(new LinkCollaborativeCommand(ParserUtil.parseIndex("1"),
+            new CollaborativeLink("proposal", "https://www.google.com")), command);
+    }
+
+    @Test
+    public void parseCommand_dueBefore() throws Exception {
+        assertTrue(parser.parseCommand(DueBeforeCommand.COMMAND_WORD + " date/12-10-2020 time/2359")
+            instanceof DueBeforeCommand);
+    }
+
+    @Test
+    public void parseCommand_dueAt() throws Exception {
+        assertTrue(parser.parseCommand(DueAtCommand.COMMAND_WORD + " date/12-10-2020 time/2359")
+            instanceof DueAtCommand);
+    }
+
+    @Test
+    public void parseCommand_done() throws Exception {
+        assertTrue(parser.parseCommand(DoneCommand.COMMAND_WORD + " 1") instanceof DoneCommand);
+    }
+
+    @Test
+    public void parseCommand_sort() throws Exception {
+        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " contact") instanceof SortCommand);
+    }
+
+    @Test
+    public void parseCommand_contactTaskTag() throws Exception {
+        assertTrue(parser.parseCommand(ContactTaskTagCommand.COMMAND_WORD + " t/CS2100 contactIndex/1 taskIndex/2")
+            instanceof ContactTaskTagCommand);
     }
 
     @Test

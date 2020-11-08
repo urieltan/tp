@@ -20,4 +20,10 @@ public class ListContactCommand extends ListCommand {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS, "CONTACT");
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+            || other instanceof ListContactCommand;
+    }
 }
