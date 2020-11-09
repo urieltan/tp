@@ -58,9 +58,6 @@ public abstract class Task {
     public Task(boolean isDone, String description, Set<Tag> tags) {
         assert description != null;
         assert tags != null;
-        if (!isValidDescription(description)) {
-            System.out.println(description);
-        }
         checkArgument(isValidDescription(description), MESSAGE_CONSTRAINTS);
         this.description = description;
         this.isDone = isDone;
