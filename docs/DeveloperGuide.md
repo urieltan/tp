@@ -992,24 +992,24 @@ Sorting the contact list and TaskList with different states. There are different
 
 When we first started coding for Lifebook, we had to figure out how to integrate all the task operations into the current
 AB3. Although we had experience with creating "Duke" for our iP, which shares many similar features, we still had to figure out how to merge both the 
-contact and task aspects together. Thus, many hours were spent inspecting AB3's codebase.  
+contact and task aspects together. Thus, many hours were spent inspecting AB3's codebase.
 
 For the first milestone, we managed to implement the basic task operations, like add, view and delete. This required an implementation
 of multiple new model components, such as TaskList and Tasks.
-We also modified AB3's GUI to include another panel to view the list of tasks.  
+We also modified AB3's GUI to include another panel to view the list of tasks.
 Inspecting AB3's JavaFX files proved to be a challenge, as the GUI is significantly more complicated than one in "Duke".
 Much trial and error was required to properly implement it. For instance, the initial implementation of TaskList had to be scrapped, because
 it was not observable to the GUI. To remedy this, a new TaskList implementation, which follow's AB3's implementation of the AddressBook closely had to be created.
-This challenge was encountered primarily due to a lack of familiarity. Likewise, challenges of a similar nature were faced when implementing Storage components for TaskList. 
+This challenge was encountered primarily due to a lack of familiarity. Likewise, challenges of a similar nature were faced when implementing Storage components for TaskList.
 The implementation of Storage for TaskList had to be done using JSON to ensure it remained consistent with AB3's implementation of storage. Again due to a lack of experience, there were multiple bugs while developing it.
 It took multiple attempts of troubleshooting to finally realise that additional annotations had to be made to serialize/deserialize polymorphic objects.
 
-While creating test cases for task operations, we had to study the way AB3 created its stubs. 
+While creating test cases for task operations, we had to study the way AB3 created its stubs.
 We followed after AB3 and created "TodoBuilder", "EventBuilder", "TypicalTodos" and "TypicalEvents" to abstract out
 the process of creating tasks to do testing.
 
 While implementing recurring task, we had to ensure that Lifebook automatically creates a new task after the recurring task
-is marked as done. Initially, we followed a brute force approach, wherein the "done" method in Todo/Event returns an "AddCommand" 
+is marked as done. Initially, we followed a brute force approach, wherein the "done" method in Todo/Event returns an "AddCommand"
 to generate a new task when executed. This did not follow recommended design principles, as the Todo/Event class (Model components) should not be return
 the Command type class (Logic component). Eventually, we managed to solve this issue, by making the "DoneCommand" responsible for checking
 if the task is a recurring type, and if it is, to create a new recurring task and add it directly to the TaskList.
