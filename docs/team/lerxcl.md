@@ -89,4 +89,5 @@ Given below are my contributions to the project.
     - Sharing tips: [Testing your application using Windows Sandbox](https://github.com/nus-cs2103-AY2021S1/forum/issues/227), [iP .jar tip](https://github.com/nus-cs2103-AY2021S1/forum/issues/174)
     - Asking for help: [Unable to display ✓ and ✘](https://github.com/nus-cs2103-AY2021S1/forum/issues/64)
 
-
+* **Other contributions**:
+  * Contributed to the creation of Lifebook's demonstration video. (Script and voice-over)
