@@ -856,6 +856,23 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect add commands to try: `add`, `add todo`, missing description and/or date/time <br>
        Expected: Similar to previous.
 
+### Editing a Task
+
+1. Editing a task while the TaskList is being shown.
+    1. Prerequisites: Have the tasks in the displayed TaskList. The list may be filtered or unfiltered.
+    1. Test case: `edit todo i/VALID INDEX ...` e.g. if there is a todo with an index of 5, input the command `edit todo i/5 ...`. <br>
+       Expected: The todo at the index of 5 should be edited according to the input given.
+    1. Test case: `edit todo i/2 date/17-12-2020 time/2359`. <br>
+       Expected: The todo at the index of 2 should have the date edited to be `17-12-2020` and the time to be `2359`.
+    1. Test case: `edit event i/VALID INDEX ...` e.g. if there is an event with an index of 5, input the command `edit event i/5 ...`. <br>
+       Expected: The event at the index of 5 should be edited according to the input given.
+    1. Test case: `edit event i/1 desc/new description startdate/12-12-2020`. <br>
+       Expected: The event at the index of 1 should have the description edited to be `new description` and the starting date to be `12-12-2020`.
+    1. Test case: `edit todo i/INVALID INDEX ...` e.g. if the TaskList has 10 items, input the command `edit todo i/12`. <br>
+       Expected: An error message should be provided indicating that the provided index is invalid.
+    1. Test case: `edit event i/INVALID INDEX ...` e.g. if the TaskList has 10 items, input the command `edit event i/12`. <br>
+       Expected: An error message should be provided indicating that the provided index is invalid.
+           
 ### Marking a Task as done and Task deletion
 
 1. Marking a task as done or deleting a task while the TaskList is being shown.
@@ -880,6 +897,31 @@ testers are expected to do more *exploratory* testing.
         Expected: GUI should switch to the task tab (if previously on the contact tab) that displays a complete list of only all added todos.
     1. Test case: `list event` <br>
         Expected: GUI should switch to the task tab (if previously on the contact tab) that displays a complete list of only all added events.
+
+### Adding a link to a task
+Adding a CollaborativeLink to a `Todo` or a MeetingLink to an `Event`.
+
+1. Command: `link meeting`
+    1. Prerequisites: Have the tasks in the displayed TaskList. The list may be filtered or unfiltered.
+    1. Test case: `link meeting i/VALID INDEX ...` e.g. if there is an event with an index of 5, input the command `link meeting i/5 ...`. <br>
+        Expected: The event at index 5 will now have a link and the GUI will show it.
+    1. Test case: `link meeting i/VALID INDEX desc/DESC url/VALID URL date/DATE time/TIME` e.g. if there is an event with an index of 2, input the command `link meeting i/2 desc/Link to Zoom Meeting url/https://www.zoom.com date/20-12-2020 time/1400`. <br>
+        Expected: The event at index 2 will now have a [link](https://www.zoom.com) that has a description, date, and time.
+    1. Test case: `link meeting i/VALID INDEX url/INVALID URL FORMAT ...` e.g. if there is an event with an index of 3, input the command `link meeting i/3 url/thisisnotaurl`. <br>
+        Expected: An error message should be provided indicating that the provided url is invalid.
+    1. Test case: `link meeting i/VALID INDEX desc/DESC url/VALID URL date/DATE` e.g. if there is an event with an index of 1, input the command `link meeting i/1 desc/Link to Zoom Meeting url/https://www.zoom.com date/20-12-2020`. <br>
+        Expected: An error message should be provided indicating that one of the field is not provided (`time`).
+
+1. Command: `link doc`
+    1. Prerequisites: Have the tasks in the displayed TaskList. The list may be filtered or unfiltered.
+    1. Test case: `link doc i/VALID INDEX ...` e.g. if there is a todo with an index of 5, input the command `link doc i/5 ...`. <br>
+        Expected: The todo at index 5 will now have a link and the GUI will show it.
+    1. Test case: `link doc i/VALID INDEX desc/DESC url/VALID` e.g. if there is a todo with an index of 2, input the command `link doc i/2 desc/Link to User Guide url/https://ay2021s1-cs2103t-f12-4.github.io/tp/UserGuide.html`. <br>
+        Expected: The todo at index 2 will now have a [link](https://ay2021s1-cs2103t-f12-4.github.io/tp/UserGuide.html) that has a description.
+    1. Test case: `link doc i/VALID INDEX url/INVALID URL FORMAT ...` e.g. if there is a todo with an index of 3, input the command `link doc i/3 url/thisisnotaurl`. <br>
+        Expected: An error message should be provided indicating that the provided url is invalid.
+    1. Test case: `link doc i/VALID INDEX url/VALID URL` e.g. if there is a todo with an index of 1, input the command `link doc i/1 url/https://ay2021s1-cs2103t-f12-4.github.io/tp/UserGuide.html`. <br>
+        Expected: An error message should be provided indicating that one of the field is not provided (`desc`).
 
 ### Sorting
 Sorting the contact list and TaskList with different states. There are different inputs for each sorting command.
