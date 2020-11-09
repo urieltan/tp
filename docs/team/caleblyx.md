@@ -47,7 +47,7 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=F12-4&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=functional-code~docs~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=caleblyx&tabRepo=AY2021S1-CS2103T-F12-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=functional-code~docs~test-code)
 
 * **Project management**:
-  * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+  * Created release `v1.3` on [GitHub](https://github.com/AY2021S1-CS2103T-F12-4/tp/releases/tag/v1.3) 
 
 * **Enhancements to existing features**:
   * Reduced coupling of `Model` and `Logic` in the implementation of the Recurrence feature. Initially, `Model` had a dependency on `Logic` in the implementation of Recurrence, as`Model` had to initially return a `Command`, which is a component of `Logic`. This implementation was enhanced, removing this dependency, such that only `Logic` would have a dependency on `Model`. [\#148](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/148)
