@@ -35,7 +35,7 @@ This user guide is targeted at university students who are interested in using L
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `Lifebook.jar` from [here](https://github.com/AY2021S1-CS2103T-F12-4/tp/releases/tag/v1.3).
+1. Download the latest `Lifebook.jar` from [here](https://github.com/AY2021S1-CS2103T-F12-4/tp/releases/tag/v1.4).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your Lifebook.
 
@@ -307,6 +307,7 @@ Adds a To Do to the TodoList of LifeBook.
 
 Format: `add todo desc/DESCRIPTION date/DATE time/TIME [recurring/VALUE UNIT] [t/TAG]…`
 
+* `DESCRIPTION` must be <= 30 characters
 * `DATE` must be specified in the format of DD-MM-YYYY
 * `TIME` must be specified in the format of HHmm using 24 hour time
 * `VALUE` must be > 0
@@ -403,6 +404,7 @@ Adds an Event o to the EventList of LifeBook.
 
 Format: `add event desc/DESCRIPTION startdate/DATE starttime/TIME enddate/DATE endtime/TIME [recurring/VALUE UNIT] [t/TAG]..`
 
+* `DESCRIPTION` must be <= 30 characters
 * `DATE` must be specified in the format of DD-MM-YYYY
 * `TIME` must be specified in the format of HHmm using 24 hour time
 * `VALUE` must be > 0

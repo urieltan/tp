@@ -49,11 +49,11 @@ public class SampleDataUtil {
         return new Task[] {
             new Todo("Finish assignment", "19-11-2020 2359", getTagSet("CS2100")),
             new Todo("Finish tutorial worksheet", "16-11-2020 2359", getTagSet("CS2100")),
-            new Todo("Complete next CS2103T team project iteration", "22-11-2020 2359", getTagSet("CS2103T")),
+            new Todo("Complete next iteration", "22-11-2020 2359", getTagSet("CS2103T")),
             new Event("Attend group meeting", "20-11-2020 1000", "20-11-2020 1200",
                     new MeetingLink("Group meeting", "https://www.facebook.com", "20-11-2020 1000"),
                     getTagSet("CS2103T")),
-            new Event("Attend computer science lecture", "17-11-2020 1200", "17-11-2020 1300", getTagSet("CS2100")),
+            new Event("Attend lecture", "17-11-2020 1200", "17-11-2020 1300", getTagSet("CS2100")),
             new Event("Meet friends for lunch", "17-11-2020 1300", "17-11-2020 1400", getTagSet("Friends")),
             new Todo("Finish assignment", "19-12-2020 2359", getTagSet("CS2105")),
             new Event("Attend group meeting", "20-12-2020 1000", "20-12-2020 1200",
