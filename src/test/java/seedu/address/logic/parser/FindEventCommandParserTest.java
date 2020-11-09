@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.EXTRA_ARGUMENT_MESSAGE;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -24,8 +25,7 @@ public class FindEventCommandParserTest {
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindEventCommand.MESSAGE_USAGE));
 
         // wrong prefix
-        assertParseFailure(parser, "event i/2",
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindEventCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "event i/2", String.format(EXTRA_ARGUMENT_MESSAGE, "i/"));
 
         // no tag keyword given
         assertParseFailure(parser, "event " + PREFIX_TAG,
