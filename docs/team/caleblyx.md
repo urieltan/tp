@@ -33,7 +33,7 @@ Given below are my contributions to the project.
 * **New feature: TaskList GUI**: Created a simple GUI for the `TaskList` and `Tasks` in the first iteration, which was further enhanced and modified in proceeding iterations by other members.
   * What it does: allows users to view the `TaskList` and its contents.
   * Justification: provides a means for users to easily access the contents of the `TaskList` via a graphical representation.
-  * Highlights: made it easier for the developing team to visualise any features that they may have implemented in regards to the `TaskList` and/or `Tasks`. This also provided a starting point for further development of its GUI. Implementing this GUI was initially challenging due to my lack of my experience. It required me to scrap my initial implementation of the TaskList to create a new one that could provide an observable list to the GUI.
+  * Highlights: made it easier for the developing team to visualise any features that they may have implemented in regards to the `TaskList` and/or `Tasks`. This also provided a starting point for further development of its GUI. Implementing this was initially challenging due to my lack of my experience. It required me to scrap my initial implementation of the TaskList to create a new one that could provide an observable list to the GUI.
   * Credits: this GUI implementation for the `TaskList` was inspired by the GUI of contact list of AB3.
 
 * **New feature: Storage for TaskList**: Implemented storage for the `TaskList`
@@ -50,7 +50,7 @@ Given below are my contributions to the project.
   * Created release `v1.3` on [GitHub](https://github.com/AY2021S1-CS2103T-F12-4/tp/releases/tag/v1.3) 
 
 * **Enhancements to existing features**:
-  * Reduced coupling of `Model` and `Logic` in the implementation of the Recurrence feature. Initially, `Model` had a dependency on `Logic` in the implementation of Recurrence, as`Model` had to return a `Command`, which is a component of `Logic`. This implementation was enhanced, removing this dependency, such that only `Logic` would have a dependency on `Model`.  [\#148](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/148)
+  * Reduced coupling of `Model` and `Logic` in the implementation of the Recurrence feature.  [\#148](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/148)
   * Wrote unit tests for all added storage components that support storage of the contents of `TaskList`. [\#134](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/134)
   * Wrote unit tests for the logical components of the Sorting feature, and updated various test files to fix bugs after correcting the `equals` method of `ModelManager`.[\#248](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/248)
 * **Documentation**:
