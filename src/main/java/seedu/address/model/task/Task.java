@@ -1,15 +1,14 @@
 package seedu.address.model.task;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
-
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public abstract class Task {
     /** Maximum length for description supported by Lifebook */
@@ -59,7 +58,7 @@ public abstract class Task {
     public Task(boolean isDone, String description, Set<Tag> tags) {
         assert description != null;
         assert tags != null;
-        if(!isValidDescription(description)){
+        if (!isValidDescription(description)) {
             System.out.println(description);
         }
         checkArgument(isValidDescription(description), MESSAGE_CONSTRAINTS);
