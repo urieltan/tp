@@ -39,12 +39,9 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
   * Wrote tests for the basic task operations to increase coverage from 49.89% to 56.75% (Pull requests [\#69](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/69))
-
+  
     Created EventBuilder and TodoBuilder, which is adapted after PersonBuilder in AB3.
-
     Created TypicalTodos and TypicalEvents, which is adapted after TypicalPersons in AB3.
-
-    These stubs are useful for testing task operations.
 
   * Wrote tests for:
     - Filter function [\#71](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/71)
@@ -72,13 +69,10 @@ Given below are my contributions to the project.
     * Added more notices and warnings (Pull requests [\#243](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/243), [\#271](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/271), [\#266](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/266))
     * Resize some images [\#273](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/273)
   * Developer Guide:
-    * Added MSS + use case for filter feature [\#19](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/19)
-    * Added MSS + use case for recurring task feature [\#113](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/113)
-    * Added MSS + use case for contactTaskTag feature [\#239](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/239)
+    * Added MSS + use case for `filter`, `recurring task` and `contactTaskTag` (Pull requests [\#19](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/19), [\#113](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/113), [\#239](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/239))
     * Added implementation details of the `filter` feature (Pull requests [\#113](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/113), [\#114](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/114), [\#115](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/115))
-    * Added implementation details of the `contactTaskTag` feature [\#239](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/239)
-    * Added manual testing instructions for `adding a task` [\#239](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/239)
-    * Added manual testing instructions for `filter`, `due soon` and `contactTaskTag` [\#271](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/271)
+    * Added implementation details of the `contactTaskTag` feature [\#239](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/239) 
+    * Added manual testing instructions for `adding task`, `filter`, `due soon` and `contactTaskTag` (Pull requests [\#239](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/239), [\#271](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/271))
     * Standardize UML diagram colors [\#254](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/242)
     * Added brief "Effort" section [\#271](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/271)
   * About Us:
