@@ -944,7 +944,7 @@ Sorting the contact list and TaskList with different states. There are different
     1. Test case: `contactTaskTag t/CS2103T t/project contactIndex/2 taskIndex/2`<br>
        Expected: The contact and task at index 2 should have the tags "CS2103T" and "project".
 
-    1. Other variations to try: Incorrect index for contact/task, not giving a tag.
+    1. Other variations to try: Incorrect index for contact/task, not giving a tag, tags with a spacing.
 
 
 

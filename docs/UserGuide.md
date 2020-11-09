@@ -89,10 +89,11 @@ This user guide is targeted at university students who are interested in using L
 
 Adds a person to the contact list.
 
-Format: `add  contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
+Each tag should not contain a spacing.
 </div>
 
 Examples:
@@ -294,6 +295,8 @@ Upon executing the command, the contact at index 7- “James Ho” and task at i
 It is a coincidence in the example that the index of the "homework" task is 1 for "Due soon" and the whole Tasklist.
 Input the task's index based from the **whole Tasklist** instead.
 
+Also, each tag should not have any spacings.
+
 </div>
 
 * `contactTaskTag t/CS2100 t/buddy contactIndex/7 taskIndex/1`
@@ -308,7 +311,7 @@ Format: `add todo desc/DESCRIPTION date/DATE time/TIME [recurring/VALUE UNIT] [t
 * `DATE` must be specified in the format of DD-MM-YYYY
 * `TIME` must be specified in the format of HHmm using 24 hour time
 * `VALUE` must be > 0
-* `TAG` must be alphanumeric
+* `TAG` must be alphanumeric (no spaces)
 * `UNIT` must be "day", "week", "month" or "year"
 
 Examples:
@@ -328,6 +331,14 @@ Format: `edit todo i/INDEX [desc/DESCRIPTION] [date/DATE] [time/TIME]`
 * Existing values will be updated to the input values.
 * `DATE` must be specified in the format of DD-MM-YYYY
 * `TIME` must be specified in the format of HHmm using 24 hour time
+
+<div markdown="block" class="alert alert-danger">
+
+:warning: **Warning:**
+
+To change a normal Todo to a recurring one (or vice-versa), you would have to delete the task and add it with the recurring field (vice-versa).
+
+</div>
 
 Examples:
 *  `edit todo i/1 desc/CS2101 Slides date/24-01-2020` Edits the description and date of the 1st todo to be `CS2101 Slides` and `24-01-2020` respectively.
@@ -393,7 +404,7 @@ Format: `add event desc/DESCRIPTION startdate/DATE starttime/TIME enddate/DATE e
 * `TIME` must be specified in the format of HHmm using 24 hour time
 * `VALUE` must be > 0
 * `UNIT` must be "day", "week", "month" or "year"
-* `TAG` must be alphanumeric
+* `TAG` must be alphanumeric (no spaces)
 
 Examples:
 
@@ -411,6 +422,14 @@ Format: `edit event i/INDEX [desc/DESCRIPTION] [startdate/DATE] [starttime/TIME]
 * Existing values will be updated to the input values.
 * `STARTDATE` and `ENDDATE` must be specified in the format of DD-MM-YYYY
 * `STARTTIME` and `ENDTIME` must be specified in the format of HHmm using 24 hour time
+
+<div markdown="block" class="alert alert-danger">
+
+:warning: **Warning:**
+
+To change a normal Event to a recurring one (or vice-versa), you would have to delete the task and add it with the recurring field (vice-versa).
+
+</div>
 
 Examples:
 *  `edit event i/1 desc/CS2101 Lecture startdate/24-01-2020 endtime/2359` Edits the description, start date, and end time of the 1st event to be `CS2101 Lecture`, `24-01-2020`, and `2359` respectively.
