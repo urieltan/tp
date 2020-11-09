@@ -5,7 +5,7 @@ title: Chua Chen Ler's Project Portfolio Page
 
 ## Project: Lifebook
 
-Lifebook is a desktop task management application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+Lifebook is a desktop task management application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 13 kLoC.
 
 Given below are my contributions to the project.
 
@@ -27,6 +27,7 @@ Given below are my contributions to the project.
 * **Added ability to add a recurring task**
   * What it does: A recurring task is created when a user includes the optional `recurring/` field in adding a new todo/event.
                   When a recurring task is marked as done, it will automatically generate another recurring task with the new deadline based on the recurrence field. (while the remaining details of the task remains the same)
+  <div style="page-break-after: always;"></div>
   * Justification: This feature improves the product functionality as the user would not have to manually add recurring tasks every time.
   * Highlights: I have to ensure that the recurring task is generated properly after it is marked as done. We have considered whether should the "done" recurrence task be deleted automatically too, but we decide to leave it in case the user wants to trace back their done tasks.
 
