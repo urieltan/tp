@@ -9,22 +9,22 @@ Lifebook is a desktop task management application used for teaching Software Eng
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to filter tasks due at/before a specified date/time.
+* **Added the ability to filter tasks due at/before a specified date/time**
   * What it does: It allows users to search todos/meetings due at/before a certain date/time.
   * Justification: This feature improves the product functionality because a user may have a long task-list and it could be hard to search for specific deadlines.
   * Highlights: The implementation of this feature requires accessing the task-list and each task's deadline.
 
-* **New Feature**: Added ability to view tasks that are due soon (within 1 week).
+* **Added ability to view tasks that are due soon (within 1 week)**
   * What it does: At the bottom right-hand corner of Lifebook, a list of tasks is shown that are due 1 week from the current date/time.
   * Justification: This feature improves the product usefulness as the user will be more inclined to use Lifebook for the ease of looking at tasks that are due soon.
   * Highlights: It is a little challenging to incorporate the "Due by" panel into Lifebook, and I have to ensure that the "Due soon" panel is updated dynamically each time the user does a task operation.
 
-* **New Feature**: Add a common tag to both a contact and a task.
+* **Add a common tag to both a contact and a task**
   * What it does: With a single command, you can add the same tag(s) to a particular contact and task.
   * Justification: This feature helps to speed up the process of adding a tag to a contact and a task if the user decides to have a commonn tag.
   * Highlights: Instead of writing all new code, I have used the "tagging" feature for a contact and task (individually) to reduce chance of bugs and overlaps.
 
-* **New Feature**: Added ability to add a recurring task.
+* **Added ability to add a recurring task**
   * What it does: A recurring task is created when a user includes the optional `recurring/` field in adding a new todo/event.
                   When a recurring task is marked as done, it will automatically generate another recurring task with the new deadline based on the recurrence field. (while the remaining details of the task remains the same)
   * Justification: This feature improves the product functionality as the user would not have to manually add recurring tasks every time.
@@ -34,6 +34,7 @@ Given below are my contributions to the project.
 
 * **Project management**:
   * Created release `v1.3(trial)` on [GitHub](https://github.com/AY2021S1-CS2103T-F12-4/tp/releases/tag/v1.3a)
+  * Created release `v1.4` on [GitHub](https://github.com/AY2021S1-CS2103T-F12-4/tp/releases/tag/v1.4)
 
 * **Enhancements to existing features**:
   * Wrote tests for the basic task operations to increase coverage from 49.89% to 56.75% (Pull requests [\#69](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/69))
@@ -48,6 +49,7 @@ Given below are my contributions to the project.
     - Filter function [\#71](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/71)
     - Recurring function [\#98](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/98)
     - Common tag for contact and task [\#132](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/132)
+    - Due soon [\#257](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/257)
 
   * Modify GUI to show "Recurring task" [\#125](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/125)
   * Modify GUI to show "Due soon" panel [\#126](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/126)
@@ -65,17 +67,27 @@ Given below are my contributions to the project.
         - Common tag for contact and task [\#132](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/132)
     * Did cosmetic tweaks to command summary : [\#138](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/138)
     * Update release link for v1.3a [\#121](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/121)
+    * Update release link for v1.4 [\#274](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/274)
+    * Added more notices and warnings (Pull requests [\#243](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/243), [\#271](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/271), [\#266](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/266))
+    * Resize some images [\#273](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/273)
   * Developer Guide:
     * Added MSS + use case for filter feature [\#19](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/19)
     * Added MSS + use case for recurring task feature [\#113](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/113)
-    * Added implementation details of the `filter` feature. (Pull requests [\#113](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/113), [\#114](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/114), [\#115](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/115))
+    * Added MSS + use case for contactTaskTag feature [\#239](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/239)
+    * Added implementation details of the `filter` feature (Pull requests [\#113](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/113), [\#114](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/114), [\#115](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/115))
+    * Added implementation details of the `contactTaskTag` feature [\#239](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/239)
+    * Added manual testing instructions for `adding a task` [\#239](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/239)
+    * Added manual testing instructions for `filter`, `due soon` and `contactTaskTag` [\#271](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/271)
+    * Standardize UML diagram colors [\#254](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/242)
+    * Added brief "Effort" section [\#271](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/271)
   * About Us:
     * Fix teammate's issue of image not showing up [\#39](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/39)
 
 * **Community**:
-  * PRs reviewed: [\#98](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/98), [\#107](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/107), [\#112](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/112), [\#116](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/116), [\#118](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/118), [\#120](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/120), [\#130](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/130), [\#145](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/145), [\#151](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/151)
+  * PRs reviewed with non-trivial comments: (Pull requests [\#270](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/270), [\#240](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/240), [\#232](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/232))
   * Contributed to forum discussions:
     - Sharing tips: [Testing your application using Windows Sandbox](https://github.com/nus-cs2103-AY2021S1/forum/issues/227), [iP .jar tip](https://github.com/nus-cs2103-AY2021S1/forum/issues/174)
     - Asking for help: [Unable to display ✓ and ✘](https://github.com/nus-cs2103-AY2021S1/forum/issues/64)
 
-
+* **Other contributions**:
+  * Contributed to the creation of Lifebook's demonstration video. (Script and voice-over)
