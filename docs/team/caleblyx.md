@@ -5,7 +5,7 @@ title: Lin Yuan Xun, Caleb's Project Portfolio Page
 
 ## Project: Lifebook
 
-Lifebook is a desktop task management application created during a collaborative project for a module that teaches Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+Lifebook is a desktop task management application created during a collaborative project for a module that teaches Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 13 kLoC.
 
 Given below are my contributions to the project.
 
@@ -61,7 +61,7 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Updated the model architecture diagram to include the newly added model components of Lifebook. [\#234](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/234)
     * Added implementation details of the `Add Task` feature. [\#120](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/120)
-    * Added user stories, use cases, and manual testing for the features I implemented  [\#37](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/37/files) [\#234](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/234) [\#259](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/259)
+    * Added user stories, use cases, and manual testing for the features I implemented  [\#37](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/37/files), [\#234](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/234), [\#259](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/259)
     * Contributed to the "Effort" section of the appendix [\#276](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/276)
 * **Community**:
   * Reviewed and merged multiple PRs. Examples: [\#149](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/149), [\#216](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/216), [\#221](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/221).
