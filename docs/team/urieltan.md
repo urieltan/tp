@@ -16,6 +16,9 @@ Given below are my contributions to the project.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=kevnw&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
+* **Bug fixing**: 
+  * Add checks for invalid data during data input [\#268](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/268) [\#270](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/270)
+
 * **Project management**:
   * Setting up the GitHub team repository and website
 
