@@ -35,7 +35,7 @@ This user guide is targeted at university students who are interested in using L
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `Lifebook.jar` from [here](https://github.com/AY2021S1-CS2103T-F12-4/tp/releases/tag/v1.3).
+1. Download the latest `Lifebook.jar` from [here](https://github.com/AY2021S1-CS2103T-F12-4/tp/releases/tag/v1.4).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your Lifebook.
 
