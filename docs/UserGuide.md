@@ -93,6 +93,7 @@ Format: `add contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
+
 Each tag should not contain a spacing.
 </div>
 
@@ -116,11 +117,11 @@ Format: `edit contact i/INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]�
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * Emails should be of the format `local-part@domain` and adhere to the following constraints:
-* 1. The local-part should only contain alphanumeric characters and these special characters: `` `!#$%&'*+/=?`{|}~^.- ``
-* 2. This is followed by a '@' and then a domain name. The domain name must:
-*    - be at least 2 characters long
-*    - start and end with alphanumeric characters
-*    - consist of alphanumeric characters, a period or a hyphen for the characters in between, if any.
+    1. The local-part should only contain alphanumeric characters and these special characters: `` `!#$%&'*+/=?`{|}~^.- ``
+    2. This is followed by a '@' and then a domain name. The domain name must:
+        - be at least 2 characters long
+        - start and end with alphanumeric characters
+        - consist of alphanumeric characters, a period or a hyphen for the characters in between, if any.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
@@ -271,7 +272,7 @@ When this task is marked as done, it will generate another todo with the deadlin
 
 If a task is recurring, it will be displayed in the GUI.
 
-<img width="20%" height="20%" src="images/ExampleOfARecurringTask.png" />
+<img width="25%" height="25%" src="images/ExampleOfARecurringTask.png" />
 
 ##### 2.2.7 Add common tag to contact + task: `contactTaskTag`
 
@@ -336,7 +337,7 @@ Format: `edit todo i/INDEX [desc/DESCRIPTION] [date/DATE] [time/TIME]`
 
 :warning: **Warning:**
 
-To change a normal Todo to a recurring one (or vice-versa), you would have to delete the task and add it with the recurring field (vice-versa).
+To change a normal Todo to a recurring one (or vice-versa), you would have to delete the task and add it with the updated fields, instead of using the `edit` command.
 
 </div>
 
@@ -432,7 +433,7 @@ Format: `edit event i/INDEX [desc/DESCRIPTION] [startdate/DATE] [starttime/TIME]
 
 :warning: **Warning:**
 
-To change a normal Event to a recurring one (or vice-versa), you would have to delete the task and add it with the recurring field (vice-versa).
+To change a normal Event to a recurring one (or vice-versa), you would have to delete the task and add it with the updated fields, instead of using the `edit` command.
 
 </div>
 
@@ -535,7 +536,7 @@ Format: `help`
 **Q**: How do I save any update I made on the Lifebook?<br>
 **A**: Lifebook will automatically save any update you make upon closing the app, and the data is saved in the hard disk. There is no need to save manually.<br>
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Lifebook home folder.
+**A**: Simply copy over the whole directory of Lifebook to the other computer and overwrite the files.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -577,8 +578,8 @@ Action | Format, Examples
 
 Action | Format, Examples
 --------|------------------
-**Add To Do** | `add todo desc/DESCRIPTION date/DATE time/TIME [recurring/VALUE UNIT] [t/TAG]…` <br> e.g., `add todo desc/update user guide date/09-08-2020 time/2300 recurring/1 week t/MUSTFINISHSOON`
 **List To Dos** | `list todo`
+**Add To Do** | `add todo desc/DESCRIPTION date/DATE time/TIME [recurring/VALUE UNIT] [t/TAG]…` <br> e.g., `add todo desc/update user guide date/09-08-2020 time/2300 recurring/1 week t/MUSTFINISHSOON`
 **Find To Do** | `find todo [desc/DESC_KEYWORD [MORE_DESC_KEYWORDS]] [t/TAG_KEYWORD]`<br> e.g., `find todo desc/Finish assignment t/CS2100`
 **Link doc** | `link doc desc/DESCRIPTION url/LINK i/INDEX_OF_TODO` <br> e.g.,`link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoIkfacr0asqV9A4kh i/2`
 
@@ -587,8 +588,8 @@ Action | Format, Examples
 
 Action | Format, Examples
 --------|------------------
-**Add Event** | `add event desc/DESCRIPTION startdate/DATE starttime/TIME enddate/DATE endtime/TIME [recurring/VALUE UNIT] [t/TAG]` <br> e.g., `add event desc/meeting startdate/12-12-2020 starttime/1000 enddate/12-12-2020 endtime/1130 recurring/1 week t/IMPORTANT`
 **List Events** | `list event`
+**Add Event** | `add event desc/DESCRIPTION startdate/DATE starttime/TIME enddate/DATE endtime/TIME [recurring/VALUE UNIT] [t/TAG]` <br> e.g., `add event desc/meeting startdate/12-12-2020 starttime/1000 enddate/12-12-2020 endtime/1130 recurring/1 week t/IMPORTANT`
 **Find Event** | `find event [desc/DESC_KEYWORD [MORE_DESC_KEYWORDS]] [t/TAG_KEYWORD]`<br> e.g., `find event desc/Attend meeting t/CS2103T`
 **Link meeting** | `link meeting desc/DESCRIPTION url/LINK i/INDEX_OF_EVENT date/DATE time/TIME` <br> e.g.,`link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf i/2 date/22-09-2020 time/1400`
 
