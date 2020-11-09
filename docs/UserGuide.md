@@ -170,7 +170,7 @@ Format: `delete contact INDEX`
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-
+<div style="page-break-after: always;"></div>
 Examples:
 * `list contact` followed by `delete contact 2` deletes the 2nd person in the contact list.
 * `find contact Betsy` followed by `delete contact 1` deletes the 1st person in the results of the `find` command.
@@ -500,6 +500,7 @@ Examples:
 * `find event meeting` returns `CCA meeting` and `Team meeting`
 * `find event Attend meeting` returns `Attend workshop`, `Arrange meeting`
 * `find event t/CS3243`
+<div style="page-break-after: always;"></div>
 * `find event n/Attend meeting t/TeamProject`<br>
 
 ### 2.5 Others
@@ -547,6 +548,7 @@ Format: `help`
 **A**: Simply copy over the whole directory of Lifebook to the other computer and overwrite the files.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 4. Command summary
 
@@ -558,6 +560,7 @@ Action | Format, Examples
 **Help** | `help`
 **Add common tag to Contact + Task** | `contactTaskTag t/TAG... contactIndex/INDEX taskIndex/INDEX` <br> e.g., `contactTaskTag t/CS2103T t/ProjMate contactIndex/1 taskIndex/1`
 
+<div style="page-break-after: always;"></div>
 
 ### 4.2 Contact Operations
 
@@ -570,6 +573,7 @@ Action | Format, Examples
 **Find Contact** | `find contact [n/NAME_KEYWORD [MORE_NAME_KEYWORDS]] [t/TAG_KEYWORD]`<br> e.g., `find contact n/James Jake t/colleagues`
 **List Contacts** | `list contact`
 
+<div style="page-break-after: always;"></div>
 
 ### 4.3 Task Operations
 
