@@ -58,6 +58,8 @@ This user guide is targeted at university students who are interested in using L
    * **`clear contact`** : Deletes all contacts.
 
    * **`exit`** : Exits the app.
+   
+   <div style="page-break-after: always;"></div>
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -142,6 +144,9 @@ Format: `find contact [n/NAME_KEYWORD [MORE_NAME_KEYWORDS]] [t/TAG_KEYWORD]`
 * Only full words will be matched for both name and tag e.g. `Han` will not match `Hans`
 * When only name keyword is given, persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. name keyword `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  
+  <div style="page-break-after: always;"></div>
+  
 * When only tag keyword is given, persons whose one of the tag(s) matches the tag searched will be returned.
 e.g. Hans with tag `friends` and `colleagues` will be returned when tag `friends` is searched.
 * When both name keyword and tag keyword are given, persons matching both keywords are returned.
@@ -341,6 +346,8 @@ To change a normal Todo to a recurring one (or vice-versa), you would have to de
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 *  `edit todo i/1 desc/CS2101 Slides date/24-01-2020` Edits the description and date of the 1st todo to be `CS2101 Slides` and `24-01-2020` respectively.
 *  `edit todo i/2 date/25-01-2020 time/2350` Edits the date and time of the 2nd todo to be `25-01-2020` and `2350` respectively.
@@ -382,6 +389,7 @@ Format: `find todo [desc/DESC_KEYWORD [MORE_DESC_KEYWORDS]] [t/TAG_KEYWORD]`
 
 * At least one of description keyword or tag keyword is given in the command.
 * The search is case-insensitive for both description and tag. e.g `assignment` will match `Assignment`
+<div style="page-break-after: always;"></div>
 * The order of the description keywords does not matter. e.g. `Finish assignment` will match `assignment Finish`
 * Only full words will be matched for both description and tag e.g. `Quiz` will not match `Quizzes`
 * When only description keyword is given, todos matching at least one keyword will be returned (i.e. `OR` search).
@@ -548,6 +556,7 @@ Action | Format, Examples
 --------|------------------
 **Sort** | `sort OPTION` <br> `OPTION` refers to `contact`, `task`, or `clear`
 **Help** | `help`
+<div style="page-break-after: always;"></div>
 **Add common tag to Contact + Task** | `contactTaskTag t/TAG... contactIndex/INDEX taskIndex/INDEX` <br> e.g., `contactTaskTag t/CS2103T t/ProjMate contactIndex/1 taskIndex/1`
 
 
@@ -570,6 +579,7 @@ Action | Format, Examples
 **List Tasks** | `list task`
 **Remove Task (Todo and Event)** | `delete task INDEX` <br> e.g., `delete task 3`
 **Mark To Do/Event as Complete** | `done INDEX` <br> e.g., `done 5`
+<div style="page-break-after: always;"></div>
 **Find tasks due at** | `itemsDueAt date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueAt date/12-12-2020 time/2359`
 **Find tasks due before** |  `itemsDueBefore date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueBefore date/12-12-2020 time/2359`
 
