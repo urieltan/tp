@@ -271,8 +271,7 @@ When this task is marked as done, it will generate another todo with the deadlin
 
 If a task is recurring, it will be displayed in the GUI.
 
-![recurringTask](images/ExampleOfARecurringTask.png)
-
+<img width="20%" height="20%" src="images/ExampleOfARecurringTask.png" />
 
 ##### 2.2.7 Add common tag to contact + task: `contactTaskTag`
 
@@ -523,7 +522,7 @@ Format: `exit`
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+<img height="60%" width="60%" src="images/helpMessage.png" />
 
 Format: `help`
 
