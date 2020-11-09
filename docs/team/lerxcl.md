@@ -5,7 +5,7 @@ title: Chua Chen Ler's Project Portfolio Page
 
 ## Project: Lifebook
 
-Lifebook is a desktop task management application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+Lifebook is a desktop task management application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 13 kLoC.
 
 Given below are my contributions to the project.
 
@@ -27,6 +27,7 @@ Given below are my contributions to the project.
 * **Added ability to add a recurring task**
   * What it does: A recurring task is created when a user includes the optional `recurring/` field in adding a new todo/event.
                   When a recurring task is marked as done, it will automatically generate another recurring task with the new deadline based on the recurrence field. (while the remaining details of the task remains the same)
+  <div style="page-break-after: always;"></div>
   * Justification: This feature improves the product functionality as the user would not have to manually add recurring tasks every time.
   * Highlights: I have to ensure that the recurring task is generated properly after it is marked as done. We have considered whether should the "done" recurrence task be deleted automatically too, but we decide to leave it in case the user wants to trace back their done tasks.
 
@@ -38,13 +39,6 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
   * Wrote tests for the basic task operations to increase coverage from 49.89% to 56.75% (Pull requests [\#69](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/69))
-
-    Created EventBuilder and TodoBuilder, which is adapted after PersonBuilder in AB3.
-
-    Created TypicalTodos and TypicalEvents, which is adapted after TypicalPersons in AB3.
-
-    These stubs are useful for testing task operations.
-
   * Wrote tests for:
     - Filter function [\#71](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/71)
     - Recurring function [\#98](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/98)
@@ -71,17 +65,12 @@ Given below are my contributions to the project.
     * Added more notices and warnings (Pull requests [\#243](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/243), [\#271](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/271), [\#266](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/266))
     * Resize some images [\#273](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/273)
   * Developer Guide:
-    * Added MSS + use case for filter feature [\#19](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/19)
-    * Added MSS + use case for recurring task feature [\#113](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/113)
-    * Added MSS + use case for contactTaskTag feature [\#239](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/239)
+    * Added MSS + use case for `filter`, `recurring task` and `contactTaskTag` (Pull requests [\#19](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/19), [\#113](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/113), [\#239](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/239))
     * Added implementation details of the `filter` feature (Pull requests [\#113](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/113), [\#114](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/114), [\#115](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/115))
-    * Added implementation details of the `contactTaskTag` feature [\#239](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/239)
-    * Added manual testing instructions for `adding a task` [\#239](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/239)
-    * Added manual testing instructions for `filter`, `due soon` and `contactTaskTag` [\#271](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/271)
+    * Added implementation details of the `contactTaskTag` feature [\#239](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/239) 
+    * Added manual testing instructions for `adding task`, `filter`, `due soon` and `contactTaskTag` (Pull requests [\#239](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/239), [\#271](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/271))
     * Standardize UML diagram colors [\#254](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/242)
     * Added brief "Effort" section [\#271](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/271)
-  * About Us:
-    * Fix teammate's issue of image not showing up [\#39](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/39)
 
 * **Community**:
   * PRs reviewed with non-trivial comments: (Pull requests [\#270](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/270), [\#240](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/240), [\#232](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/232))

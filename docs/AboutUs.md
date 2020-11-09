@@ -22,7 +22,7 @@ You may reach us through the following email addresses:
 [[github](https://github.com/urieltan)]
 [[portfolio](team/urieltan.md)]
 
-* Role: Developer Guide
+* Role: Developer Guide, Testing
 
 ### Chua Chen Ler
 
