@@ -58,8 +58,6 @@ This user guide is targeted at university students who are interested in using L
    * **`clear contact`** : Deletes all contacts.
 
    * **`exit`** : Exits the app.
-   
-   <div style="page-break-after: always;"></div>
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -142,7 +140,6 @@ Format: `find contact [n/NAME_KEYWORD [MORE_NAME_KEYWORDS]] [t/TAG_KEYWORD]`
 
 * At least one of name keyword or tag keyword is given in the command.
 * The search is case-insensitive for both name and tag. e.g `friends` will match `Friends`
-<div style="page-break-after: always;"></div>
 * The order of the name keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only full words will be matched for both name and tag e.g. `Han` will not match `Hans`
 * When only name keyword is given, persons matching at least one keyword will be returned (i.e. `OR` search).
@@ -170,7 +167,7 @@ Format: `delete contact INDEX`
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-<div style="page-break-after: always;"></div>
+
 Examples:
 * `list contact` followed by `delete contact 2` deletes the 2nd person in the contact list.
 * `find contact Betsy` followed by `delete contact 1` deletes the 1st person in the results of the `find` command.
@@ -346,7 +343,6 @@ To change a normal Todo to a recurring one (or vice-versa), you would have to de
 
 </div>
 
-<div style="page-break-after: always;"></div>
 
 Examples:
 *  `edit todo i/1 desc/CS2101 Slides date/24-01-2020` Edits the description and date of the 1st todo to be `CS2101 Slides` and `24-01-2020` respectively.
@@ -389,7 +385,6 @@ Format: `find todo [desc/DESC_KEYWORD [MORE_DESC_KEYWORDS]] [t/TAG_KEYWORD]`
 
 * At least one of description keyword or tag keyword is given in the command.
 * The search is case-insensitive for both description and tag. e.g `assignment` will match `Assignment`
-<div style="page-break-after: always;"></div>
 * The order of the description keywords does not matter. e.g. `Finish assignment` will match `assignment Finish`
 * Only full words will be matched for both description and tag e.g. `Quiz` will not match `Quizzes`
 * When only description keyword is given, todos matching at least one keyword will be returned (i.e. `OR` search).
@@ -500,7 +495,6 @@ Examples:
 * `find event meeting` returns `CCA meeting` and `Team meeting`
 * `find event Attend meeting` returns `Attend workshop`, `Arrange meeting`
 * `find event t/CS3243`
-<div style="page-break-after: always;"></div>
 * `find event n/Attend meeting t/TeamProject`<br>
 
 ### 2.5 Others
@@ -548,7 +542,6 @@ Format: `help`
 **A**: Simply copy over the whole directory of Lifebook to the other computer and overwrite the files.
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ## 4. Command summary
 
@@ -560,7 +553,6 @@ Action | Format, Examples
 **Help** | `help`
 **Add common tag to Contact + Task** | `contactTaskTag t/TAG... contactIndex/INDEX taskIndex/INDEX` <br> e.g., `contactTaskTag t/CS2103T t/ProjMate contactIndex/1 taskIndex/1`
 
-<div style="page-break-after: always;"></div>
 
 ### 4.2 Contact Operations
 
@@ -573,7 +565,6 @@ Action | Format, Examples
 **Find Contact** | `find contact [n/NAME_KEYWORD [MORE_NAME_KEYWORDS]] [t/TAG_KEYWORD]`<br> e.g., `find contact n/James Jake t/colleagues`
 **List Contacts** | `list contact`
 
-<div style="page-break-after: always;"></div>
 
 ### 4.3 Task Operations
 
