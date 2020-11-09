@@ -69,6 +69,11 @@ public class JsonAdaptedTodo extends JsonAdaptedTask {
             .collect(Collectors.toList()));
     }
 
+    /**
+     * Converts this Jackson-friendly adapted todo object into the model's {@code Todo} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the adapted Todo.
+     */
     @Override
     public Task toModelType() throws IllegalValueException {
         final Set<Tag> personTags = new HashSet<>();

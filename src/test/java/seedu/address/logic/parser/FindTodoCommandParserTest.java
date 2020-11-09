@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.EXTRA_ARGUMENT_MESSAGE;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -19,8 +20,12 @@ public class FindTodoCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
+        // no prefix
         assertParseFailure(parser, "todo     ",
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTodoCommand.MESSAGE_USAGE));
+
+        // wrong prefix
+        assertParseFailure(parser, "todo i/2", String.format(EXTRA_ARGUMENT_MESSAGE, "i/"));
 
         // no tag keyword given
         assertParseFailure(parser, "todo " + PREFIX_TAG,
@@ -31,7 +36,15 @@ public class FindTodoCommandParserTest {
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTodoCommand.MESSAGE_USAGE));
 
         // no desc keyword given
-        assertParseFailure(parser, "todo " + PREFIX_DESCRIPTION,
+        assertParseFailure(parser, "todo " + PREFIX_DESCRIPTION + "  " + PREFIX_TAG + "tag",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTodoCommand.MESSAGE_USAGE));
+
+        // no desc keyword given
+        assertParseFailure(parser, "todo " + PREFIX_DESCRIPTION + "  ",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTodoCommand.MESSAGE_USAGE));
+
+        // no tag keyword given
+        assertParseFailure(parser, "todo " + PREFIX_DESCRIPTION + "desc " + PREFIX_TAG + "tag1 tag2",
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTodoCommand.MESSAGE_USAGE));
     }
 

@@ -12,7 +12,6 @@ import seedu.address.logic.commands.list.ListTaskCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.TaskList;
 import seedu.address.model.UserPrefs;
 
 
@@ -24,7 +23,7 @@ public class ListTaskCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(new AddressBook(), new UserPrefs(), getTypicalTodosTaskList());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new TaskList());
+        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), getTypicalTodosTaskList());
     }
 
     @Test

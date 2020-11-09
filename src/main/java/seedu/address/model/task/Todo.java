@@ -250,16 +250,6 @@ public class Todo extends Task {
         this.recurrence = recurrence;
         this.collaborativeLink = link;
     }
-
-    /**
-     * Changes the deadline of the task to a provided new deadline.
-     *
-     * @param newDeadline the deadline of the task to be changed to
-     */
-    public void snooze(String newDeadline) {
-        this.deadline = LocalDateTime.parse(newDeadline, INPUT_DATE_TIME_FORMAT);
-    }
-
     /**
      * Returns a String representation of the deadline with the format of outputFormatter.
      *
@@ -324,10 +314,14 @@ public class Todo extends Task {
                         && this.recurrence.equals(task.recurrence) && task.collaborativeLink == null
                         && this.tags.equals(task.tags);
             } else if (this.recurrence == null && this.collaborativeLink == null) {
+                System.out.println("masuk else if");
+                System.out.println(this);
+                System.out.println(task);
                 isEqualDeadlines = this.description.equals(task.description)
                         && this.deadline.equals(task.deadline) && this.isDone == task.isDone
                         && task.recurrence == null && task.collaborativeLink == null
                         && this.tags.equals(task.tags);
+                System.out.println(isEqualDeadlines);
             } else {
                 isEqualDeadlines = this.description.equals(task.description)
                         && this.deadline.equals(task.deadline) && this.isDone == task.isDone

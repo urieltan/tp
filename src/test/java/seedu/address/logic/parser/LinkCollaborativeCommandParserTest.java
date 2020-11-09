@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.EXTRA_ARGUMENT_MESSAGE;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_URL;
@@ -54,8 +55,8 @@ public class LinkCollaborativeCommandParserTest {
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "doc i/1 some random string", MESSAGE_INVALID_FORMAT);
 
-        // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "doc i/1 s/ string", MESSAGE_INVALID_FORMAT);
+        // invalid prefix
+        assertParseFailure(parser, "doc i/1 s/ string", String.format(EXTRA_ARGUMENT_MESSAGE, "s/"));
     }
 
     @Test

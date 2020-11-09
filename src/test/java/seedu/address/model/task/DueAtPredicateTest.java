@@ -11,7 +11,7 @@ import seedu.address.testutil.TodoBuilder;
 public class DueAtPredicateTest {
     @Test
     public void test_tasksDueAt_returnsTrue() {
-        DueAtPredicate predicate = new DueAtPredicate("12-12-2020 2359");
+        DueAtPredicate predicate = new DueAtPredicate("14-12-2020 2359");
 
         //To-do (homework)
         assertTrue(predicate.test(new TodoBuilder().build()));

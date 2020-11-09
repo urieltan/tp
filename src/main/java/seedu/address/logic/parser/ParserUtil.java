@@ -23,6 +23,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.task.CollaborativeLink;
 import seedu.address.model.task.Link;
 import seedu.address.model.task.MeetingLink;
+import seedu.address.model.task.Task;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -115,6 +116,21 @@ public class ParserUtil {
         boolean isValid = Link.isValidUrl(trimmedUrl);
         if (!isValid) {
             throw new ParseException((Link.MESSAGE_CONSTRAINTS));
+        }
+        return true;
+    }
+
+    /**
+     * Validates a {@code String description} an returns a {@Code Boolean}
+     *
+     * @throws ParseException if the given {@code String description} is invalid (too long).
+     */
+    public static boolean validateDescription(String description) throws ParseException {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        boolean isValid = Task.isValidDescription(trimmedDescription);
+        if (!isValid) {
+            throw new ParseException((Task.MESSAGE_CONSTRAINTS));
         }
         return true;
     }

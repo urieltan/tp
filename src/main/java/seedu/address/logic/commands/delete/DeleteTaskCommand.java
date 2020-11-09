@@ -11,7 +11,9 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.task.Task;
-
+/**
+ * Deletes a task identified using it's displayed index from the task list.
+ */
 public class DeleteTaskCommand extends DeleteCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " task"
             + ": Deletes the task identified by the index number used in the displayed TaskList.\n"

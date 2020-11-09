@@ -9,7 +9,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.model.Model;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all tasks in the task list to the user.
  */
 public class ListTaskCommand extends ListCommand {
 
@@ -21,5 +21,11 @@ public class ListTaskCommand extends ListCommand {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         return new CommandResult(MESSAGE_SUCCESS, "TASK");
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+            || other instanceof ListTaskCommand;
     }
 }
