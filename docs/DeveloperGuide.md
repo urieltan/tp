@@ -445,7 +445,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `Lifebook` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Contact list use cases
+#### ContactList use cases
 **Use case: UC1 Delete a person**
 
 **MSS**
@@ -815,7 +815,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts and tasks. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -907,3 +907,67 @@ Sorting the contact list and TaskList with different states. There are different
         Expected: The empty displayed list or lists should now be unfiltered and restored to natural orders.
     1. Input: List or lists without added tasks or contacts (i.e. both or one of the lists can have no added tasks or contacts).
        Expected: An error message prompting the user to add tasks or contacts to the list or lists without added items should be displayed. If one of the list had items, that list will be restored to its natural order.
+
+
+### Filter (itemsDueAt/itemsDueBefore)
+
+1. Filter tasks based on a specific deadline.
+
+    1. Prerequisites: List all tasks using the `list task` command. Multiple tasks in the list.
+    
+    1. Test case: `itemsDueAt date/12-12-2020 time/2359`<br>
+       Expected: A list of tasks that are due **exactly** at `12-12-2020, 2359` will be shown.
+    1. Test case: `itemsDueBefore date/02-01-2021 time/2359`<br>
+       Expected: A list of tasks that are due **before** `02-01-2021, 2359` will be shown.
+    1. Other variations to try: Missing date/time, where an exception will be thrown.
+
+### Due soon tasks
+
+1. At the bottom right-hand corner of Lifebook, a list of due soon tasks are shown (latest of 1 week from the current date/time)
+
+    1. Prerequisites: A todo/event with a deadline (latest 1 week from the current date/time) should be added.<br>
+       Expected: Upon adding the task, the task should appear immediately in the "due soon" panel.
+       
+    1. Test case: Marking a recurring task as done<br>
+       Expected: Upon marking the recurring task as done, if the new task generated is due soon, it should appear immediately in the "due soon" panel.
+       Also, the done task should no longer appear in the "due soon" panel.
+
+### Common tag
+
+1. Adds a common tag to a specified contact and task.
+
+    1. Prerequisites: There should be at least 1 contact and 1 task.
+    
+    1. Test case: `contactTaskTag t/CS2100 contactIndex/1 taskIndex/1`<br>
+       Expected: The contact and task at index 1 should have the tag "CS2100".
+
+    1. Test case: `contactTaskTag t/CS2103T t/project contactIndex/2 taskIndex/2`<br>
+       Expected: The contact and task at index 2 should have the tags "CS2103T" and "project".
+
+    1. Other variations to try: Incorrect index for contact/task, not giving a tag, tags with a spacing.
+
+## **Effort**
+
+When we first started coding for Lifebook, we have to figure out how to integrate all the task operations into the current
+AB3. Although we have done "Duke" for our iP, which shared many similar features, we still have to figure out how to merge both the 
+contact and task aspects together. Thus, many hours were spent inspecting AB3's codebase.  
+
+For the first milestone, we managed to implement the basic task operations, like add, view and delete.
+We have also modified AB3's GUI to include another panel to view the list of tasks. 
+Inspecting AB3's JavaFX files proved to be a challenge, as the GUI is way more complicated than "Duke".
+Many trial and error is done to properly implement it.
+
+While creating test cases for the task operations, we have to study the way AB3 does its stubs. 
+We followed after AB3 and created "TodoBuilder", "EventBuilder", "TypicalTodos" and "TypicalEvents" to abstract out
+the process of creating tasks to do the testing.
+
+While implementing recurring task, we have to ensure that Lifebook automatically creates a new task after the recurring task
+is marked as done. Initially, we did a brute force approach, where in the "done" method in Todo/Event calls out the "AddCommand" 
+to generate the new task. This is not following the right abstraction principle, as the Todo/Event class (Model) should not be
+calling the Command type class. Eventually, we have finally managed to solve this issue, where the "DoneCommand" class now checks 
+if the task is a recurring type, and if it is, it creates the new recurring task and adds it directly to the TaskList.
+
+
+
+
+

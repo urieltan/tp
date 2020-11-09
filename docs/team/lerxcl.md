@@ -14,8 +14,8 @@ Given below are my contributions to the project.
   * Justification: This feature improves the product functionality because a user may have a long task-list and it could be hard to search for specific deadlines.
   * Highlights: The implementation of this feature requires accessing the task-list and each task's deadline.
 
-* **New Feature**: Added ability to view tasks that are dueing soon (within 1 week).
-  * What it does: At the bottom right hand corner of Lifebook, a list of tasks is shown that are due 1 week from the current date/time.
+* **New Feature**: Added ability to view tasks that are due soon (within 1 week).
+  * What it does: At the bottom right-hand corner of Lifebook, a list of tasks is shown that are due 1 week from the current date/time.
   * Justification: This feature improves the product usefulness as the user will be more inclined to use Lifebook for the ease of looking at tasks that are due soon.
   * Highlights: It is a little challenging to incorporate the "Due by" panel into Lifebook, and I have to ensure that the "Due soon" panel is updated dynamically each time the user does a task operation.
 
