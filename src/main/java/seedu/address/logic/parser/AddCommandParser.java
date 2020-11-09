@@ -90,6 +90,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             String time = argMultimap.getValue(PREFIX_TIME).get().trim();
             ParserUtil.checkDateValidity(date);
             ParserUtil.checkTimeValidity(time);
+            ParserUtil.validateDescription(description);
             String deadline = date + " " + time;
 
             Todo todo;
@@ -139,6 +140,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             ParserUtil.checkTimeValidity(stTime);
             ParserUtil.checkDateValidity(endDate);
             ParserUtil.checkTimeValidity(endTime);
+            ParserUtil.validateDescription(description);
             String stDateTime = stDate + " " + stTime;
             String endDateTime = endDate + " " + endTime;
 
