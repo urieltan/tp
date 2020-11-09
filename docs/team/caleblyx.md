@@ -11,7 +11,7 @@ Given below are my contributions to the project.
 
 * **New feature: TaskList and tasks**: Added the ability to create `Tasks`, and add or delete them to or from the `TaskList` respectively.
   * What it does: allows the user to create `Tasks` that may either be `Todos` or `Events` and keep a record of them in the `TaskList`.
-  * Justification: This feature improves the product significantly because a user can now record information about tasks in addition to addresses in Lifebook for future reference and planning.
+  * Justification: This feature improves the product significantly because a user can now record information about tasks in Lifebook for future reference and planning.
   * Highlights: This required an implementation of the TaskList and Tasks (along with its subclasses). This a basis for more commands and features to be added in the future.
   * Credits: inspired from the creation of Bob - the personal assistant, which was my individual project.
 
@@ -28,21 +28,19 @@ Given below are my contributions to the project.
 * **New feature: Sort TaskList and AddressBook** Implemented the ability for users to sort the `TaskList` and `AddressBook`.
   * What it does: allows users to sort the `TaskList` and `AddressBook` by name and date respectively. Users also have the option of restoring both lists to their natural order if needed.
   * Justification: provides users with intuitively sorted lists. Users normally prefer to look through contact details in alphabetical order, and task details in the order of imminence.
-  * Highlights: this required a change in the model component. To implement sorting easily, the `TaskList` and `AddressBook` had to be wrapped by the JavaFX sorted list class, since the JavaFX filtered list class does not support sorting. Also, thanks to bug reporting by peers, I was able to make further refinements to the sorting command's messages in cases whereby the displayed filtered list is empty, or whereby the unfiltered list had no added items. 
+  * Highlights: To implement sorting easily, the `TaskList` and `AddressBook` had to be wrapped by the JavaFX sorted list class, since the JavaFX filtered list class does not support sorting. Also, thanks to bug reporting by peers, I was able to make further refinements to the sorting command in cases whereby the displayed filtered list is empty, or whereby the unfiltered list had no added items. 
 
 * **New feature: TaskList GUI**: Created a simple GUI for the `TaskList` and `Tasks` in the first iteration, which was further enhanced and modified in proceeding iterations by other members.
   * What it does: allows users to view the `TaskList` and its contents.
   * Justification: provides a means for users to easily access the contents of the `TaskList` via a graphical representation.
-  * Highlights: made it easier for the developing team to visualise any features that they may have implemented in regards to the `TaskList` and/or `Tasks`. This also provided a starting point for further development of its GUI. Implementing this was initially challenging due to my lack of my experience. It required me to scrap my initial implementation of the TaskList to create a new one that could provide an observable list to the GUI.
+  * Highlights: made it easier for the developing team to visualise any features that they may have implemented in regards to the `TaskList` and/or `Tasks`. Implementing this was initially challenging due to my lack of experience with JavaFX. It required me to scrap my initial implementation of the TaskList to create a new one that could provide an observable list to the GUI.
   * Credits: this GUI implementation for the `TaskList` was inspired by the GUI of contact list of AB3.
 
 * **New feature: Storage for TaskList**: Implemented storage for the `TaskList`
   * What it does: allows users to store `TaskList` data.
   * Justification: provides a means for users to easily store and access the contents of the `TaskList` for future sessions.
-  * Highlights: enables greater ease of implementing storage for data of other features pertaining to `Tasks` in the future. I had encountered some challenges due to my lack of familiarity with JSON. For instance, I was not aware I had to make additional annotations to serialize/deserialize polymorphic objects with JSON. Implementing Storage with JSON had definitely provided me with some valuable experience.
+  * Highlights: enables greater ease of implementing storage for data of other features pertaining to `Tasks` in the future. I had encountered some challenges due to my lack of familiarity with JSON. For instance, I was not aware I had to make additional annotations to serialize/deserialize polymorphic objects with JSON.
   * Credits: implementation inspired by the existing `Storage` component of address book. I referred to a [Stack Overflow discussion forum](https://stackoverflow.com/questions/30362446/deserialize-json-with-jackson-into-polymorphic-types-a-complete-example-is-giv) to gain insight on how to resolve my issue regarding JSON adapted polymorphic objects.
-
-
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=F12-4&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=functional-code~docs~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=caleblyx&tabRepo=AY2021S1-CS2103T-F12-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=functional-code~docs~test-code)
 
