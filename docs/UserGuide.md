@@ -94,9 +94,11 @@ Adds a person to the contact list.
 Format: `add contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+
+A person can have any number of tags (including 0).
 
 Each tag should not contain a spacing.
+
 </div>
 
 Examples:
@@ -140,13 +142,11 @@ Format: `find contact [n/NAME_KEYWORD [MORE_NAME_KEYWORDS]] [t/TAG_KEYWORD]`
 
 * At least one of name keyword or tag keyword is given in the command.
 * The search is case-insensitive for both name and tag. e.g `friends` will match `Friends`
+<div style="page-break-after: always;"></div>
 * The order of the name keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only full words will be matched for both name and tag e.g. `Han` will not match `Hans`
 * When only name keyword is given, persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. name keyword `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-  
-  <div style="page-break-after: always;"></div>
-  
+  e.g. name keyword `Hans Bo` will return `Hans Gruber`, `Bo Yang` 
 * When only tag keyword is given, persons whose one of the tag(s) matches the tag searched will be returned.
 e.g. Hans with tag `friends` and `colleagues` will be returned when tag `friends` is searched.
 * When both name keyword and tag keyword are given, persons matching both keywords are returned.
@@ -556,7 +556,6 @@ Action | Format, Examples
 --------|------------------
 **Sort** | `sort OPTION` <br> `OPTION` refers to `contact`, `task`, or `clear`
 **Help** | `help`
-<div style="page-break-after: always;"></div>
 **Add common tag to Contact + Task** | `contactTaskTag t/TAG... contactIndex/INDEX taskIndex/INDEX` <br> e.g., `contactTaskTag t/CS2103T t/ProjMate contactIndex/1 taskIndex/1`
 
 
@@ -579,7 +578,6 @@ Action | Format, Examples
 **List Tasks** | `list task`
 **Remove Task (Todo and Event)** | `delete task INDEX` <br> e.g., `delete task 3`
 **Mark To Do/Event as Complete** | `done INDEX` <br> e.g., `done 5`
-<div style="page-break-after: always;"></div>
 **Find tasks due at** | `itemsDueAt date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueAt date/12-12-2020 time/2359`
 **Find tasks due before** |  `itemsDueBefore date/DD-MM-YYYY time/HHmm` <br> e.g. `itemsDueBefore date/12-12-2020 time/2359`
 
