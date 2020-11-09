@@ -64,9 +64,9 @@ Given below are my contributions to the project.
     * Added user stories, use cases, and manual testing for the features I implemented  [\#37](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/37/files) [\#234](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/234) [\#259](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/259)
 
 * **Community**:
-  * PRs reviewed and merged: [\#149](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/149), [\#216](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/216), [\#221](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/221).
+  * Reviewed and merged multiple PRs. Examples: [\#149](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/149), [\#216](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/216), [\#221](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/221).
   * Resolve failing CI with PR: [\#150](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/150)
   * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/Caleblyx/ped/issues/6), [2](https://github.com/Caleblyx/ped/issues/4), [3](https://github.com/Caleblyx/ped/issues/3))
 
 * **Other contributions**:
-  * Contributed to the creation of Lifebook's demo video.
+  * Contributed to the creation of Lifebook's demonstration video.
