@@ -1,7 +1,6 @@
 @startuml
 !include ../style.puml
 
-Actor User as user USER_COLOR
 box Ui UI_COLOR_T1
 Participant ":UI" as ui UI_COLOR
 end box
@@ -22,7 +21,7 @@ box Storage STORAGE_COLOR_T1
 Participant ":Storage" as Storage STORAGE_COLOR
 end box
 
-user -[USER_COLOR]> ui : "find contact n/John t/CS2100Teammate"
+ -[USER_COLOR]> ui : "find contact n/John t/CS2100Teammate"
 activate ui UI_COLOR
 
 ui -[UI_COLOR]> LogicManager : execute("find ...")
@@ -39,7 +38,7 @@ FindCommandParser -[LOGIC_COLOR]-> AddressBookParser
 deactivate FindCommandParser
 
 
-AddressBookParser -[LOGIC_COLOR]> FindCommandParser : parse("contact n/John t/CS2100Teammate")
+AddressBookParser -[LOGIC_COLOR]> FindCommandParser : parse("contact...")
 activate FindCommandParser LOGIC_COLOR
 
 create FindContactCommand
@@ -90,6 +89,6 @@ destroy FindContactCommand
 ui <-[LOGIC_COLOR]-LogicManager : result
 deactivate LogicManager
 
-user <-[UI_COLOR]-ui : result
+ <-[UI_COLOR]-ui : result
 deactivate ui
 @enduml
