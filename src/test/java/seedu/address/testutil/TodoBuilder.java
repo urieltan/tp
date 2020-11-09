@@ -25,10 +25,10 @@ public class TodoBuilder {
     private static final DateTimeFormatter OUTPUT_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
 
     private static final String DEFAULT_DESC = "homework";
-    private static final String DEFAULT_DATETIME = "12-12-2020 2359";
+    private static final String DEFAULT_DATETIME = "14-12-2020 2359";
 
     private String description;
-    private String dateTime;
+    private LocalDateTime dateTime;
     private Recurrence recurrence;
     private CollaborativeLink link;
     private Set<Tag> tags;
@@ -38,7 +38,7 @@ public class TodoBuilder {
      */
     public TodoBuilder() {
         description = DEFAULT_DESC;
-        dateTime = DEFAULT_DATETIME;
+        dateTime = LocalDateTime.parse(DEFAULT_DATETIME, INPUT_DATE_TIME_FORMAT);
         tags = new HashSet<>();
     }
 
@@ -47,9 +47,7 @@ public class TodoBuilder {
      */
     public TodoBuilder(Todo todoToCopy) {
         description = todoToCopy.getDescription();
-        String dateTimeOutput = todoToCopy.getDateTime();
-        // flip the output and input of LocalDateTime
-        dateTime = LocalDateTime.parse(dateTimeOutput, OUTPUT_DATE_TIME_FORMAT).format(INPUT_DATE_TIME_FORMAT);
+        dateTime = todoToCopy.getDeadline();
         recurrence = todoToCopy.getRecurrence();
         link = todoToCopy.getCollaborativeLink();
         tags = new HashSet<>(todoToCopy.getTags());
@@ -67,6 +65,14 @@ public class TodoBuilder {
      * Sets the {@code DateTime} of the {@code To-do} that we are building.
      */
     public TodoBuilder withDateTime(String dateTime) {
+        this.dateTime = LocalDateTime.parse(dateTime, INPUT_DATE_TIME_FORMAT);
+        return this;
+    }
+
+    /**
+     * Sets the {@code DateTime} of the {@code To-do} that we are building.
+     */
+    public TodoBuilder withDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
         return this;
     }
@@ -99,7 +105,7 @@ public class TodoBuilder {
     }
 
     public Todo build() {
-        return new Todo(description, dateTime, recurrence, tags);
+        return new Todo(description, dateTime, recurrence, link, tags);
     }
 
 }

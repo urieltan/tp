@@ -26,4 +26,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Date should be in DD-MM-YYYY "
             + "and the numbers have to be valid!";
     public static final String MESSAGE_INVALID_TIME_FORMAT = "Time should be in HHmm and the numbers have to be valid!";
+    public static final String EXTRA_ARGUMENT_MESSAGE = "Extra parameter found! Please remove parameter: %1$s";
+    public static final String EXTRA_SINGULAR_ARGUMENT_MESSAGE =
+            "Extra parameter found! Please have only 1 parameter: %1$s";
 }

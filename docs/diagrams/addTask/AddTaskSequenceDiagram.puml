@@ -14,10 +14,10 @@ participant ":Model" as Model MODEL_COLOR
 participant "t:Todo" as Todo MODEL_COLOR
 end box
 
-[-> LogicManager : execute("add todo desc/Complete homework date/12-12-2020 time/2359")
+[-> LogicManager : execute("add todo ...")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("add todo desc/Complete homework date/12-12-2020 time/2359")
+LogicManager -> AddressBookParser : parseCommand("add todo ...")
 activate AddressBookParser
 
 create AddCommandParser

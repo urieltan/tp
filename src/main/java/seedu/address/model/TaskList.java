@@ -121,4 +121,7 @@ public class TaskList implements ReadOnlyTaskList {
     public void markAsDone(Task target) {
         this.tasks.markAsDone(target);
     }
+    public boolean isEmpty() {
+        return tasks.isEmpty();
+    }
 }

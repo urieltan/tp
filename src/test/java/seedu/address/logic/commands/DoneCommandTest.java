@@ -60,6 +60,7 @@ public class DoneCommandTest {
     @Test
     public void execute_doneRecurringTodo_success() throws CommandException {
         Todo todoRecurring = new TodoBuilder(CHORES).build();
+        Todo todoRecurred = new TodoBuilder(CHORES).withDateTime("08-01-2020 1800").build();
 
         model.addTodo(todoRecurring);
         DoneCommand doneCommand = new DoneCommand(INDEX_FIRST_PERSON);
@@ -67,6 +68,7 @@ public class DoneCommandTest {
         ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new TaskList());
         expectedModel.addTodo(todoRecurring);
         todoRecurring.markAsDone();
+        expectedModel.addTodo(todoRecurred);
 
         String expectedMessage = String.format(DoneCommand.MESSAGE_MARK_TASK_AS_DONE_SUCCESS, todoRecurring);
 
@@ -77,13 +79,16 @@ public class DoneCommandTest {
     @Test
     public void execute_doneRecurringEvent_success() throws CommandException {
         Event eventRecurring = new EventBuilder(PARTY).build();
+        Event eventRecurred = new EventBuilder(PARTY).withStartDateTime("01-01-2021 1800").withEndDateTime("02-01"
+                + "-2021 0600").build();
 
         model.addEvent(eventRecurring);
         DoneCommand doneCommand = new DoneCommand(INDEX_FIRST_PERSON);
 
         ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new TaskList());
         expectedModel.addEvent(eventRecurring);
-        eventRecurring.markAsDone();
+        expectedModel.markAsDone(eventRecurring);
+        expectedModel.addEvent(eventRecurred);
 
         String expectedMessage = String.format(DoneCommand.MESSAGE_MARK_TASK_AS_DONE_SUCCESS, eventRecurring);
 

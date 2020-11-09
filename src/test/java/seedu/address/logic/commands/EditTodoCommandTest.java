@@ -39,7 +39,7 @@ public class EditTodoCommandTest {
         Todo editedTodo = new TodoBuilder().build();
         EditTodoCommand.EditTodoDescriptor descriptor = new EditTodoCommand.EditTodoDescriptor();
         descriptor.setDescription("homework");
-        descriptor.setDate("12-12-2020");
+        descriptor.setDate("14-12-2020");
         descriptor.setTime("2359");
         EditTodoCommand editTodoCommand = new EditTodoCommand(INDEX_FIRST_TASK, descriptor);
 

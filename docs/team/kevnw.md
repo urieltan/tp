@@ -42,6 +42,8 @@ Given below are my contributions to the project.
     * Added user stories and use case for the `link` feature. [\#42](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/42/)
     * Added implementation details of the `link` feature. [\#116](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/116/)
     * Added UML diagrams for `link` feature. [\#116](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/116/)
+    * Added user stories and use case for `edit` feature. [\#251](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/251/)
+    * Added UML diagrams for `edit` feature. [\#251](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/251/)
 
 * **Contributions to the Developer Guide**:
 
@@ -70,7 +72,7 @@ Given below are my contributions to the project.
     * Link Command
 
         ![LinkCommand](../images/PPP-kevnw/linkmeeting.png)
-  
+
     * And others
 
 * **Community**:
