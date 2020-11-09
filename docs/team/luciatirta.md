@@ -83,8 +83,8 @@ Given below are my contributions to the project.
         
 * **Contributions to the User Guide**:
 
-    * Find Command (`find contact`, `find event`, `find todo`)
+    * Find Contact Command 
 
         ![FindContactCommand](../images/PPP-luciatirta/findContactCommand.png)
     
-    
+    * Find Event and Find Todo Commands have similar usage as the command above.
