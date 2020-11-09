@@ -75,19 +75,19 @@ The Model,
 
 <img width="500" src="images/storage/StorageClassDiagram.png">
 
-The `UserPrefsStorage` and `TaskListStorage` and `AddressBookStorage` defines the API for reading and saving the Model from and to the computer's memory. 
+The `UserPrefsStorage` and `TaskListStorage` and `AddressBookStorage` defines the API for reading and saving the Model from and to the computer's memory.
 * `UserPrefsStorage` keeps track of `UserPrefs`
 * `TaskListStorage` keeps track of `Task` items in the `Model`
 * `AddressBookStorage` keeps track of `Person` items in the `Model`
 Storage is responsible for keeping the `UserPrefs`, `Task` and `Person` in JSON file format.
 
-The following class diagram shows how `TaskListStorage` makes use of OOP to handle additional data such as Tags and Recurrence, as well as to differentiate between `Task` and `Event`. 
+The following class diagram shows how `TaskListStorage` makes use of OOP to handle additional data such as Tags and Recurrence, as well as to differentiate between `Task` and `Event`.
 
 <img height="500" src="images/storage/TaskListStorageClassDiagram.png">
 
 The `AddressBookStorage` class is much simpler and only makes use of `JsonAdaptedTag`, while `UserPrefsStorage` is even simpler and doesn't require it.
 
-These 2 sequence diagrams show a high level view of reading and saving the `Task` from the `LogicManager`. 
+These 2 sequence diagrams show a high level view of reading and saving the `Task` from the `LogicManager`.
 
 <img width="500" src="images/storage/ReadTaskList.png">
 <img width="500" src="images/storage/SaveTaskList.png">
@@ -1013,8 +1013,3 @@ is marked as done. Initially, we followed a brute force approach, wherein the "d
 to generate a new task when executed. This did not follow recommended design principles, as the Todo/Event class (Model components) should not be return
 the Command type class (Logic component). Eventually, we managed to solve this issue, by making the "DoneCommand" responsible for checking
 if the task is a recurring type, and if it is, to create a new recurring task and add it directly to the TaskList.
-
-
-
-
-

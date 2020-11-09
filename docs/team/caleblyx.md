@@ -70,4 +70,3 @@ Given below are my contributions to the project.
 
 * **Other contributions**:
   * Contributed to the creation of Lifebook's demonstration video.
-  
