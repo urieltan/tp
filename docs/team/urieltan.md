@@ -34,15 +34,11 @@ Given below are my contributions to the project.
     * Added user stories and use case for the `link` feature. [\#43](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/43/)
 
 * **Contributions to the Developer Guide**:
-
     * Storage component documentation
 
 * **Contributions to the User Guide**:
-
     * Link meeting command
 
 * **Community**:
   * PRs reviewed: [\#17](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/17), [\#104](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/104), [\#224](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/224)
   * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/AY2021S1-CS2103T-F13-3/tp/issues/183), [2](https://github.com/AY2021S1-CS2103T-F13-3/tp/issues/182), [3](https://github.com/AY2021S1-CS2103T-F13-3/tp/issues/184))
-
-
