@@ -5,7 +5,7 @@ title: Lin Yuan Xun, Caleb's Project Portfolio Page
 
 ## Project: Lifebook
 
-Lifebook is a desktop task management application created as an assignment for a module that teaches Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+Lifebook is a desktop task management application created during a collaborative project for a module that teaches Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
 
@@ -34,7 +34,7 @@ Given below are my contributions to the project.
   * What it does: allows users to view the `TaskList` and its contents.
   * Justification: provides a means for users to easily access the contents of the `TaskList` via a graphical representation.
   * Highlights: made it easier for the developing team to visualise any features that they may have implemented in regards to the `TaskList` and/or `Tasks`. This also provided a starting point for further development of its GUI. Implementing this GUI was initially challenging due to my lack of my experience. It required me to scrap my initial implementation of the TaskList to create a new one that could provide an observable list to the GUI.
-  * Credits: this GUI implementation for the `TaskList` was inspired by the GUI of the AddressBook.
+  * Credits: this GUI implementation for the `TaskList` was inspired by the GUI of contact list of AB3.
 
 * **New feature: Storage for TaskList**: Implemented storage for the `TaskList`
   * What it does: allows users to store `TaskList` data.
@@ -50,23 +50,23 @@ Given below are my contributions to the project.
   * Created release `v1.3` on [GitHub](https://github.com/AY2021S1-CS2103T-F12-4/tp/releases/tag/v1.3) 
 
 * **Enhancements to existing features**:
-  * Reduced coupling of `Model` and `Logic` in the implementation of the Recurrence feature. Initially, `Model` had a dependency on `Logic` in the implementation of Recurrence, as`Model` had to initially return a `Command`, which is a component of `Logic`. This implementation was enhanced, removing this dependency, such that only `Logic` would have a dependency on `Model`. [\#148](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/148)
-  * Wrote unit tests for all added storage components to support storage of the contents of `TaskList`. [\#134](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/134)
-  * Wrote unit test for the logical components of the Sorting feature, and updated various test files to fix bugs after correcting the `equals` method of `ModelManager`.
+  * Reduced coupling of `Model` and `Logic` in the implementation of the Recurrence feature. Initially, `Model` had a dependency on `Logic` in the implementation of Recurrence, as`Model` had to return a `Command`, which is a component of `Logic`. This implementation was enhanced, removing this dependency, such that only `Logic` would have a dependency on `Model`.  [\#148](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/148)
+  * Wrote unit tests for all added storage components that support storage of the contents of `TaskList`. [\#134](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/134)
+  * Wrote unit tests for the logical components of the Sorting feature, and updated various test files to fix bugs after correcting the `equals` method of `ModelManager`.[\#248](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/248)
 * **Documentation**:
   * User Guide:
     * Added documentation for the features:
-        * `add todo`, `remove todo`, `mark todo as done` and `list todo`. [#\20](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/20)
-        * `sort contact`, `sort task`, and `sort clear` [\#110](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/110) [\#145](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/145);
+        * `add todo`, `remove todo`, `mark todo as done` and `list todo`. These features were updated in future iterations. [\#20](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/20)
+        * `sort contact`, `sort task`, and `sort clear` [\#110](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/110) [\#145](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/145)
   * Developer Guide:
     * Updated the model architecture diagram to include the newly added model components of Lifebook. [\#234](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/234)
     * Added implementation details of the `Add Task` feature. [\#120](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/120)
     * Added user stories, use cases, and manual testing for the features I implemented  [\#37](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/37/files) [\#234](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/234) [\#259](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/259)
-
+    * Contributed to the "Effort" section of the appendix [\#276](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/276)
 * **Community**:
   * Reviewed and merged multiple PRs. Examples: [\#149](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/149), [\#216](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/216), [\#221](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/221).
   * Resolve failing CI with PR: [\#150](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/150)
   * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/Caleblyx/ped/issues/6), [2](https://github.com/Caleblyx/ped/issues/4), [3](https://github.com/Caleblyx/ped/issues/3))
 
 * **Other contributions**:
-  * Contributed to the creation of Lifebook's demonstration video.
+  * Contributed to the creation of Lifebook's demonstration video (script and voiceover).
