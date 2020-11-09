@@ -366,6 +366,10 @@ Adds a collaborative link (Google Drive, GitHub, Trello, and others) for a todo.
 Format:
 * `link doc desc/DESCRIPTION url/LINK i/INDEX_OF_TODO`
 
+* `LINK` must be specified in the format of URL.
+    * Valid URL: https://www.google.com
+    * Invalid URL: www.google.com, google.com, google
+    
 Examples:
 * `link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoUz1JpAgynIkfacr0asqV9A4kh i/2`
 
@@ -458,6 +462,9 @@ Format:
 
 * `DATE` must be specified in the format of DD-MM-YYYY
 * `TIME` must be specified in the format of HHmm using 24 hour time
+* `MEETING LINK` must be specified in the format of URL.
+    * Valid URL: https://www.google.com
+    * Invalid URL: www.google.com, google.com, google
 
 Examples:
 * `link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf i/2 date/22-09-2020 time/1400`
