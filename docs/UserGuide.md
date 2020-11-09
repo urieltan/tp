@@ -308,6 +308,7 @@ Adds a To Do to the TodoList of LifeBook.
 
 Format: `add todo desc/DESCRIPTION date/DATE time/TIME [recurring/VALUE UNIT] [t/TAG]…`
 
+* `DESCRIPTION` must be <= 30 characters
 * `DATE` must be specified in the format of DD-MM-YYYY
 * `TIME` must be specified in the format of HHmm using 24 hour time
 * `VALUE` must be > 0
@@ -404,6 +405,7 @@ Adds an Event o to the EventList of LifeBook.
 
 Format: `add event desc/DESCRIPTION startdate/DATE starttime/TIME enddate/DATE endtime/TIME [recurring/VALUE UNIT] [t/TAG]..`
 
+* `DESCRIPTION` must be <= 30 characters
 * `DATE` must be specified in the format of DD-MM-YYYY
 * `TIME` must be specified in the format of HHmm using 24 hour time
 * `VALUE` must be > 0
