@@ -6,20 +6,9 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
 public abstract class Task {
-    /** Maximum length for description supported by Lifebook */
-    private static final int MAX_DESCRIPTION_LENGTH = 30;
-
-    /** Message for denoting max description length */
-    public static final String MESSAGE_CONSTRAINTS = "Description must have less than "
-            + MAX_DESCRIPTION_LENGTH + " characters.";
-
-
     /** A brief description of the task. */
     protected String description;
 
@@ -43,7 +32,6 @@ public abstract class Task {
     public Task(String description, Set<Tag> tags) {
         assert description != null;
         assert tags != null;
-        checkArgument(isValidDescription(description), MESSAGE_CONSTRAINTS);
         this.description = description;
         this.isDone = false;
         this.tags.addAll(tags);
@@ -59,10 +47,6 @@ public abstract class Task {
     public Task(boolean isDone, String description, Set<Tag> tags) {
         assert description != null;
         assert tags != null;
-        if(!isValidDescription(description)){
-            System.out.println(description);
-        }
-        checkArgument(isValidDescription(description), MESSAGE_CONSTRAINTS);
         this.description = description;
         this.isDone = isDone;
         this.tags.addAll(tags);
@@ -75,7 +59,6 @@ public abstract class Task {
      */
     public Task(String description) {
         assert description != null;
-        checkArgument(isValidDescription(description), MESSAGE_CONSTRAINTS);
         this.description = description;
         this.isDone = false;
     }
@@ -190,14 +173,6 @@ public abstract class Task {
     public boolean isRecurring() {
         System.out.println(this.getRecurrence() != null);
         return this.getRecurrence() != null;
-    }
-
-    /**
-     * Indicates if description is valid.
-     * @return true if it is valid, and false otherwise.
-     */
-    public static boolean isValidDescription(String description) {
-        return description.length() <= MAX_DESCRIPTION_LENGTH;
     }
 
     public abstract LocalDateTime getDeadline();
