@@ -39,10 +39,6 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
   * Wrote tests for the basic task operations to increase coverage from 49.89% to 56.75% (Pull requests [\#69](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/69))
-  
-    Created EventBuilder and TodoBuilder, which is adapted after PersonBuilder in AB3.
-    Created TypicalTodos and TypicalEvents, which is adapted after TypicalPersons in AB3.
-
   * Wrote tests for:
     - Filter function [\#71](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/71)
     - Recurring function [\#98](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/98)
@@ -75,8 +71,6 @@ Given below are my contributions to the project.
     * Added manual testing instructions for `adding task`, `filter`, `due soon` and `contactTaskTag` (Pull requests [\#239](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/239), [\#271](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/271))
     * Standardize UML diagram colors [\#254](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/242)
     * Added brief "Effort" section [\#271](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/271)
-  * About Us:
-    * Fix teammate's issue of image not showing up [\#39](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/39)
 
 * **Community**:
   * PRs reviewed with non-trivial comments: (Pull requests [\#270](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/270), [\#240](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/240), [\#232](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/232))
