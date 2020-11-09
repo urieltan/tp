@@ -123,7 +123,7 @@ public class ParserUtil {
     /**
      * Validates a {@code String description} an returns a {@Code Boolean}
      *
-     * @throws ParseException if the given {@code String url} is invalid (too long).
+     * @throws ParseException if the given {@code String description} is invalid (too long).
      */
     public static boolean validateDescription(String description) throws ParseException {
         requireNonNull(description);
