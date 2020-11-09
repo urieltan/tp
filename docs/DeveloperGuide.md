@@ -73,7 +73,8 @@ The Model,
 ![BetterModelClassDiagram](images/UpdatedBetterModelClassDiagram.png)
 ### Storage component
 
-![StorageClassDiagram](images/storage/StorageClassDiagram.png)
+<img width="500" src="images/storage/StorageClassDiagram.png">
+
 The `UserPrefsStorage` and `TaskListStorage` and `AddressBookStorage` defines the API for reading and saving the Model from and to the computer's memory. 
 * `UserPrefsStorage` keeps track of `UserPrefs`
 * `TaskListStorage` keeps track of `Task` items in the `Model`
@@ -82,9 +83,20 @@ Storage is responsible for keeping the `UserPrefs`, `Task` and `Person` in JSON 
 
 The following class diagram shows how `TaskListStorage` makes use of OOP to handle additional data such as Tags and Recurrence, as well as to differentiate between `Task` and `Event`. 
 
-![TaskListStorageClassDiagram](images/storage/TaskListStorageClassDiagram.png)
+<img height="500" src="images/storage/TaskListStorageClassDiagram.png">
 
 The `AddressBookStorage` class is much simpler and only makes use of `JsonAdaptedTag`, while `UserPrefsStorage` is even simpler and doesn't require it.
+
+These 2 sequence diagrams show a high level view of reading and saving the `Task` from the `LogicManager`. 
+
+<img width="500" src="images/storage/ReadTaskList.png">
+<img width="500" src="images/storage/SaveTaskList.png">
+
+<img width="500" src="images/storage/ReadFileActivityDiagram.png">
+
+The activity diagram gives a slightly deeper view of how reading `Task` is done.
+If the file parsing has issues, an exception will be thrown.
+
 
 **API** : [`Storage.java`](https://github.com/AY2021S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
@@ -433,7 +445,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `Lifebook` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Contact list use cases
+#### ContactList use cases
 **Use case: UC1 Delete a person**
 
 **MSS**
@@ -803,7 +815,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts and tasks. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -844,6 +856,23 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect add commands to try: `add`, `add todo`, missing description and/or date/time <br>
        Expected: Similar to previous.
 
+### Editing a Task
+
+1. Editing a task while the TaskList is being shown.
+    1. Prerequisites: Have the tasks in the displayed TaskList. The list may be filtered or unfiltered.
+    1. Test case: `edit todo i/VALID INDEX ...` e.g. if there is a todo with an index of 5, input the command `edit todo i/5 ...`. <br>
+       Expected: The todo at the index of 5 should be edited according to the input given.
+    1. Test case: `edit todo i/2 date/17-12-2020 time/2359`. <br>
+       Expected: The todo at the index of 2 should have the date edited to be `17-12-2020` and the time to be `2359`.
+    1. Test case: `edit event i/VALID INDEX ...` e.g. if there is an event with an index of 5, input the command `edit event i/5 ...`. <br>
+       Expected: The event at the index of 5 should be edited according to the input given.
+    1. Test case: `edit event i/1 desc/new description startdate/12-12-2020`. <br>
+       Expected: The event at the index of 1 should have the description edited to be `new description` and the starting date to be `12-12-2020`.
+    1. Test case: `edit todo i/INVALID INDEX ...` e.g. if the TaskList has 10 items, input the command `edit todo i/12`. <br>
+       Expected: An error message should be provided indicating that the provided index is invalid.
+    1. Test case: `edit event i/INVALID INDEX ...` e.g. if the TaskList has 10 items, input the command `edit event i/12`. <br>
+       Expected: An error message should be provided indicating that the provided index is invalid.
+           
 ### Marking a Task as done and Task deletion
 
 1. Marking a task as done or deleting a task while the TaskList is being shown.
@@ -868,6 +897,31 @@ testers are expected to do more *exploratory* testing.
         Expected: GUI should switch to the task tab (if previously on the contact tab) that displays a complete list of only all added todos.
     1. Test case: `list event` <br>
         Expected: GUI should switch to the task tab (if previously on the contact tab) that displays a complete list of only all added events.
+
+### Adding a link to a task
+Adding a CollaborativeLink to a `Todo` or a MeetingLink to an `Event`.
+
+1. Command: `link meeting`
+    1. Prerequisites: Have the tasks in the displayed TaskList. The list may be filtered or unfiltered.
+    1. Test case: `link meeting i/VALID INDEX ...` e.g. if there is an event with an index of 5, input the command `link meeting i/5 ...`. <br>
+        Expected: The event at index 5 will now have a link and the GUI will show it.
+    1. Test case: `link meeting i/VALID INDEX desc/DESC url/VALID URL date/DATE time/TIME` e.g. if there is an event with an index of 2, input the command `link meeting i/2 desc/Link to Zoom Meeting url/https://www.zoom.com date/20-12-2020 time/1400`. <br>
+        Expected: The event at index 2 will now have a [link](https://www.zoom.com) that has a description, date, and time.
+    1. Test case: `link meeting i/VALID INDEX url/INVALID URL FORMAT ...` e.g. if there is an event with an index of 3, input the command `link meeting i/3 url/thisisnotaurl`. <br>
+        Expected: An error message should be provided indicating that the provided url is invalid.
+    1. Test case: `link meeting i/VALID INDEX desc/DESC url/VALID URL date/DATE` e.g. if there is an event with an index of 1, input the command `link meeting i/1 desc/Link to Zoom Meeting url/https://www.zoom.com date/20-12-2020`. <br>
+        Expected: An error message should be provided indicating that one of the field is not provided (`time`).
+
+1. Command: `link doc`
+    1. Prerequisites: Have the tasks in the displayed TaskList. The list may be filtered or unfiltered.
+    1. Test case: `link doc i/VALID INDEX ...` e.g. if there is a todo with an index of 5, input the command `link doc i/5 ...`. <br>
+        Expected: The todo at index 5 will now have a link and the GUI will show it.
+    1. Test case: `link doc i/VALID INDEX desc/DESC url/VALID` e.g. if there is a todo with an index of 2, input the command `link doc i/2 desc/Link to User Guide url/https://ay2021s1-cs2103t-f12-4.github.io/tp/UserGuide.html`. <br>
+        Expected: The todo at index 2 will now have a [link](https://ay2021s1-cs2103t-f12-4.github.io/tp/UserGuide.html) that has a description.
+    1. Test case: `link doc i/VALID INDEX url/INVALID URL FORMAT ...` e.g. if there is a todo with an index of 3, input the command `link doc i/3 url/thisisnotaurl`. <br>
+        Expected: An error message should be provided indicating that the provided url is invalid.
+    1. Test case: `link doc i/VALID INDEX url/VALID URL` e.g. if there is a todo with an index of 1, input the command `link doc i/1 url/https://ay2021s1-cs2103t-f12-4.github.io/tp/UserGuide.html`. <br>
+        Expected: An error message should be provided indicating that one of the field is not provided (`desc`).
 
 ### Sorting
 Sorting the contact list and TaskList with different states. There are different inputs for each sorting command.
@@ -895,3 +949,67 @@ Sorting the contact list and TaskList with different states. There are different
         Expected: The empty displayed list or lists should now be unfiltered and restored to natural orders.
     1. Input: List or lists without added tasks or contacts (i.e. both or one of the lists can have no added tasks or contacts).
        Expected: An error message prompting the user to add tasks or contacts to the list or lists without added items should be displayed. If one of the list had items, that list will be restored to its natural order.
+
+
+### Filter (itemsDueAt/itemsDueBefore)
+
+1. Filter tasks based on a specific deadline.
+
+    1. Prerequisites: List all tasks using the `list task` command. Multiple tasks in the list.
+    
+    1. Test case: `itemsDueAt date/12-12-2020 time/2359`<br>
+       Expected: A list of tasks that are due **exactly** at `12-12-2020, 2359` will be shown.
+    1. Test case: `itemsDueBefore date/02-01-2021 time/2359`<br>
+       Expected: A list of tasks that are due **before** `02-01-2021, 2359` will be shown.
+    1. Other variations to try: Missing date/time, where an exception will be thrown.
+
+### Due soon tasks
+
+1. At the bottom right-hand corner of Lifebook, a list of due soon tasks are shown (latest of 1 week from the current date/time)
+
+    1. Prerequisites: A todo/event with a deadline (latest 1 week from the current date/time) should be added.<br>
+       Expected: Upon adding the task, the task should appear immediately in the "due soon" panel.
+       
+    1. Test case: Marking a recurring task as done<br>
+       Expected: Upon marking the recurring task as done, if the new task generated is due soon, it should appear immediately in the "due soon" panel.
+       Also, the done task should no longer appear in the "due soon" panel.
+
+### Common tag
+
+1. Adds a common tag to a specified contact and task.
+
+    1. Prerequisites: There should be at least 1 contact and 1 task.
+    
+    1. Test case: `contactTaskTag t/CS2100 contactIndex/1 taskIndex/1`<br>
+       Expected: The contact and task at index 1 should have the tag "CS2100".
+
+    1. Test case: `contactTaskTag t/CS2103T t/project contactIndex/2 taskIndex/2`<br>
+       Expected: The contact and task at index 2 should have the tags "CS2103T" and "project".
+
+    1. Other variations to try: Incorrect index for contact/task, not giving a tag, tags with a spacing.
+
+## **Effort**
+
+When we first started coding for Lifebook, we have to figure out how to integrate all the task operations into the current
+AB3. Although we have done "Duke" for our iP, which shared many similar features, we still have to figure out how to merge both the 
+contact and task aspects together. Thus, many hours were spent inspecting AB3's codebase.  
+
+For the first milestone, we managed to implement the basic task operations, like add, view and delete.
+We have also modified AB3's GUI to include another panel to view the list of tasks. 
+Inspecting AB3's JavaFX files proved to be a challenge, as the GUI is way more complicated than "Duke".
+Many trial and error is done to properly implement it.
+
+While creating test cases for the task operations, we have to study the way AB3 does its stubs. 
+We followed after AB3 and created "TodoBuilder", "EventBuilder", "TypicalTodos" and "TypicalEvents" to abstract out
+the process of creating tasks to do the testing.
+
+While implementing recurring task, we have to ensure that Lifebook automatically creates a new task after the recurring task
+is marked as done. Initially, we did a brute force approach, where in the "done" method in Todo/Event calls out the "AddCommand" 
+to generate the new task. This is not following the right abstraction principle, as the Todo/Event class (Model) should not be
+calling the Command type class. Eventually, we have finally managed to solve this issue, where the "DoneCommand" class now checks 
+if the task is a recurring type, and if it is, it creates the new recurring task and adds it directly to the TaskList.
+
+
+
+
+

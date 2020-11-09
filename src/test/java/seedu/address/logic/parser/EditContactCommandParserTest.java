@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.EXTRA_ARGUMENT_MESSAGE;
+import static seedu.address.commons.core.Messages.EXTRA_SINGULAR_ARGUMENT_MESSAGE;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
@@ -24,6 +26,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -76,7 +79,7 @@ public class EditContactCommandParserTest {
         assertParseFailure(parser, "contact i/1 some random string", MESSAGE_INVALID_FORMAT);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "contact i/1 s/ string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "contact i/1 s/ string", String.format(EXTRA_ARGUMENT_MESSAGE, "s/"));
     }
 
     @Test
@@ -93,7 +96,8 @@ public class EditContactCommandParserTest {
 
         // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
-        assertParseFailure(parser, "contact i/1" + PHONE_DESC_BOB + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "contact i/1" + PHONE_DESC_BOB + INVALID_PHONE_DESC,
+                String.format(EXTRA_SINGULAR_ARGUMENT_MESSAGE, PREFIX_PHONE));
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid tag results in error
@@ -171,7 +175,7 @@ public class EditContactCommandParserTest {
     }
 
     @Test
-    public void parse_multipleRepeatedFields_acceptsLast() {
+    public void parse_multipleRepeatedFields_failure() {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = "contact i/" + targetIndex.getOneBased() + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
                 + TAG_DESC_FRIEND + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND
@@ -182,17 +186,17 @@ public class EditContactCommandParserTest {
                 .build();
         EditContactCommand expectedCommand = new EditContactCommand(targetIndex, descriptor);
 
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseFailure(parser, userInput, String.format(EXTRA_SINGULAR_ARGUMENT_MESSAGE, PREFIX_PHONE));
     }
 
     @Test
-    public void parse_invalidValueFollowedByValidValue_success() {
+    public void parse_invalidValueFollowedByValidValue_failure() {
         // no other valid values specified
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = "contact i/" + targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_BOB;
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB).build();
         EditContactCommand expectedCommand = new EditContactCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseFailure(parser, userInput, String.format(EXTRA_SINGULAR_ARGUMENT_MESSAGE, PREFIX_PHONE));
 
         // other valid values specified
         userInput = "contact i/" + targetIndex.getOneBased() + EMAIL_DESC_BOB + INVALID_PHONE_DESC + ADDRESS_DESC_BOB
@@ -200,7 +204,7 @@ public class EditContactCommandParserTest {
         descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).build();
         expectedCommand = new EditContactCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseFailure(parser, userInput, String.format(EXTRA_SINGULAR_ARGUMENT_MESSAGE, PREFIX_PHONE));
     }
 
     @Test

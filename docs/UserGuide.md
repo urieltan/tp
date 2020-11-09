@@ -89,10 +89,11 @@ This user guide is targeted at university students who are interested in using L
 
 Adds a person to the contact list.
 
-Format: `add  contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
+Each tag should not contain a spacing.
 </div>
 
 Examples:
@@ -114,8 +115,8 @@ Format: `edit contact i/INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]�
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* Emails should be of the format local-part@domain and adhere to the following constraints:
-* 1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (!#$%&'*+/=?`{|}~^.-) .
+* Emails should be of the format `local-part@domain` and adhere to the following constraints:
+* 1. The local-part should only contain alphanumeric characters and these special characters: `` `!#$%&'*+/=?`{|}~^.- ``
 * 2. This is followed by a '@' and then a domain name. The domain name must:
 *    - be at least 2 characters long
 *    - start and end with alphanumeric characters
@@ -270,8 +271,7 @@ When this task is marked as done, it will generate another todo with the deadlin
 
 If a task is recurring, it will be displayed in the GUI.
 
-![recurringTask](images/ExampleOfARecurringTask.png)
-
+<img width="20%" height="20%" src="images/ExampleOfARecurringTask.png" />
 
 ##### 2.2.7 Add common tag to contact + task: `contactTaskTag`
 
@@ -294,6 +294,8 @@ Upon executing the command, the contact at index 7- “James Ho” and task at i
 It is a coincidence in the example that the index of the "homework" task is 1 for "Due soon" and the whole Tasklist.
 Input the task's index based from the **whole Tasklist** instead.
 
+Also, each tag should not have any spacings.
+
 </div>
 
 * `contactTaskTag t/CS2100 t/buddy contactIndex/7 taskIndex/1`
@@ -308,7 +310,7 @@ Format: `add todo desc/DESCRIPTION date/DATE time/TIME [recurring/VALUE UNIT] [t
 * `DATE` must be specified in the format of DD-MM-YYYY
 * `TIME` must be specified in the format of HHmm using 24 hour time
 * `VALUE` must be > 0
-* `TAG` must be alphanumeric
+* `TAG` must be alphanumeric (no spaces)
 * `UNIT` must be "day", "week", "month" or "year"
 
 Examples:
@@ -328,6 +330,14 @@ Format: `edit todo i/INDEX [desc/DESCRIPTION] [date/DATE] [time/TIME]`
 * Existing values will be updated to the input values.
 * `DATE` must be specified in the format of DD-MM-YYYY
 * `TIME` must be specified in the format of HHmm using 24 hour time
+
+<div markdown="block" class="alert alert-danger">
+
+:warning: **Warning:**
+
+To change a normal Todo to a recurring one (or vice-versa), you would have to delete the task and add it with the recurring field (vice-versa).
+
+</div>
 
 Examples:
 *  `edit todo i/1 desc/CS2101 Slides date/24-01-2020` Edits the description and date of the 1st todo to be `CS2101 Slides` and `24-01-2020` respectively.
@@ -355,6 +365,10 @@ Adds a collaborative link (Google Drive, GitHub, Trello, and others) for a todo.
 Format:
 * `link doc desc/DESCRIPTION url/LINK i/INDEX_OF_TODO`
 
+* `LINK` must be specified in the format of URL.
+    * Valid URL: https://www.google.com
+    * Invalid URL: www.google.com, google.com, google
+    
 Examples:
 * `link doc desc/CS2103T Team Project url/https://drive.google.com/drive/folders/1zoUz1JpAgynIkfacr0asqV9A4kh i/2`
 
@@ -393,7 +407,7 @@ Format: `add event desc/DESCRIPTION startdate/DATE starttime/TIME enddate/DATE e
 * `TIME` must be specified in the format of HHmm using 24 hour time
 * `VALUE` must be > 0
 * `UNIT` must be "day", "week", "month" or "year"
-* `TAG` must be alphanumeric
+* `TAG` must be alphanumeric (no spaces)
 
 Examples:
 
@@ -411,6 +425,14 @@ Format: `edit event i/INDEX [desc/DESCRIPTION] [startdate/DATE] [starttime/TIME]
 * Existing values will be updated to the input values.
 * `STARTDATE` and `ENDDATE` must be specified in the format of DD-MM-YYYY
 * `STARTTIME` and `ENDTIME` must be specified in the format of HHmm using 24 hour time
+
+<div markdown="block" class="alert alert-danger">
+
+:warning: **Warning:**
+
+To change a normal Event to a recurring one (or vice-versa), you would have to delete the task and add it with the recurring field (vice-versa).
+
+</div>
 
 Examples:
 *  `edit event i/1 desc/CS2101 Lecture startdate/24-01-2020 endtime/2359` Edits the description, start date, and end time of the 1st event to be `CS2101 Lecture`, `24-01-2020`, and `2359` respectively.
@@ -439,6 +461,9 @@ Format:
 
 * `DATE` must be specified in the format of DD-MM-YYYY
 * `TIME` must be specified in the format of HHmm using 24 hour time
+* `MEETING LINK` must be specified in the format of URL.
+    * Valid URL: https://www.google.com
+    * Invalid URL: www.google.com, google.com, google
 
 Examples:
 * `link meeting desc/Job interview url/https://nus-sg.zoom.us/j/98221234359?pwd=eG9HU1FJRDdsVHRaYk2UTC95L0abcedf i/2 date/22-09-2020 time/1400`
@@ -497,7 +522,7 @@ Format: `exit`
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+<img height="60%" width="60%" src="images/helpMessage.png" />
 
 Format: `help`
 
