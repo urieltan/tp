@@ -60,12 +60,13 @@ Given below are my contributions to the project.
         * `sort contact`, `sort task`, and `sort clear` [\#110](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/110) [\#145](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/145);
   * Developer Guide:
     * Updated the model architecture diagram to include the newly added model components of Lifebook. [\#234](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/234)
-    * Added implementation details of the `Add Task` feature. [#\120](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/120)
-    * Added user stories and use cases for the features I implemented [#\234](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/234)[#\https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/37/files]
+    * Added implementation details of the `Add Task` feature. [\#120](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/120)
+    * Added user stories, use cases, and manual testing for the features I implemented  [\#37](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/37/files) [\#234](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/234) [\#259](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/259)
 
 * **Community**:
   * PRs reviewed and merged: [\#149](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/149), [\#216](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/216), [\#221](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/221).
   * Resolve failing CI with PR: [\#150](https://github.com/AY2021S1-CS2103T-F12-4/tp/pull/150)
   * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/Caleblyx/ped/issues/6), [2](https://github.com/Caleblyx/ped/issues/4), [3](https://github.com/Caleblyx/ped/issues/3))
 
-
+* **Other contributions**:
+  * Contributed to the creation of Lifebook's demo video.
