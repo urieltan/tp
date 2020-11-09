@@ -946,6 +946,27 @@ Sorting the contact list and TaskList with different states. There are different
 
     1. Other variations to try: Incorrect index for contact/task, not giving a tag, tags with a spacing.
 
+## **Effort**
+
+When we first started coding for Lifebook, we have to figure out how to integrate all the task operations into the current
+AB3. Although we have done "Duke" for our iP, which shared many similar features, we still have to figure out how to merge both the 
+contact and task aspects together. Thus, many hours were spent inspecting AB3's codebase.  
+
+For the first milestone, we managed to implement the basic task operations, like add, view and delete.
+We have also modified AB3's GUI to include another panel to view the list of tasks. 
+Inspecting AB3's JavaFX files proved to be a challenge, as the GUI is way more complicated than "Duke".
+Many trial and error is done to properly implement it.
+
+While creating test cases for the task operations, we have to study the way AB3 does its stubs. 
+We followed after AB3 and created "TodoBuilder", "EventBuilder", "TypicalTodos" and "TypicalEvents" to abstract out
+the process of creating tasks to do the testing.
+
+While implementing recurring task, we have to ensure that Lifebook automatically creates a new task after the recurring task
+is marked as done. Initially, we did a brute force approach, where in the "done" method in Todo/Event calls out the "AddCommand" 
+to generate the new task. This is not following the right abstraction principle, as the Todo/Event class (Model) should not be
+calling the Command type class. Eventually, we have finally managed to solve this issue, where the "DoneCommand" class now checks 
+if the task is a recurring type, and if it is, it creates the new recurring task and adds it directly to the TaskList.
+
 
 
 
