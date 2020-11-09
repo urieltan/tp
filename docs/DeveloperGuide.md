@@ -898,6 +898,29 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `list event` <br>
         Expected: GUI should switch to the task tab (if previously on the contact tab) that displays a complete list of only all added events.
 
+### Finding contacts or tasks
+1. Find contacts by name and/or tag
+    1. Prerequisites: Have contacts added to Lifebook
+    1. Test case: `find contact n/James`<br>
+        Expected: All contacts whose name contains the word 'James'(case-insensitive) will be displayed in the list.
+    1. Test case: `find contact t/friend`<br>
+        Expected: All contacts whose one of the tags is 'friend'(case-insensitive) will be displayed in the list.
+    1. Test case: `find contact n/James t/friend`<br>
+        Expected: All contacts whose name contains the word 'James'(case-insensitive) AND one of the tags is 'friend'(case-insensitive) will be displayed in the list.
+    1. Incorrect find commands to try: `find contact`, `find contact john`
+        Expected: Error message of invalid command format will be returned.
+2. Find events or todos by description and/or tag
+   1. Prerequisites: Have events or todos added to Lifebook
+   1. Test case: `find event desc/meeting`<br>
+       Expected: All events whose description contains the word 'meeting'(case-insensitive) will be displayed in the list.
+   1. Test case: `find event t/important`<br>
+       Expected: All events whose one of the tags is 'important'(case-insensitive) will be displayed in the list.
+   1. Test case: `find event desc/meeting t/important`<br>
+       Expected: All events whose description contains the word 'meeting'(case-insensitive) AND one of the tags is 'important'(case-insensitive) will be displayed in the list.
+   1. All three test cases above can be applied to todos by changing the `find event` to `find todo`.
+   1. Incorrect find commands to try: `find event`, `find todo assignment`
+       Expected: Error message of invalid command format will be returned.            
+
 ### Adding a link to a task
 Adding a CollaborativeLink to a `Todo` or a MeetingLink to an `Event`.
 

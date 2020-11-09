@@ -22,7 +22,7 @@ You may reach us through the following email addresses:
 [[github](https://github.com/urieltan)]
 [[portfolio](team/urieltan.md)]
 
-* Role: About Us expert, Developer Guide
+* Role: Developer Guide, Testing
 
 ### Chua Chen Ler
 
@@ -42,7 +42,6 @@ You may reach us through the following email addresses:
 [[portfolio](team/caleblyx.md)]
 
 * Role: User guide, Intellij expert, Merge conflict solver
-* Responsibilities: Data
 
 ### Lucia Tirta Gunawan
 
