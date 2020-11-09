@@ -50,6 +50,41 @@ Given below are my contributions to the project.
   * Reported bugs and suggestions for other teams in the class (examples: [\#1](https://github.com/luciatirta/ped/issues/1), [\#2](https://github.com/Caleblyx/ped/issues/2), [\#3](https://github.com/Caleblyx/ped/issues/3))
 
 * **Other contributions**:
-  * Designed the Mock UI using Figma.
+  * Designed the Mock UI using [Figma](https://www.figma.com/file/B1tC0wFEH80wViZf6EQCId/Lifebook?node-id=0%3A1).
   * Contributed to the creation of Lifebook's demonstration video (script, voiceover, and video editing).
 
+* **Contributions to the Developer Guide**:
+
+    * Ui Class Diagram
+
+        ![UiComponent](../images/UpdatedUiClassDiagram.png)
+
+    * FindCommandParser Class Diagram
+
+        ![ParserClassDiagram](../images/findFunction/FindCommandParserClassDiagram.png)
+        
+    * Predicate Diagram
+    
+        ![ContactPredicateClassDiagram](../images/findFunction/ContactMatchesFindKeywordPredicate.png)
+        ![TaskPredicateClassDiagram](../images/findFunction/TaskMatchesFindKeywordPredicate.png)
+
+    * FindCommand Class Diagram
+
+        ![CommandClassDiagram](../images/findFunction/FindCommandClassDiagram.png)
+
+    * Sequence Diagram of Find Command Feature
+
+        ![FilterSequenceDiagram](../images/findFunction/FindCommandSequenceDiagram.png)
+        ![SaveFileDiagram](../images/findFunction/SaveLifebook.png)
+
+    * Activity Diagram of Find Command Feature
+
+        ![FilterActivityDiagram](../images/findFunction/FindCommandActivityDiagram.png)
+        
+* **Contributions to the User Guide**:
+
+    * Find Command (`find contact`, `find event`, `find todo`)
+
+        ![FindContactCommand](../images/PPP-luciatirta/findContactCommand.png)
+    
+    
