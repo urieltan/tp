@@ -39,7 +39,7 @@ Given below are my contributions to the project.
 * **New feature: Storage for TaskList**: Implemented storage for the `TaskList`
   * What it does: allows users to store `TaskList` data.
   * Justification: provides a means for users to easily store and access the contents of the `TaskList` for future sessions.
-  * Highlights: enables greater ease of implementing storage for data of other features pertaining to `Tasks` in the future. I had encountered some challenges due to my lack of familiarity with JSON. For instance, I was not aware I had to serialize/deserialize JSON adapted polymorphic objects when there are JSON adapted sub-classes. Implementing Storage with it had definitely provided me with some valuable experience.
+  * Highlights: enables greater ease of implementing storage for data of other features pertaining to `Tasks` in the future. I had encountered some challenges due to my lack of familiarity with JSON. For instance, I was not aware I had to make additional annotations to serialize/deserialize polymorphic objects with JSON. Implementing Storage with JSON had definitely provided me with some valuable experience.
   * Credits: implementation inspired by the existing `Storage` component of address book. I referred to a [Stack Overflow discussion forum](https://stackoverflow.com/questions/30362446/deserialize-json-with-jackson-into-polymorphic-types-a-complete-example-is-giv) to gain insight on how to resolve my issue regarding JSON adapted polymorphic objects.
 
 
